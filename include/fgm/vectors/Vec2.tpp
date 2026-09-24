@@ -888,109 +888,82 @@ namespace fgm
     //     noexcept
     //         requires StrictArithmetic<T>
     //     { return lhs.tensorProduct(rhs); }
-    //
-    //
-    //     /*************************************
-    //      *                                   *
-    //      *       VECTOR CROSS PRODUCT        *
-    //      *                                   *
-    //      *************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <SignedStrictArithmetic U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::cross(const Vec2& rhs) const noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     {
-    //         using R = PromotedValue_t<T, U>;
-    //         return R(_data[0] * rhs[1] - _data[1] * rhs[0]);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <SignedStrictArithmetic U>
-    //     FALCON_INLINE constexpr PromotedValue_t<T, U> Vec2<T>::cross(const Vec2& lhs, const Vec2& rhs) noexcept
-    //         requires SignedStrictArithmetic<T>
-    //     { return lhs.cross(rhs); }
+
+    /*************************************
+     *                                   *
+     *       VECTOR NORMALIZATION        *
+     *                                   *
+     *************************************/
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::normalize() const noexcept
+        requires FPArithmetic<T>
+    {
+        const auto magnitude = mag();
+        FALCON_ASSERT_MSG(magnitude >= fgm::Config::EPSILON<decltype(magnitude)>,
+                       fgm::messages::assertion::VEC_NORMALIZE_DIV_BY_ZERO);
+        return *this / magnitude;
+    }
 
 
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::normalize(const Vec2& vec) noexcept
+        requires FPArithmetic<T>
+    { return vec.normalize(); }
 
-    //     /*************************************
-    //      *                                   *
-    //      *       VECTOR NORMALIZATION        *
-    //      *                                   *
-    //      *************************************/
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::normalize() const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         const auto magnitude = mag();
-    //         FALCON_ASSERT_MSG(magnitude >= fgm::Config::EPSILON<decltype(magnitude)>,
-    //                        fgm::messages::assertion::VEC_NORMALIZE_DIV_BY_ZERO);
-    //         return *this / magnitude;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::normalize(const Vec2& vec) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.normalize(); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::safeNormalize() const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R     = Magnitude<T>;
-    //         R magnitude = mag();
-    //         if (fgm::isnan(magnitude))
-    //         {
-    //             return Vec2<R>::zero();
-    //         }
-    //         if (magnitude <= Config::EPSILON_SQUARE<R>)
-    //         {
-    //             return Vec2<R>::zero();
-    //         }
-    //
-    //         return *this / magnitude;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::safeNormalize(const Vec2& vec) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.safeNormalize(); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::tryNormalize(OperationStatus& status) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         using R     = Magnitude<T>;
-    //         R magnitude = mag();
-    //         if (fgm::isnan(magnitude))
-    //         {
-    //             status = OperationStatus::NANOPERAND;
-    //             return Vec2<R>::zero();
-    //         }
-    //         if (magnitude <= Config::EPSILON_SQUARE<R>)
-    //         {
-    //             status = OperationStatus::DIVISIONBYZERO;
-    //             return Vec2<R>::zero();
-    //         }
-    //
-    //         status = OperationStatus::SUCCESS;
-    //         return *this / magnitude;
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::tryNormalize(const Vec2& vec, OperationStatus& status)
-    //     noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.tryNormalize(status); }
-    //
-    //
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::safeNormalize() const noexcept
+        requires FPArithmetic<T>
+    {
+        T magnitude = mag();
+        if (fgm::isnan(magnitude))
+        {
+            return Vec2<T>::zero();
+        }
+        if (magnitude <= Config::EPSILON_SQUARE<T>)
+        {
+            return Vec2<T>::zero();
+        }
+
+        return *this / magnitude;
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::safeNormalize(const Vec2& vec) noexcept
+        requires FPArithmetic<T>
+    { return vec.safeNormalize(); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::tryNormalize(OperationStatus& status) const noexcept
+        requires FPArithmetic<T>
+    {
+        T magnitude = mag();
+        if (fgm::isnan(magnitude))
+        {
+            status = OperationStatus::NANOPERAND;
+            return Vec2<T>::zero();
+        }
+        if (magnitude <= Config::EPSILON_SQUARE<T>)
+        {
+            status = OperationStatus::DIVISIONBYZERO;
+            return Vec2<T>::zero();
+        }
+
+        status = OperationStatus::SUCCESS;
+        return *this / magnitude;
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<Magnitude<T>> Vec2<T>::tryNormalize(const Vec2& vec, OperationStatus& status)
+    noexcept
+        requires FPArithmetic<T>
+    { return vec.tryNormalize(status); }
+
+
     //     /*************************************
     //      *                                   *
     //      *        VECTOR PROJECTION          *

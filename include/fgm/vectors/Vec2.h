@@ -963,8 +963,7 @@ namespace fgm
          *
          * @return The scalar dot product of @p lhs and @p rhs.
          */
-        [[nodiscard]] static constexpr T dot(const Vec2& lhs, const Vec2& rhs)
-        noexcept
+        [[nodiscard]] static constexpr T dot(const Vec2& lhs, const Vec2& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1280,125 +1279,115 @@ namespace fgm
 
 
 
-        //         /**
-        //          * @addtogroup FGM_Vec2_Normalize
-        //          * @{
-        //          */
-        //
-        //         /**
-        //          * @brief Compute the normalized (unit) form of this vector.
-        //          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
-        //          *
-        //          * @note To maintain precision, result components are promoted to their
-        //          *       corresponding floating-point representation via @ref Magnitude.
-        //          * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug
-        //          mode**.
-        //          *
-        //          * @return A new @ref Vec2 with a magnitude of 1.0.
-        //          */
-        //         [[nodiscard]] constexpr Vec2<Magnitude<T>> normalize() const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the normalized (unit) form of @p Vec.
-        //          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
-        //          *
-        //          * @note To maintain precision, result components are promoted to their
-        //          *       corresponding floating-point representation via @ref Magnitude.
-        //          * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug
-        //          mode**.
-        //          *
-        //          * @param[in] vec The vector to normalize.
-        //          *
-        //          * @return A new @ref Vec2 with a magnitude of 1.0.
-        //          */
-        //         [[nodiscard]] static constexpr Vec2<Magnitude<T>> normalize(const Vec2& vec) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the normalized (unit) form of this vector.
-        //          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
-        //          *
-        //          * @note This is a safe operation. If the vector's magnitude falls below the internal
-        //          *       epsilon, or if it contains NaN components, division by zero is bypassed.
-        //          * @note To maintain precision, result components are promoted to their
-        //          *       corresponding floating-point representation via @ref Magnitude.
-        //          *
-        //          * @return A @ref Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is below
-        //          the
-        //          *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
-        //          */
-        //         [[nodiscard]] constexpr Vec2<Magnitude<T>> safeNormalize() const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the normalized (unit) form of @p Vec.
-        //          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
-        //          *
-        //          * @note This is a safe operation. If the vector's magnitude falls below the internal
-        //          *       epsilon, or if it contains NaN components, division by zero is bypassed.
-        //          * @note To maintain precision, result components are promoted to their
-        //          *       corresponding floating-point representation via @ref Magnitude.
-        //          *
-        //          * @param[in] vec The vector to be normalized.
-        //          *
-        //          * @return A @ref fgm::Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is
-        //          below the
-        //          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
-        //          */
-        //         [[nodiscard]] static constexpr Vec2<Magnitude<T>> safeNormalize(const Vec2& vec) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the normalized (unit) form of this vector and
-        //          *        set @p status to the normalization operation result.
-        //          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
-        //          *
-        //          * @note This is a safe operation. If the vector's magnitude falls below the internal
-        //          *       epsilon, or if it contains NaN components, division by zero is bypassed.
-        //          * @note To maintain precision, result components are promoted to their
-        //          *       corresponding floating-point representation via @ref Magnitude.
-        //          *
-        //          * @param[out] status The status flag to store the status of the current operation result.*
-        //          *                    For details on status codes see @ref OperationStatus.
-        //          *
-        //          * @return A @ref fgm::Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is
-        //          below the
-        //          *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
-        //          */
-        //         [[nodiscard]] constexpr Vec2<Magnitude<T>> tryNormalize(OperationStatus& status) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the normalized (unit) form of @p Vec and
-        //          *        set @p status to the normalization operation result.
-        //          *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
-        //          *
-        //          * @note This is a safe operation. If the vector's magnitude falls below the internal
-        //          *       epsilon, or if it contains NaN components, division by zero is bypassed.
-        //          * @note To maintain precision, result components are promoted to their
-        //          *       corresponding floating-point representation via @ref Magnitude.
-        //          *
-        //          * @param[in] vec     The vector to be normalized.
-        //          * @param[out] status The status flag to store the status of the current operation result.*
-        //          *                    For details on status codes see @ref OperationStatus.
-        //          *
-        //          * @return A @ref fgm::Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is
-        //          below the
-        //          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
-        //          */
-        //         [[nodiscard]] static constexpr Vec2<Magnitude<T>> tryNormalize(const Vec2& vec,
-        //                                                                        OperationStatus& status) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //         /** @} */
-        //
-        //
+        /**
+         * @addtogroup FGM_Vec2_Normalize
+         * @{
+         */
+
+        /**
+         * @brief Compute the normalized (unit) form of this vector.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
+         *
+         * @note Performs assertion for division by zero, resulting from zero-length vector,
+         *       in **Debug mode**.
+         * @note Restricted to floating point types via @ref FPArithmetic.
+         *
+         * @return A new @ref Vec2 with a magnitude of 1.0.
+         */
+        [[nodiscard]] constexpr Vec2<Magnitude<T>> normalize() const noexcept
+            requires FPArithmetic<T>;
+
+
+        /**
+         * @brief Compute the normalized (unit) form of @p Vec.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
+         *
+         * @note Performs assertion for division by zero, resulting from zero-length vector,
+         *       in **Debug mode**.
+         * @note Restricted to floating point types via @ref FPArithmetic.
+         *
+         * @param[in] vec The vector to normalize.
+         *
+         * @return A new @ref Vec2 with a magnitude of 1.0.
+         */
+        [[nodiscard]] static constexpr Vec2<Magnitude<T>> normalize(const Vec2& vec) noexcept
+            requires FPArithmetic<T>;
+
+
+        /**
+         * @brief Compute the normalized (unit) form of this vector.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
+         *
+         * @note This is a safe operation. If the vector's magnitude falls below the internal
+         *       epsilon, or if it contains NaN components, division by zero is bypassed.
+         * @note Restricted to floating point types via @ref FPArithmetic.
+         *
+         * @return A @ref Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is below
+         *         the epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] constexpr Vec2<Magnitude<T>> safeNormalize() const noexcept
+            requires FPArithmetic<T>;
+
+
+        /**
+         * @brief Compute the normalized (unit) form of @p Vec.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
+         *
+         * @note This is a safe operation. If the vector's magnitude falls below the internal
+         *       epsilon, or if it contains NaN components, division by zero is bypassed.
+         * @note Restricted to floating point types via @ref FPArithmetic.
+         *
+         * @param[in] vec The vector to be normalized.
+         *
+         * @return A @ref fgm::Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is
+         *         below the epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] static constexpr Vec2<Magnitude<T>> safeNormalize(const Vec2& vec) noexcept
+            requires FPArithmetic<T>;
+
+
+        /**
+         * @brief Compute the normalized (unit) form of this vector and
+         *        set @p status to the normalization operation result.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
+         *
+         * @note This is a safe operation. If the vector's magnitude falls below the internal
+         *       epsilon, or if it contains NaN components, division by zero is bypassed.
+         * @note Restricted to floating point types via @ref FPArithmetic.
+         *
+         * @param[out] status The status flag to store the status of the current operation result.*
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return A @ref fgm::Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is
+         *         below the epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] constexpr Vec2<Magnitude<T>> tryNormalize(OperationStatus& status) const noexcept
+            requires FPArithmetic<T>;
+
+
+        /**
+         * @brief Compute the normalized (unit) form of @p Vec and
+         *        set @p status to the normalization operation result.
+         *        \f$ \mathbf{\hat{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \f$
+         *
+         * @note This is a safe operation. If the vector's magnitude falls below the internal
+         *       epsilon, or if it contains NaN components, division by zero is bypassed.
+         * @note Restricted to floating point types via @ref FPArithmetic.
+         *
+         * @param[in] vec     The vector to be normalized.
+         * @param[out] status The status flag to store the status of the current operation result.*
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return A @ref fgm::Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is
+         *         below the epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] static constexpr Vec2<Magnitude<T>> tryNormalize(const Vec2& vec,
+                                                                       OperationStatus& status) noexcept
+            requires FPArithmetic<T>;
+
+        /** @} */
+
+
         //         /**
         //          * @addtogroup FGM_Vec2_Proj
         //          * @{

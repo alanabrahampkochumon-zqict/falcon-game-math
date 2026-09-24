@@ -1,7 +1,7 @@
 /**
  * @file NormalizationTests.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: April 04, 2026
+ * @date Created on: September 24, 2026
  *
  * @brief Verify @ref fgm::Vec2 normalization logic.
  *
@@ -43,7 +43,7 @@ namespace
             _expectedUnitVec = { static_cast<R>(0.46031716445500037), static_cast<R>(0.8877545314489294) };
         }
     };
-    TYPED_TEST_SUITE(Vec2NormalizationTests, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec2NormalizationTests, SupportedFloatingPointTypes);
 
 
 
@@ -59,7 +59,7 @@ namespace
 
         void SetUp() override { _vec = { T(0), T(0) }; }
     };
-    TYPED_TEST_SUITE(Vec2NormalizationZeroTests, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec2NormalizationZeroTests, SupportedFloatingPointTypes);
 
 
 
@@ -73,19 +73,6 @@ namespace
                              ::testing::Values(fgm::Vec2<float>(fgm::constants::NaN, 1.0f),
                                                fgm::Vec2<float>(1.0f, fgm::constants::NaN),
                                                fgm::Vec2<float>(fgm ::constants::NaN, fgm::constants::NaN)));
-
-
-
-    /**************************************
-     *            STATIC TESTS            *
-     **************************************/
-
-    namespace static_tests
-    {
-        // TODO: Add static tests after making sqrt constexpr
-        // constexpr fgm::Vec2 Vec(14, 27);
-        // constexpr auto norm = Vec.normalize();
-    }
 } // namespace
 
 
@@ -116,11 +103,8 @@ TYPED_TEST(Vec2NormalizationTests, NormalizedVectorIsAlwaysTypedPromotedToFloati
 
 
 
-
 /**************************************
- *                                    *
  *     SAFE NORMALIZATION TESTS       *
- *                                    *
  **************************************/
 
 TYPED_TEST(Vec2NormalizationTests, SafeNormalize_NonZeroVectorReturnsUnitVector)
@@ -274,9 +258,7 @@ TYPED_TEST(Vec2NormalizationTests, StaticWrapper_TryNormalize_NormalizedVectorIs
 
 
 /**************************************
- *                                    *
  *      NAN NORMALIZATION TESTS       *
- *                                    *
  **************************************/
 
 /**

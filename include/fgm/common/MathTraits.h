@@ -56,6 +56,12 @@ namespace fgm
     template <typename T>
     concept StrictArithmetic = Arithmetic<T> && !std::is_same_v<T, bool>;
 
+    /**
+     * @brief Enforces numeric types with floating point precision.
+     */
+    template <typename T>
+    concept FPArithmetic = std::floating_point<T>;
+
 
     /**
      * @brief Detects arithmetic capability after stripping cv-qualifiers and references.
