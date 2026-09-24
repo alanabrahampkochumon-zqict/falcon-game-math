@@ -317,7 +317,7 @@ TYPED_TEST(CVec2CrossProductTests, StaticWrapper_Cross_TwoNonParallelVectorsRetu
 }
 
 
-TEST(CVec2CrossProduct, TensorProduct_MixedTypes_PromotesType)
+TEST(CVec2CrossProduct, MixedTypes_PromotesType)
 {
     const fgm::CVec2 vecA(2.0f, 3.0f);
     const fgm::CVec2 vecB(5.0, 6.0);

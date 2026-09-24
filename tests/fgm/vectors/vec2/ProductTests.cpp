@@ -58,30 +58,30 @@ namespace
     };
     TYPED_TEST_SUITE(Vec2DotProductTests, SupportedArithmeticTypes);
 
-    //
-    // /**
-    //  * @brief Test fixture for @ref fgm::Vec2 cross product.
-    //  *
-    //  * @tparam T The scalar type (e.g., float, double) used for the vectors.
-    //  */
-    // template <typename T>
-    // class Vec2CrossProductTests: public testing::Test
-    // {
-    // protected:
-    //     fgm::Vec2<T> _vecA;
-    //     fgm::Vec2<T> _vecB;
-    //     T _expectedCrossProduct;
-    //
-    //     void SetUp() override
-    //     {
-    //         _vecA                 = { T(3), T(0) };
-    //         _vecB                 = { T(0), T(4) };
-    //         _expectedCrossProduct = T(12);
-    //     }
-    // };
-    // TYPED_TEST_SUITE(Vec2CrossProductTests, SupportedSignedArithmeticTypes);
-    //
-    //
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec2 cross product.
+     *
+     * @tparam T The scalar type (e.g., float, double) used for the vectors.
+     */
+    template <typename T>
+    class Vec2CrossProductTests: public testing::Test
+    {
+    protected:
+        fgm::Vec2<T> _vecA;
+        fgm::Vec2<T> _vecB;
+        T _expectedCrossProduct;
+
+        void SetUp() override
+        {
+            _vecA                 = { T(3), T(0) };
+            _vecB                 = { T(0), T(4) };
+            _expectedCrossProduct = T(12);
+        }
+    };
+    TYPED_TEST_SUITE(Vec2CrossProductTests, SupportedSignedArithmeticTypes);
+
+
     // /**
     //  * @brief Test fixture for @ref fgm::Vec2 tensor product.
     //  *
@@ -204,69 +204,59 @@ TEST(Vec2DotProduct, Dot_AntiParallelVectorsReturnsNegativeScalar)
     EXPECT_DOUBLE_EQ(-1.0, dotProduct);
 }
 
-//
-// /**************************************
-//  *        CROSS PRODUCT TESTS         *
-//  **************************************/
-//
-// TEST(Vec2CrossProduct, Cross_WithItself_ReturnsZeroVector)
-// {
-//     const fgm::Vec2 vec(2.0f, 1.0f);
-//
-//     const float crossProduct = vec.cross(vec);
-//
-//     EXPECT_FLOAT_EQ(0.0f, crossProduct);
-// }
-//
-//
-// TYPED_TEST(Vec2CrossProductTests, Cross_TwoNonParallelVectorsReturnsNewProduct)
-// {
-//     const TypeParam crossProduct = this->_vecA.cross(this->_vecB);
-//
-//     if constexpr (std::is_same_v<TypeParam, double>)
-//     {
-//         EXPECT_DOUBLE_EQ(this->_expectedCrossProduct, crossProduct);
-//     }
-//     else if constexpr (std::is_floating_point_v<TypeParam>)
-//     {
-//         EXPECT_FLOAT_EQ(this->_expectedCrossProduct, crossProduct);
-//     }
-//     else
-//     {
-//         EXPECT_EQ(this->_expectedCrossProduct, crossProduct);
-//     }
-// }
-//
-//
-// TYPED_TEST(Vec2CrossProductTests, StaticWrapper_Cross_TwoNonParallelVectorsReturnsNewProduct)
-// {
-//     const TypeParam crossProduct = fgm::Vec2<TypeParam>::cross(this->_vecA, this->_vecB);
-//     if constexpr (std::is_same_v<TypeParam, double>)
-//     {
-//         EXPECT_DOUBLE_EQ(this->_expectedCrossProduct, crossProduct);
-//     }
-//     else if constexpr (std::is_floating_point_v<TypeParam>)
-//     {
-//         EXPECT_FLOAT_EQ(this->_expectedCrossProduct, crossProduct);
-//     }
-//     else
-//     {
-//         EXPECT_EQ(this->_expectedCrossProduct, crossProduct);
-//     }
-// }
-//
-//
-// TEST(Vec2CrossProduct, TensorProduct_MixedTypes_PromotesType)
-// {
-//     const fgm::Vec2 vecA(2.0f, 3.0f);
-//     const fgm::Vec2 vecB(5.0, 6.0);
-//
-//     [[maybe_unused]] const auto crossProduct = vecA.cross(vecB);
-//     static_assert(std::is_same_v<decltype(crossProduct), const double>);
-// }
-//
-//
-//
+
+/**************************************
+ *        CROSS PRODUCT TESTS         *
+ **************************************/
+
+TEST(Vec2CrossProduct, Cross_WithItself_ReturnsZeroVector)
+{
+    const fgm::Vec2 vec(2.0f, 1.0f);
+
+    const float crossProduct = vec.cross(vec);
+
+    EXPECT_FLOAT_EQ(0.0f, crossProduct);
+}
+
+
+TYPED_TEST(Vec2CrossProductTests, Cross_TwoNonParallelVectorsReturnsNewProduct)
+{
+    const TypeParam crossProduct = this->_vecA.cross(this->_vecB);
+
+    if constexpr (std::is_same_v<TypeParam, double>)
+    {
+        EXPECT_DOUBLE_EQ(this->_expectedCrossProduct, crossProduct);
+    }
+    else if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_FLOAT_EQ(this->_expectedCrossProduct, crossProduct);
+    }
+    else
+    {
+        EXPECT_EQ(this->_expectedCrossProduct, crossProduct);
+    }
+}
+
+
+TYPED_TEST(Vec2CrossProductTests, StaticWrapper_Cross_TwoNonParallelVectorsReturnsNewProduct)
+{
+    const TypeParam crossProduct = fgm::Vec2<TypeParam>::cross(this->_vecA, this->_vecB);
+    if constexpr (std::is_same_v<TypeParam, double>)
+    {
+        EXPECT_DOUBLE_EQ(this->_expectedCrossProduct, crossProduct);
+    }
+    else if constexpr (std::is_floating_point_v<TypeParam>)
+    {
+        EXPECT_FLOAT_EQ(this->_expectedCrossProduct, crossProduct);
+    }
+    else
+    {
+        EXPECT_EQ(this->_expectedCrossProduct, crossProduct);
+    }
+}
+
+
+
 // /**************************************
 //  *        TENSOR PRODUCT TESTS        *
 //  **************************************/

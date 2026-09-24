@@ -644,7 +644,7 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
-    constexpr T Vec2<T>::dot([[maybe_unused]] const Vec2& rhs) const noexcept
+    FALCON_INLINE constexpr T Vec2<T>::dot([[maybe_unused]] const Vec2& rhs) const noexcept
         requires StrictArithmetic<T>
     {
         const auto product = _data * rhs._data;
@@ -653,9 +653,26 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr T Vec2<T>::dot(const Vec2& lhs, const Vec2& rhs) noexcept
+    FALCON_INLINE constexpr T Vec2<T>::dot(const Vec2& lhs, const Vec2& rhs) noexcept
         requires StrictArithmetic<T>
     { return lhs.dot(rhs); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr T Vec2<T>::cross(const Vec2& rhs) const noexcept
+        requires SignedStrictArithmetic<T>
+    {
+        // Ax*By - Ay*Bx
+        const auto shuffled = rhs._data.template shuffle<1, 0>(); // [By, Bx]
+        const auto product  = _data * shuffled;                   // [Ax*By, Ay*Bx]
+        return product.horizontalSub();                           // Ax*By - Ay*Bx
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr T Vec2<T>::cross(const Vec2& lhs, const Vec2& rhs) noexcept
+        requires SignedStrictArithmetic<T>
+    { return lhs.cross(rhs); }
 
 
 

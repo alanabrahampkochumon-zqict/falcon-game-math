@@ -1,5 +1,4 @@
 #pragma once
-#include "Simd128SSE.h"
 /**
  * @file Simd128SSE.inl
  * @author Alan Abraham P Kochumon

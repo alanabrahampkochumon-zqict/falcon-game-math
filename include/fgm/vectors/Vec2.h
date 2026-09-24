@@ -1006,43 +1006,35 @@ namespace fgm
         //         [[nodiscard]] static constexpr PromotedMat2<T, U> tensorProduct(const Vec2& lhs, const Vec2<U>& rhs)
         //         noexcept
         //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the 2D pseudo-cross product with another vector.
-        //          *        \f$ \mathbf{a} \times \mathbf{b} = (x_1 \cdot y_2 - x_2 \cdot y_1) \f$
-        //          *
-        //          * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
-        //          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] rhs The vector to compute the cross product with.
-        //          *
-        //          * @return The pseudo-cross cross product of the two vectors.
-        //          */
-        //         template <SignedStrictArithmetic U>
-        //         constexpr PromotedValue_t<T, U> cross(const Vec2<U>& rhs) const noexcept
-        //             requires SignedStrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Compute the 2D pseudo-cross product of two vectors.
-        //          *        \f$ \mathbf{a} \times \mathbf{b} = (x_1 \cdot y_2 - x_2 \cdot y_1) \f$
-        //          *
-        //          * @note Promotes the result to the wider type using @ref PromotedValue_t<T, U>.
-        //          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] lhs The first vector to compute the cross product with.
-        //          * @param[in] rhs The second vector to compute the cross product with.
-        //          *
-        //          * @return The pseudo-cross product of the two vectors.
-        //          */
-        //         template <SignedStrictArithmetic U>
-        //         static constexpr PromotedValue_t<T, U> cross(const Vec2& lhs, const Vec2<U>& rhs) noexcept
-        //             requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the 2D pseudo-cross product with another vector.
+         *        \f$ \mathbf{a} \times \mathbf{b} = (x_1 \cdot y_2 - x_2 \cdot y_1) \f$
+         *
+         * @note Operation is restricted to signed numeric types via @ref SignedStrictArithmetic.
+         *
+         * @param[in] rhs The vector to compute the cross product with.
+         *
+         * @return The pseudo-cross cross product of the two vectors.
+         */
+        constexpr T cross(const Vec2& rhs) const noexcept
+            requires SignedStrictArithmetic<T>;
+
+
+        /**
+         * @brief Compute the 2D pseudo-cross product of two vectors.
+         *        \f$ \mathbf{a} \times \mathbf{b} = (x_1 \cdot y_2 - x_2 \cdot y_1) \f$
+         *
+         * @note Operation is restricted to signed numeric types via @ref SignedStrictArithmetic.
+         *
+         * @param[in] lhs The first vector to compute the cross product with.
+         * @param[in] rhs The second vector to compute the cross product with.
+         *
+         * @return The pseudo-cross product of the two vectors.
+         */
+        static constexpr T cross(const Vec2& lhs, const Vec2& rhs) noexcept
+            requires SignedStrictArithmetic<T>;
 
         /** @} */
 
