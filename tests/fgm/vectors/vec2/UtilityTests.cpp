@@ -31,18 +31,18 @@ namespace
         bool expected;
     };
 
-    //
-    // /**
-    //  * @brief Test fixture for @ref fgm::Vec2 Infinity Checking.
-    //  */
-    // class Vec2InfCheckerTests: public testing::TestWithParam<Vec2UtilityParams<float>>
-    // {};
-    // INSTANTIATE_TEST_SUITE_P(
-    //     Vec2UtilsInfVectors, Vec2InfCheckerTests,
-    //     ::testing::Values(Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, 1.0f), true },
-    //                       Vec2UtilityParams{ fgm::Vec2(1.0f, fgm::constants::INFINITY_F), true },
-    //                       Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F), true },
-    //                       Vec2UtilityParams{ fgm::Vec2(1.0f, 1.0f), false }));
+
+    /**
+     * @brief Test fixture for @ref fgm::Vec2 Infinity Checking.
+     */
+    class Vec2InfCheckerTests: public testing::TestWithParam<Vec2UtilityParams<float>>
+    {};
+    INSTANTIATE_TEST_SUITE_P(
+        Vec2UtilsInfVectors, Vec2InfCheckerTests,
+        ::testing::Values(Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, 1.0f), true },
+                          Vec2UtilityParams{ fgm::Vec2(1.0f, fgm::constants::INFINITY_F), true },
+                          Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F), true },
+                          Vec2UtilityParams{ fgm::Vec2(1.0f, 1.0f), false }));
 
 
     /**
@@ -73,42 +73,42 @@ namespace
  *      INFINITY CHECKER TESTS        *
  **************************************/
 
-// /**
-//  * @test Verify that @ref std::Vec2::hasInf returns True if any of components are IEE754 infinity
-//  *       and False otherwise.
-//  */
-// TEST_P(Vec2InfCheckerTests, ReturnTrueIfAnyComponentIsInfinity)
-// {
-//     const auto& [vec, expected] = GetParam();
-//     EXPECT_EQ(expected, vec.hasInf());
-// }
-//
-//
-// /** @test Verify that @ref std::Vec2::hasInf returns False for integral types. */
-// TYPED_TEST(Vec2UtilsIntTests, HasInf_ReturnsFalseForIntegrals)
-// {
-//     const auto value = TypeParam(1);
-//     EXPECT_FALSE(fgm::Vec2(value, value).hasInf());
-// }
-//
-//
-// /**
-//  * @test Verify that the static variant of @ref std::Vec2::hasInf returns True if any of components are IEE754
-//  *       infinity and False otherwise.
-//  */
-// TEST_P(Vec2InfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
-// {
-//     const auto& [vec, expected] = GetParam();
-//     EXPECT_EQ(expected, fgm::Vec2<float>::hasInf(vec));
-// }
-//
-//
-// /** @test Verify that the static variant of @ref std::Vec2::hasInf returns False for integral types. */
-// TYPED_TEST(Vec2UtilsIntTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
-// {
-//     const auto value = TypeParam(1);
-//     EXPECT_FALSE(fgm::Vec2<TypeParam>::hasInf(fgm::Vec2(value, value)));
-// }
+/**
+ * @test Verify that @ref std::Vec2::hasInf returns True if any of components are IEE754 infinity
+ *       and False otherwise.
+ */
+TEST_P(Vec2InfCheckerTests, ReturnTrueIfAnyComponentIsInfinity)
+{
+    const auto& [vec, expected] = GetParam();
+    EXPECT_EQ(expected, vec.hasInf());
+}
+
+
+/** @test Verify that @ref std::Vec2::hasInf returns False for integral types. */
+TYPED_TEST(Vec2UtilsIntTests, HasInf_ReturnsFalseForIntegrals)
+{
+    const auto value = TypeParam(1);
+    EXPECT_FALSE(fgm::Vec2(value, value).hasInf());
+}
+
+
+/**
+ * @test Verify that the static variant of @ref std::Vec2::hasInf returns True if any of components are IEE754
+ *       infinity and False otherwise.
+ */
+TEST_P(Vec2InfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
+{
+    const auto& [vec, expected] = GetParam();
+    EXPECT_EQ(expected, fgm::Vec2<float>::hasInf(vec));
+}
+
+
+/** @test Verify that the static variant of @ref std::Vec2::hasInf returns False for integral types. */
+TYPED_TEST(Vec2UtilsIntTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
+{
+    const auto value = TypeParam(1);
+    EXPECT_FALSE(fgm::Vec2<TypeParam>::hasInf(fgm::Vec2(value, value)));
+}
 
 
 /**************************************

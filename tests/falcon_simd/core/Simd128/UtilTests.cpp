@@ -114,7 +114,7 @@ TYPED_TEST(Simd128UtilsTests, HasInf_ReturnsValidMask)
 
     for (size_t i = 0; i < Lane; ++i)
     {
-        EXPECT_ANY_EQ(this->expectedNanVec[i], resultMask[i]);
+        EXPECT_ANY_EQ(this->expectedInfVec[i], resultMask[i]);
     }
 }
 

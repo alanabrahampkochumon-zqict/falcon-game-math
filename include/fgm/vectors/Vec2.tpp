@@ -1155,31 +1155,30 @@ namespace fgm
     { return vec.tryRejectNorm(from, status); }
 
 
-    //     /**************************************
-    //      *                                    *
-    //      *             UTILITIES              *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr bool Vec2<T>::hasInf() const noexcept
-    //     {
-    //         if constexpr (std::is_floating_point_v<T>)
-    //         {
-    //             return fgm::isinf(_data[0]) | fgm::isinf(_data[1]);
-    //         }
-    //         else
-    //         {
-    //             return false;
-    //         }
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     FALCON_INLINE constexpr bool Vec2<T>::hasInf(const Vec2& vec) noexcept
-    //     { return vec.hasInf(); }
-    //
-    //
+
+    /**************************************
+     *             UTILITIES              *
+     **************************************/
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr bool Vec2<T>::hasInf() const noexcept
+    {
+        if constexpr (std::is_floating_point_v<T>)
+        {
+            return _data.hasInf().horizontalOr();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr bool Vec2<T>::hasInf(const Vec2& vec) noexcept
+    { return vec.hasInf(); }
+
+
     template <Arithmetic T>
     FALCON_INLINE constexpr bool Vec2<T>::hasNaN() const noexcept
     {
