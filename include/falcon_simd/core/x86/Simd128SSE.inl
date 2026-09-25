@@ -3353,7 +3353,7 @@ namespace falcon
         {
             // AVL2 Library: https://github.com/vectorclass/version2/blob/master/vectorf128.h
             const auto shifted = cast<uint32_t>().template shiftLeft<1>();
-            const auto res     = shifted == Simd128<SimdBackend::ARCH_SSE2, uint32_t, Lane>(0xFF000000UL);
+            const auto res     = shifted == Simd128<SimdBackend::ARCH_SSE2, uint32_t, Lane>(0xFF000000U);
             return Simd128(_mm_castsi128_ps(*res));
         }
         else // if constexpr (std::is_integral_v<DataType>)
