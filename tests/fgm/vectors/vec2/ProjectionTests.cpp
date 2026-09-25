@@ -46,7 +46,7 @@ namespace
             _expectedProjection = { T(4), T(0) };
         }
     };
-    TYPED_TEST_SUITE(Vec2ProjectionTests, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec2ProjectionTests, SupportedFloatingPointTypes);
 
 
 

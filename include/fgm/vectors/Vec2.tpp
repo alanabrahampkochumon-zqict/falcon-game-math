@@ -970,25 +970,18 @@ namespace fgm
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::project(const Vec2& onto) const noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     {
         const auto b2 = onto.dot(onto);
-        // NOTE: Epsilon for integrals return 0
-        if constexpr (FPArithmetic<T>)
-        {
-            FALCON_ASSERT_MSG(b2 > fgm::Config::EPSILON_SQUARE<T>, fgm::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
-        }
-        else
-        {
-            FALCON_ASSERT_MSG(b2 != 0, fgm::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
-        }
+        FALCON_ASSERT_MSG(b2 > fgm::Config::EPSILON_SQUARE<T>, fgm::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
+
         return this->dot(onto) / b2 * onto; // a.dot(b) / b.dot(b) * b
     }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::projectNorm(const Vec2& onto) const noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     {
         return dot(onto) * onto; // A.B * A
     }
@@ -996,93 +989,69 @@ namespace fgm
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::project(const Vec2& vec, const Vec2& onto) noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return vec.project(onto); }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::projectNorm(const Vec2& vec, const Vec2& onto) noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return vec.projectNorm(onto); }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeProject(const Vec2& onto) const noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     {
         const auto ontoSquared = onto.dot(onto);
-
-        if constexpr (FPArithmetic<T>)
+        if (hasNaN() || fgm::isnan(ontoSquared) || ontoSquared <= Config::EPSILON_SQUARE<T>)
         {
-            if (hasNaN() || fgm::isnan(ontoSquared) || ontoSquared <= Config::EPSILON_SQUARE<T>)
-            {
-                return Vec2<T>::zero();
-            }
+            return Vec2<T>::zero();
         }
-        else
-        {
-            if (ontoSquared == 0)
-            {
-                return Vec2<T>::zero();
-            }
-        }
-
         return this->dot(onto) / ontoSquared * onto; // a.dot(b) / b.dot(b) * b
     }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeProjectNorm(const Vec2& onto) const noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     {
-        if constexpr (FPArithmetic<T>)
+
+        if (hasNaN() || onto.hasNaN())
         {
-            if (hasNaN() || onto.hasNaN())
-            {
-                return Vec2<T>::zero();
-            }
+            return Vec2<T>::zero();
         }
+
         return this->dot(onto) * onto;
     }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeProject(const Vec2& vec, const Vec2& onto) noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return vec.safeProject(onto); }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeProjectNorm(const Vec2& vec, const Vec2& onto) noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return vec.safeProjectNorm(onto); }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryProject(const Vec2& onto, OperationStatus& status) const noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     {
         const auto ontoSquared = onto.dot(onto);
-        if constexpr (FPArithmetic<T>)
+        if (hasNaN() || fgm::isnan(ontoSquared))
         {
-            if (hasNaN() || fgm::isnan(ontoSquared))
-            {
-                status = OperationStatus::NANOPERAND;
-                return Vec2<T>::zero();
-            }
-            if (ontoSquared <= Config::EPSILON_SQUARE<T>)
-            {
-                status = OperationStatus::DIVISIONBYZERO;
-                return Vec2<T>::zero();
-            }
+            status = OperationStatus::NANOPERAND;
+            return Vec2<T>::zero();
         }
-        else
+        if (ontoSquared <= Config::EPSILON_SQUARE<T>)
         {
-            if (ontoSquared == 0)
-            {
-                status = OperationStatus::DIVISIONBYZERO;
-                return Vec2<T>::zero();
-            }
+            status = OperationStatus::DIVISIONBYZERO;
+            return Vec2<T>::zero();
         }
 
         status = OperationStatus::SUCCESS;
@@ -1092,15 +1061,12 @@ namespace fgm
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryProjectNorm(const Vec2& onto, OperationStatus& status) const noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     {
-        if constexpr (FPArithmetic<T>)
+        if (hasNaN() || onto.hasNaN())
         {
-            if (hasNaN() || onto.hasNaN())
-            {
-                status = OperationStatus::NANOPERAND;
-                return Vec2<T>::zero();
-            }
+            status = OperationStatus::NANOPERAND;
+            return Vec2<T>::zero();
         }
         status = OperationStatus::SUCCESS;
         return this->dot(onto) * onto;
@@ -1110,14 +1076,14 @@ namespace fgm
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryProject(const Vec2& vec, const Vec2& onto,
                                                         OperationStatus& status) noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return vec.tryProject(onto, status); }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryProjectNorm(const Vec2& vec, const Vec2& onto,
                                                             OperationStatus& status) noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return vec.tryProjectNorm(onto, status); }
 
 
@@ -1128,38 +1094,35 @@ namespace fgm
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::reject(const Vec2& from) const noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return *this - this->project(from); }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::rejectNorm(const Vec2& from) const noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return *this - this->projectNorm(from); }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::reject(const Vec2& vec, const Vec2& from) noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return vec.reject(from); }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::rejectNorm(const Vec2& vec, const Vec2& from) noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return vec.rejectNorm(from); }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeReject(const Vec2& from) const noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     {
-        if (std::is_floating_point_v<T>)
+        if (hasNaN() || from.hasNaN())
         {
-            if (hasNaN() || from.hasNaN())
-            {
-                return Vec2<T>::zero();
-            }
+            return Vec2<T>::zero();
         }
 
         return *this - this->safeProject(from);
@@ -1168,14 +1131,11 @@ namespace fgm
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeRejectNorm(const Vec2& from) const noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     {
-        if (std::is_floating_point_v<T>)
+        if (hasNaN() || from.hasNaN())
         {
-            if (hasNaN() || from.hasNaN())
-            {
-                return Vec2<T>::zero();
-            }
+            return Vec2<T>::zero();
         }
 
         return *this - this->safeProjectNorm(from);
@@ -1184,27 +1144,24 @@ namespace fgm
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeReject(const Vec2& vec, const Vec2& from) noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return vec.safeReject(from); }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeRejectNorm(const Vec2& vec, const Vec2& from) noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return vec.safeRejectNorm(from); }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryReject(const Vec2& from, OperationStatus& status) const noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     {
-        if (std::is_floating_point_v<T>)
+        if (hasNaN() || from.hasNaN())
         {
-            if (hasNaN() || from.hasNaN())
-            {
-                status = OperationStatus::NANOPERAND;
-                return Vec2<T>::zero();
-            }
+            status = OperationStatus::NANOPERAND;
+            return Vec2<T>::zero();
         }
 
         return *this - this->tryProject(from, status);
@@ -1213,15 +1170,12 @@ namespace fgm
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryRejectNorm(const Vec2& from, OperationStatus& status) const noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     {
-        if (std::is_floating_point_v<T>)
+        if (hasNaN() || from.hasNaN())
         {
-            if (hasNaN() || from.hasNaN())
-            {
-                status = OperationStatus::NANOPERAND;
-                return Vec2<T>::zero();
-            }
+            status = OperationStatus::NANOPERAND;
+            return Vec2<T>::zero();
         }
 
         return *this - this->tryProjectNorm(from, status);
@@ -1231,84 +1185,15 @@ namespace fgm
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryReject(const Vec2& vec, const Vec2& from,
                                                        OperationStatus& status) noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return vec.tryReject(from, status); }
 
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryRejectNorm(const Vec2& vec, const Vec2& from,
                                                            OperationStatus& status) noexcept
-        requires StrictArithmetic<T>
+        requires FPArithmetic<T>
     { return vec.tryRejectNorm(from, status); }
-
-
-
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::reject(const Vec2<U>& from) const noexcept
-    //         requires StrictArithmetic<T>
-    //     { return static_cast<PromotedFloatVec2<T, U>>(*this) - this->project(from); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::rejectNorm(const Vec2<U>& from) const noexcept
-    //         requires StrictArithmetic<T>
-    //     { return *this - this->projectNorm(from); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::reject(const Vec2& vec, const Vec2<U>& from)
-    //     noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.reject(from); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::rejectNorm(const Vec2& vector, const Vec2<U>& from)
-    //     noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vector.rejectNorm(from); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::safeReject(const Vec2<U>& from) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         if (hasNaN() || from.hasNaN())
-    //         {
-    //             return Vec2<Magnitude<PromotedValue_t<T, U>>>::zero();
-    //         }
-    //
-    //         return static_cast<PromotedFloatVec2<T, U>>(*this) - safeProject(from);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::safeRejectNorm(const Vec2<U>& from) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         if (hasNaN() || from.hasNaN())
-    //         {
-    //             return Vec2<PromotedValue_t<T, U>>::zero();
-    //         }
-    //
-    //         return *this - safeProjectNorm(from);
-    //     }
-    //
-
-
 
 
     //     /**************************************

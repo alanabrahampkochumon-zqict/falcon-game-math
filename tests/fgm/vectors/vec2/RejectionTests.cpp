@@ -46,7 +46,7 @@ namespace
             _expectedRejection = { T(4), T(0) };
         }
     };
-    TYPED_TEST_SUITE(Vec2RejectionTests, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec2RejectionTests, SupportedFloatingPointTypes);
 
 
 

@@ -1395,7 +1395,8 @@ namespace fgm
          */
 
         /// API NOTE: While projections are allowed on all numeric types, it can cause imprecise results with
-        ///           non-floating point types due to rounding in the division.
+        ///           non-floating point types due to rounding in the division, so they are restricted to only
+        ///           floating point types.
 
         /**
          * @brief Project this vector onto the @p onto vector.
@@ -1412,7 +1413,7 @@ namespace fgm
          * @return The projected @ref Vec2.
          */
         [[nodiscard]] constexpr Vec2 project(const Vec2& onto) const noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1428,7 +1429,7 @@ namespace fgm
          * @return The projected @ref Vec2.
          */
         [[nodiscard]] constexpr Vec2 projectNorm(const Vec2& onto) const noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1447,7 +1448,7 @@ namespace fgm
          * @return The projected @ref Vec2.
          */
         [[nodiscard]] static constexpr Vec2 project(const Vec2& vec, const Vec2& onto) noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1464,7 +1465,7 @@ namespace fgm
          * @return The projected @ref Vec2.
          */
         [[nodiscard]] static constexpr Vec2 projectNorm(const Vec2& vec, const Vec2& onto) noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1484,7 +1485,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr Vec2 safeProject(const Vec2& onto) const noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1504,7 +1505,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr Vec2 safeProjectNorm(const Vec2& onto) const noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1526,7 +1527,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] static constexpr Vec2 safeProject(const Vec2& vec, const Vec2& onto) noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1545,7 +1546,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] static constexpr Vec2 safeProjectNorm(const Vec2& vec, const Vec2& onto) noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1568,7 +1569,7 @@ namespace fgm
          *         either vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr Vec2 tryProject(const Vec2& onto, OperationStatus& status) const noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1590,7 +1591,7 @@ namespace fgm
          *         either vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr Vec2 tryProjectNorm(const Vec2& onto, OperationStatus& status) const noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1616,7 +1617,7 @@ namespace fgm
          */
         [[nodiscard]] static constexpr Vec2 tryProject(const Vec2& vec, const Vec2& onto,
                                                        OperationStatus& status) noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1640,7 +1641,7 @@ namespace fgm
          */
         [[nodiscard]] static constexpr Vec2 tryProjectNorm(const Vec2& vec, const Vec2& onto,
                                                            OperationStatus& status) noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1655,7 +1656,7 @@ namespace fgm
          * @return The perpendicular @ref Vec2 component.
          */
         [[nodiscard]] constexpr Vec2 reject(const Vec2& from) const noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1669,7 +1670,7 @@ namespace fgm
          * @return The perpendicular @ref Vec2 component.
          */
         [[nodiscard]] constexpr Vec2 rejectNorm(const Vec2& from) const noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1684,7 +1685,7 @@ namespace fgm
          * @return The perpendicular @ref Vec2 component.
          */
         [[nodiscard]] static constexpr Vec2 reject(const Vec2& vec, const Vec2& from) noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1699,7 +1700,7 @@ namespace fgm
          * @return The perpendicular @ref Vec2 component.
          */
         [[nodiscard]] static constexpr Vec2 rejectNorm(const Vec2& vec, const Vec2& from) noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1716,7 +1717,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr Vec2 safeReject(const Vec2& from) const noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1732,7 +1733,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr Vec2 safeRejectNorm(const Vec2& from) const noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1750,7 +1751,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] static constexpr Vec2 safeReject(const Vec2& vec, const Vec2& from) noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1767,7 +1768,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] static constexpr Vec2 safeRejectNorm(const Vec2& vec, const Vec2& from) noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1786,7 +1787,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr Vec2 tryReject(const Vec2& from, OperationStatus& status) const noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1805,7 +1806,7 @@ namespace fgm
          *         or if either of the vectors has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr Vec2 tryRejectNorm(const Vec2& from, OperationStatus& status) const noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1828,7 +1829,7 @@ namespace fgm
          */
         [[nodiscard]] static constexpr Vec2 tryReject(const Vec2& vec, const Vec2& from,
                                                       OperationStatus& status) noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
 
         /**
@@ -1848,7 +1849,7 @@ namespace fgm
          */
         [[nodiscard]] static constexpr Vec2 tryRejectNorm(const Vec2& vec, const Vec2& from,
                                                           OperationStatus& status) noexcept
-            requires StrictArithmetic<T>;
+            requires FPArithmetic<T>;
 
         /** @} */
 
