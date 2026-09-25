@@ -8,11 +8,11 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-#ifdef ENABLE_DEBUG_TESTS
-    #include "CommonSetup.h"
+#include "../../include/CommonSetup.h"
+#include "Vec2TestSetup.h"
 
-    #include <fgm/vectors/Vec2.h>
-    #include <gtest/gtest.h>
+
+#ifdef ENABLE_DEBUG_TESTS
 
 namespace
 {
@@ -23,7 +23,7 @@ namespace
     /**
      * @brief Test fixture for @ref Vec2 accessor.
      */
-    class Vec2IndexingTests: public testing::TestWithParam<std::size_t>
+    class Vec2IndexingTests: public testing::TestWithParam<size_t>
     {};
     INSTANTIATE_TEST_SUITE_P(Vec2InvalidIndices, Vec2IndexingTests, testing::Values(3, 4, 100));
 
@@ -70,7 +70,7 @@ namespace
             _expectedUnitVec = { static_cast<R>(0.46031716445500037), static_cast<R>(0.8877545314489294) };
         }
     };
-    TYPED_TEST_SUITE(Vec2NormalizationTests, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec2NormalizationTests, SupportedFloatingPointTypes);
 
 
 
@@ -96,7 +96,7 @@ namespace
             _expectedProjection = { T(4), T(0) };
         }
     };
-    TYPED_TEST_SUITE(Vec2ProjectionTests, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec2ProjectionTests, SupportedFloatingPointTypes);
 
 
 
@@ -122,7 +122,7 @@ namespace
             _expectedRejection = { T(4), T(0) };
         }
     };
-    TYPED_TEST_SUITE(Vec2RejectionTests, SupportedArithmeticTypes);
+    TYPED_TEST_SUITE(Vec2RejectionTests, SupportedFloatingPointTypes);
 
 } // namespace
 

@@ -64,7 +64,7 @@ add_executable(FGMVectorDeathTests
         cvec2/DeathTests.cpp # TODO: Add death tests here
         vec3/DeathTests.cpp
         vec4/DeathTests.cpp
-        # vec2/DeathTests.cpp # TODO: Add death tests here
+        vec2/DeathTests.cpp
 )
 set_target_properties(FGMVectorDeathTests PROPERTIES CXX_STANDARD 20)
 set_target_properties(FGMVectorDeathTests PROPERTIES CXX_STANDARD_REQUIRED ON)
