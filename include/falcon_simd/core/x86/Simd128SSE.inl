@@ -3248,13 +3248,13 @@ namespace falcon
             {
                 reg = *max(*this, Simd128(_mm_setzero_si128()));
             }
-            const auto regLo = _mm_unpacklo_saturated_custom(reg); // Unpacked 16-bit register
-            const auto regA  = _mm_unpacklo_saturated_custom(regLo);     // <_, _, _, A>
+            const auto regLo = _mm_unpacklo_saturated_custom(reg);   // Unpacked 16-bit register
+            const auto regA  = _mm_unpacklo_saturated_custom(regLo); // <_, _, _, A>
             // NOTE: We need to clamp negative numbers to zero since we cannot have negative sqrt(imaginary numbers)
-            const auto floatRegA   = _mm_cvtepi32_ps(regA);
-            const auto sqrtA       = _mm_sqrt_ps(floatRegA);
-            const auto intSqrtA    = _mm_cvttps_epi32(sqrtA);
-            const auto packedRegA  = _mm_packs_epi32(intSqrtA, _mm_setzero_si128());
+            const auto floatRegA  = _mm_cvtepi32_ps(regA);
+            const auto sqrtA      = _mm_sqrt_ps(floatRegA);
+            const auto intSqrtA   = _mm_cvttps_epi32(sqrtA);
+            const auto packedRegA = _mm_packs_epi32(intSqrtA, _mm_setzero_si128());
             if constexpr (Lane <= 4)
             {
                 return Simd128(_mm_packs_epi16(packedRegA, _mm_setzero_si128()));
@@ -3272,12 +3272,12 @@ namespace falcon
                 }
                 else
                 {
-                    const auto regHi       = _mm_unpackhi_saturated_custom(_register);
-                    const auto regC        = _mm_unpacklo_saturated_custom(regHi); // <_, C, _, _>
-                    const auto floatRegC   = _mm_cvtepi32_ps(regC);
-                    const auto sqrtC       = _mm_sqrt_ps(floatRegC);
-                    const auto intSqrtC    = _mm_cvttps_epi32(sqrtC);
-                    const auto packedRegC  = _mm_packs_epi32(intSqrtC, _mm_setzero_si128());
+                    const auto regHi      = _mm_unpackhi_saturated_custom(_register);
+                    const auto regC       = _mm_unpacklo_saturated_custom(regHi); // <_, C, _, _>
+                    const auto floatRegC  = _mm_cvtepi32_ps(regC);
+                    const auto sqrtC      = _mm_sqrt_ps(floatRegC);
+                    const auto intSqrtC   = _mm_cvttps_epi32(sqrtC);
+                    const auto packedRegC = _mm_packs_epi32(intSqrtC, _mm_setzero_si128());
                     if constexpr (Lane <= 12)
                     {
                         return Simd128(_mm_packs_epi16(packedRegBA, packedRegC));
@@ -3328,6 +3328,33 @@ namespace falcon
             {
                 return Simd128(_mm_cmpunord_ps(_register, _register));
             }
+        }
+        else // if constexpr (std::is_integral_v<DataType>)
+        {
+            return Simd128(_mm_setzero_si128());
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
+                                                                                    Lane>::hasInf() const noexcept
+    {
+        if constexpr (types::IsFP64<DataType>)
+        {
+            // Infinity: 0x7FF0000000000000 (All exponents bits set to 1)
+            // For checking for infinity we cast the register to a integral, shift to remove the sign bit
+            // and then check if the first 10-bits are 1 or (0xFFE0 0000 0000 0000).
+            const auto shifted = cast<uint64_t>().template shiftLeft<1>();
+            const auto res     = shifted == Simd128<SimdBackend::ARCH_SSE2, uint64_t, Lane>(0xFFE0000000000000ULL);
+            return Simd128(_mm_castsi128_pd(*res));
+        }
+        else if constexpr (types::IsFP32<DataType>)
+        {
+            // AVL2 Library: https://github.com/vectorclass/version2/blob/master/vectorf128.h
+            const auto shifted = cast<uint32_t>().template shiftLeft<1>();
+            const auto res     = shifted == Simd128<SimdBackend::ARCH_SSE2, uint32_t, Lane>(0xFF000000UL);
+            return Simd128(_mm_castsi128_ps(*res));
         }
         else // if constexpr (std::is_integral_v<DataType>)
         {
