@@ -56,6 +56,7 @@
              *   @defgroup T_FGM_CVec2_Negation Negation(-)
              *   @defgroup T_FGM_CVec2_Utils Vector Utilities
              *   @defgroup T_FGM_CVec2_Swizzle Vector Swizzling
+             *   @defgroup T_FGM_CVec2_Ptr Internal Storage Access(Raw Pointer)
              * @}
              */
 
@@ -84,6 +85,7 @@
               *   @defgroup T_FGM_Vec2_Negation Negation(-)
               *   @defgroup T_FGM_Vec2_Utils Vector Utilities
               *   @defgroup T_FGM_Vec2_Swizzle Vector Swizzling
+              *   @defgroup T_FGM_Vec2_Ptr Internal Storage Access(Raw Pointer)
               * @}
               */
 
@@ -113,6 +115,7 @@
              *   @defgroup T_FGM_Vec3_Negation Negation(-)
              *   @defgroup T_FGM_Vec3_Utils Vector Utilities
              *   @defgroup T_FGM_Vec3_Swizzle Vector Swizzling
+             *   @defgroup T_FGM_Vec3_Ptr Internal Storage Access(Raw Pointer)
              * @}
              */
 
@@ -142,6 +145,7 @@
              *   @defgroup T_FGM_Vec4_Negation Negation(-)
              *   @defgroup T_FGM_Vec4_Utils Vector Utilities
              *   @defgroup T_FGM_Vec4_Swizzle Vector Swizzling
+             *   @defgroup T_FGM_Vec4_Ptr Internal Storage Access(Raw Pointer)
              * @}
              */
 

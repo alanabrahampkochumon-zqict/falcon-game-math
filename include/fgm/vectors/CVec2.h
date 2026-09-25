@@ -252,8 +252,17 @@ namespace fgm
         template <std::size_t... Indices>
         [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
         static constexpr auto swizzle(const CVec2& vec) noexcept;
+        /** @} */
+
+
+
+        /**
+         * @addtogroup FGM_CVec2_Ptr
+         * @{
+         */
 
         /** @} */
+
 
 
         /**
