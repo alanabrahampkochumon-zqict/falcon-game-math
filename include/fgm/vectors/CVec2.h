@@ -66,6 +66,14 @@ namespace fgm
 
 
         /**
+         * @brief Initialize @ref CVec2 with a single value broadcast across its components.
+         *
+         * @param[in] val The value to use broadcast across all vector components.
+         */
+        [[nodiscard]] explicit constexpr CVec2(T val) noexcept;
+
+
+        /**
          * @brief Initialize @ref CVec2 with passed in values.
          *
          * @param[in] v1 The first entry of @ref CVec2.

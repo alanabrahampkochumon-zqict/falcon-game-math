@@ -41,10 +41,15 @@ namespace
     namespace static_wrapper
     {
 
+        /// @test Verify that CVec2 can be initialized with a single parameters at compile time.
+        constexpr fgm::CVec2 SCALAR_INIT_VEC1(1);
+        static_assert(SCALAR_INIT_VEC1.x() == 1);
+        static_assert(SCALAR_INIT_VEC1.y() == 1);
+
         /// @test Verify that CVec2 can be initialized with parameters at compile time.
-        constexpr fgm::CVec2 SCALAR_INIT_VEC(1, 2);
-        static_assert(SCALAR_INIT_VEC.x() == 1);
-        static_assert(SCALAR_INIT_VEC.y() == 2);
+        constexpr fgm::CVec2 SCALAR_INIT_VEC2(1, 2);
+        static_assert(SCALAR_INIT_VEC2.x() == 1);
+        static_assert(SCALAR_INIT_VEC2.y() == 2);
 
         /// @test Verify that CVec2 can be initialized using braced initialization at compile time.
         constexpr fgm::CVec2<int> BRACED_INIT_VEC{};
@@ -73,6 +78,14 @@ TYPED_TEST(CVec2InitializationTests, Ctor_ParametersInitializesVector)
 
     const fgm::CVec2<TypeParam> vec(a, b);
     EXPECT_VEC_CONTAINS(vec, a, b);
+}
+
+
+TYPED_TEST(CVec2InitializationTests, Ctor_SingleParameterInitializesVector)
+{
+    const auto a = static_cast<TypeParam>(3);
+    const fgm::CVec2<TypeParam> vec(a);
+    EXPECT_VEC_CONTAINS(vec, a, a);
 }
 
 /** @} */
