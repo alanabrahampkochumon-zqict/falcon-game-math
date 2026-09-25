@@ -41,6 +41,9 @@ namespace fgm
     struct CVec2;
 
     template <Arithmetic T>
+    struct Vec2;
+
+    template <Arithmetic T>
     struct Vec3;
 
     template <Arithmetic T>

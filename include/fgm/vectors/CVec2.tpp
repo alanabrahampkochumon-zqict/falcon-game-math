@@ -52,10 +52,23 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> CVec2<T>::toVec2() const noexcept
+    {
+        return Vec2<T>(_data[0], _data[1]);
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> CVec2<T>::toVec2(const CVec2& vec) noexcept
+    {
+        return vec.toVec2();
+    }
+
+
+
     /*************************************
-     *                                   *
      *            ACCESSORS              *
-     *                                   *
      *************************************/
 
     /**************************************
@@ -198,17 +211,19 @@ namespace fgm
     FALCON_INLINE constexpr const T* CVec2<T>::ptr(const CVec2& vec) noexcept
     { return vec.ptr(); }
 
+
     template <Arithmetic T>
     FALCON_INLINE constexpr T* CVec2<T>::ptr(CVec2& vec) noexcept
     { return vec.ptr(); }
 
+
     template <Arithmetic T>
-    constexpr T* CVec2<T>::operator*() noexcept
+    FALCON_INLINE constexpr T* CVec2<T>::operator*() noexcept
     { return ptr(); }
 
 
     template <Arithmetic T>
-    constexpr const T* CVec2<T>::operator*() const noexcept
+    FALCON_INLINE constexpr const T* CVec2<T>::operator*() const noexcept
     { return ptr(); }
 
 

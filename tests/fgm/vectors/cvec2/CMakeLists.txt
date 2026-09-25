@@ -6,6 +6,7 @@ target_sources(
         AliasTests.cpp
         ArithmeticOperationTests.cpp
         BooleanBitOperationTests.cpp
+        ConversionTests.cpp
         ComparisonTests.cpp
         ConstantsTests.cpp
         DistanceTests.cpp

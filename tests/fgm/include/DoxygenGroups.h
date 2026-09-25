@@ -86,6 +86,7 @@
               *   @defgroup T_FGM_Vec2_Utils Vector Utilities
               *   @defgroup T_FGM_Vec2_Swizzle Vector Swizzling
               *   @defgroup T_FGM_Vec2_Ptr Internal Storage Access(Raw Pointer)
+              *   @defgroup T_FGM_Vec2_Conv Constexpr Vec to SIMD Accelerated Vec conversion.
               * @}
               */
 
@@ -116,6 +117,7 @@
              *   @defgroup T_FGM_Vec3_Utils Vector Utilities
              *   @defgroup T_FGM_Vec3_Swizzle Vector Swizzling
              *   @defgroup T_FGM_Vec3_Ptr Internal Storage Access(Raw Pointer)
+             *   @defgroup T_FGM_Vec3_Conv Constexpr Vec to SIMD Accelerated Vec conversion.
              * @}
              */
 
@@ -146,6 +148,7 @@
              *   @defgroup T_FGM_Vec4_Utils Vector Utilities
              *   @defgroup T_FGM_Vec4_Swizzle Vector Swizzling
              *   @defgroup T_FGM_Vec4_Ptr Internal Storage Access(Raw Pointer)
+             *   @defgroup T_FGM_Vec4_Conv Constexpr Vec to SIMD Accelerated Vec conversion.
              * @}
              */
 
