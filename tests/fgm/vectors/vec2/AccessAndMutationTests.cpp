@@ -134,4 +134,15 @@ TEST(Vec2MutationTests, ElementsCanBeMutatedUsingIndex)
     EXPECT_FLOAT_EQ(1.0f, vec[1]);
 }
 
+TEST(Vec2MutationTests, ElementsCanBeMutatedUsingCompileTimeIndexing)
+{
+    fgm::Vec2<float> vec;
+
+    vec.set<0>(3.0f);
+    vec.set<1>(1.0f);
+
+    EXPECT_FLOAT_EQ(3.0f, vec[0]);
+    EXPECT_FLOAT_EQ(1.0f, vec[1]);
+}
+
 /** @} */

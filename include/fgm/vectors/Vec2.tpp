@@ -179,6 +179,15 @@ namespace fgm
     }
 
 
+    template <Arithmetic T>
+    template <size_t Index>
+    FALCON_INLINE constexpr void Vec2<T>::set(T value) noexcept
+    {
+        static_assert(Index < DIMENSION && "[Vec2]: Out of bounds mutation");
+        _data.template setAt<Index>(value);
+    }
+
+
     /**************************************
      *                                    *
      *             SWIZZLING              *

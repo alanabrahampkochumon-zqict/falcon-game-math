@@ -238,9 +238,14 @@ namespace fgm
         template <size_t Index>
         constexpr T get() noexcept;
 
+
+        /// @brief Get the element at @p Index to @p value.
+        template <size_t Index>
+        constexpr void set(T value) noexcept;
+
         /** @} */
 
-        
+
 
         /**
          * @addtogroup FGM_Vec2_Swizzle
