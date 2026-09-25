@@ -397,9 +397,9 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr CVec2<bool> eq(const CVec2<U>& rhs,
-                                                 double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
-                                                     ? Config::DOUBLE_EPSILON
-                                                     : Config::FLOAT_EPSILON) const noexcept;
+                                               double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
+                                                   ? Config::DOUBLE_EPSILON
+                                                   : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -418,10 +418,10 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr CVec2<bool> eq(const CVec2& lhs, const CVec2<U>& rhs,
-                                                        double epsilon = std::is_same_v<T, double> ||
-                                                                std::is_same_v<U, double>
-                                                            ? Config::DOUBLE_EPSILON
-                                                            : Config::FLOAT_EPSILON) noexcept;
+                                                      double epsilon = std::is_same_v<T, double> ||
+                                                              std::is_same_v<U, double>
+                                                          ? Config::DOUBLE_EPSILON
+                                                          : Config::FLOAT_EPSILON) noexcept;
 
 
         /**
@@ -441,10 +441,9 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr CVec2<bool> neq(const CVec2<U>& rhs,
-                                                  double epsilon = std::is_same_v<T, double> ||
-                                                          std::is_same_v<U, double>
-                                                      ? Config::DOUBLE_EPSILON
-                                                      : Config::FLOAT_EPSILON) const noexcept;
+                                                double epsilon = std::is_same_v<T, double> || std::is_same_v<U, double>
+                                                    ? Config::DOUBLE_EPSILON
+                                                    : Config::FLOAT_EPSILON) const noexcept;
 
 
         /**
@@ -463,10 +462,10 @@ namespace fgm
         template <Arithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr CVec2<bool> neq(const CVec2& lhs, const CVec2<U>& rhs,
-                                                         double epsilon = std::is_same_v<T, double> ||
-                                                                 std::is_same_v<U, double>
-                                                             ? Config::DOUBLE_EPSILON
-                                                             : Config::FLOAT_EPSILON) noexcept;
+                                                       double epsilon = std::is_same_v<T, double> ||
+                                                               std::is_same_v<U, double>
+                                                           ? Config::DOUBLE_EPSILON
+                                                           : Config::FLOAT_EPSILON) noexcept;
 
         /** @} */
 
@@ -979,7 +978,7 @@ namespace fgm
          */
         template <StrictArithmetic S>
         [[nodiscard]] static constexpr PromotedCVec2<T, S> tryDiv(const CVec2& vec, S scalar,
-                                                                    OperationStatus& status) noexcept
+                                                                  OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1288,8 +1287,7 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedValue_t<T, U> distSq(const CVec2& lhs,
-                                                                    const CVec2<U>& rhs) noexcept
+        [[nodiscard]] static constexpr PromotedValue_t<T, U> distSq(const CVec2& lhs, const CVec2<U>& rhs) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1483,7 +1481,7 @@ namespace fgm
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] static constexpr CVec2<Magnitude<T>> tryNormalize(const CVec2& vec,
-                                                                          OperationStatus& status) noexcept
+                                                                        OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -1558,8 +1556,7 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedFloatCVec2<T, U> project(const CVec2& vec,
-                                                                          const CVec2<U>& onto) noexcept
+        [[nodiscard]] static constexpr PromotedFloatCVec2<T, U> project(const CVec2& vec, const CVec2<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1581,8 +1578,7 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedCVec2<T, U> projectNorm(const CVec2& vec,
-                                                                         const CVec2<U>& onto) noexcept
+        [[nodiscard]] static constexpr PromotedCVec2<T, U> projectNorm(const CVec2& vec, const CVec2<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1657,7 +1653,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedFloatCVec2<T, U> safeProject(const CVec2& vec,
-                                                                              const CVec2<U>& onto) noexcept
+                                                                            const CVec2<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1682,7 +1678,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedCVec2<T, U> safeProjectNorm(const CVec2& vec,
-                                                                             const CVec2<U>& onto) noexcept
+                                                                           const CVec2<U>& onto) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1711,7 +1707,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedFloatCVec2<T, U> tryProject(const CVec2<U>& onto,
-                                                                      OperationStatus& status) const noexcept
+                                                                    OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1738,7 +1734,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedCVec2<T, U> tryProjectNorm(const CVec2<U>& onto,
-                                                                     OperationStatus& status) const noexcept
+                                                                   OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1768,7 +1764,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedFloatCVec2<T, U> tryProject(const CVec2& vec, const CVec2<U>& onto,
-                                                                             OperationStatus& status) noexcept
+                                                                           OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1798,7 +1794,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedCVec2<T, U> tryProjectNorm(const CVec2& vec, const CVec2<U>& onto,
-                                                                            OperationStatus& status) noexcept
+                                                                          OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1857,8 +1853,7 @@ namespace fgm
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedFloatCVec2<T, U> reject(const CVec2& vec,
-                                                                         const CVec2<U>& from) noexcept
+        [[nodiscard]] static constexpr PromotedFloatCVec2<T, U> reject(const CVec2& vec, const CVec2<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1871,15 +1866,14 @@ namespace fgm
          *
          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
          *
-         * @param[in] vector The vector to be rejected.
-         * @param[in] from   The vector to reject from.
+         * @param[in] vec  The vector to be rejected.
+         * @param[in] from The vector to reject from.
          *
          * @return The perpendicular @ref CVec2 component.
          */
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
-        [[nodiscard]] static constexpr PromotedCVec2<T, U> rejectNorm(const CVec2& vector,
-                                                                        const CVec2<U>& from) noexcept
+        [[nodiscard]] static constexpr PromotedCVec2<T, U> rejectNorm(const CVec2& vec, const CVec2<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1946,7 +1940,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedFloatCVec2<T, U> safeReject(const CVec2& vec,
-                                                                             const CVec2<U>& from) noexcept
+                                                                           const CVec2<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1969,7 +1963,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedCVec2<T, U> safeRejectNorm(const CVec2& vec,
-                                                                            const CVec2<U>& from) noexcept
+                                                                          const CVec2<U>& from) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -1994,7 +1988,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedFloatCVec2<T, U> tryReject(const CVec2<U>& from,
-                                                                     OperationStatus& status) const noexcept
+                                                                   OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2019,7 +2013,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] constexpr PromotedCVec2<T, U> tryRejectNorm(const CVec2<U>& from,
-                                                                    OperationStatus& status) const noexcept
+                                                                  OperationStatus& status) const noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2046,7 +2040,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedFloatCVec2<T, U> tryReject(const CVec2& vec, const CVec2<U>& from,
-                                                                            OperationStatus& status) noexcept
+                                                                          OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
 
@@ -2071,7 +2065,7 @@ namespace fgm
         template <StrictArithmetic U>
             requires StrictSignedness<T, U>
         [[nodiscard]] static constexpr PromotedCVec2<T, U> tryRejectNorm(const CVec2& vec, const CVec2<U>& from,
-                                                                           OperationStatus& status) noexcept
+                                                                         OperationStatus& status) noexcept
             requires StrictArithmetic<T>;
 
         /** @} */
@@ -2179,9 +2173,7 @@ namespace fgm
          */
         static constexpr CVec2 one()
             requires StrictArithmetic<T>
-        {
-            return CVec2{ T(1), T(1) };
-        }
+        { return CVec2{ T(1), T(1) }; }
 
 
         /**
@@ -2189,9 +2181,7 @@ namespace fgm
          */
         static constexpr CVec2 zero()
             requires StrictArithmetic<T>
-        {
-            return CVec2{ T(0), T(0) };
-        }
+        { return CVec2{ T(0), T(0) }; }
 
 
         /**
@@ -2201,9 +2191,7 @@ namespace fgm
          */
         static constexpr CVec2 inf()
             requires std::floating_point<T>
-        {
-            return CVec2{ T(constants::INFINITY_D), T(constants::INFINITY_D) };
-        }
+        { return CVec2{ T(constants::INFINITY_D), T(constants::INFINITY_D) }; }
 
 
         /**
@@ -2213,9 +2201,7 @@ namespace fgm
          */
         static constexpr CVec2 infNeg()
             requires std::floating_point<T>
-        {
-            return CVec2{ T(-constants::INFINITY_D), T(-constants::INFINITY_D) };
-        }
+        { return CVec2{ T(-constants::INFINITY_D), T(-constants::INFINITY_D) }; }
 
 
         /**
@@ -2225,9 +2211,7 @@ namespace fgm
          */
         static constexpr CVec2 qnan()
             requires std::floating_point<T>
-        {
-            return CVec2{ T(constants::NaN_D), T(constants::NaN_D) };
-        }
+        { return CVec2{ T(constants::NaN_D), T(constants::NaN_D) }; }
 
 
         /**
@@ -2237,9 +2221,7 @@ namespace fgm
          */
         static constexpr CVec2 right()
             requires std::is_signed_v<T>
-        {
-            return CVec2{ T(1), T(0) };
-        }
+        { return CVec2{ T(1), T(0) }; }
 
 
         /**
@@ -2249,9 +2231,7 @@ namespace fgm
          */
         static constexpr CVec2 left()
             requires std::is_signed_v<T>
-        {
-            return CVec2{ T(-1), T(0) };
-        }
+        { return CVec2{ T(-1), T(0) }; }
 
 
         /**
@@ -2261,9 +2241,7 @@ namespace fgm
          */
         static constexpr CVec2 up()
             requires std::is_signed_v<T>
-        {
-            return CVec2{ T(0), T(1) };
-        }
+        { return CVec2{ T(0), T(1) }; }
 
 
         /**
@@ -2273,9 +2251,7 @@ namespace fgm
          */
         static constexpr CVec2 down()
             requires std::is_signed_v<T>
-        {
-            return CVec2{ T(0), T(-1) };
-        }
+        { return CVec2{ T(0), T(-1) }; }
 
         // NOLINTEND
 

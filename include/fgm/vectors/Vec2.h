@@ -1643,309 +1643,215 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-        //         /**
-        //          * @brief Reject this vector from the @p from vector.
-        //          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a}
-        //          \f$
-        //          *
-        //          * @note Promotes the result to the wider type using @ref Vec2.
-        //          * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit
-        //          vectors.
-        //          * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug
-        //          mode**.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] from The vector to reject from.
-        //          *
-        //          * @return The perpendicular @ref Vec2 component.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr Vec2 reject(const Vec2& from) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Reject this vector from the **unit** @p from vector.
-        //          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a}
-        //          \f$
-        //          *
-        //          * @note Promotes the result to the wider type using @ref Vec2.
-        //          * @note Only use this method if @p from is normalized. If not, use @ref reject.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] from The vector to reject from.
-        //          *
-        //          * @return The perpendicular @ref Vec2 component.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr Vec2 rejectNorm(const Vec2& from) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Reject the @p Vec vector from the @p from vector.
-        //          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a}
-        //          \f$
-        //          *
-        //          * @note Promotes the result to the wider type using @ref Vec2.
-        //          * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit
-        //          vectors.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] vec  The vector to be rejected.
-        //          * @param[in] from The vector to reject from.
-        //          *
-        //          * @return The perpendicular @ref Vec2 component.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr Vec2 reject(const Vec2& vec, const Vec2& from)
-        //         noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Reject the @p Vec vector from the **unit** @p from vector.
-        //          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a}
-        //          \f$
-        //          *
-        //          * @note Promotes the result to the wider type using @ref Vec2.
-        //          * @note Only use this method if @p from is normalized. If not, use @ref reject.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] vector The vector to be rejected.
-        //          * @param[in] from   The vector to reject from.
-        //          *
-        //          * @return The perpendicular @ref Vec2 component.
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr Vec2 rejectNorm(const Vec2& vector, const Vec2& from)
-        //         noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Reject this vector from the @p from vector.
-        //          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a}
-        //          \f$
-        //          *
-        //          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
-        //          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-        //          * @note Promotes the result to the wider type using @ref Vec2.
-        //          * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit
-        //          vectors.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] from The vector to reject from.
-        //          *
-        //          * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length
-        //          vector
-        //          *         or if either of the vectors has NaN(Not-a-Number) component(s).
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr Vec2 safeReject(const Vec2& from) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Reject this vector from the **unit** @p from vector.
-        //          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a}
-        //          \f$
-        //          *
-        //          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-        //          * @note Promotes the result to the wider type using @ref Vec2.
-        //          * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] from The vector to reject from.
-        //          *
-        //          * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length
-        //          vector
-        //          *         or if either of the vectors has NaN(Not-a-Number) component(s).
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr Vec2 safeRejectNorm(const Vec2& from) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Reject the @p Vec vector from the @p from vector.
-        //          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a}
-        //          \f$
-        //          *
-        //          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
-        //          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-        //          * @note Promotes the result to the wider type using @ref Vec2.
-        //          * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit
-        //          vectors.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] vec  The vector to reject.
-        //          * @param[in] from The vector to reject from.
-        //          *
-        //          * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length
-        //          vector
-        //          *         or if either of the vectors has NaN(Not-a-Number) component(s).
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr Vec2 safeReject(const Vec2& vec, const Vec2&
-        //         from) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Reject the @p Vec vector from the **unit** @p from vector.
-        //          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a}
-        //          \f$
-        //          *
-        //          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-        //          * @note Promotes the result to the wider type using @ref Vec2.
-        //          * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] vec  The vector to reject.
-        //          * @param[in] from The vector to reject from.
-        //          *
-        //          * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length
-        //          vector
-        //          *         or if either of the vectors has NaN(Not-a-Number) component(s).
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr Vec2 safeRejectNorm(const Vec2& vec, const Vec2&
-        //         from) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Reject this vector from the @p from vector and set @p status to the result of rejection
-        //          operation.
-        //          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a}
-        //          \f$
-        //          *
-        //          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
-        //          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-        //          * @note Promotes the result to the wider type using @ref Vec2.
-        //          * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit
-        //          vectors.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] from    The vector to reject from
-        //          * @param[out] status The status flag to store the status of the current operation result.
-        //          *                    For details on status codes see @ref OperationStatus.
-        //          *
-        //          * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length
-        //          vector
-        //          *         or if either of the vectors has NaN(Not-a-Number) component(s).
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr Vec2 tryReject(const Vec2& from,
-        //                                                                   OperationStatus& status) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Reject this vector from the **unit** @p from vector and set @p status to the result of
-        //          *        rejection operation.
-        //          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a}
-        //          \f$
-        //          *
-        //          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-        //          * @note Promotes the result to the wider type using @ref Vec2.
-        //          * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] from    The vector to reject from
-        //          * @param[out] status The status flag to store the status of the current operation result.
-        //          *                    For details on status codes see @ref OperationStatus.
-        //          *
-        //          * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length
-        //          vector
-        //          *         or if either of the vectors has NaN(Not-a-Number) component(s).
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] constexpr Vec2 tryRejectNorm(const Vec2& from,
-        //                                                                  OperationStatus& status) const noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Reject the @p Vec vector from the @p from vector and set @p status to the result of
-        //          *        rejection operation.
-        //          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a}
-        //          \f$
-        //          *
-        //          * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
-        //          *       epsilon, or if either vector contains NaN components, rejection is bypassed.
-        //          * @note Promotes the result to the wider type using @ref Vec2.
-        //          * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit
-        //          vectors.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] vec     The vector to reject.
-        //          * @param[in] from    The vector to reject from.
-        //          * @param[out] status The status flag to store the status of the current operation result.
-        //          *                    For details on status codes see @ref OperationStatus.
-        //          *
-        //          * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length
-        //          vector
-        //          *         or if either of the vectors has NaN(Not-a-Number) component(s).
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr Vec2 tryReject(const Vec2& vec, const Vec2&
-        //         from,
-        //                                                                          OperationStatus& status) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //
-        //         /**
-        //          * @brief Reject the @p Vec vector from the **unit** @p from vector.
-        //          *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a}
-        //          \f$
-        //          *
-        //          * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
-        //          * @note Promotes the result to the wider type using @ref Vec2.
-        //          * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
-        //          *
-        //          * @tparam U Numeric type of the RHS vector. Must satisfy @ref StrictArithmetic.
-        //          *
-        //          * @param[in] vec     The vector to reject.
-        //          * @param[in] from    The vector to reject from.
-        //          * @param[out] status The status flag to store the status of the current operation result.
-        //          *                    For details on status codes see @ref OperationStatus.
-        //          *
-        //          * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length
-        //          vector
-        //          *         or if either of the vectors has NaN(Not-a-Number) component(s).
-        //          */
-        //         template <StrictArithmetic U>
-        //             requires StrictSignedness<T, U>
-        //         [[nodiscard]] static constexpr Vec2 tryRejectNorm(const Vec2& vec, const Vec2& from,
-        //                                                                         OperationStatus& status) noexcept
-        //             requires StrictArithmetic<T>;
-        //
-        //         /** @} */
-        //
+        /**
+         * @brief Reject this vector from the @p from vector.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
+         *
+         * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
+         * @note Performs assertion for division by zero, resulting from zero-length vector, in **Debug mode**.
+         *
+         * @param[in] from The vector to reject from.
+         *
+         * @return The perpendicular @ref Vec2 component.
+         */
+        [[nodiscard]] constexpr Vec2 reject(const Vec2& from) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Reject this vector from the **unit** @p from vector.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
+         *
+         * @note Only use this method if @p from is normalized. If not, use @ref reject.
+         *
+         * @param[in] from The vector to reject from.
+         *
+         * @return The perpendicular @ref Vec2 component.
+         */
+        [[nodiscard]] constexpr Vec2 rejectNorm(const Vec2& from) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Reject the @p Vec vector from the @p from vector.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
+         *
+         * @note If @p from is normalized, use @ref rejectNorm as it is a faster implementation for unit vectors.
+         *
+         * @param[in] vec  The vector to be rejected.
+         * @param[in] from The vector to reject from.
+         *
+         * @return The perpendicular @ref Vec2 component.
+         */
+        [[nodiscard]] static constexpr Vec2 reject(const Vec2& vec, const Vec2& from) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Reject the @p Vec vector from the **unit** @p from vector.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
+         *
+         * @note Only use this method if @p from is normalized. If not, use @ref reject.
+         *
+         * @param[in] vec The vector to be rejected.
+         * @param[in] from   The vector to reject from.
+         *
+         * @return The perpendicular @ref Vec2 component.
+         */
+        [[nodiscard]] static constexpr Vec2 rejectNorm(const Vec2& vec, const Vec2& from) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Reject this vector from the @p from vector.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
+         *
+         * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, rejection is bypassed.
+         * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit vectors.
+         *
+         * @param[in] from The vector to reject from.
+         *
+         * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] constexpr Vec2 safeReject(const Vec2& from) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Reject this vector from the **unit** @p from vector.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
+         *
+         * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
+         * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
+         *
+         * @param[in] from The vector to reject from.
+         *
+         * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] constexpr Vec2 safeRejectNorm(const Vec2& from) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Reject the @p Vec vector from the @p from vector.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
+         *
+         * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, rejection is bypassed.
+         * @note If @p from is normalized, use @ref safeRejectNorm as it is a faster implementation for unit vectors.
+         *
+         * @param[in] vec  The vector to reject.
+         * @param[in] from The vector to reject from.
+         *
+         * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] static constexpr Vec2 safeReject(const Vec2& vec, const Vec2& from) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Reject the @p Vec vector from the **unit** @p from vector.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
+         *
+         * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
+         * @note Only use this method if @p from is normalized. If not, use @ref safeReject.
+         *
+         * @param[in] vec  The vector to reject.
+         * @param[in] from The vector to reject from.
+         *
+         * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] static constexpr Vec2 safeRejectNorm(const Vec2& vec, const Vec2& from) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Reject this vector from the @p from vector and set @p status to the result of rejection operation.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
+         *
+         * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, rejection is bypassed.
+         * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit vectors.
+         *
+         * @param[in] from    The vector to reject from
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] constexpr Vec2 tryReject(const Vec2& from, OperationStatus& status) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Reject this vector from the **unit** @p from vector and set @p status to the result of
+         *        rejection operation.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
+         *
+         * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
+         * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
+         *
+         * @param[in] from    The vector to reject from
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] constexpr Vec2 tryRejectNorm(const Vec2& from, OperationStatus& status) const noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Reject the @p Vec vector from the @p from vector and set @p status to the result of
+         *        rejection operation.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
+         *
+         * @note This is a safe operation. If the @p from vector's magnitude falls below the internal
+         *       epsilon, or if either vector contains NaN components, rejection is bypassed.
+         * @note If @p from is normalized, use @ref tryRejectNorm as it is a faster implementation for unit vectors.
+         *
+         *
+         * @param[in] vec     The vector to reject.
+         * @param[in] from    The vector to reject from.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] static constexpr Vec2 tryReject(const Vec2& vec, const Vec2& from,
+                                                      OperationStatus& status) noexcept
+            requires StrictArithmetic<T>;
+
+
+        /**
+         * @brief Reject the @p Vec vector from the **unit** @p from vector.
+         *        \f$ \text{rej}_{\mathbf{b}} \mathbf{a} = \mathbf{a} - \text{proj}_{\mathbf{b}} \mathbf{a} \f$
+         *
+         * @note This is a safe operation. If either vector contains NaN components, rejection is bypassed.
+         * @note Only use this method if @p from is normalized. If not, use @ref tryReject.
+         *
+         * @param[in] vec     The vector to reject.
+         * @param[in] from    The vector to reject from.
+         * @param[out] status The status flag to store the status of the current operation result.
+         *                    For details on status codes see @ref OperationStatus.
+         *
+         * @return The perpendicular @ref Vec2 component or a zero-vector if projected onto a zero-length vector
+         *         or if either of the vectors has NaN(Not-a-Number) component(s).
+         */
+        [[nodiscard]] static constexpr Vec2 tryRejectNorm(const Vec2& vec, const Vec2& from,
+                                                          OperationStatus& status) noexcept
+            requires StrictArithmetic<T>;
+
+        /** @} */
+
 
         /**
          * @addtogroup FGM_Vec2_Utils

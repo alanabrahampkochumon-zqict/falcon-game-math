@@ -1,7 +1,7 @@
 /**
  * @file RejectionTests.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: April 04, 2026
+ * @date Created on: September 25, 2026
  *
  * @brief Verify @ref fgm::Vec2 rejection logic.
  *
@@ -59,64 +59,6 @@ namespace
                              ::testing::Values(fgm::Vec2<float>(fgm::constants::NaN, 1.0f),
                                                fgm::Vec2<float>(1.0f, fgm::constants::NaN),
                                                fgm::Vec2<float>(fgm ::constants::NaN, fgm::constants::NaN)));
-
-
-
-
-    /**************************************
-     *           STATIC TESTS             *
-     **************************************/
-
-    namespace static_tests
-    {
-        constexpr fgm::Vec2 VEC_A(1, 2);
-        constexpr fgm::Vec2 VEC_B(1, 0);
-
-        /// @test Verify that vector rejection(reject) returns a valid vector at compile time.
-        constexpr auto REJ_VEC = VEC_A.reject(VEC_B);
-        static_assert(REJ_VEC.x() == 0);
-        static_assert(REJ_VEC.y() == 2);
-
-        /// @test Verify that vector rejection(reject-static wrapper) returns a valid vector at compile time.
-        constexpr auto REJ_VEC_STATIC = fgm::Vec2<int>::reject(VEC_A, VEC_B);
-        static_assert(REJ_VEC_STATIC.x() == 0);
-        static_assert(REJ_VEC_STATIC.y() == 2);
-
-
-        /// @test Verify that vector rejection(reject normalized) returns a valid vector at compile time.
-        constexpr auto REJ_NORM_VEC = VEC_A.rejectNorm(VEC_B);
-        static_assert(REJ_NORM_VEC.x() == 0);
-        static_assert(REJ_NORM_VEC.y() == 2);
-
-        /// @test Verify that vector rejection(reject normalized-static wrapper) returns a valid vector at compile
-        /// time.
-        constexpr auto REJ_NORM_VEC_STATIC = fgm::Vec2<int>::rejectNorm(VEC_A, VEC_B);
-        static_assert(REJ_NORM_VEC_STATIC.x() == 0);
-        static_assert(REJ_NORM_VEC_STATIC.y() == 2);
-
-
-        /// @test Verify that vector rejection(safe reject) returns a valid vector at compile time.
-        constexpr auto SAFE_REJ_VEC = VEC_A.safeReject(VEC_B);
-        static_assert(SAFE_REJ_VEC.x() == 0);
-        static_assert(SAFE_REJ_VEC.y() == 2);
-
-        /// @test Verify that vector rejection(safe reject-static wrapper) returns a valid vector at compile time.
-        constexpr auto SAFE_REJ_VEC_STATIC = fgm::Vec2<int>::safeReject(VEC_A, VEC_B);
-        static_assert(SAFE_REJ_VEC_STATIC.x() == 0);
-        static_assert(SAFE_REJ_VEC_STATIC.y() == 2);
-
-
-        /// @test Verify that vector rejection(safe reject normalized) returns a valid vector at compile time.
-        constexpr auto SAFE_REJ_NORM_VEC = VEC_A.safeRejectNorm(VEC_B);
-        static_assert(SAFE_REJ_NORM_VEC.x() == 0);
-        static_assert(SAFE_REJ_NORM_VEC.y() == 2);
-
-        /// @test Verify that vector rejection(safe reject normalized-static wrapper) returns a valid vector at
-        /// compile time.
-        constexpr auto SAFE_REJ_NORM_VEC_STATIC = fgm::Vec2<int>::safeRejectNorm(VEC_A, VEC_B);
-        static_assert(SAFE_REJ_NORM_VEC_STATIC.x() == 0);
-        static_assert(SAFE_REJ_NORM_VEC_STATIC.y() == 2);
-    } // namespace static_tests
 } // namespace
 
 
@@ -248,26 +190,6 @@ TEST(Vec2RejectionTests, RejectionFromVectorInOppositeDirectionReturnsVectorWith
 }
 
 
-/**
- * @test Verify that rejecting a vector from another vector of different numeric type using @ref fgm::Vec2::reject
- *       returns a type-promoted vector.
- */
-TEST(Vec2RejectionTests, MixedTypeRejectionPromotesType)
-{
-    // Given two arbitrary vectors
-    const fgm::Vec2 vec(7, 13);
-    const fgm::Vec2 from(2.0, 4.0);
-    const fgm::Vec2 expectedRejection(0.4, -0.2);
-
-    // When reject from another
-    const fgm::Vec2 actualRejection = vec.reject(from);
-
-    // Then, the resultant vector is type promoted
-    static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
-    // and is the rejection
-    EXPECT_VEC_EQ(expectedRejection, actualRejection);
-}
-
 
 /**
  * @test Verify that rejecting from an orthogonal unit vector using static variant of @ref fgm::Vec2::rejectNorm
@@ -287,24 +209,6 @@ TEST(Vec2RejectionTests, StaticWrapper_RejectionFromNormalizedVectorReturnsNonZe
     EXPECT_VEC_EQ(expectedRejection, actualRejection);
 }
 
-
-/** @test Verify that rejection using @ref fgm::Vec2::reject always return floating-point vector. */
-TYPED_TEST(Vec2RejectionTests, Reject_AlwaysReturnFloatingPointVector)
-{
-    [[maybe_unused]] const fgm::Vec2 rejection = this->_vec.reject(this->_fromVec);
-    static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
-}
-
-
-/**
- * @test Verify that rejection using static variant of @ref fgm::Vec2::reject
- *       always return floating-point vector.
- */
-TYPED_TEST(Vec2RejectionTests, StaticWrapper_Reject_AlwaysReturnFloatingPointVector)
-{
-    [[maybe_unused]] const fgm::Vec2 rejection = fgm::Vec2<TypeParam>::reject(this->_vec, this->_fromVec);
-    static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
-}
 
 
 /**************************************
@@ -462,27 +366,6 @@ TEST(Vec2RejectionTests, StaticWrapper_SafeRejectNorm_FromNaNVectorReturnsNonZer
 
 
 /**
- * @test Verify that safely rejecting a vector from another vector of different numeric
- *       type using @ref fgm::Vec2::safeReject returns a type-promoted vector.
- */
-TEST(Vec2RejectionTests, SafeReject_MixedTypeRejectionPromotesType)
-{
-    // Given two arbitrary vectors
-    const fgm::Vec2 vec(7, 13);
-    const fgm::Vec2 from(2.0, 4.0);
-    const fgm::Vec2 expectedRejection(0.4, -0.2);
-
-    // When rejected from another
-    const fgm::Vec2 actualRejection = vec.safeReject(from);
-
-    // Then, the resultant vector is type promoted
-    static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
-    // and is the rejection
-    EXPECT_VEC_EQ(expectedRejection, actualRejection);
-}
-
-
-/**
  * @test Verify that safely rejecting from a zero vector using @ref fgm::Vec2::safeReject
  *       returns the same vector.
  */
@@ -535,26 +418,6 @@ TYPED_TEST(Vec2RejectionTests, StaticWrapper_SafeReject_NonOrthogonalRejectionRe
 }
 
 
-/**
- * @test Verify that safely rejecting a vector from another vector of different numeric type
- *       using static variant of @ref fgm::Vec2::safeReject returns a type-promoted vector.
- */
-TEST(Vec2RejectionTests, StaticWrapper_SafeReject_MixedTypeRejectionPromotesType)
-{
-    // Given two arbitrary vectors
-    const fgm::Vec2 vec(7, 13);
-    const fgm::Vec2 from(2.0, 4.0);
-    const fgm::Vec2 expectedRejection(0.4, -0.2);
-
-    // When rejected from another
-    const fgm::Vec2 actualRejection = fgm::Vec2<int>::safeReject(vec, from);
-
-    // Then, the resultant vector is type promoted
-    static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
-    // and is the rejection
-    EXPECT_VEC_EQ(expectedRejection, actualRejection);
-}
-
 
 /**
  * @test Verify that safely rejecting from a zero length vector using static variant of @ref fgm::Vec2::safeReject
@@ -567,25 +430,6 @@ TYPED_TEST(Vec2RejectionTests, StaticWrapper_SafeReject_FromZeroVectorReturnsSam
     const fgm::Vec2 actualRejection = fgm::Vec2<TypeParam>::safeReject(this->_vec, zeroVec);
 
     EXPECT_VEC_EQ(this->_vec, actualRejection);
-}
-
-
-/** @test Verify that rejection using @ref fgm::Vec2::safeReject always return floating-point vector. */
-TYPED_TEST(Vec2RejectionTests, SafeReject_AlwaysReturnFloatingPointVector)
-{
-    [[maybe_unused]] const fgm::Vec2 rejection = this->_vec.safeReject(this->_fromVec);
-    static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
-}
-
-
-/**
- * @test Verify that rejection using static variant of @ref fgm::Vec2::safeReject
- *       always return floating-point vector.
- */
-TYPED_TEST(Vec2RejectionTests, StaticWrapper_SafeReject_AlwaysReturnFloatingPointVector)
-{
-    [[maybe_unused]] const fgm::Vec2 rejection = fgm::Vec2<TypeParam>::safeReject(this->_vec, this->_fromVec);
-    static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
 }
 
 
@@ -758,29 +602,6 @@ TEST(Vec2RejectionTests, TryRejectNorm_FromNaNVectorReturnsZeroVectorAndSetsCorr
 }
 
 
-/**
- * @test Verify that safely rejecting a vector from another vector of different numeric
- *       type using @ref fgm::Vec2::tryReject returns a type-promoted vector
- *       sets flag to @ref fgm::OperationStatus::SUCCESS.
- */
-TEST(Vec2RejectionTests, TryReject_MixedTypeRejectionPromotesType)
-{
-    // Given two arbitrary vectors
-    const fgm::Vec2 vec(7, 13);
-    const fgm::Vec2 from(2.0, 4.0);
-    const fgm::Vec2 expectedRejection(0.4, -0.2);
-    fgm::OperationStatus flag;
-
-    // When rejected from another
-    const fgm::Vec2 actualRejection = vec.tryReject(from, flag);
-
-    // Then, the resultant vector is type promoted
-    static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
-    // and is the rejection
-    EXPECT_VEC_EQ(expectedRejection, actualRejection);
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
-}
-
 
 /**
  * @test Verify that safely rejecting from a zero vector using @ref fgm::Vec2::tryReject
@@ -913,31 +734,6 @@ TEST(Vec2RejectionTests, StaticWrapper_TryRejectNorm_FromNaNVectorReturnsZeroVec
 
 
 /**
- * @test Verify that safely rejecting a vector from another vector of different numeric type
- *       using static variant of @ref fgm::Vec2::tryReject returns a type-promoted vector
- *       and sets flag to @ref fgm::OperationStatus::SUCCESS.
- */
-TEST(Vec2RejectionTests, StaticWrapper_TryReject_MixedTypeRejectionPromotesType)
-{
-    // Given two arbitrary vectors
-    const fgm::Vec2 vec(7, 13);
-    const fgm::Vec2 from(2.0, 4.0);
-    const fgm::Vec2 expectedRejection(0.4, -0.2);
-    fgm::OperationStatus flag;
-
-    // When rejected from another
-    const fgm::Vec2 actualRejection = fgm::Vec2<int>::tryReject(vec, from, flag);
-
-    // Then, the resultant vector is type promoted
-    static_assert(std::is_same_v<decltype(actualRejection)::value_type, double>);
-    // and is the rejection
-    EXPECT_VEC_EQ(expectedRejection, actualRejection);
-    // Flag is set to SUCCESS
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
-}
-
-
-/**
  * @test Verify that safely rejecting from a zero length vector using static variant of @ref fgm::Vec2::tryReject
  *       returns the same vector and sets flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
  */
@@ -951,28 +747,6 @@ TYPED_TEST(Vec2RejectionTests, StaticWrapper_TryReject_FromZeroVectorReturnsSame
     EXPECT_VEC_EQ(this->_vec, actualRejection);
     EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
 }
-
-
-/** @test Verify that rejection using @ref fgm::Vec2::tryReject always return floating-point vector. */
-TYPED_TEST(Vec2RejectionTests, TryRejectAlwaysReturnFloatingPointVector)
-{
-    [[maybe_unused]] fgm::OperationStatus status;
-    [[maybe_unused]] const fgm::Vec2 rejection = this->_vec.tryReject(this->_fromVec, status);
-    static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
-}
-
-
-/**
- * @test Verify that rejection using static variant of @ref fgm::Vec2::tryReject
- *       always return floating-point vector.
- */
-TYPED_TEST(Vec2RejectionTests, StaticWrapper_TryReject_AlwaysReturnFloatingPointVector)
-{
-    [[maybe_unused]] fgm::OperationStatus status;
-    [[maybe_unused]] const fgm::Vec2 rejection = fgm::Vec2<TypeParam>::tryReject(this->_vec, this->_fromVec, status);
-    static_assert(std::is_floating_point_v<typename decltype(rejection)::value_type>);
-}
-
 
 
 /**

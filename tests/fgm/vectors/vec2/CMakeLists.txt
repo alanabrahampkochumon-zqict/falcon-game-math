@@ -16,7 +16,7 @@ target_sources(
         PNormTests.cpp
         ProductTests.cpp
         ProjectionTests.cpp
-        # RejectionTests.cpp
+        RejectionTests.cpp
         # StringRepresentationTests.cpp
         # SwizzlingTests.cpp
         TypeConversionTests.cpp

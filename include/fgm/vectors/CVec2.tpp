@@ -1268,9 +1268,9 @@ namespace fgm
     template <Arithmetic T>
     template <StrictArithmetic U>
         requires StrictSignedness<T, U>
-    FALCON_INLINE constexpr PromotedCVec2<T, U> CVec2<T>::rejectNorm(const CVec2& vector, const CVec2<U>& from) noexcept
+    FALCON_INLINE constexpr PromotedCVec2<T, U> CVec2<T>::rejectNorm(const CVec2& vec, const CVec2<U>& from) noexcept
         requires StrictArithmetic<T>
-    { return vector.rejectNorm(from); }
+    { return vec.rejectNorm(from); }
 
 
     template <Arithmetic T>

@@ -1121,11 +1121,128 @@ namespace fgm
     { return vec.tryProjectNorm(onto, status); }
 
 
-    //     /*************************************
-    //      *                                   *
-    //      *         VECTOR REJECTION          *
-    //      *                                   *
-    //      *************************************/
+
+    /*************************************
+     *         VECTOR REJECTION          *
+     *************************************/
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::reject(const Vec2& from) const noexcept
+        requires StrictArithmetic<T>
+    { return *this - this->project(from); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::rejectNorm(const Vec2& from) const noexcept
+        requires StrictArithmetic<T>
+    { return *this - this->projectNorm(from); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::reject(const Vec2& vec, const Vec2& from) noexcept
+        requires StrictArithmetic<T>
+    { return vec.reject(from); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::rejectNorm(const Vec2& vec, const Vec2& from) noexcept
+        requires StrictArithmetic<T>
+    { return vec.rejectNorm(from); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeReject(const Vec2& from) const noexcept
+        requires StrictArithmetic<T>
+    {
+        if (std::is_floating_point_v<T>)
+        {
+            if (hasNaN() || from.hasNaN())
+            {
+                return Vec2<T>::zero();
+            }
+        }
+
+        return *this - this->safeProject(from);
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeRejectNorm(const Vec2& from) const noexcept
+        requires StrictArithmetic<T>
+    {
+        if (std::is_floating_point_v<T>)
+        {
+            if (hasNaN() || from.hasNaN())
+            {
+                return Vec2<T>::zero();
+            }
+        }
+
+        return *this - this->safeProjectNorm(from);
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeReject(const Vec2& vec, const Vec2& from) noexcept
+        requires StrictArithmetic<T>
+    { return vec.safeReject(from); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::safeRejectNorm(const Vec2& vec, const Vec2& from) noexcept
+        requires StrictArithmetic<T>
+    { return vec.safeRejectNorm(from); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryReject(const Vec2& from, OperationStatus& status) const noexcept
+        requires StrictArithmetic<T>
+    {
+        if (std::is_floating_point_v<T>)
+        {
+            if (hasNaN() || from.hasNaN())
+            {
+                status = OperationStatus::NANOPERAND;
+                return Vec2<T>::zero();
+            }
+        }
+
+        return *this - this->tryProject(from, status);
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryRejectNorm(const Vec2& from, OperationStatus& status) const noexcept
+        requires StrictArithmetic<T>
+    {
+        if (std::is_floating_point_v<T>)
+        {
+            if (hasNaN() || from.hasNaN())
+            {
+                status = OperationStatus::NANOPERAND;
+                return Vec2<T>::zero();
+            }
+        }
+
+        return *this - this->tryProjectNorm(from, status);
+    }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryReject(const Vec2& vec, const Vec2& from,
+                                                       OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    { return vec.tryReject(from, status); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T> Vec2<T>::tryRejectNorm(const Vec2& vec, const Vec2& from,
+                                                           OperationStatus& status) noexcept
+        requires StrictArithmetic<T>
+    { return vec.tryRejectNorm(from, status); }
+
+
+
     //
     //     template <Arithmetic T>
     //     template <StrictArithmetic U>
@@ -1190,77 +1307,10 @@ namespace fgm
     //         return *this - safeProjectNorm(from);
     //     }
     //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::safeReject(const Vec2& vec, const Vec2<U>& from)
-    //     noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.safeReject(from); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::safeRejectNorm(const Vec2& vec, const Vec2<U>& from)
-    //     noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.safeRejectNorm(from); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::tryReject(const Vec2<U>& from,
-    //                                                                     OperationStatus& status) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         if (hasNaN() || from.hasNaN())
-    //         {
-    //             status = OperationStatus::NANOPERAND;
-    //             return Vec2<Magnitude<PromotedValue_t<T, U>>>::zero();
-    //         }
-    //
-    //         return static_cast<PromotedFloatVec2<T, U>>(*this) - this->tryProject(from, status);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::tryRejectNorm(const Vec2<U>& from,
-    //                                                                    OperationStatus& status) const noexcept
-    //         requires StrictArithmetic<T>
-    //     {
-    //         if (hasNaN() || from.hasNaN())
-    //         {
-    //             status = OperationStatus::NANOPERAND;
-    //             return Vec2<PromotedValue_t<T, U>>::zero();
-    //         }
-    //
-    //         return *this - this->tryProjectNorm(from, status);
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedFloatVec2<T, U> Vec2<T>::tryReject(const Vec2& vec, const Vec2<U>& from,
-    //                                                                     OperationStatus& status) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.tryReject(from, status); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <StrictArithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr PromotedVec2<T, U> Vec2<T>::tryRejectNorm(const Vec2& vec, const Vec2<U>& from,
-    //                                                                    OperationStatus& status) noexcept
-    //         requires StrictArithmetic<T>
-    //     { return vec.tryRejectNorm(from, status); }
-    //
-    //
+
+
+
+
     //     /**************************************
     //      *                                    *
     //      *             UTILITIES              *
