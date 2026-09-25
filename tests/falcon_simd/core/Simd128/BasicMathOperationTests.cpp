@@ -157,8 +157,14 @@ TYPED_TEST(Simd128BasicMathTests, MemberSqrtFunction_ReturnsARegisterWithSquareR
     alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
-        data[i]     = this->a[i];
-        expected[i] = static_cast<Type>(std::sqrt(data[i]));
+        data[i] = this->a[i];
+        // For our simd sqrt, we clamp the values for integrals to zero
+        auto clampedVal = data[i];
+        if constexpr (std::is_integral_v<Type>)
+        {
+            clampedVal = std::max(Type(0), data[i]);
+        }
+        expected[i] = static_cast<Type>(std::sqrt(clampedVal));
     }
 
     falcon::Simd128_t<Type, Lane> reg;
@@ -183,7 +189,13 @@ TYPED_TEST(Simd128BasicMathTests, Sqrt_ReturnsARegisterWithSquareRootValues)
     for (size_t i = 0; i < Lane; ++i)
     {
         data[i]     = this->a[i];
-        expected[i] = static_cast<Type>(std::sqrt(data[i]));
+        // For our simd sqrt, we clamp the values for integrals to zero
+        auto clampedVal = data[i];
+        if constexpr (std::is_integral_v<Type>)
+        {
+            clampedVal = std::max(Type(0), data[i]);
+        }
+        expected[i] = static_cast<Type>(std::sqrt(clampedVal));
     }
 
     falcon::Simd128_t<Type, Lane> reg;

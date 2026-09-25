@@ -968,7 +968,6 @@ namespace fgm
      *        VECTOR PROJECTION          *
      *************************************/
 
-
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::project(const Vec2& onto) const noexcept
         requires StrictArithmetic<T>

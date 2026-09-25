@@ -3104,10 +3104,19 @@ namespace falcon
         }
         else if constexpr (sizeof(DataType) == 8)
         {
-            // TODO: Update to Newton's method if its faster
-            // There must only 2 lanes for 8-bit integrals
+            // There must only 2 lanes for 64-bit integrals
             alignas(16) std::array<DataType, 2> array{};
-            storeAligned(array.data());
+            if constexpr (std::is_signed_v<DataType>)
+            {
+                // For signed integrals we must clamp to zero to prevent negative integral square roots
+                // And we need to clamp to zero.
+                const auto clamped = *max(*this, Simd128(_mm_setzero_si128()));
+                _mm_store_si128(reinterpret_cast<__m128i*>(array.data()), clamped);
+            }
+            else
+            {
+                storeAligned(array.data());
+            }
             return Simd128(static_cast<DataType>(std::sqrt(array[0])), static_cast<DataType>(std::sqrt(array[1])));
         }
         // Since there is no epu32 to pd instruction we need to split paths for unsigned
@@ -3117,7 +3126,8 @@ namespace falcon
             // For EPI32 we need to convert them to 64-bit integrals and then to doubles
             // to ensure minimal precision loss.
             const auto doubleRegLo = _mm_cvtepi32_pd(_register);
-            const auto sqrtLo      = _mm_sqrt_pd(doubleRegLo);
+            const auto clampedLo   = _mm_max_pd(doubleRegLo, _mm_setzero_pd());
+            const auto sqrtLo      = _mm_sqrt_pd(clampedLo);
             auto intSqrtLo         = _mm_cvttpd_epi32(sqrtLo); // (0, 0, B, A)
             if constexpr (Lane == 2)
             {
@@ -3127,7 +3137,8 @@ namespace falcon
             {
                 const auto shifted     = _mm_srli_si128(_register, 8);
                 const auto doubleRegHi = _mm_cvtepi32_pd(shifted);
-                const auto sqrtHi      = _mm_sqrt_pd(doubleRegHi);
+                const auto clampedHi   = _mm_max_pd(doubleRegHi, _mm_setzero_pd());
+                const auto sqrtHi      = _mm_sqrt_pd(clampedHi);
                 const auto intSqrtHi   = _mm_cvttpd_epi32(sqrtHi);        // (0, 0, D, C)
                 return Simd128(_mm_unpacklo_epi64(intSqrtLo, intSqrtHi)); // (D, C, B, A)
             }
@@ -3199,23 +3210,27 @@ namespace falcon
             // We only need to sqrt with the lower lane if lane count is less than or equal to 4.
             // For byte-wide register we need to convert them into 4(D, C, B, A) 32 bit registers and
             // perform sqrt and then packed them
-            const auto regLo = _mm_unpacklo_saturated_custom(_register);
+            auto reg = _register;
+            // Clamp the register values to greater than or equal to zero, if the register is signed.
+            if constexpr (std::is_signed_v<DataType>)
+            {
+                reg = *max(*this, Simd128(_mm_setzero_si128()));
+            }
+            const auto regLo = _mm_unpacklo_saturated_custom(reg);
             // NOTE: We need to clamp negative numbers to zero since we cannot have negative sqrt(imaginary numbers)
-            const auto clampedRegLo = *falcon::max(Simd128(regLo), Simd128(_mm_setzero_si128()));
-            const auto floatRegLo   = _mm_cvtepi32_ps(clampedRegLo);
-            const auto sqrtLo       = _mm_sqrt_ps(floatRegLo);
-            const auto intSqrtLo    = _mm_cvttps_epi32(sqrtLo);
+            const auto floatRegLo = _mm_cvtepi32_ps(regLo);
+            const auto sqrtLo     = _mm_sqrt_ps(floatRegLo);
+            const auto intSqrtLo  = _mm_cvttps_epi32(sqrtLo);
             if constexpr (Lane <= 4)
             {
                 return Simd128(_mm_packs_epi32(intSqrtLo, _mm_setzero_si128()));
             }
             else
             {
-                const auto regHi        = _mm_unpackhi_saturated_custom(_register);
-                const auto clampedRegHi = *falcon::max(Simd128(regHi), Simd128(_mm_setzero_si128()));
-                const auto floatRegHi   = _mm_cvtepi32_ps(clampedRegHi);
-                const auto sqrtHi       = _mm_sqrt_ps(floatRegHi);
-                const auto intSqrtHi    = _mm_cvttps_epi32(sqrtHi);
+                const auto regHi      = _mm_unpackhi_saturated_custom(reg);
+                const auto floatRegHi = _mm_cvtepi32_ps(regHi);
+                const auto sqrtHi     = _mm_sqrt_ps(floatRegHi);
+                const auto intSqrtHi  = _mm_cvttps_epi32(sqrtHi);
                 return Simd128(_mm_packs_epi32(intSqrtLo, intSqrtHi));
             }
         }
@@ -3226,11 +3241,17 @@ namespace falcon
             // 1-bytex16 packed register => <ZYXW ,VUTS, RQPO, NMLK>
             // Unpack the last two to 2-bytex8 registers => <RQ, PO, NM, LK> (<D, C, B, A> in the code eg.)
             // Unpack them further to 4-bytex4 registers => <N, M, L, K>
-            const auto regLo = _mm_unpacklo_saturated_custom(_register); // Unpacked 16-bit register
+
+            // Clamp the register values to greater than or equal to zero, if the register is signed.
+            auto reg = _register;
+            if constexpr (std::is_signed_v<DataType>)
+            {
+                reg = *max(*this, Simd128(_mm_setzero_si128()));
+            }
+            const auto regLo = _mm_unpacklo_saturated_custom(reg); // Unpacked 16-bit register
             const auto regA  = _mm_unpacklo_saturated_custom(regLo);     // <_, _, _, A>
             // NOTE: We need to clamp negative numbers to zero since we cannot have negative sqrt(imaginary numbers)
-            const auto clampedRegA = *falcon::max(Simd128(regA), Simd128(_mm_setzero_si128()));
-            const auto floatRegA   = _mm_cvtepi32_ps(clampedRegA);
+            const auto floatRegA   = _mm_cvtepi32_ps(regA);
             const auto sqrtA       = _mm_sqrt_ps(floatRegA);
             const auto intSqrtA    = _mm_cvttps_epi32(sqrtA);
             const auto packedRegA  = _mm_packs_epi32(intSqrtA, _mm_setzero_si128());
@@ -3241,8 +3262,7 @@ namespace falcon
             else
             {
                 const auto regB        = _mm_unpackhi_saturated_custom(regLo); // <_, _, B, _>
-                const auto clampedRegB = *falcon::max(Simd128(regB), Simd128(_mm_setzero_si128()));
-                const auto floatRegB   = _mm_cvtepi32_ps(clampedRegB);
+                const auto floatRegB   = _mm_cvtepi32_ps(regB);
                 const auto sqrtB       = _mm_sqrt_ps(floatRegB);
                 const auto intSqrtB    = _mm_cvttps_epi32(sqrtB);
                 const auto packedRegBA = _mm_packs_epi32(intSqrtA, intSqrtB);
@@ -3254,8 +3274,7 @@ namespace falcon
                 {
                     const auto regHi       = _mm_unpackhi_saturated_custom(_register);
                     const auto regC        = _mm_unpacklo_saturated_custom(regHi); // <_, C, _, _>
-                    const auto clampedRegC = *falcon::max(Simd128(regC), Simd128(_mm_setzero_si128()));
-                    const auto floatRegC   = _mm_cvtepi32_ps(clampedRegC);
+                    const auto floatRegC   = _mm_cvtepi32_ps(regC);
                     const auto sqrtC       = _mm_sqrt_ps(floatRegC);
                     const auto intSqrtC    = _mm_cvttps_epi32(sqrtC);
                     const auto packedRegC  = _mm_packs_epi32(intSqrtC, _mm_setzero_si128());
@@ -3266,8 +3285,7 @@ namespace falcon
                     else
                     {
                         const auto regD        = _mm_unpackhi_saturated_custom(regHi); // <D, _, _, _>
-                        const auto clampedRegD = *falcon::max(Simd128(regD), Simd128(_mm_setzero_si128()));
-                        const auto floatRegD   = _mm_cvtepi32_ps(clampedRegD);
+                        const auto floatRegD   = _mm_cvtepi32_ps(regD);
                         const auto sqrtD       = _mm_sqrt_ps(floatRegD);
                         const auto intSqrtD    = _mm_cvttps_epi32(sqrtD);
                         const auto packedRegDC = _mm_packs_epi32(intSqrtC, intSqrtD);
