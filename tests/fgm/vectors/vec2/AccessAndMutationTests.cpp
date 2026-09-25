@@ -62,6 +62,22 @@ TEST(Vec2AccessTests, AccessibleAsArray)
 }
 
 
+TEST(Vec2AccessTests, ConstVec_AccessibleAsCompileTimeIndex)
+{
+    const fgm::Vec2 vec(3.0f, 1.0f);
+    EXPECT_FLOAT_EQ(3.0f, vec.get<0>());
+    EXPECT_FLOAT_EQ(1.0f, vec.get<1>());
+}
+
+
+TEST(Vec2AccessTests, NonConstVec_AccessibleAsCompileTimeIndex)
+{
+    fgm::Vec2 vec(3.0f, 1.0f);
+    EXPECT_FLOAT_EQ(3.0f, vec.get<0>());
+    EXPECT_FLOAT_EQ(1.0f, vec.get<1>());
+}
+
+
 
 /**************************************
  *           MUTATION TESTS           *
@@ -117,7 +133,5 @@ TEST(Vec2MutationTests, ElementsCanBeMutatedUsingIndex)
     EXPECT_FLOAT_EQ(3.0f, vec[0]);
     EXPECT_FLOAT_EQ(1.0f, vec[1]);
 }
-
-
 
 /** @} */

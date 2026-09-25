@@ -160,6 +160,25 @@ namespace fgm
         return _data.getAt(idx);
     }
 
+
+    template <Arithmetic T>
+    template <size_t Index>
+    FALCON_INLINE constexpr T Vec2<T>::get() const noexcept
+    {
+        static_assert(Index < DIMENSION && "[Vec2]: Out of bounds access");
+        return _data.template getAt<Index>();
+    }
+
+
+    template <Arithmetic T>
+    template <size_t Index>
+    FALCON_INLINE constexpr T Vec2<T>::get() noexcept
+    {
+        static_assert(Index < DIMENSION && "[Vec2]: Out of bounds access");
+        return _data.template getAt<Index>();
+    }
+
+
     // TODO: Add swizzling after adding compiletime indexing (get<> and set<>)
     //     /**************************************
     //      *                                    *

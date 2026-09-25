@@ -228,6 +228,16 @@ namespace fgm
          */
         constexpr T operator[](std::size_t idx) const noexcept;
 
+
+        /// @brief Get the element at @p Index.
+        template <size_t Index>
+        constexpr T get() const noexcept;
+
+
+        /// @brief Get the element at @p Index (non-const variant).
+        template <size_t Index>
+        constexpr T get() noexcept;
+
         //         /** @} */
         //
         //
