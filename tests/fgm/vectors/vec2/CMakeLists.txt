@@ -18,7 +18,7 @@ target_sources(
         ProjectionTests.cpp
         RejectionTests.cpp
         StringRepresentationTests.cpp
-        # SwizzlingTests.cpp
+        SwizzlingTests.cpp
         TypeConversionTests.cpp
         UtilityTests.cpp
 

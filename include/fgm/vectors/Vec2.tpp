@@ -146,7 +146,7 @@ namespace fgm
      **************************************/
 
     template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<T>::IndexableProxy Vec2<T>::operator[](const std::size_t idx) noexcept
+    FALCON_INLINE constexpr Vec2<T>::IndexableProxy Vec2<T>::operator[](const size_t idx) noexcept
     {
         FALCON_ASSERT_MSG(idx < DIMENSION, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return IndexableProxy(*this, idx);
@@ -154,7 +154,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FALCON_INLINE constexpr T Vec2<T>::operator[](const std::size_t idx) const noexcept
+    FALCON_INLINE constexpr T Vec2<T>::operator[](const size_t idx) const noexcept
     {
         FALCON_ASSERT_MSG(idx < DIMENSION, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data.getAt(idx);
@@ -179,107 +179,38 @@ namespace fgm
     }
 
 
-    // TODO: Add swizzling after adding compiletime indexing (get<> and set<>)
-    //     /**************************************
-    //      *                                    *
-    //      *             SWIZZLING              *
-    //      *                                    *
-    //      **************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <std::size_t... Indices>
-    //     FALCON_INLINE constexpr auto Vec2<T>::swizzle() const noexcept
-    //     {
-    //         constexpr std::size_t swizzleDimension = sizeof...(Indices);
-    //
-    //         static_assert(((Indices < DIMENSION) && ...), "Index out of bounds!");
-    //         static_assert(swizzleDimension > 0 && swizzleDimension <= DIMENSION &&
-    //                       "Swizzle must return a scalar, or a 2D vector.");
-    //         if constexpr (swizzleDimension == 2)
-    //         {
-    //             return Vec2(_data[Indices]...);
-    //         }
-    //         else
-    //         {
-    //             return T(_data[Indices]...);
-    //         }
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <std::size_t... Indices>
-    //     FALCON_INLINE constexpr auto Vec2<T>::swizzle(const Vec2& vec) noexcept
-    //     { return vec.swizzle<Indices...>(); }
-    //
-    //
-    //     /***************************************
-    //      *                                     *
-    //      *         EQUALITY (ABSOLUTE)         *
-    //      *                                     *
-    //      ***************************************/
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::allEq(const Vec2& rhs, const double epsilon) const noexcept
-    //     {
-    //         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
-    //         {
-    //             return _data[0] == rhs[0] && _data[1] == rhs[1];
-    //         }
-    //         else
-    //         /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F.
-    //         */
-    //         {
-    // // MSVC's constexpr evaluator incorrectly yields true for NaN relational comparisons.
-    // // To enforce strict IEEE 754 compliance at compile-time, we explicitly short-circuit
-    // // if a NaN is detected. Runtime evaluation is safely deferred to hardware intrinsics.
-    // #ifdef _MSC_VER
-    //             if (std::is_constant_evaluated())
-    //             {
-    //                 if (hasNaN() || rhs.hasNaN())
-    //                 {
-    //                     return false;
-    //                 }
-    //             }
-    // #endif
-    //             return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) &&
-    //                 (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
-    //         }
-    //     }
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::allEq(const Vec2& lhs, const Vec2& rhs, const double epsilon)
-    //     noexcept { return lhs.allEq(rhs, epsilon); }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::anyNeq(const Vec2& rhs, const double epsilon) const noexcept
-    //     {
-    //         if constexpr (std::is_integral_v<T> && std::is_integral_v<U>)
-    //         {
-    //             return _data[0] != rhs[0] || _data[1] != rhs[1];
-    //         }
-    //         else
-    //         {
-    //             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-    //             return (_data[0] != rhs[0] && !(fgm::abs(_data[0] - rhs[0]) <= epsilon)) ||
-    //                 (_data[1] != rhs[1] && !(fgm::abs(_data[1] - rhs[1]) <= epsilon));
-    //         }
-    //     }
-    //
-    //
-    //     template <Arithmetic T>
-    //     template <Arithmetic U>
-    //         requires StrictSignedness<T, U>
-    //     FALCON_INLINE constexpr bool Vec2<T>::anyNeq(const Vec2& lhs, const Vec2& rhs, const double epsilon)
-    //     noexcept { return lhs.anyNeq(rhs, epsilon); }
-    //
-    //
+    /**************************************
+     *                                    *
+     *             SWIZZLING              *
+     *                                    *
+     **************************************/
+
+    template <Arithmetic T>
+    template <size_t... Indices>
+    FALCON_INLINE constexpr auto Vec2<T>::swizzle() const noexcept
+    {
+        constexpr size_t swizzleDimension = sizeof...(Indices);
+
+        static_assert(((Indices < DIMENSION) && ...) && "Index out of bounds!");
+        static_assert(swizzleDimension > 0 && swizzleDimension <= DIMENSION &&
+                      "Swizzle must return a scalar, or a 2D vector.");
+        if constexpr (swizzleDimension == 2)
+        {
+            return Vec2(_data.template getAt<Indices>()...);
+        }
+        else
+        {
+            return T(_data.template getAt<Indices>()...);
+        }
+    }
+
+
+    template <Arithmetic T>
+    template <size_t... Indices>
+    FALCON_INLINE constexpr auto Vec2<T>::swizzle(const Vec2& vec) noexcept
+    { return vec.swizzle<Indices...>(); }
+
+
     /**************************************
      *                                    *
      *         EQUALITY OPERATORS         *

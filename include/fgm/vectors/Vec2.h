@@ -60,7 +60,7 @@ namespace fgm
 
         using value_type = T; ///< The numeric type of the vector components.
 
-        static constexpr std::size_t DIMENSION = 2; ///< The number of components of the vector.
+        static constexpr size_t DIMENSION = 2; ///< The number of components of the vector.
 
         /** @} */
 
@@ -210,7 +210,7 @@ namespace fgm
          *
          * @return A reference to the vector component(Proxy).
          */
-        constexpr IndexableProxy operator[](std::size_t idx) noexcept;
+        constexpr IndexableProxy operator[](size_t idx) noexcept;
 
 
         /**
@@ -226,7 +226,7 @@ namespace fgm
          *
          * @return A copy of the vector component.
          */
-        constexpr T operator[](std::size_t idx) const noexcept;
+        constexpr T operator[](size_t idx) const noexcept;
 
 
         /// @brief Get the element at @p Index.
@@ -238,56 +238,53 @@ namespace fgm
         template <size_t Index>
         constexpr T get() noexcept;
 
-        //         /** @} */
-        //
-        //
-        //         /**
-        //          * @addtogroup FGM_Vec2_Swizzle
-        //          * @{
-        //          */
-        //
-        //         /**
-        //          * @brief Construct a new vector by rearranging, duplicating, or isolating components of this vector.
-        //          *
-        //          * @note Bounds checking for the provided indices is strictly enforced at compile-time.
-        //          *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero
-        //          runtime
-        //          *       overhead.
-        //          *
-        //          * @tparam Indices The component indices used to construct the new vector.
-        //          *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle
-        //          aliases.
-        //          *
-        //          * @return A new vector containing the requested components or the component if @p Indices is 1.
-        //          *         The dimension of the returned vector perfectly matches the number of indices provided.
-        //          */
-        //         template <std::size_t... Indices>
-        //         [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
-        //         constexpr auto swizzle() const noexcept;
-        //
-        //
-        //         /**
-        //          * @brief Construct a new vector by rearranging, duplicating, or isolating components of @p Vec.
-        //          *
-        //          * @note Bounds checking for the provided indices is strictly enforced at compile-time.
-        //          *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero
-        //          runtime
-        //          *       overhead.
-        //          *
-        //          * @tparam Indices The component indices used to construct the new vector.
-        //          *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle
-        //          aliases.
-        //          *
-        //          * @param vec The vector to shuffle, rearrange or isolate components.
-        //          *
-        //          * @return A new vector containing the requested components or the component if @p Indices is 1.
-        //          *         The dimension of the returned vector perfectly matches the number of indices provided.
-        //          */
-        //         template <std::size_t... Indices>
-        //         [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
-        //         static constexpr auto swizzle(const Vec2& vec) noexcept;
-        //
-        //         /** @} */
+        /** @} */
+
+        
+
+        /**
+         * @addtogroup FGM_Vec2_Swizzle
+         * @{
+         */
+
+        /**
+         * @brief Construct a new vector by rearranging, duplicating, or isolating components of this vector.
+         *
+         * @note Bounds checking for the provided indices is strictly enforced at compile-time.
+         *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero
+         *       runtime overhead.
+         *
+         * @tparam Indices The component indices used to construct the new vector.
+         *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
+         *
+         * @return A new vector containing the requested components or the component if @p Indices is 1.
+         *         The dimension of the returned vector perfectly matches the number of indices provided.
+         */
+        template <size_t... Indices>
+        [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
+        constexpr auto swizzle() const noexcept;
+
+
+        /**
+         * @brief Construct a new vector by rearranging, duplicating, or isolating components of @p Vec.
+         *
+         * @note Bounds checking for the provided indices is strictly enforced at compile-time.
+         *       Providing an out-of-bounds index will result in a compilation error, guaranteeing zero
+         *       runtime overhead.
+         *
+         * @tparam Indices The component indices used to construct the new vector.
+         *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
+         *
+         * @param vec The vector to shuffle, rearrange or isolate components.
+         *
+         * @return A new vector containing the requested components or the component if @p Indices is 1.
+         *         The dimension of the returned vector perfectly matches the number of indices provided.
+         */
+        template <size_t... Indices>
+        [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
+        static constexpr auto swizzle(const Vec2& vec) noexcept;
+
+        /** @} */
 
 
         /**
@@ -2067,7 +2064,7 @@ namespace fgm
         class IndexableProxy
         {
         public:
-            FALCON_INLINE constexpr IndexableProxy(Vec2& parent, const std::size_t index) noexcept
+            FALCON_INLINE constexpr IndexableProxy(Vec2& parent, const size_t index) noexcept
                 : _vec{ parent }, _index{ index }
             {}
 
@@ -2090,7 +2087,7 @@ namespace fgm
 
         private:
             Vec2& _vec;
-            std::size_t _index;
+            size_t _index;
         };
 
 
