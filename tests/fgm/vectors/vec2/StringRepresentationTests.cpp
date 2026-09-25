@@ -1,7 +1,7 @@
 /**
  * @file StringRepresentationTests.cpp
  * @author Alan Abraham P Kochumon
- * @date Created on: April 04, 2026
+ * @date Created on: September 25, 2026
  *
  * @brief Verify @ref fgm::Vec2 string representation.
  *
