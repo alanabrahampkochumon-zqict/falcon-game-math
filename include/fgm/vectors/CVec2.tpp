@@ -30,9 +30,7 @@
 namespace fgm
 {
     /*************************************
-     *                                   *
      *            INITIALIZERS           *
-     *                                   *
      *************************************/
 
     template <Arithmetic T>
@@ -61,9 +59,7 @@ namespace fgm
      *************************************/
 
     /**************************************
-     *                                    *
      *        SPATIAL COORDINATES         *
-     *                                    *
      **************************************/
 
     template <Arithmetic T>
@@ -87,9 +83,7 @@ namespace fgm
 
 
     /**************************************
-     *                                    *
      *           STP COORDINATES          *
-     *                                    *
      **************************************/
 
     template <Arithmetic T>
@@ -113,9 +107,7 @@ namespace fgm
 
 
     /**************************************
-     *                                    *
      *         COLOR COORDINATES          *
-     *                                    *
      **************************************/
 
     template <Arithmetic T>
@@ -139,9 +131,7 @@ namespace fgm
 
 
     /**************************************
-     *                                    *
      *              INDEXING              *
-     *                                    *
      **************************************/
 
     template <Arithmetic T>
@@ -161,9 +151,7 @@ namespace fgm
 
 
     /**************************************
-     *                                    *
      *             SWIZZLING              *
-     *                                    *
      **************************************/
 
     template <Arithmetic T>
@@ -193,9 +181,39 @@ namespace fgm
 
 
     /***************************************
-     *                                     *
+     *          STORAGE ACCESSORS          *
+     ***************************************/
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr const T* CVec2<T>::ptr() const noexcept
+    { return _data.data();}
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr T* CVec2<T>::ptr() noexcept
+    { return _data.data(); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr const T* CVec2<T>::ptr(const CVec2& vec) noexcept
+    { return vec.ptr(); }
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr T* CVec2<T>::ptr(CVec2& vec) noexcept
+    { return vec.ptr(); }
+
+    template <Arithmetic T>
+    constexpr T* CVec2<T>::operator*() noexcept
+    { return ptr(); }
+
+
+    template <Arithmetic T>
+    constexpr const T* CVec2<T>::operator*() const noexcept
+    { return ptr(); }
+
+
+    /***************************************
      *         EQUALITY (ABSOLUTE)         *
-     *                                     *
      ***************************************/
 
     template <Arithmetic T>
