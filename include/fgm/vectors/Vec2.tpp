@@ -234,10 +234,17 @@ namespace fgm
     FALCON_INLINE constexpr void Vec2<T>::store(T* pBuffer) const noexcept
     { _data.storeAligned(pBuffer); }
 
-
     template <Arithmetic T>
     FALCON_INLINE constexpr void Vec2<T>::store(const Vec2& vec, T* pBuffer) noexcept
     { vec.store(pBuffer); }
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr void Vec2<T>::storeUnaligned(T* pBuffer) const noexcept
+    { _data.store(pBuffer); }
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr void Vec2<T>::storeUnaligned(const Vec2& vec, T* pBuffer) noexcept
+    { vec.storeUnaligned(pBuffer); }
 
 
 

@@ -39,7 +39,7 @@ namespace
 } // namespace
 
 
-TYPED_TEST(Vec2StorageTests, Store_WritesDataToAlginedBuffer)
+TYPED_TEST(Vec2StorageTests, Store_WritesDataToAlignedBuffer)
 {
     alignas(16) TypeParam data[2];
     this->_vec.store(data);
@@ -49,10 +49,30 @@ TYPED_TEST(Vec2StorageTests, Store_WritesDataToAlginedBuffer)
 }
 
 
-TYPED_TEST(Vec2StorageTests, StaticWrapper_Ptr_ReturnsAPointerToTheInternalData)
+TYPED_TEST(Vec2StorageTests, StaticWrapper_Store_WritesDataToAlignedBuffer)
 {
     alignas(16) TypeParam data[2];
     this->_vec.store(data);
+
+    EXPECT_EQ(this->_vec[0], data[0]);
+    EXPECT_EQ(this->_vec[1], data[1]);
+}
+
+TYPED_TEST(Vec2StorageTests, StoreUnaligned_WritesDataToNonAlignedBuffer)
+{
+
+    alignas(8) TypeParam data[2];
+    this->_vec.storeUnaligned(data);
+
+    EXPECT_EQ(this->_vec[0], data[0]);
+    EXPECT_EQ(this->_vec[1], data[1]);
+}
+
+
+TYPED_TEST(Vec2StorageTests, StaticWrapper_StoreUnaligned_WritesDataToNonAlignedBuffer)
+{
+    alignas(8) TypeParam data[2];
+    this->_vec.storeUnaligned(data);
 
     EXPECT_EQ(this->_vec[0], data[0]);
     EXPECT_EQ(this->_vec[1], data[1]);

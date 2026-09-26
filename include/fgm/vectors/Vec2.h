@@ -307,8 +307,9 @@ namespace fgm
         /**
          * @brief Store the values of this vector to @p pBuffer.
          * @note  Since we cannot return a pointer to a buffer, due to lifetime limitation
-         *        of pointer allocated on the callstack of @ref store, use either @ref store
-         *        or convert to a CVec2 using @ref toCVec2 and then use *cvec or cvec.ptr().
+         *        of pointer allocated on the callstack of @ref store,
+         *        use either @ref store or storeUnaligned.
+         *        Alternatively, convert to a CVec2 using @ref toCVec2 and then use *cvec or cvec.ptr().
          *        *But you shouldn't make the CVec2 instance a temporary.*
          * @note The buffer must be of an adequate size to store the contents.
          *
@@ -321,12 +322,16 @@ namespace fgm
          * auto ptr = *cvec2();
          *
          * // OR
-         * float data[2];
+         * alignas(16) float data[2];
          * vec2.store(data);
          *
          * // DON'T
          * auto ptr = *(vec2.toCVec2());
          * @endcode
+         *
+         * @relatedalso store(Vec2<T>, T*)
+         * @relatedalso storeUnaligned(T*)
+         * @relatedalso storeUnaligned(Vec2<T>, T*)
          */
         constexpr void store(T* pBuffer) const noexcept;
 
@@ -334,13 +339,45 @@ namespace fgm
         /**
          * @brief Store the values of @p vec to @p pBuffer.
          * @note  Since we cannot return a pointer to a buffer, due to lifetime limitation
-         *        of pointer allocated on the callstack of @ref store, use either @ref store
-         *        or convert to a CVec2 using @ref toCVec2 and then use *cvec or cvec.ptr().
+         *        of pointer allocated on the callstack of @ref store,
+         *        use either @ref store or storeUnaligned.
+         *        Alternatively, convert to a CVec2 using @ref toCVec2 and then use *cvec or cvec.ptr().
          *        *But you shouldn't make the CVec2 instance a temporary.*
          * @note The buffer must be of an adequate size to store the contents.
          *
          * @warning @p pBuffer must be aligned to 16-byte boundary.
          *          If you want to store unaligned memory use @ref storeUnaligned.
+         *
+         * @code
+         * // DO
+         * auto cvec2 = vec2.toCVec2();
+         * auto ptr = *cvec2();
+         *
+         * // OR
+         * alignas(16) float data[2];
+         * vec2.store(data);
+         *
+         * // DON'T
+         * auto ptr = *(vec2.toCVec2());
+         * @endcode
+         *
+         * @relatedalso store(T*)
+         * @relatedalso storeUnaligned(T*)
+         * @relatedalso storeUnaligned(Vec2<T>, T*)
+         */
+        static constexpr void store(const Vec2& vec, T* pBuffer) noexcept;
+
+
+        /**
+         * @brief Store the values of this vector to @p pBuffer.
+         * @note  Since we cannot return a pointer to a buffer, due to lifetime limitation
+         *        of pointer allocated on the callstack of @ref storeUnaligned,
+         *        use either @ref store or storeUnaligned.
+         *        Alternatively, convert to a CVec2 using @ref toCVec2 and then use *cvec or cvec.ptr().
+         *        *But you shouldn't make the CVec2 instance a temporary.*
+         * @note The buffer must be of an adequate size to store the contents.
+         *
+         * @warning No memory alignment necessary.
          *
          * @code
          * // DO
@@ -354,8 +391,43 @@ namespace fgm
          * // DON'T
          * auto ptr = *(vec2.toCVec2());
          * @endcode
+         *
+         * @relatedalso store(T*)
+         * @relatedalso store(Vec2<T>, T*)
+         * @relatedalso storeUnaligned(Vec2<T>, T*)
          */
-        static constexpr void store(const Vec2& vec, T* pBuffer) noexcept;
+        constexpr void storeUnaligned(T* pBuffer) const noexcept;
+
+
+        /**
+         * @brief Store the values of @p vec to @p pBuffer.
+         * @note  Since we cannot return a pointer to a buffer, due to lifetime limitation
+         *        of pointer allocated on the callstack of @ref storeUnaligned,
+         *        use either @ref store or storeUnaligned.
+         *        Alternatively, convert to a CVec2 using @ref toCVec2 and then use *cvec or cvec.ptr().
+         *        *But you shouldn't make the CVec2 instance a temporary.*
+         * @note The buffer must be of an adequate size to store the contents.
+         *
+         * @warning No memory alignment necessary.
+         *
+         * @code
+         * // DO
+         * auto cvec2 = vec2.toCVec2();
+         * auto ptr = *cvec2();
+         *
+         * // OR
+         * float data[2];
+         * vec2.storeUnaligned(data);
+         *
+         * // DON'T
+         * auto ptr = *(vec2.toCVec2());
+         * @endcode
+         *
+         * @relatedalso store(T*)
+         * @relatedalso store(Vec2<T>, T*)
+         * @relatedalso storeUnaligned(T*)
+         */
+        static constexpr void storeUnaligned(const Vec2& vec, T* pBuffer) noexcept;
 
         /** @} */
 
