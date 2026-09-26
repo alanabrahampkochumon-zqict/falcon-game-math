@@ -50,6 +50,13 @@ using Simd128RegisterTypeHints = testing::Types<
     SimdRegisterTypeMatrix<int64_t, 2>, SimdRegisterTypeMatrix<float, 2>, SimdRegisterTypeMatrix<float, 4>,
     SimdRegisterTypeMatrix<double, 2>>;
 
+using Simd256RegisterTypeHints =
+    testing::Types<SimdRegisterTypeMatrix<uint8_t, 32>, SimdRegisterTypeMatrix<uint16_t, 16>,
+                   SimdRegisterTypeMatrix<uint32_t, 8>, SimdRegisterTypeMatrix<uint64_t, 4>,
+                   SimdRegisterTypeMatrix<int8_t, 32>, SimdRegisterTypeMatrix<int16_t, 16>,
+                   SimdRegisterTypeMatrix<int32_t, 8>, SimdRegisterTypeMatrix<int64_t, 4>,
+                   SimdRegisterTypeMatrix<float, 8>, SimdRegisterTypeMatrix<double, 4>>;
+
 
 
 template <typename T>

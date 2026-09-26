@@ -49,7 +49,8 @@ namespace falcon
         static constexpr size_t LaneCount    = Lane;     ///< Number of Lanes of current SIMD128 Register
 
         static_assert(sizeof(DataType) * Lane <= BUFFER_WIDTH && "Invalid size.");
-        static_assert(std::has_single_bit(Lane) && Lane > 1 && "Invalid Number of Lanes.");
+        static_assert(std::has_single_bit(Lane) && Lane > 1 &&
+                      "Invalid Number of Lanes. Must be a power of 2(2, 4, 8, 16...)");
 
 
         constexpr explicit Simd128() = default;

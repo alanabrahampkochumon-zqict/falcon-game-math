@@ -12,11 +12,11 @@
 #include "SIMDTestSetup.h"
 
 #include <array>
-#include <falcon_simd/core/Simd256.h>
+#include <falcon_simd/core/Simd128.h>
 
 
 /**
- * @addtogroup T_SIMD128_Load_Store
+ * @addtogroup T_SIMD256_Load_Store
  * @{
  */
 
