@@ -116,6 +116,16 @@ namespace fgm
          */
         [[nodiscard]] explicit constexpr Vec2(const falcon::Simd128_t<T, DIMENSION>& reg) noexcept;
 
+
+        /// @brief Convert this Vec2 to CVec2.
+        /// @note Use this minimally, as these can add unnecessary overheads.
+        [[nodiscard]] constexpr CVec2<T> toCVec2() const noexcept;
+
+
+        /// @brief Convert @p vec to a CVec2.
+        /// @note Use this minimally, as these can add unnecessary overheads.
+        [[nodiscard]] static constexpr CVec2<T> toCVec2(const Vec2& vec) noexcept;
+
         /** @} */
 
 

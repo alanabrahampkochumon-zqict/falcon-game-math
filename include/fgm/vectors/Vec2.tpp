@@ -57,8 +57,20 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vec2<T>::Vec2(const falcon::Simd128_t<T, DIMENSION>& reg) noexcept: _data{ reg }
+    FALCON_INLINE constexpr Vec2<T>::Vec2(const falcon::Simd128_t<T, DIMENSION>& reg) noexcept: _data{ reg }
     {}
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr CVec2<T> Vec2<T>::toCVec2() const noexcept
+    {
+        CVec2<T> cVec{};
+        _data.storeAligned(cVec._data.data());
+        return cVec;
+    }
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr CVec2<T> Vec2<T>::toCVec2(const Vec2& vec) noexcept
+    { return vec.toCVec2(); }
 
     /*************************************
      *                                   *
@@ -78,7 +90,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    constexpr Vec2<T>::template ConstIndexableProxy<0> Vec2<T>::x() noexcept
+    FALCON_INLINE constexpr Vec2<T>::template ConstIndexableProxy<0> Vec2<T>::x() noexcept
     { return ConstIndexableProxy<0>(*this); }
 
 

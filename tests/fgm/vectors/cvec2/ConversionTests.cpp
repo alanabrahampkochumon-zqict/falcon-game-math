@@ -15,7 +15,7 @@
 
 
 /**
- * @addtogroup T_FGM_Vec2_Conv
+ * @addtogroup T_FGM_CVec2_Conv
  * @{
  */
 

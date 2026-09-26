@@ -92,15 +92,14 @@ namespace fgm
         template <Arithmetic U>
         [[nodiscard]] explicit constexpr CVec2(const CVec2<U>& other) noexcept;
 
+
         /// @brief Convert this CVec2 to a Simd accelerated Vec2.
-        /// @note  Conversion operations should only be used when necessary, as internally this is not a simple cast,
-        ///        but involves register loading.
+        /// @note Use this minimally, as these can add unnecessary overheads.
         [[nodiscard]] constexpr Vec2<T> toVec2() const noexcept;
 
 
         /// @brief Convert @p vec to a Simd accelerated Vec2.
-        /// @note  Conversion operations should only be used when necessary, as internally this is not a simple cast,
-        ///        but involves register loading.
+        /// @note Use this minimally, as these can add unnecessary overheads.
         [[nodiscard]] static constexpr Vec2<T> toVec2(const CVec2& vec) noexcept;
 
         /** @} */
@@ -2304,7 +2303,7 @@ namespace fgm
 
         /** @} */
 
-        /// Vec2 is declared a friend to enable toVec2 to directly usage the buffer of CVec2,
+        /// Vec2 is declared a friend to enable toCVec2 to directly usage the buffer of CVec2,
         /// without writing to a temporary.
         friend struct Vec2<T>;
 
