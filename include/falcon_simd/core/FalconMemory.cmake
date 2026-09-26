@@ -7,6 +7,8 @@ set(FALCON_SIMD_MEMORY_HEADERS
         RegisterTraits.h
         x86/Simd128SSE.h
         x86/Simd128SSE.inl
+        x86/Simd256SSE.h
+        x86/Simd256SSE.inl
         x86/Simd128X86Math.h
         x86/Simd128X86Math.inl
 )

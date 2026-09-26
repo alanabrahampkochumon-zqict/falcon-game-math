@@ -18,6 +18,7 @@
  * @{
  */
 
+// TODO: Rename File to SIMD core
 namespace falcon
 {
 
@@ -33,6 +34,10 @@ namespace falcon
     template <SimdBackend, typename, size_t>
     struct Simd128;
 
+    /// Primary Template for Simd256
+    template <SimdBackend, typename, size_t>
+    struct Simd256;
+
     // static_assert(IsSIMDLoadable<Simd128_t<float>, float> == true);
 } // namespace falcon
 
@@ -40,6 +45,7 @@ namespace falcon
 #if defined(FALCON_ENABLE_SSE2) || defined(FALCON_ENABLE_SSE4) || defined(FALCON_ENABLE_AVX) ||                        \
     defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX10)
     #include "x86/Simd128SSE.h"
+    #include "x86/Simd256SSE.h"
 #endif
 
 
@@ -49,6 +55,9 @@ namespace falcon
     defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX10)
     template <typename DataType, size_t Lane>
     using Simd128_t = Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>;
+
+    template <typename DataType, size_t Lane>
+    using Simd256_t = Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>;
 #endif
 } // namespace falcon
 
