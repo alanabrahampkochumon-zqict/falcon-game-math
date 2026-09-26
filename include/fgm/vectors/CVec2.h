@@ -97,6 +97,7 @@ namespace fgm
         ///        but involves register loading.
         [[nodiscard]] constexpr Vec2<T> toVec2() const noexcept;
 
+
         /// @brief Convert @p vec to a Simd accelerated Vec2.
         /// @note  Conversion operations should only be used when necessary, as internally this is not a simple cast,
         ///        but involves register loading.

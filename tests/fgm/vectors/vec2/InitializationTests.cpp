@@ -54,4 +54,12 @@ TYPED_TEST(Vec2InitializationTests, Ctor_ParametersInitializesVector)
     EXPECT_VEC_CONTAINS(vec, a, b);
 }
 
+
+TYPED_TEST(Vec2InitializationTests, Ctor_SingleParameterInitializesVector)
+{
+    const auto a = static_cast<TypeParam>(3);
+    const fgm::Vec2<TypeParam> vec(a);
+    EXPECT_VEC_CONTAINS(vec, a, a);
+}
+
 /** @} */

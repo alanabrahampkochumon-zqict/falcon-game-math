@@ -36,6 +36,11 @@ namespace fgm
      *************************************/
 
     template <Arithmetic T>
+    FALCON_INLINE constexpr Vec2<T>::Vec2(T val) noexcept: _data{ val, val }
+    {}
+
+
+    template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T>::Vec2(T v1, T v2) noexcept: _data{ v1, v2 }
     {}
 
