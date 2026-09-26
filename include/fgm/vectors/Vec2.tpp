@@ -225,10 +225,24 @@ namespace fgm
     { return vec.swizzle<Indices...>(); }
 
 
+
+    /***************************************
+     *               STORAGE               *
+     ***************************************/
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr void Vec2<T>::store(T* pBuffer) const noexcept
+    { _data.storeAligned(pBuffer); }
+
+
+    template <Arithmetic T>
+    FALCON_INLINE constexpr void Vec2<T>::store(const Vec2& vec, T* pBuffer) noexcept
+    { vec.store(pBuffer); }
+
+
+
     /**************************************
-     *                                    *
      *         EQUALITY OPERATORS         *
-     *                                    *
      **************************************/
 
     template <Arithmetic T>

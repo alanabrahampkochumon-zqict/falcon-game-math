@@ -263,6 +263,7 @@ namespace fgm
         template <std::size_t... Indices>
         [[nodiscard("Swizzling returns a new vector and does not mutate the original.")]]
         static constexpr auto swizzle(const CVec2& vec) noexcept;
+
         /** @} */
 
 
@@ -2302,6 +2303,10 @@ namespace fgm
         // NOLINTEND
 
         /** @} */
+
+        /// Vec2 is declared a friend to enable toVec2 to directly usage the buffer of CVec2,
+        /// without writing to a temporary.
+        friend struct Vec2<T>;
 
     private:
         std::array<T, DIMENSION> _data;

@@ -299,6 +299,66 @@ namespace fgm
 
         /** @} */
 
+        /**
+         * @addtogroup FGM_CVec2_Ptr
+         * @{
+         */
+
+        /**
+         * @brief Store the values of this vector to @p pBuffer.
+         * @note  Since we cannot return a pointer to a buffer, due to lifetime limitation
+         *        of pointer allocated on the callstack of @ref store, use either @ref store
+         *        or convert to a CVec2 using @ref toCVec2 and then use *cvec or cvec.ptr().
+         *        *But you shouldn't make the CVec2 instance a temporary.*
+         * @note The buffer must be of an adequate size to store the contents.
+         *
+         * @warning @p pBuffer must be aligned to 16-byte boundary.
+         *          If you want to store unaligned memory use @ref storeUnaligned.
+         *
+         * @code
+         * // DO
+         * auto cvec2 = vec2.toCVec2();
+         * auto ptr = *cvec2();
+         *
+         * // OR
+         * float data[2];
+         * vec2.store(data);
+         *
+         * // DON'T
+         * auto ptr = *(vec2.toCVec2());
+         * @endcode
+         */
+        constexpr void store(T* pBuffer) const noexcept;
+
+
+        /**
+         * @brief Store the values of @p vec to @p pBuffer.
+         * @note  Since we cannot return a pointer to a buffer, due to lifetime limitation
+         *        of pointer allocated on the callstack of @ref store, use either @ref store
+         *        or convert to a CVec2 using @ref toCVec2 and then use *cvec or cvec.ptr().
+         *        *But you shouldn't make the CVec2 instance a temporary.*
+         * @note The buffer must be of an adequate size to store the contents.
+         *
+         * @warning @p pBuffer must be aligned to 16-byte boundary.
+         *          If you want to store unaligned memory use @ref storeUnaligned.
+         *
+         * @code
+         * // DO
+         * auto cvec2 = vec2.toCVec2();
+         * auto ptr = *cvec2();
+         *
+         * // OR
+         * float data[2];
+         * vec2.store(data);
+         *
+         * // DON'T
+         * auto ptr = *(vec2.toCVec2());
+         * @endcode
+         */
+        static constexpr void store(const Vec2& vec, T* pBuffer) noexcept;
+
+        /** @} */
+
 
         /**
          * @addtogroup FGM_Vec2_Equality
