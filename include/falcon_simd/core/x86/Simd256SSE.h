@@ -47,63 +47,63 @@ namespace falcon
 
         constexpr explicit Simd256() = default;
 
-        //     /**
-        //      * @brief Initialize a 256-bit SIMD register with @p data.
-        //      *
-        //      * @tparam Args The numeric type of @p data. Must match the register's datatype.
-        //      * @param data  The values to initialize the register with.
-        //      *
-        //      * @note If only a single argument is provided then the value will be broadcasted across the entire
-        //      register.
-        //      *       The number of values provided must be less than or equal to the total register lanes. If
-        //      *       the number of values is less than the lanes, values will be inserted into the lower lanes,
-        //      *       and rest filled with zeroes.
-        //      */
-        //     template <typename... Args>
-        //         requires(SimdSafeConvertible<Args, DataType> && ...)
-        //     constexpr explicit Simd256(Args... data) noexcept;
-        //
-        //     // TODO: Add test
-        //     /// @brief Cast a register from @p DataType to @p T.
-        //     /// @tparam T The destination data type.
-        //     template <typename T>
-        //     [[nodiscard]] constexpr Simd256<SimdBackend::ARCH_SSE2, T, Lane> cast() const noexcept;
-        //
-        //
-        //     /// @brief Cast a register from @p DataType to @p T (non-const variant).
-        //     /// @tparam T The destination data type.
-        //     template <typename T>
-        //     [[nodiscard]] constexpr Simd256<SimdBackend::ARCH_SSE2, T, Lane> cast() noexcept;
-        //
-        //
-        //     /**
-        //      * @brief Initialize a 256-bit SIMD register with values from a std::container(std::array, std::vector).
-        //      *
-        //      * @note Unused lanes must be zeroed-out manually.
-        //      *
-        //      * @param values The values to fill the register with.
-        //      *
-        //      * @warning The container must be aligned to 16-byte boundary. For unaligned data,
-        //      *          use @ref load to load data manually.
-        //      */
-        //     constexpr explicit Simd256(std::span<const DataType> values) noexcept;
-        //
-        //
-        //     /**
-        //      * @brief Initialize a 256-bit SIMD register with a raw memory buffer.
-        //      *
-        //      * @note Passing in a buffer with allocated size less than @p Lane * @p sizeof(DataType)
-        //      *       can cause segmentation faults.
-        //      * @note Unused lanes must be zeroed-out manually.
-        //      *
-        //      * @param buffer The starting address of the values to fill the register with.
-        //      *
-        //      * @warning @p buffer must be aligned to 16-byte boundary. For unaligned data,
-        //      *          use @ref load to load data manually.
-        //      */
-        //     constexpr explicit Simd256(const DataType* buffer) noexcept;
-        //
-        //
+        /**
+         * @brief Initialize a 256-bit SIMD register with @p data.
+         *
+         * @tparam Args The numeric type of @p data. Must match the register's datatype.
+         * @param data  The values to initialize the register with.
+         *
+         * @note If only a single argument is provided then the value will be broadcasted across the entire
+         register.
+         *       The number of values provided must be less than or equal to the total register lanes. If
+         *       the number of values is less than the lanes, values will be inserted into the lower lanes,
+         *       and rest filled with zeroes.
+         */
+        template <typename... Args>
+            requires(SimdSafeConvertible<Args, DataType> && ...)
+        constexpr explicit Simd256(Args&&... data) noexcept;
+
+        // TODO: Add test
+        /// @brief Cast a register from @p DataType to @p T.
+        /// @tparam T The destination data type.
+        template <typename T>
+        [[nodiscard]] constexpr Simd256<SimdBackend::ARCH_SSE2, T, Lane> cast() const noexcept;
+
+
+        /// @brief Cast a register from @p DataType to @p T (non-const variant).
+        /// @tparam T The destination data type.
+        template <typename T>
+        [[nodiscard]] constexpr Simd256<SimdBackend::ARCH_SSE2, T, Lane> cast() noexcept;
+
+
+        /**
+         * @brief Initialize a 256-bit SIMD register with values from a std::container(std::array, std::vector).
+         *
+         * @note Unused lanes must be zeroed-out manually.
+         *
+         * @param values The values to fill the register with.
+         *
+         * @warning The container must be aligned to 16-byte boundary. For unaligned data,
+         *          use @ref load to load data manually.
+         */
+        constexpr explicit Simd256(std::span<const DataType> values) noexcept;
+
+
+        /**
+         * @brief Initialize a 256-bit SIMD register with a raw memory buffer.
+         *
+         * @note Passing in a buffer with allocated size less than @p Lane * @p sizeof(DataType)
+         *       can cause segmentation faults.
+         * @note Unused lanes must be zeroed-out manually.
+         *
+         * @param pBuffer The starting address of the values to fill the register with.
+         *
+         * @warning @p buffer must be aligned to 16-byte boundary. For unaligned data,
+         *          use @ref load to load data manually.
+         */
+        constexpr explicit Simd256(const DataType* pBuffer) noexcept;
+
+
         /**
          * @brief Set the register with the given values in the lower lanes filling the unfilled lanes with zeroes.
          *
@@ -779,6 +779,13 @@ namespace falcon
         /// [Upper][Lower]
         Simd128<SimdBackend::ARCH_SSE2, DataType, UPPER_LANE_COUNT> _upper;
         Simd128<SimdBackend::ARCH_SSE2, DataType, LOWER_LANE_COUNT> _lower;
+
+    private:
+        /// @brief Initialize a Simd256 with the lower and upper Simd128 register.
+        explicit constexpr Simd256(Simd128<SimdBackend::ARCH_SSE2, DataType, LOWER_LANE_COUNT> lower,
+                                   Simd128<SimdBackend::ARCH_SSE2, DataType, UPPER_LANE_COUNT> upper)
+            : _upper(upper), _lower(lower)
+        {}
     };
 
 

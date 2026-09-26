@@ -9,10 +9,54 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
+
 #include <tuple>
 
 namespace falcon
 {
+    template <typename DataType, size_t Lane>
+    template <typename... Args>
+        requires(SimdSafeConvertible<Args, DataType> && ...)
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd256(Args&&... data) noexcept
+    {
+        /// If only single argument is provided then it will be broadcast otherwise the data will be filled
+        /// from bottom to top, with zeroes in unoccupied spaces.
+        if constexpr (sizeof...(data) == 1)
+        {
+            broadcast(std::forward<Args>(data)...);
+        }
+        else
+        {
+            set(std::forward<Args>(data)...);
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    template <typename T>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, T, Lane> Simd256<SimdBackend::ARCH_SSE2, DataType,
+                                                                             Lane>::cast() const noexcept
+    { return Simd256(_lower.template cast<T>(), _upper.template cast<T>()); }
+
+
+    template <typename DataType, size_t Lane>
+    template <typename T>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, T, Lane> Simd256<SimdBackend::ARCH_SSE2, DataType,
+                                                                             Lane>::cast() noexcept
+    { return Simd256(_lower.template cast<T>(), _upper.template cast<T>()); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd256(
+        std::span<const DataType> values) noexcept
+    { loadAligned(values.data()); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd256(const DataType* pBuffer) noexcept
+    { loadAligned(pBuffer); }
+
+
     template <typename DataType, size_t Lane>
     template <typename... Args>
         requires(sizeof...(Args) <= Lane) && (std::same_as<Args, DataType> && ...)
@@ -20,19 +64,28 @@ namespace falcon
                                                                                      Lane>::set(Args... args)
     {
         // TODO: Apply this to SIMD128
-        // To set values in 2 registers store the values into a tuple
-        // and store and fill the lower lane and then the upper lane.
-        constexpr auto argCount = sizeof...(args);
-        const auto tuple        = std::make_tuple(args...);
+        // To support variable argument passing we need to return pass down a zero for all the lanes that are
+        // not provided.
+        constexpr auto argCount  = sizeof...(args);
+        const DataType arr[Lane] = { args... };
 
-        // Helper to set the values with unpacking to set to the correct register.
-        auto invokeSet = []<size_t Offset, size_t... Is>(auto& reg, const auto& t, std::index_sequence<Is...>) {
-            reg.set(std::get<Offset + Is>(t)...);
+        // Fill the upper lane
+        if constexpr (argCount <= LOWER_LANE_COUNT)
+        {
+            _upper.setZero();
+        }
+        else
+        {
+            auto fillUpper = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
+                _upper.set(arr[LOWER_LANE_COUNT + Indices]...);
+            };
+            fillUpper(std::make_index_sequence<UPPER_LANE_COUNT>{});
+        }
+        // Fill the lower lane
+        auto fillLower = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
+            _lower.set(arr[Indices]...);
         };
-
-        invokeSet.template operator()<0>(_lower, tuple, std::make_index_sequence<LOWER_LANE_COUNT>{});
-        constexpr size_t upperArgs = argCount - LOWER_LANE_COUNT;
-        invokeSet.template operator()<LOWER_LANE_COUNT>(_upper, tuple, std::make_index_sequence<upperArgs>{});
+        fillLower(std::make_index_sequence<LOWER_LANE_COUNT>{});
 
         return *this;
     }

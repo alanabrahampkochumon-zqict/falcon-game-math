@@ -260,7 +260,7 @@ TEST_SIMD128_VARG_CTOR(FP64_2Lanes_2Arguments, FP64, 2, max<FP64>, min<FP64>)
             }                                                                                                          \
         }
 
-// Signed Types
+// Unsigned Types
 TEST_SIMD128_VARG_CTOR(Uint8_2Lanes, U8, 2, max<U8>)
 TEST_SIMD128_VARG_CTOR(Uint8_4Lanes, U8, 4, max<U8>)
 TEST_SIMD128_VARG_CTOR(Uint8_8Lanes, U8, 8, max<U8>)
@@ -272,7 +272,7 @@ TEST_SIMD128_VARG_CTOR(Uint32_2Lanes, U32, 2, max<U32>)
 TEST_SIMD128_VARG_CTOR(Uint32_4Lanes, U32, 4, max<U32>)
 TEST_SIMD128_VARG_CTOR(Uint64_2Lanes, U64, 2, max<U64>)
 
-// Unsigned Types
+// Signed Types
 TEST_SIMD128_VARG_CTOR(Int8_2Lanes, I8, 2, max<I8>)
 TEST_SIMD128_VARG_CTOR(Int8_4Lanes, I8, 4, max<I8>)
 TEST_SIMD128_VARG_CTOR(Int8_8Lanes, I8, 8, max<I8>)
