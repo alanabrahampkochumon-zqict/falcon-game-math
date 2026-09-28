@@ -497,19 +497,20 @@ namespace falcon
         [[nodiscard]] constexpr Simd256 fma(Simd256 b, Simd256 c) const noexcept;
 
 
-        //     /**
-        //      * @brief Add together elements from all the lanes of the current register.
-        //      * @return The sum of elements in all the lanes.
-        //      */
-        //     [[nodiscard]] constexpr DataType horizontalAdd() const noexcept;
-        //
-        //     /**
-        //      * @brief Subtract upper lane elements from the lower lanes of the current register.
-        //      * @return The difference between elements in all the lanes.
-        //      */
-        //     [[nodiscard]] constexpr DataType horizontalSub() const noexcept;
-        //
-        //
+        /**
+         * @brief Add together elements from all the lanes of the current register.
+         * @return The sum of elements in all the lanes.
+         */
+        [[nodiscard]] constexpr DataType horizontalAdd() const noexcept;
+
+
+        /**
+         * @brief Subtract upper lane elements from the lower lanes of the current register.
+         * @return The difference between elements in all the lanes.
+         */
+        [[nodiscard]] constexpr DataType horizontalSub() const noexcept;
+
+
         //     // TODO: Add masked variants comparison AVX512(__mmask) and emulate
         //
         //

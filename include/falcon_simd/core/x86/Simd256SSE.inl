@@ -243,5 +243,21 @@ namespace falcon
     { return Simd256(_lower.fma(b._lower, c._lower), _upper.fma(b._upper, c._upper)); }
 
 
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::horizontalAdd() const noexcept
+    { return _lower.horizontalAdd() + _upper.horizontalAdd(); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::horizontalSub() const noexcept
+    {
+        // NOTE: For horizontal sub to work like A - B - C - D
+        //       We need to use a horizontal sub and horizontal add
+        //       and take the difference of the results.
+        //       A - B - (C + D)
+        return _lower.horizontalSub() - _upper.horizontalAdd();
+    }
+
+
 
 } // namespace falcon
