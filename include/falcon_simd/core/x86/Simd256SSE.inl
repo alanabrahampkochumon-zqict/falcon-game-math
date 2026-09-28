@@ -191,4 +191,13 @@ namespace falcon
         *this = *this - other;
         return *this;
     }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<SimdBackend::ARCH_SSE2, DataType,
+                                                                                    Lane>::operator-() const noexcept
+    { return Simd256(-_lower, -_upper); }
+
+
+
 } // namespace falcon

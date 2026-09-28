@@ -245,6 +245,47 @@ TEST(Simd256ArithmeticTests, CompoundSubtractOperation_WorksWithMixedNumbers)
 }
 
 
+/// @test Verify that unary minus return a new register with negated values(0-reg).
+TYPED_TEST(Simd256ArithmeticTests, UnaryMinusOperator_ReturnsAValidResult)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    Type min = std::numeric_limits<Type>::min();
+    Type max = std::numeric_limits<Type>::max();
+    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+
+        if (i % 2 == 0)
+        {
+            data[i] = static_cast<Type>(max - i * 2);
+        }
+        else
+        {
+            data[i] = static_cast<Type>(min + i * 2);
+        }
+    // Disable msvc from generating unsigned negation warnings
+    #ifdef _MSC_VER
+        #pragma warning(push)
+        #pragma warning(disable : 4146)
+    #endif
+        expected[i] = static_cast<Type>(-data[i]);
+    #ifdef _MSC_VER
+        #pragma warning(pop)
+    #endif
+    }
+    falcon::Simd256_t<Type, Lane> reg{ data };
+    auto regRes = -reg;
+    regRes.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
+    }
+}
+
+
 //
 // TYPED_TEST(Simd256ArithmeticTests, BinaryMultiplication_ReturnsAValidResult)
 // {
@@ -592,47 +633,7 @@ TEST(Simd256ArithmeticTests, CompoundSubtractOperation_WorksWithMixedNumbers)
 //     }
 // }
 //
-//
-// /// @test Verify that unary minus return a new register with negated values(0-reg).
-// TYPED_TEST(Simd256ArithmeticTests, UnaryMinusOperator_ReturnsAValidResult)
-// {
-//     using Type            = TypeParam::Type;
-//     constexpr size_t Lane = TypeParam::VALUE;
-//
-//     Type min = std::numeric_limits<Type>::min();
-//     Type max = std::numeric_limits<Type>::max();
-//     alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
-//     for (size_t i = 0; i < Lane; ++i)
-//     {
-//
-//         if (i % 2 == 0)
-//         {
-//             data[i] = static_cast<Type>(max - i * 2);
-//         }
-//         else
-//         {
-//             data[i] = static_cast<Type>(min + i * 2);
-//         }
-//         // Disable msvc from generating unsigned negation warnings
-//         #ifdef _MSC_VER
-//         #pragma warning(push)
-//         #pragma warning(disable : 4146)
-//         #endif
-//         expected[i] = static_cast<Type>(-data[i]);
-//         #ifdef _MSC_VER
-//         #pragma warning(pop)
-//         #endif
-//     }
-//     falcon::Simd256_t<Type, Lane> reg{ data };
-//     auto regRes = -reg;
-//     regRes.storeAligned(result.data());
-//
-//     for (size_t i = 0; i < Lane; ++i)
-//     {
-//         EXPECT_ANY_EQ(expected[i], result[i]);
-//     }
-// }
-//
+
 //
 // /// @test Verify that fma operation returns a valid result (a * b + c).
 // TYPED_TEST(Simd256ArithmeticTests, FMA_ReturnsAValidResult)
