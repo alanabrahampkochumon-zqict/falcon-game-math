@@ -236,5 +236,12 @@ namespace falcon
     }
 
 
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<SimdBackend::ARCH_SSE2, DataType,
+                                                                                    Lane>::fma(Simd256 b,
+                                                                                               Simd256 c) const noexcept
+    { return Simd256(_lower.fma(b._lower, c._lower), _upper.fma(b._upper, c._upper)); }
+
+
 
 } // namespace falcon
