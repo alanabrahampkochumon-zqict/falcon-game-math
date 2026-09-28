@@ -1,4 +1,5 @@
 #pragma once
+#include "Simd256SSE.h"
 /**
  * @file Simd256SSE.inl
  * @author Alan Abraham P Kochumon
@@ -210,6 +211,27 @@ namespace falcon
         SimdBackend::ARCH_SSE2, DataType, Lane>::operator*=(Simd256 other) noexcept
     {
         *this = *this * other;
+        return *this;
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::divReg(Simd256 other) const noexcept
+    { return Simd256(_lower.divReg(other._lower), _upper.divReg(other._upper)); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator/(DataType scalar) const noexcept
+    { return Simd256(_lower / scalar, _upper / scalar); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator/=(DataType scalar) noexcept
+    {
+        *this = *this / scalar;
         return *this;
     }
 
