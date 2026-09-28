@@ -161,7 +161,63 @@ namespace falcon
 
 
     /**************************************
-     *       BITWISE OPERATORS         *
+     *          GETTERS/SETTERS           *
+     **************************************/
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::getAt(size_t index) const noexcept
+    { return index >= LOWER_LANE_COUNT ? _upper.getAt(index - LOWER_LANE_COUNT) : _lower.getAt(index); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::setAt(size_t index,
+                                                                                        DataType value) noexcept
+    {
+        // TODO: Optimize with masks
+        index >= LOWER_LANE_COUNT ? _upper.setAt(index - LOWER_LANE_COUNT, value) : _lower.setAt(index, value);
+    }
+
+
+    template <typename DataType, size_t Lane>
+    template <size_t Index>
+        requires(Index < Lane)
+    FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::getAt() const noexcept
+    {
+        if constexpr (Index >= LOWER_LANE_COUNT)
+        {
+            return _upper.template getAt<Index - LOWER_LANE_COUNT>();
+        }
+        else
+        {
+            return _lower.template getAt<Index>();
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    template <size_t Index>
+        requires(Index < Lane)
+    FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::setAt(DataType value) noexcept
+    {
+        if constexpr (Index >= LOWER_LANE_COUNT)
+        {
+            _upper.template setAt<Index - LOWER_LANE_COUNT>(value);
+        }
+        else
+        {
+            _lower.template setAt<Index>(value);
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::extractFirst() noexcept
+    { return _lower.extractFirst(); }
+
+
+
+    /**************************************
+     *          BITWISE OPERATORS         *
      **************************************/
 
     template <typename DataType, size_t Lane>

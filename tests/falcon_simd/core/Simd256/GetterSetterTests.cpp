@@ -12,7 +12,7 @@
 #include "SIMDTestSetup.h"
 
 #include <array>
-#include <falcon_simd/core/Simd256.h>
+#include <falcon_simd/core/Simd128.h>
 
 
 /**
@@ -32,11 +32,14 @@ namespace
     class Simd256GetterSetterTests: public testing::Test
     {
     public:
+        static constexpr size_t RegSizeInBytes = 32;
         using Register = falcon::Simd256_t<typename T::Type, T::VALUE>;
 
         static constexpr auto max = std::numeric_limits<typename T::Type>::max();
         static constexpr auto min = std::numeric_limits<typename T::Type>::min();
-        alignas(16) static constexpr std::array<typename T::Type, 16> data = { max, min, 0, 3,  5,  11, 15, 3,
+        alignas(16) static constexpr std::array<typename T::Type, 32> data = { max, min, 0, 3,  5,  11, 15, 3,
+                                                                               1,   2,   5, 12, 14, 3,  15, 12,
+                                                                               max, min, 0, 3,  5,  11, 15, 3,
                                                                                1,   2,   5, 12, 14, 3,  15, 12 };
 
         /// Testing condition
@@ -56,7 +59,7 @@ TYPED_TEST(Simd256GetterSetterTests, Set_FillsActiveLanesInCorrectOrder)
 {
     using Type                = TypeParam::Type;
     constexpr size_t Lane     = TypeParam::VALUE;
-    constexpr size_t MaxLanes = 16 / sizeof(Type);
+    constexpr size_t MaxLanes = this->RegSizeInBytes / sizeof(Type);
 
     /// Grab the register prefilled with values using set
     auto reg = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
@@ -76,7 +79,7 @@ TYPED_TEST(Simd256GetterSetterTests, Set_FillsUnoccupiedSpaceWithZeroes)
 {
     using Type                = typename TypeParam::Type;
     constexpr size_t Lane     = TypeParam::VALUE;
-    constexpr size_t MaxLanes = 16 / sizeof(Type);
+    constexpr size_t MaxLanes = this->RegSizeInBytes / sizeof(Type);
 
     // If the register is perfectly full (e.g., 4 floats), there is no space to pad.
     // We can tell GTest to automatically skip this specific matrix combination!
@@ -103,7 +106,7 @@ TYPED_TEST(Simd256GetterSetterTests, Set_FillsUnoccupiedSpaceWithZeroes)
 TEST(Simd256GetterSetterTests, Set_CanTakeParametersLessThanLaneSize)
 {
     using Type            = uint8_t;
-    constexpr size_t Lane = 8;
+    constexpr size_t Lane = 32;
     falcon::Simd256_t<Type, Lane> reg{};
 
     reg.set(static_cast<Type>(1), static_cast<Type>(2), static_cast<Type>(3), static_cast<Type>(4),
