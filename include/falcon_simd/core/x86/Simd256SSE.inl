@@ -370,5 +370,63 @@ namespace falcon
     { return Simd256(_lower <= other._lower, _upper <= other._upper); }
 
 
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator<<(uint32_t count) const noexcept
+    { return Simd256(_lower << count, _upper << count); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator<<=(uint32_t count) noexcept
+    {
+        *this = *this << count;
+        return *this;
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator>>(uint32_t count) const noexcept
+    { return Simd256(_lower >> count, _upper >> count); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator>>=(uint32_t count) noexcept
+    {
+        *this = *this >> count;
+        return *this;
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::shiftRightLogical(uint32_t count) const noexcept
+    { return Simd256(_lower.shiftRightLogical(count), _upper.shiftRightLogical(count)); }
+
+
+    template <typename DataType, size_t Lane>
+    template <uint32_t Count>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<SimdBackend::ARCH_SSE2, DataType,
+                                                                                    Lane>::shiftLeft() const noexcept
+    { return Simd256(_lower.template shiftLeft<Count>(), _upper.template shiftLeft<Count>()); }
+
+
+    template <typename DataType, size_t Lane>
+    template <uint32_t Count>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::shiftRightArithmetic() const noexcept
+    { return Simd256(_lower.template shiftRightArithmetic<Count>(), _upper.template shiftRightArithmetic<Count>()); }
+
+
+    template <typename DataType, size_t Lane>
+    template <uint32_t Count>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::shiftRightLogical() const noexcept
+    { return Simd256(_lower.template shiftRightLogical<Count>(), _upper.template shiftRightLogical<Count>()); }
+
+
+
 
 } // namespace falcon
