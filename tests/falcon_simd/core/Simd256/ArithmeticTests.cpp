@@ -16,7 +16,7 @@
 
 
 /**
- * @addtogroup T_SIMD128_Arithmetic
+ * @addtogroup T_SIMD256_Arithmetic
  * @{
  */
 

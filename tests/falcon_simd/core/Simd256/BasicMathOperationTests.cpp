@@ -12,7 +12,7 @@
 #include "SIMDTestSetup.h"
 
 /**
- * @addtogroup T_SIMD128_Math
+ * @addtogroup T_SIMD256_Math
  * @{
  */
 

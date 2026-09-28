@@ -14,7 +14,7 @@
 #include <falcon_simd/core/Simd256.h>
 
 /**
- * @addtogroup T_SIMD128_ConvCtor
+ * @addtogroup T_SIMD256_ConvCtor
  * @{
  */
 

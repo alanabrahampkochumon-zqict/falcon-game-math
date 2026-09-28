@@ -512,16 +512,16 @@ namespace falcon
 
 
         //     // TODO: Add masked variants comparison AVX512(__mmask) and emulate
-        //
-        //
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //     ///   COMPARISON/EQUALITY
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //
-        //     [[nodiscard]] constexpr Simd256 operator==(Simd256 other) const noexcept;
-        //
-        //     [[nodiscard]] constexpr Simd256 operator!=(Simd256 other) const noexcept;
-        //
+
+
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+        ///   COMPARISON/EQUALITY
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+        [[nodiscard]] constexpr Simd256 operator==(Simd256 other) const noexcept;
+
+        [[nodiscard]] constexpr Simd256 operator!=(Simd256 other) const noexcept;
+
         //     [[nodiscard]] constexpr Simd256 operator>(Simd256 other) const noexcept;
         //
         //     [[nodiscard]] constexpr Simd256 operator>=(Simd256 other) const noexcept;

@@ -197,7 +197,7 @@ TYPED_TEST(Simd128ComparisonTests, DoubleEqualsOperator_ReturnsAValidMask)
 /// @test Verify that equality operator works for equal values in a 64-bit 2-lane register
 /// @note This test is required since our typed test only tests for equality among first two values
 ///       both of which are unequal
-TEST(Simd128ComparisonTests, DoubleEqualsOperator_UnequalValuesForFirstTwoLanesReturnsAValidMask)
+TEST(Simd128ComparisonTests, DoubleEqualsOperator_EqualValuesInTheFirstTwoLanesReturnsAValidMask)
 {
     std::array<uint64_t, 2> lhsData{ 538293, 532212300123421 };
     std::array<uint64_t, 2> rhsData{ 538293, 532212300123421 };
@@ -236,7 +236,7 @@ TYPED_TEST(Simd128ComparisonTests, NotEqualsOperator_ReturnsAValidMask)
 /// @test Verify that inequality operator works for equal values in a 64-bit 2-lane register
 /// @note This test is required since our typed test only tests for inequality among first two values
 ///       both of which are unequal
-TEST(Simd128ComparisonTests, NotEqualsOperator_UnequalValuesForFirstTwoLanesReturnsAValidMask)
+TEST(Simd128ComparisonTests, NotEqualsOperator_EqualValuesInTheFirstTwoLanesReturnsAValidMask)
 {
     std::array<uint64_t, 2> lhsData{ 538293, 532212300123421 };
     std::array<uint64_t, 2> rhsData{ 538293, 532212300123421 };
@@ -339,7 +339,7 @@ TEST(Simd128ComparisonTests, LessThanOrEqualsOperator_ReturnFalseForNaNCompariso
 }
 
 
-TEST(Simd128ComparisonTests, NotEqualsOperator_ReturnFalseForNaNComparisons)
+TEST(Simd128ComparisonTests, NotEqualsOperator_ReturnTrueForNaNComparisons)
 {
     constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
     constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };

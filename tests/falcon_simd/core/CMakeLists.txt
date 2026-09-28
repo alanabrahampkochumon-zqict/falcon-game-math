@@ -12,7 +12,7 @@ add_executable(FalconSIMDMemoryTests
         Simd128/BasicMathOperationTests.cpp
 
         Simd256/ArithmeticTests.cpp
-        # Simd256/ComparisonTests.cpp
+        Simd256/ComparisonTests.cpp
         # Simd256/ConversionCtorTests.cpp
         # Simd256/GetterSetterTests.cpp
         Simd256/LoadStoreTests.cpp
