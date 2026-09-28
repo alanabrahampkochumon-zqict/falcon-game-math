@@ -656,7 +656,7 @@ TYPED_TEST(Simd128ArithmeticTests, FMA_ReturnsAValidResult)
 }
 
 
-TYPED_TEST(Simd128ArithmeticTests, HAdd_ReturnsAValidResult)
+TYPED_TEST(Simd128ArithmeticTests, HorizontalAdd_ReturnsAValidResult)
 {
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;

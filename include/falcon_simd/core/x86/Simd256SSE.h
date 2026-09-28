@@ -53,8 +53,7 @@ namespace falcon
          * @tparam Args The numeric type of @p data. Must match the register's datatype.
          * @param data  The values to initialize the register with.
          *
-         * @note If only a single argument is provided then the value will be broadcasted across the entire
-         register.
+         * @note If only a single argument is provided then the value will be broadcasted across the entire register.
          *       The number of values provided must be less than or equal to the total register lanes. If
          *       the number of values is less than the lanes, values will be inserted into the lower lanes,
          *       and rest filled with zeroes.
@@ -346,35 +345,35 @@ namespace falcon
         //
         //     /// @brief Perform an AND operation on the entire vector, horizontally.
         //     [[nodiscard]] constexpr DataType horizontalAnd() const noexcept;
-        //
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //     ///   ARITHMETIC OPERATIONS
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //
-        //     /**
-        //      * @brief Add two registers together and return a new register.
-        //      *
-        //      * @note Register arithmetic to limited is same data types and lanes.
-        //      *
-        //      * @param other The register to add.
-        //      *
-        //      * @return A new register with the sum elements from this register and @p other.
-        //      */
-        //     [[nodiscard]] constexpr Simd256 operator+(Simd256 other) const noexcept;
-        //
-        //
-        //     /**
-        //      * @brief Add contents of this register with @p other in-place.
-        //      *
-        //      * @note Register arithmetic to limited is same data types and lanes.
-        //      *
-        //      * @param other The register to add.
-        //      *
-        //      * @return A reference to the this register with sum.
-        //      */
-        //     constexpr Simd256& operator+=(Simd256 other) noexcept;
-        //
-        //
+
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+        ///   ARITHMETIC OPERATIONS
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+        /**
+         * @brief Add two registers together and return a new register.
+         *
+         * @note Register arithmetic to limited is same data types and lanes.
+         *
+         * @param other The register to add.
+         *
+         * @return A new register with the sum elements from this register and @p other.
+         */
+        [[nodiscard]] constexpr Simd256 operator+(Simd256 other) const noexcept;
+
+
+        /**
+         * @brief Add contents of this register with @p other in-place.
+         *
+         * @note Register arithmetic to limited is same data types and lanes.
+         *
+         * @param other The register to add.
+         *
+         * @return A reference to the this register with sum.
+         */
+        constexpr Simd256& operator+=(Simd256 other) noexcept;
+
+
         //     /**
         //      * @brief Subtract two registers and return a new register.
         //      *
