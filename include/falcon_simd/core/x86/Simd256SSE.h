@@ -374,16 +374,27 @@ namespace falcon
         constexpr Simd256& operator+=(Simd256 other) noexcept;
 
 
-        //     /**
-        //      * @brief Subtract two registers and return a new register.
-        //      *
-        //      * @note Register arithmetic is limited to same data types and lanes.
-        //      *
-        //      * @param other The register to subtract.
-        //      * @return A new register with the difference between elements of this register and @p other.
-        //      */
-        //     [[nodiscard]] constexpr Simd256 operator-(Simd256 other) const noexcept;
-        //
+        /**
+         * @brief Subtract two registers and return a new register.
+         *
+         * @note Register arithmetic is limited to same data types and lanes.
+         *
+         * @param other The register to subtract.
+         * @return A new register with the difference between elements of this register and @p other.
+         */
+        [[nodiscard]] constexpr Simd256 operator-(Simd256 other) const noexcept;
+
+        /**
+         * @brief Subtract contents of this register from @p other in-place.
+         *
+         * @note Register arithmetic is limited to same data types and lanes.
+         *
+         * @param other The register to subtract.
+         *
+         * @return A reference to the this register with difference.
+         */
+        constexpr Simd256& operator-=(Simd256 other) noexcept;
+
         //
         //     /**
         //      * @brief Perform a arithmetic negation on this register(NOT BITWISE) and return a new register.
@@ -392,17 +403,7 @@ namespace falcon
         //      */
         //     [[nodiscard]] constexpr Simd256 operator-() const noexcept;
         //
-        //
-        //     /**
-        //      * @brief Subtract contents of this register from @p other in-place.
-        //      *
-        //      * @note Register arithmetic is limited to same data types and lanes.
-        //      *
-        //      * @param other The register to subtract.
-        //      *
-        //      * @return A reference to the this register with difference.
-        //      */
-        //     constexpr Simd256& operator-=(Simd256 other) noexcept;
+
         //
         //
         //     /**
