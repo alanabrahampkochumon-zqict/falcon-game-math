@@ -161,6 +161,81 @@ namespace falcon
 
 
     /**************************************
+     *       BITWISE OPERATORS         *
+     **************************************/
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<SimdBackend::ARCH_SSE2, DataType,
+                                                                                    Lane>::operator~() const noexcept
+    { return Simd256(~_lower, ~_upper); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator&(Simd256 other) const noexcept
+    { return Simd256(_lower & other._lower, _upper & other._upper); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator|(Simd256 other) const noexcept
+    { return Simd256(_lower | other._lower, _upper | other._upper); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::operator^(Simd256 other) const noexcept
+    { return Simd256(_lower ^ other._lower, _upper ^ other._upper); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::andNot(Simd256 other) const noexcept
+    { return Simd256(_lower.andNot(other._lower), _upper.andNot(other._upper)); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::horizontalOr() const noexcept
+    {
+        const auto lower = _lower.horizontalOr();
+        const auto upper = _upper.horizontalOr();
+        if constexpr (std::is_same_v<DataType, double>)
+        {
+            return std::bit_cast<double>(std::bit_cast<uint64_t>(lower) | std::bit_cast<uint64_t>(upper));
+        }
+        else if constexpr (std::is_same_v<DataType, float>)
+        {
+            return std::bit_cast<float>(std::bit_cast<uint32_t>(lower) | std::bit_cast<uint32_t>(upper));
+        }
+        else
+        {
+            return lower | upper;
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::horizontalAnd() const noexcept
+    {
+        const auto lower = _lower.horizontalAnd();
+        const auto upper = _upper.horizontalAnd();
+        if constexpr (std::is_same_v<DataType, double>)
+        {
+            return std::bit_cast<double>(std::bit_cast<uint64_t>(lower) & std::bit_cast<uint64_t>(upper));
+        }
+        else if constexpr (std::is_same_v<DataType, float>)
+        {
+            return std::bit_cast<float>(std::bit_cast<uint32_t>(lower) & std::bit_cast<uint32_t>(upper));
+        }
+        else
+        {
+            return lower & upper;
+        }
+    }
+
+
+
+    /**************************************
      *       ARITHMETIC OPERATORS         *
      **************************************/
 

@@ -317,34 +317,34 @@ namespace falcon
         //
         //     /// @brief Get the element from the lowest lane(0-th index).
         //     constexpr DataType extractFirst() noexcept;
-        //
-        //
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //     ///    BITWISE OPERATIONS
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //
-        //     /// @brief Perform bitwise NOT on the entire register.
-        //     [[nodiscard]] constexpr Simd256 operator~() const noexcept;
-        //
-        //     /// @brief Perform bitwise AND between this register and @p other.
-        //     [[nodiscard]] constexpr Simd256 operator&(Simd256 other) const noexcept;
-        //
-        //     /// @brief Perform bitwise OR between this register and @p other.
-        //     [[nodiscard]] constexpr Simd256 operator|(Simd256 other) const noexcept;
-        //
-        //     /// @brief Perform bitwise OR between this register and @p other.
-        //     [[nodiscard]] constexpr Simd256 operator^(Simd256 other) const noexcept;
-        //
-        //     /// @brief Perform a bitwise `and_not` combination between this register and @p other.
-        //     /// @note  Faster than manually doing (~RegA & RegB) since this executes only a single SIMD instruction.
-        //     [[nodiscard]] constexpr Simd256 andNot(Simd256 other) const noexcept;
-        //
-        //     /// @brief Perform an OR operation on the entire vector, horizontally.
-        //     [[nodiscard]] constexpr DataType horizontalOr() const noexcept;
-        //
-        //
-        //     /// @brief Perform an AND operation on the entire vector, horizontally.
-        //     [[nodiscard]] constexpr DataType horizontalAnd() const noexcept;
+
+
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+        ///    BITWISE OPERATIONS
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+        /// @brief Perform bitwise NOT on the entire register.
+        [[nodiscard]] constexpr Simd256 operator~() const noexcept;
+
+        /// @brief Perform bitwise AND between this register and @p other.
+        [[nodiscard]] constexpr Simd256 operator&(Simd256 other) const noexcept;
+
+        /// @brief Perform bitwise OR between this register and @p other.
+        [[nodiscard]] constexpr Simd256 operator|(Simd256 other) const noexcept;
+
+        /// @brief Perform bitwise OR between this register and @p other.
+        [[nodiscard]] constexpr Simd256 operator^(Simd256 other) const noexcept;
+
+        /// @brief Perform a bitwise `and_not` combination between this register and @p other.
+        /// @note  Faster than manually doing (~RegA & RegB) since this executes only a single SIMD instruction.
+        [[nodiscard]] constexpr Simd256 andNot(Simd256 other) const noexcept;
+
+        /// @brief Perform an OR operation on the entire vector, horizontally.
+        [[nodiscard]] constexpr DataType horizontalOr() const noexcept;
+
+
+        /// @brief Perform an AND operation on the entire vector, horizontally.
+        [[nodiscard]] constexpr DataType horizontalAnd() const noexcept;
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         ///   ARITHMETIC OPERATIONS
