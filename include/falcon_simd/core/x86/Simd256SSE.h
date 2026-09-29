@@ -792,6 +792,9 @@ namespace falcon
 
         template <typename T, size_t L>
         friend constexpr __REG_256_SSE<T, L> min(__REG_256_SSE<T, L> a, __REG_256_SSE<T, L> b) noexcept;
+
+        template <typename T, size_t L>
+        friend constexpr __REG_256_SSE<T, L> max(__REG_256_SSE<T, L> a, __REG_256_SSE<T, L> b) noexcept;
     };
 
 

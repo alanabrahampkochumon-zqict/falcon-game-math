@@ -32,23 +32,23 @@ namespace falcon
     [[nodiscard]] constexpr _REG_256_SSE<DataType, Lane> min(_REG_256_SSE<DataType, Lane> a,
                                                              _REG_256_SSE<DataType, Lane> b) noexcept;
 
-    //
-    // /**
-    //  * @brief Get the maximum values from both the registers, packed into a single register.
-    //  *
-    //  * @tparam DataType The data type of the Simd256 register.
-    //  * @tparam Lane     The number of lanes of the Simd256 register.
-    //  *
-    //  * @param a The first register.
-    //  * @param b The second register.
-    //  *
-    //  * @return A Simd256 register with maximum values taken from both the registers.
-    //  */
-    // template <typename DataType, size_t Lane>
-    // [[nodiscard]] constexpr _REG_256_SSE<DataType, Lane> max(_REG_256_SSE<DataType, Lane> a,
-    //                                                          _REG_256_SSE<DataType, Lane> b) noexcept;
-    //
-    //
+
+    /**
+     * @brief Get the maximum values from both the registers, packed into a single register.
+     *
+     * @tparam DataType The data type of the Simd256 register.
+     * @tparam Lane     The number of lanes of the Simd256 register.
+     *
+     * @param a The first register.
+     * @param b The second register.
+     *
+     * @return A Simd256 register with maximum values taken from both the registers.
+     */
+    template <typename DataType, size_t Lane>
+    [[nodiscard]] constexpr _REG_256_SSE<DataType, Lane> max(_REG_256_SSE<DataType, Lane> a,
+                                                             _REG_256_SSE<DataType, Lane> b) noexcept;
+
+
     // /**
     //  * @brief Compute the absolute value of each entry in the register.
     //  *
