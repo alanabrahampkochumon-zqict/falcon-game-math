@@ -25,6 +25,16 @@
 
 namespace falcon
 {
+
+    template <typename DataType>
+    struct Emulated256<SimdBackend::ARCH_SSE2, DataType>
+    {
+        using EmulatedRegType = simd::internal::SSERegister_t<DataType>;
+        EmulatedRegType lower;
+        EmulatedRegType upper;
+    };
+
+
     /**
      * @brief 256-bit Simd Register specialized for SSE2/4.1 architecture.
      *
@@ -118,7 +128,8 @@ namespace falcon
          * @return A reference to this register.
          */
         template <typename... Args>
-            requires(sizeof...(Args) <= Lane) && (std::same_as<Args, DataType> && ...)
+            requires(sizeof...(Args) <= Lane) && (std::same_as<Args, DataType> && ...) &&
+            (SimdSafeConvertible<Args, DataType> && ...)
         constexpr Simd256& set(Args... args);
 
 
@@ -710,18 +721,19 @@ namespace falcon
         //      */
         //     template <uint8_t... ShuffleIndex>
         //     [[nodiscard]] constexpr Simd256 shuffle() const noexcept;
-        //
-        //
-        //     /// @brief Get the internal register used by Simd256.
-        //     [[nodiscard]] FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept
-        //     { return _register; }
-        //
-        //
-        //     /// @brief Get the internal register used by Simd256.
-        //     [[nodiscard]] FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> operator*() const noexcept
-        //     { return _register; }
-        //
-        //
+
+
+
+        /// @brief Get the internal register used by Simd256.
+        [[nodiscard]] FALCON_INLINE constexpr Emulated256<SimdBackend::ARCH_SSE2, DataType> naive() const noexcept
+        { return { .lower = _lower.naive(), .upper = _upper.naive() }; }
+
+
+        /// @brief Get the internal register used by Simd256.
+        [[nodiscard]] FALCON_INLINE constexpr Emulated256<SimdBackend::ARCH_SSE2, DataType> operator*() const noexcept
+        { return { .lower = *_lower, .upper = *_upper }; }
+
+
         //
         //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         //     ///       UTILITIES

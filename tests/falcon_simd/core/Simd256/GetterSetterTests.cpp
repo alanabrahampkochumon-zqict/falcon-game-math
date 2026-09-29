@@ -214,102 +214,126 @@ TYPED_TEST(Simd256GetterSetterTests, SetAt_SetsTheValueAtAppropriateIndex)
     }
 }
 
-//
-// TEST(Simd256GetterSetterTests, Integrals_Naive_ReturnsDefaultRegister)
-// {
-//     falcon::Simd256_t<int32_t, 8> reg{ 1, 2, 3, 4, 5, 6, 7, 8 };
-//
-//     const auto naiveReg = reg.naive();
-//
-//     alignas(16) std::array<int, 4> data{};
-//     _mm_store_si128(reinterpret_cast<__m128i*>(data.data()), naiveReg);
-//
-//     EXPECT_ANY_EQ(1, data[0]);
-//     EXPECT_ANY_EQ(2, data[1]);
-//     EXPECT_ANY_EQ(3, data[2]);
-//     EXPECT_ANY_EQ(4, data[3]);
-//     EXPECT_ANY_EQ(4, data[3]);
-//     EXPECT_ANY_EQ(4, data[3]);
-// }
-//
-//
-// TEST(Simd256GetterSetterTests, Float_Naive_ReturnsDefaultRegister)
-// {
-//     falcon::Simd256_t<float, 4> reg{ 1, 2, 3, 4 };
-//
-//     const auto naiveReg = reg.naive();
-//
-//     alignas(16) std::array<float, 4> data{};
-//     _mm_store_ps(data.data(), naiveReg);
-//
-//     EXPECT_ANY_EQ(1.0f, data[0]);
-//     EXPECT_ANY_EQ(2.0f, data[1]);
-//     EXPECT_ANY_EQ(3.0f, data[2]);
-//     EXPECT_ANY_EQ(4.0f, data[3]);
-// }
-//
-//
-// TEST(Simd256GetterSetterTests, Double_Naive_ReturnsDefaultRegister)
-// {
-//     falcon::Simd256_t<double, 4> reg{ 1, 2, 3, 4 };
-//
-//     const auto naiveReg = reg.naive();
-//
-//     alignas(16) std::array<double, 2> data{};
-//     _mm_store_pd(data.data(), naiveReg);
-//
-//     EXPECT_ANY_EQ(1.0, data[0]);
-//     EXPECT_ANY_EQ(2.0, data[1]);
-// }
-//
-//
-// /// @test Verify that *reg returns the default internal register for integrals.
-// TEST(Simd256GetterSetterTests, UnaryTimesOperator_IntegralRegister_ReturnsDefaultRegister)
-// {
-//     falcon::Simd256_t<int32_t, 4> reg{ 1, 2, 3, 4 };
-//
-//     const auto naiveReg = *reg;
-//
-//     alignas(16) std::array<int, 4> data{};
-//     _mm_store_si128(reinterpret_cast<__m128i*>(data.data()), naiveReg);
-//
-//     EXPECT_ANY_EQ(1, data[0]);
-//     EXPECT_ANY_EQ(2, data[1]);
-//     EXPECT_ANY_EQ(3, data[2]);
-//     EXPECT_ANY_EQ(4, data[3]);
-// }
-//
-//
-// /// @test Verify that *reg returns the default internal register for floats.
-// TEST(Simd256GetterSetterTests, UnaryTimesOperator_FloatRegister_ReturnsDefaultRegister)
-// {
-//     falcon::Simd256_t<float, 4> reg{ 1, 2, 3, 4 };
-//
-//     const auto naiveReg = *reg;
-//
-//     alignas(16) std::array<float, 4> data{};
-//     _mm_store_ps(data.data(), naiveReg);
-//
-//     EXPECT_ANY_EQ(1.0f, data[0]);
-//     EXPECT_ANY_EQ(2.0f, data[1]);
-//     EXPECT_ANY_EQ(3.0f, data[2]);
-//     EXPECT_ANY_EQ(4.0f, data[3]);
-// }
-//
-// /// @test Verify that *reg returns the default internal register for doubles.
-// TEST(Simd256GetterSetterTests, UnaryTimesOperator_DoubleRegister_ReturnsDefaultRegister)
-// {
-//     falcon::Simd256_t<double, 2> reg{ 1, 2 };
-//
-//     const auto naiveReg = *reg;
-//
-//     alignas(16) std::array<double, 2> data{};
-//     _mm_store_pd(data.data(), naiveReg);
-//
-//     EXPECT_ANY_EQ(1.0, data[0]);
-//     EXPECT_ANY_EQ(2.0, data[1]);
-// }
 
+TEST(Simd256GetterSetterTests, Integrals_Naive_ReturnsDefaultRegister)
+{
+    falcon::Simd256_t<int32_t, 8> reg{ 1, 2, 3, 4, 5, 6, 7, 8 };
+
+    const auto naiveReg = reg.naive();
+
+    alignas(16) std::array<int, 4> dataLower{}, dataUpper{};
+    _mm_store_si128(reinterpret_cast<__m128i*>(dataLower.data()), naiveReg.lower);
+    _mm_store_si128(reinterpret_cast<__m128i*>(dataUpper.data()), naiveReg.upper);
+
+    EXPECT_ANY_EQ(1, dataLower[0]);
+    EXPECT_ANY_EQ(2, dataLower[1]);
+    EXPECT_ANY_EQ(3, dataLower[2]);
+    EXPECT_ANY_EQ(4, dataLower[3]);
+    EXPECT_ANY_EQ(5, dataUpper[0]);
+    EXPECT_ANY_EQ(6, dataUpper[1]);
+    EXPECT_ANY_EQ(7, dataUpper[2]);
+    EXPECT_ANY_EQ(8, dataUpper[3]);
+}
+
+
+TEST(Simd256GetterSetterTests, Float_Naive_ReturnsDefaultRegister)
+{
+    falcon::Simd256_t<float, 8> reg{ 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f };
+
+    const auto naiveReg = reg.naive();
+
+    alignas(16) std::array<float, 4> dataLower{}, dataUpper{};
+    _mm_store_ps(dataLower.data(), naiveReg.lower);
+    _mm_store_ps(dataUpper.data(), naiveReg.upper);
+
+    EXPECT_ANY_EQ(1.0f, dataLower[0]);
+    EXPECT_ANY_EQ(2.0f, dataLower[1]);
+    EXPECT_ANY_EQ(3.0f, dataLower[2]);
+    EXPECT_ANY_EQ(4.0f, dataLower[3]);
+    EXPECT_ANY_EQ(5.0f, dataUpper[0]);
+    EXPECT_ANY_EQ(6.0f, dataUpper[1]);
+    EXPECT_ANY_EQ(7.0f, dataUpper[2]);
+    EXPECT_ANY_EQ(8.0f, dataUpper[3]);
+}
+
+
+TEST(Simd256GetterSetterTests, Double_Naive_ReturnsDefaultRegister)
+{
+    falcon::Simd256_t<double, 4> reg{ 1.0, 2.0, 3.0, 4.0 };
+
+    const auto naiveReg = reg.naive();
+
+    alignas(16) std::array<double, 2> dataLower{}, dataUpper{};
+    _mm_store_pd(dataLower.data(), naiveReg.lower);
+    _mm_store_pd(dataUpper.data(), naiveReg.upper);
+
+    EXPECT_ANY_EQ(1.0, dataLower[0]);
+    EXPECT_ANY_EQ(2.0, dataLower[1]);
+    EXPECT_ANY_EQ(3.0, dataUpper[0]);
+    EXPECT_ANY_EQ(4.0, dataUpper[1]);
+}
+
+
+/// @test Verify that *reg returns the default internal register for integrals.
+TEST(Simd256GetterSetterTests, UnaryTimesOperator_IntegralRegister_ReturnsDefaultRegister)
+{
+    falcon::Simd256_t<int32_t, 8> reg{ 1, 2, 3, 4, 5, 6, 7, 8 };
+
+    const auto naiveReg = *reg;
+
+    alignas(16) std::array<int, 4> dataLower{}, dataUpper{};
+    _mm_store_si128(reinterpret_cast<__m128i*>(dataLower.data()), naiveReg.lower);
+    _mm_store_si128(reinterpret_cast<__m128i*>(dataUpper.data()), naiveReg.upper);
+
+    EXPECT_ANY_EQ(1, dataLower[0]);
+    EXPECT_ANY_EQ(2, dataLower[1]);
+    EXPECT_ANY_EQ(3, dataLower[2]);
+    EXPECT_ANY_EQ(4, dataLower[3]);
+    EXPECT_ANY_EQ(5, dataUpper[0]);
+    EXPECT_ANY_EQ(6, dataUpper[1]);
+    EXPECT_ANY_EQ(7, dataUpper[2]);
+    EXPECT_ANY_EQ(8, dataUpper[3]);
+}
+
+
+/// @test Verify that *reg returns the default internal register for floats.
+TEST(Simd256GetterSetterTests, UnaryTimesOperator_FloatRegister_ReturnsDefaultRegister)
+{
+    falcon::Simd256_t<float, 8> reg{ 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f };
+
+    const auto naiveReg = *reg;
+
+    alignas(16) std::array<float, 4> dataLower{}, dataUpper{};
+    _mm_store_ps(dataLower.data(), naiveReg.lower);
+    _mm_store_ps(dataUpper.data(), naiveReg.upper);
+
+    EXPECT_ANY_EQ(1.0f, dataLower[0]);
+    EXPECT_ANY_EQ(2.0f, dataLower[1]);
+    EXPECT_ANY_EQ(3.0f, dataLower[2]);
+    EXPECT_ANY_EQ(4.0f, dataLower[3]);
+    EXPECT_ANY_EQ(5.0f, dataUpper[0]);
+    EXPECT_ANY_EQ(6.0f, dataUpper[1]);
+    EXPECT_ANY_EQ(7.0f, dataUpper[2]);
+    EXPECT_ANY_EQ(8.0f, dataUpper[3]);
+}
+
+
+/// @test Verify that *reg returns the default internal register for doubles.
+TEST(Simd256GetterSetterTests, UnaryTimesOperator_DoubleRegister_ReturnsDefaultRegister)
+{
+    falcon::Simd256_t<double, 4> reg{ 1.0, 2.0, 3.0, 4.0 };
+
+    const auto naiveReg = *reg;
+
+    alignas(16) std::array<double, 2> dataLower{}, dataUpper{};
+    _mm_store_pd(dataLower.data(), naiveReg.lower);
+    _mm_store_pd(dataUpper.data(), naiveReg.upper);
+
+    EXPECT_ANY_EQ(1.0, dataLower[0]);
+    EXPECT_ANY_EQ(2.0, dataLower[1]);
+    EXPECT_ANY_EQ(3.0, dataUpper[0]);
+    EXPECT_ANY_EQ(4.0, dataUpper[1]);
+}
 
 
 using namespace simd::testing;

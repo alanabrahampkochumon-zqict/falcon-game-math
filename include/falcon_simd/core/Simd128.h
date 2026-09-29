@@ -38,6 +38,11 @@ namespace falcon
     template <SimdBackend, typename, size_t>
     struct Simd256;
 
+    /// Primary Template for Simd256 Emulated Intrinsic Holder
+    /// Each specialization will have a lower and upper 128-bit register.
+    template <SimdBackend Backend, typename DataType>
+    struct Emulated256;
+
     // static_assert(IsSIMDLoadable<Simd128_t<float>, float> == true);
 } // namespace falcon
 

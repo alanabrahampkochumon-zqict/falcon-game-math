@@ -1,5 +1,4 @@
 #pragma once
-#include "Simd256SSE.h"
 /**
  * @file Simd256SSE.inl
  * @author Alan Abraham P Kochumon
@@ -9,7 +8,6 @@
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
-
 
 
 namespace falcon
@@ -59,7 +57,8 @@ namespace falcon
 
     template <typename DataType, size_t Lane>
     template <typename... Args>
-        requires(sizeof...(Args) <= Lane) && (std::same_as<Args, DataType> && ...)
+        requires(sizeof...(Args) <= Lane) && (std::same_as<Args, DataType> && ...) &&
+        (SimdSafeConvertible<Args, DataType> && ...)
     FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>& Simd256<SimdBackend::ARCH_SSE2, DataType,
                                                                                      Lane>::set(Args... args)
     {
