@@ -1,4 +1,5 @@
 #pragma once
+#include "Simd128SSE.h"
 /**
  * @file Simd128SSE.inl
  * @author Alan Abraham P Kochumon
@@ -2603,9 +2604,51 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
+    template <uint32_t Mask>
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::blend(Simd128 other) const noexcept
+    {
+        if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX2 && std::is_integral_v<DataType> &&
+                      sizeof(DataType) == 4)
+        {
+            return Simd128(_mm_blend_epi32(_register, other._register, Mask));
+        }
+        else if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                return Simd128(_mm_blend_pd(_register, other._register, Mask));
+            }
+            if constexpr (types::IsFP32<DataType>)
+            {
+                return Simd128(_mm_blend_ps(_register, other._register, Mask));
+            }
+            if constexpr (sizeof(DataType) == 8)
+            {
+                const auto dblReg1 = _mm_castsi128_pd(_register);
+                const auto dblReg2 = _mm_castsi128_pd(*other);
+                return Simd128(_mm_castpd_si128(_mm_blend_pd(dblReg1, dblReg2, Mask)));
+            }
+            if constexpr (sizeof(DataType) == 4)
+            {
+                const auto fltReg1 = _mm_castsi128_ps(_register);
+                const auto fltReg2 = _mm_castsi128_ps(*other);
+                return Simd128(_mm_castps_si128(_mm_blend_ps(fltReg1, fltReg2, Mask)));
+            }
+            if constexpr (sizeof(DataType) == 2)
+            {
+                return Simd128(_mm_blend_epi16(_register, other._register, Mask));
+            }
+        }
+        // TODO:
+        return *this;
+    }
+
+
+    template <typename DataType, size_t Lane>
     template <uint8_t... ShuffleIdx>
-    constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>::shuffle()
-        const noexcept
+    FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<SimdBackend::ARCH_SSE2, DataType,
+                                                                                    Lane>::shuffle() const noexcept
     {
         // NOTE: Shuffle mask must be evaluated as a separate const-expression since GCC
         //       is very strict about the immediate value being constexpr, which is guaranteed for constexpr lvalues.

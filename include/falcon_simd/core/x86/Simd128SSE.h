@@ -704,6 +704,28 @@ namespace falcon
          */
         [[nodiscard]] constexpr Simd128 blend(Simd128 other, Simd128 mask) const noexcept;
 
+
+        /**
+         * @brief Selectively blend values from this register and @p other using the compile-time @p Mask.
+         * @tparam Mask The mask to use for blending.
+         * @note   Even though the mask is uint32_t, only lower 8-bit will be considered
+         *
+         * @code
+         * // Masking sample
+         * this  -> 0x ff 23 15 81
+         * other -> 0x 32 3f ed 55
+         * mask  -> 0x ff 00 ff 00
+         * ret   -> 0x 32 23 ed 81
+         * @endcode
+         *
+         * @param other The register whose values are selected when mask is 0b11..11 or 0xf..f.
+         *
+         * @return Return a new register with blended values.
+         */
+        template<uint32_t Mask>
+        [[nodiscard]] constexpr Simd128 blend(Simd128 other) const noexcept;
+
+
         /**
          * Shuffle the values as per given index.
          *
