@@ -474,6 +474,16 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::horizontalMin() const noexcept
+    { return std::min(_lower.horizontalMin(), _upper.horizontalMin()); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::horizontalMax() const noexcept
+    { return std::max(_lower.horizontalMax(), _upper.horizontalMax()); }
+
+
+    template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<SimdBackend::ARCH_SSE2, DataType,
                                                                                     Lane>::abs() const noexcept
     { return Simd256(_lower.abs(), _upper.abs()); }
@@ -495,8 +505,6 @@ namespace falcon
     FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<SimdBackend::ARCH_SSE2, DataType,
                                                                                     Lane>::hasInf() const noexcept
     { return Simd256(_lower.hasInf(), _upper.hasInf()); }
-
-
 
 
 } // namespace falcon

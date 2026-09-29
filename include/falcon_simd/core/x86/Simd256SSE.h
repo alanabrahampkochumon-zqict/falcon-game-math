@@ -720,19 +720,19 @@ namespace falcon
         { return { .lower = *_lower, .upper = *_upper }; }
 
 
-        //
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //     ///       UTILITIES
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //
-        //
-        //     /// @brief Get the minimum value from this register.
-        //     [[nodiscard]] constexpr DataType horizontalMin() const noexcept;
-        //
-        //
-        //     /// @brief Get the maximum value from this register.
-        //     [[nodiscard]] constexpr DataType horizontalMax() const noexcept;
-        //
+
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+        ///       UTILITIES
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+
+        /// @brief Get the minimum value from this register.
+        [[nodiscard]] constexpr DataType horizontalMin() const noexcept;
+
+
+        /// @brief Get the maximum value from this register.
+        [[nodiscard]] constexpr DataType horizontalMax() const noexcept;
+
         /**
          * @brief Compute the absolute value of each entry in this register.
          * @note For unsigned types the value will not be affected.
