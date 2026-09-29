@@ -34,7 +34,7 @@ namespace falcon
     { return reg.abs(); }
 
 
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr _REG_256_SSE<DataType, Lane> sqrt(_REG_256_SSE<DataType, Lane> reg) noexcept
-    // { return reg.sqrt(); }
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr _REG_256_SSE<DataType, Lane> sqrt(_REG_256_SSE<DataType, Lane> reg) noexcept
+    { return reg.sqrt(); }
 } // namespace falcon
