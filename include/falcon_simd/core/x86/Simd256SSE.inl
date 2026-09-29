@@ -1,5 +1,4 @@
 #pragma once
-#include "Simd256SSE.h"
 /**
  * @file Simd256SSE.inl
  * @author Alan Abraham P Kochumon
@@ -88,16 +87,6 @@ namespace falcon
         fillLower(std::make_index_sequence<LOWER_LANE_COUNT>{});
 
         return *this;
-    }
-
-
-    template <typename DataType, size_t Lane>
-    template <typename DataType2>
-    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>::Simd256(
-        const Simd256<SimdBackend::ARCH_SSE2, DataType2, Lane>& other)
-    {
-        _lower = static_cast<Simd128<SimdBackend::ARCH_SSE2, DataType, LOWER_LANE_COUNT>>(other._lower);
-        _upper = static_cast<Simd128<SimdBackend::ARCH_SSE2, DataType, UPPER_LANE_COUNT>>(other._upper);
     }
 
 

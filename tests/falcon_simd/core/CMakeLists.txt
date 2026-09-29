@@ -13,7 +13,6 @@ add_executable(FalconSIMDMemoryTests
 
         Simd256/ArithmeticTests.cpp
         Simd256/ComparisonTests.cpp
-        # Simd256/ConversionCtorTests.cpp
         Simd256/GetterSetterTests.cpp
         Simd256/LoadStoreTests.cpp
         Simd256/BitwiseOperationTests.cpp
@@ -21,7 +20,7 @@ add_executable(FalconSIMDMemoryTests
         # Simd256/ShuffleTests.cpp
         Simd256/ConstructorTests.cpp
         Simd256/UtilTests.cpp
-        # Simd256/BasicMathOperationTests.cpp
+        Simd256/BasicMathOperationTests.cpp
 )
 
 target_compile_options(FalconSIMDMemoryTests PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>)

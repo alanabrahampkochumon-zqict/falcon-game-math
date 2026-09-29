@@ -139,20 +139,6 @@ namespace falcon
 
 
         /**
-         * @brief Convert a register from one data type to another.
-         *
-         * @note The number of lanes must match.
-         * @note Converting between data types of unmatched size, like from `uint8_t` to `double` and performing
-         *       operations on them may yield undesired outcome due to the pure intrinsic casts used.
-         *
-         * @tparam DataType2 The data type of the incoming register.
-         * @param other      The register to conform to the current register type.
-         */
-        template <typename DataType2>
-        explicit constexpr Simd256(const Simd256<SimdBackend::ARCH_SSE2, DataType2, Lane>& other);
-
-
-        /**
          * @brief Load data from memory into the SIMD register.
          *
          * @note Data must be aligned to 16 bit boundary.
