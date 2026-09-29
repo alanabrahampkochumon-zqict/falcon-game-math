@@ -176,7 +176,7 @@ SIMD128_HAS_NAN_TESTS_FP(FP64_2Lanes_AlternatingNaN, FP64, 2, DATA_FP64_2LANES_M
 
 
 
-/// @test Verify that hasNan returns the correct simd mask for floating point types with various data patterns.
+/// @test Verify that hasInf returns the correct simd mask for floating point types with various data patterns.
     #define SIMD128_HAS_INF_TESTS_FP(TestName, Type, Lane, Data, Expected)                                             \
         TEST(HasInfTests, ReturnsValidMaskGiven_##TestName)                                                            \
         {                                                                                                              \
