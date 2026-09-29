@@ -47,7 +47,6 @@ namespace
             else
             {
                 absData     = { max, min, max, min, -5, 11, -15, 0, -1, 2, -5, 12, -14, 3, -15, 12 };
-                absExpected = { max, min, max, min, -5, 11, -15, 0, -1, 2, -5, 12, -14, 3, -15, 12 };
             }
         }
     };
@@ -103,6 +102,40 @@ TYPED_TEST(Simd128BasicMathTests, Max_ReturnsARegisterWithMaximumValuesFromEithe
     regB.loadAligned(rhs.data());
 
     auto regRes = falcon::max(regA, regB);
+
+    regRes.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
+    }
+}
+
+
+TYPED_TEST(Simd128BasicMathTests, MemberAbsFunction_ReturnsARegisterWithAbsoluteValues)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        data[i] = this->absData[i];
+
+        if constexpr (std::is_unsigned_v<Type>)
+        {
+            expected[i] = data[i];
+        }
+        else
+        {
+            expected[i] = data[i] < 0 ? data[i] * -1 : data[i];
+        }
+    }
+
+    falcon::Simd128_t<Type, Lane> reg;
+    reg.loadAligned(data.data());
+
+    auto regRes = reg.abs();
 
     regRes.storeAligned(result.data());
 
