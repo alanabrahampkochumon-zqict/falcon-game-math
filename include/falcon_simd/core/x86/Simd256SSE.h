@@ -780,6 +780,18 @@ namespace falcon
                                    Simd128<SimdBackend::ARCH_SSE2, DataType, UPPER_LANE_COUNT> upper)
             : _upper(upper), _lower(lower)
         {}
+
+
+
+        /**************************************
+         *         FRIEND FUNCTION            *
+         **************************************/
+
+        template <typename T, size_t L>
+        using __REG_256_SSE = Simd256<SimdBackend::ARCH_SSE2, T, L>;
+
+        template <typename T, size_t L>
+        friend constexpr __REG_256_SSE<T, L> min(__REG_256_SSE<T, L> a, __REG_256_SSE<T, L> b) noexcept;
     };
 
 
@@ -787,6 +799,6 @@ namespace falcon
 
 
 // --- THIS SHOULD BE INCLUDED FIRST as the .inl files use functions declared in this header.
-// #include "Simd256X86Math.h"
+#include "Simd256X86Math.h"
 // ------
 #include "Simd256SSE.inl"
