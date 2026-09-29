@@ -1,4 +1,5 @@
 #pragma once
+#include "Simd256SSE.h"
 /**
  * @file Simd256SSE.inl
  * @author Alan Abraham P Kochumon
@@ -470,6 +471,12 @@ namespace falcon
     FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
         SimdBackend::ARCH_SSE2, DataType, Lane>::shiftRightLogical() const noexcept
     { return Simd256(_lower.template shiftRightLogical<Count>(), _upper.template shiftRightLogical<Count>()); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<SimdBackend::ARCH_SSE2, DataType,
+                                                                                    Lane>::abs() const noexcept
+    { return Simd256(_lower.abs(), _upper.abs()); }
 
 
     template <typename DataType, size_t Lane>

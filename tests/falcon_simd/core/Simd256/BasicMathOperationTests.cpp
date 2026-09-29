@@ -50,8 +50,6 @@ namespace
             {
                 absData     = { max, min, max, min, -5, 11, -15, 0, -1, 2, -5, 12, -14, 3, -15, 12,
                                 max, min, max, min, -5, 11, -15, 0, -1, 2, -5, 12, -14, 3, -15, 12 };
-                absExpected = { max, min, max, min, 5, 11, 15, 0, 1, 2, 5, 12, 14, 3, 15, 12,
-                                max, min, max, min, 5, 11, 15, 0, 1, 2, 5, 12, 14, 3, 15, 12 };
             }
         }
     };
@@ -117,42 +115,76 @@ TYPED_TEST(Simd256BasicMathTests, Max_ReturnsARegisterWithMaximumValuesFromEithe
 }
 
 
-// /// @test Verify that abs return the absolute value of data types from the register.
-// /// @note For unsigned types, it just return a copy of the same register.
-// TYPED_TEST(Simd256BasicMathTests, Abs_ReturnsARegisterWithAbsoluteValues)
-// {
-//     using Type            = TypeParam::Type;
-//     constexpr size_t Lane = TypeParam::VALUE;
-//
-//     alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
-//     for (size_t i = 0; i < Lane; ++i)
-//     {
-//         data[i] = this->absData[i];
-//
-//         if constexpr (std::is_unsigned_v<Type>)
-//         {
-//             expected[i] = data[i];
-//         }
-//         else
-//         {
-//             expected[i] = data[i] < 0 ? data[i] * -1 : data[i];
-//         }
-//     }
-//
-//     falcon::Simd256_t<Type, Lane> reg;
-//     reg.loadAligned(data.data());
-//
-//     auto regRes = falcon::abs(reg);
-//
-//     regRes.storeAligned(result.data());
-//
-//     for (size_t i = 0; i < Lane; ++i)
-//     {
-//         EXPECT_ANY_EQ(expected[i], result[i]);
-//     }
-// }
-//
-//
+TYPED_TEST(Simd256BasicMathTests, MemberAbsFunction_ReturnsARegisterWithAbsoluteValues)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        data[i] = this->absData[i];
+
+        if constexpr (std::is_unsigned_v<Type>)
+        {
+            expected[i] = data[i];
+        }
+        else
+        {
+            expected[i] = data[i] < 0 ? data[i] * -1 : data[i];
+        }
+    }
+
+    falcon::Simd256_t<Type, Lane> reg;
+    reg.loadAligned(data.data());
+
+    auto regRes = reg.abs();
+
+    regRes.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
+    }
+}
+
+
+/// @test Verify that abs return the absolute value of data types from the register.
+/// @note For unsigned types, it just return a copy of the same register.
+TYPED_TEST(Simd256BasicMathTests, Abs_ReturnsARegisterWithAbsoluteValues)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        data[i] = this->absData[i];
+
+        if constexpr (std::is_unsigned_v<Type>)
+        {
+            expected[i] = data[i];
+        }
+        else
+        {
+            expected[i] = data[i] < 0 ? data[i] * -1 : data[i];
+        }
+    }
+
+    falcon::Simd256_t<Type, Lane> reg;
+    reg.loadAligned(data.data());
+
+    auto regRes = falcon::abs(reg);
+
+    regRes.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
+    }
+}
+
+
 // TYPED_TEST(Simd256BasicMathTests, MemberSqrtFunction_ReturnsARegisterWithSquareRootValues)
 // {
 //     using Type            = TypeParam::Type;

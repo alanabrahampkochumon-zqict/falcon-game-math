@@ -733,15 +733,15 @@ namespace falcon
         //     /// @brief Get the maximum value from this register.
         //     [[nodiscard]] constexpr DataType horizontalMax() const noexcept;
         //
-        //     /**
-        //      * @brief Compute the absolute value of each entry in this register.
-        //      * @note For unsigned types the value will not be affected.
-        //      *
-        //      * @return A Simd256 register with absolute values.
-        //      */
-        //     [[nodiscard]] constexpr Simd256 abs() const noexcept;
-        //
-        //
+        /**
+         * @brief Compute the absolute value of each entry in this register.
+         * @note For unsigned types the value will not be affected.
+         *
+         * @return A Simd256 register with absolute values.
+         */
+        [[nodiscard]] constexpr Simd256 abs() const noexcept;
+
+
         //     /**
         //      * @brief Compute the square root value of each entry in this register.
         //      *
