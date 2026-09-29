@@ -12,16 +12,17 @@
 
 #include <algorithm>
 #include <bit>
+#include <type_traits>
 #include <cstddef>
 
 namespace falcon::simd
 {
     struct PackingParams
     {
-        std::size_t alignedByteSize;
-        std::size_t padding;
-        std::size_t packedRegisterWidth;
-        std::size_t registerCount;
+        size_t alignedByteSize;
+        size_t padding;
+        size_t packedRegisterWidth;
+        size_t registerCount;
     };
 
     /**
@@ -35,17 +36,42 @@ namespace falcon::simd
      * @return The aligned byte size, additional required padding, target register width,
      *         and number of registers required to pack the given bytes.
      */
-    constexpr PackingParams calculatePackedSize(const std::size_t totalByteSize, const std::size_t maxAlignAs)
+    constexpr PackingParams calculatePackedSize(const size_t totalByteSize, const size_t maxAlignAs)
     {
         if (totalByteSize < 16)
         {
             return PackingParams{ 16, 16 - totalByteSize, 16, 1 };
         }
 
-        const std::size_t packedSize           = std::bit_ceil(totalByteSize);
-        const std::size_t optimalRegisterWidth = std::min(packedSize, maxAlignAs);
-        const std::size_t numRegisters         = packedSize / optimalRegisterWidth;
+        const size_t packedSize           = std::bit_ceil(totalByteSize);
+        const size_t optimalRegisterWidth = std::min(packedSize, maxAlignAs);
+        const size_t numRegisters         = packedSize / optimalRegisterWidth;
 
         return PackingParams{ packedSize, packedSize - totalByteSize, optimalRegisterWidth, numRegisters };
     }
+
+
+    // TODO: Add tests
+    template <typename T>
+    constexpr T getAllOnes()
+    {
+        if constexpr (std::is_integral_v<T>)
+        {
+            return static_cast<T>(-1);
+        }
+        else if constexpr (sizeof(T) == 4)
+        {
+            return std::bit_cast<T>(0xFFFFFFFF);
+        }
+        else if constexpr (sizeof(T) == 8)
+        {
+            return std::bit_cast<T>(0xFFFFFFFFFFFFFFFF);
+        }
+        else
+        {
+            return 1; // Shouldn't hit this path.
+        }
+    }
+
+
 } // namespace falcon::simd
