@@ -772,11 +772,11 @@ namespace falcon
         [[nodiscard]] constexpr Simd256 hasNan() const noexcept;
 
 
-        //     /// @brief Get a mask with the Inf status of each Lane of elements.
-        //     /// @note Integrals always return a zero register.
-        //     [[nodiscard]] constexpr Simd256 hasInf() const noexcept;
-        //
-        //
+        /// @brief Get a mask with the Inf status of each Lane of elements.
+        /// @note Integrals always return a zero register.
+        [[nodiscard]] constexpr Simd256 hasInf() const noexcept;
+
+
     private:
         static constexpr auto MAX_128_LANE_COUNT = 128 / (sizeof(DataType) * 8);
         static_assert(Lane > MAX_128_LANE_COUNT, "Payload fits in 128-bits. Use Simd128 to directly prevent emulation");

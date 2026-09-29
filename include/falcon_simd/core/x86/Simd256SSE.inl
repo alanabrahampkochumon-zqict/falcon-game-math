@@ -489,6 +489,12 @@ namespace falcon
     { return Simd256(_lower.hasNan(), _upper.hasNan()); }
 
 
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<SimdBackend::ARCH_SSE2, DataType,
+                                                                                    Lane>::hasInf() const noexcept
+    { return Simd256(_lower.hasInf(), _upper.hasInf()); }
+
+
 
 
 } // namespace falcon
