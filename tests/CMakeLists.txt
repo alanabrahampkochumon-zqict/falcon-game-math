@@ -56,7 +56,7 @@ endif ()
 #------------------------
 # Falcon SIMD Test Setup
 #------------------------
-
+# TODO: Refactor Test Suite
 add_library(FalconSimdTestSetup INTERFACE
         falcon_core/traits/TypeHelpersTests.cpp
         falcon_core/traits/DummyTest.cpp)

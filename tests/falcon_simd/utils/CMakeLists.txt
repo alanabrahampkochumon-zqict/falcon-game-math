@@ -1,11 +1,11 @@
-add_library(FalconSIMDUtilTests OBJECT
-        TypeTraitsTests.cpp)
+add_executable(FalconSIMDUtilTests
 
-target_sources(
-        FalconSIMDUtilTests PRIVATE
-        SimdUtilsTests.cpp
         TypeTraitsTests.cpp
+        SimdUtilsTests.cpp
 )
+set_target_properties(FalconSIMDUtilTests PROPERTIES CXX_STANDARD 20)
+set_target_properties(FalconSIMDUtilTests PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(FalconSIMDUtilTests PROPERTIES CXX_EXTENSIONS OFF)
 
 target_include_directories(FalconSIMDUtilTests PRIVATE ${FALCON_SIMD_TEST_ROOT_DIR}/include)
 

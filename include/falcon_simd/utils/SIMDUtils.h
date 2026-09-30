@@ -10,10 +10,12 @@
  */
 
 
+#include "TypeTraits.h"
+
 #include <algorithm>
 #include <bit>
-#include <type_traits>
 #include <cstddef>
+#include <type_traits>
 
 namespace falcon::simd
 {
@@ -71,6 +73,62 @@ namespace falcon::simd
         {
             return 1; // Shouldn't hit this path.
         }
+    }
+
+
+
+    /** @brief Create a blend mask for 2 lane register selection.
+     *
+     * @code
+     * // int32_t x 4(lane) mask.
+     * const auto mask = makeBlendMask32<true, false, true, false>();
+     * // 0b11111111000000001111111100000000 or 0xFF00FF00
+     * @endcode
+     *
+     * @return BlendMask with each 16-bits as 0b111..111 if s<n> is true and 0 otherwise.
+     */
+    template <bool... Mask>
+        requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) > 1)
+    constexpr BlendMask32_t makeBlendMask32() noexcept
+    {
+        constexpr bool maskArr[]{ Mask... };
+        constexpr auto paramCount = sizeof...(Mask);
+
+        // Creates the mask with appropriate shifts.
+        // We create a mask by selecting an appropriate mask (0b11..11 if true, 0b0 otherwise)
+        // and shifting by width required per mask for saturating the full 32-bits.
+        // Eg: For a 4 lane register mask, we with the following mask <true, false, true, true>.
+        //     That will expand into:
+        //     0b11111111 << (0 * 8) | 0b00000000 << (1 * 8) | ob11111111 << (2 * 8) << | 0b00000000 << (3 * 8)
+        //     Which will return 0b11111111000000001111111100000000
+        auto getMask = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
+            if constexpr (paramCount == 32)
+            {
+                // True Mask 0b1
+                return (((maskArr[Indices] ? 0x1 : 0x0) << Indices) | ...);
+            }
+            else if constexpr (paramCount == 16)
+            {
+                // True Mask 0b11
+                return (((maskArr[Indices] ? 0x3 : 0x0) << (Indices * 2)) | ...);
+            }
+            else if constexpr (paramCount == 8)
+            {
+                // True Mask 0b1111
+                return (((maskArr[Indices] ? 0xF : 0x0) << (Indices * 4)) | ...);
+            }
+            else if constexpr (paramCount == 4)
+            {
+                // True Mask 0b11111111
+                return (((maskArr[Indices] ? 0xFF : 0x00) << (Indices * 8)) | ...);
+            }
+            else if constexpr (paramCount == 2)
+            {
+                // True Mask 0b1111111111111111
+                return (((maskArr[Indices] ? 0xFFFF : 0x0000) << (Indices * 16)) | ...);
+            }
+        };
+        return getMask(std::make_index_sequence<paramCount>());
     }
 
 

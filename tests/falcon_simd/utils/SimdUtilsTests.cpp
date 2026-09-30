@@ -25,7 +25,7 @@ namespace
     /** @brief Test fixture for register packed size calculation, parameterized by @ref TestPackingParams */
     class PackedSizeCalculatorTests: public ::testing::TestWithParam<TestPackingParams>
     {};
-}
+} // namespace
 
 
 /**
@@ -86,4 +86,34 @@ INSTANTIATE_TEST_SUITE_P(
         TestPackingParams{ 512, 64, 512, 0, 64, 8 }, TestPackingParams{ 777, 64, 1024, 247, 64, 16 },
         TestPackingParams{ 1024, 64, 1024, 0, 64, 16 }));
 
+
+TEST(ABC, EFG)
+{
+    const auto mask = falcon::simd::makeBlendMask32<true, false>();
+    EXPECT_EQ(mask, 0xFFFFFFFF);
+}
+
+// /// @test Verify that makeBlendMask helper returns a correct mask given all mask combinations.
+// #define TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TestSuffix, ExpectedMask, ...)                      \
+//     TEST(SimdUtilsTests, MakeBlendMask_ReturnsValidMask_For##TestSuffix)                                               \
+//     {                                                                                                                  \
+//         bool maskBools[]{ __VA_ARGS__ };                                                                              \
+//         const auto size = sizeof(maskBools) / sizeof(bool);                                                            \
+//         auto getMask    = [&]<size_t... Indices>(std::index_sequence<Indices...>) {                                    \
+//             return falcon::simd::makeBlendMask32<maskBools[Indices]...>();                                          \
+//         };                                                                                                             \
+//         EXPECT_EQ(ExpectedMask, getMask(std::make_index_sequence<size>()));                                            \
+//     }
+//
+//
+// TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TwoBoolsWithTrue, 0x0, true, true)
+// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(0)
+// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(1)
+// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(2)
+// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(4)
+// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(7)
+// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(8)
+// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(12)
+// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(24)
+// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(31)
 /** @} */

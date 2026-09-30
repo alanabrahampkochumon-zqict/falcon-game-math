@@ -30,4 +30,7 @@ namespace falcon
         requires sizeof(From) <= sizeof(To);
     };
 
+    /// 32-bit integral mask for compile-time register blending.
+    using BlendMask32_t = uint32_t;
+
 } // namespace falcon
