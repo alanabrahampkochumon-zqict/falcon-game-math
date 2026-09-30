@@ -139,5 +139,22 @@ namespace falcon::simd
         return getMask(std::make_index_sequence<paramCount>());
     }
 
+    // TODO: Make it more generalized later(2, 4, 8, 16...) and various types.
+
+    constexpr uint128_t expandFourFold(BlendMask32_t mask)
+    {
+        auto expandByFour = [&]<size_t... Index>(size_t Offset, std::index_sequence<Index...>) -> size_t {
+            constexpr size_t trueMask  = 0b1111ULL;
+            constexpr size_t falseMask = 0b0000ULL;
+#define __FLCN_EXP4_MASKED_EXTRACT (0b1ULL << (Index + Offset))
+            return ((((mask & __FLCN_EXP4_MASKED_EXTRACT) == __FLCN_EXP4_MASKED_EXTRACT ? trueMask : falseMask)
+                     << (Index * 4)) |
+                    ...);
+#undef __FLCN_EXP4_MASKED_EXTRACT
+        };
+        return uint128_t{ .upper = expandByFour(16, std::make_index_sequence<16>{}),
+                          .lower = expandByFour(0, std::make_index_sequence<16>{}) };
+    }
+
 
 } // namespace falcon::simd

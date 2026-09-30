@@ -2604,7 +2604,7 @@ namespace falcon
 
 
     template <typename DataType, size_t Lane>
-    template <uint32_t Mask>
+    template <BlendMask32_t Mask>
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::blend(Simd128 other) const noexcept
     {
@@ -2640,6 +2640,10 @@ namespace falcon
                 return Simd128(_mm_blend_epi16(_register, other._register, Mask));
             }
         }
+
+        auto expandLower = [&]<size_t... Index>(std::index_sequence<Index...>) {
+
+        };
         // TODO:
         return *this;
     }

@@ -160,6 +160,16 @@ TYPED_TEST(GetAllOnesTests, ReturnsValueWithOneInAllBits)
 }
 
 
+// TODO: Add more testcases
+TEST(ExpandFourFoldTests, ExpandsEachBitBy4TimesAndReturnsAValidPair)
+{
+    auto value = falcon::simd::expandFourFold(0x0F0F0F0F);
+    // 0x0000 FFFF 0000 FFFF 0000 FFFF 0000 FFFF
+    EXPECT_EQ(0x0000FFFF0000FFFF, value.lower);
+    EXPECT_EQ(0x0000FFFF0000FFFF, value.upper);
+}
+
+
 
 /// =============================== MAKE_BLEND_MASK_32 ===============================
 

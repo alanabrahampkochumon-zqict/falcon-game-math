@@ -482,7 +482,7 @@ namespace falcon
     {
         static_assert(sizeof...(ShuffleIndex) == Lane && "There must be <Lane> shuffle indices.");
         static_assert(((ShuffleIndex < Lane) && ...) && "Indices must be between 0(inclusive) and <Lane>(exclusive).");
-
+        //
         // constexpr size_t MaxLanes = MAX_128_LANE_COUNT * 2;
         // // Packed indexing is not support until C++26, we need to use this workaround
         // [[maybe_unused]] constexpr std::array<uint8_t, MaxLanes> indices{ { ShuffleIndex... } };

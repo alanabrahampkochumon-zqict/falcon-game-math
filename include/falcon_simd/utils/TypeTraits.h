@@ -33,4 +33,12 @@ namespace falcon
     /// 32-bit integral mask for compile-time register blending.
     using BlendMask32_t = uint32_t;
 
+
+    /// Structure for holding 128-bit integers(Emulated)
+    struct uint128_t
+    {
+        uint64_t upper;
+        uint64_t lower;
+    };
+
 } // namespace falcon
