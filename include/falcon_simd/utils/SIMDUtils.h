@@ -77,7 +77,11 @@ namespace falcon::simd
 
 
 
-    /** @brief Create a blend mask for 2 lane register selection.
+    /**
+     * @brief Create a blend mask for 2 lane register selection.
+     *
+     * @note Mask fills from LSB(Least Significant Bit) to MSB (Most Significant Bit).
+     *       The first bool translates to the lower n-bits.
      *
      * @code
      * // int32_t x 4(lane) mask.
@@ -88,7 +92,7 @@ namespace falcon::simd
      * @return BlendMask with each 16-bits as 0b111..111 if s<n> is true and 0 otherwise.
      */
     template <bool... Mask>
-        requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) > 1)
+        requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) > 0)
     constexpr BlendMask32_t makeBlendMask32() noexcept
     {
         constexpr bool maskArr[]{ Mask... };
@@ -126,6 +130,10 @@ namespace falcon::simd
             {
                 // True Mask 0b1111111111111111
                 return (((maskArr[Indices] ? 0xFFFF : 0x0000) << (Indices * 16)) | ...);
+            }
+            else
+            {
+                return 0;
             }
         };
         return getMask(std::make_index_sequence<paramCount>());

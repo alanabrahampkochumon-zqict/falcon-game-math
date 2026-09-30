@@ -25,6 +25,42 @@ namespace
     /** @brief Test fixture for register packed size calculation, parameterized by @ref TestPackingParams */
     class PackedSizeCalculatorTests: public ::testing::TestWithParam<TestPackingParams>
     {};
+
+
+    /**************************************
+     *          STATIC TESTS              *
+     **************************************/
+    namespace static_tests
+    {
+        using namespace falcon::simd;
+        constexpr bool T = true;
+        constexpr bool F = false;
+
+        /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 2 booleans
+        static_assert(makeBlendMask32<T, F>() == 0x0000FFFF);
+        static_assert(makeBlendMask32<F, T>() == 0xFFFF0000);
+
+        /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 4 booleans
+        static_assert(makeBlendMask32<T, F, T, F>() == 0x00FF00FF);
+        static_assert(makeBlendMask32<F, T, F, T>() == 0xFF00FF00);
+
+        /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 8 booleans
+        static_assert(makeBlendMask32<T, F, T, F, T, F, T, F>() == 0x0F0F0F0F);
+        static_assert(makeBlendMask32<F, T, F, T, F, T, F, T>() == 0xF0F0F0F0);
+
+
+        /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 16 booleans
+        static_assert(makeBlendMask32<T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F>() == 0x33333333);
+        static_assert(makeBlendMask32<F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T>() == 0xCCCCCCCC);
+
+        /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 32 booleans
+        static_assert(makeBlendMask32<T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T,
+                                      F, T, F, T, F>() == 0x55555555);
+        static_assert(makeBlendMask32<F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F,
+                                      T, F, T, F, T>() == 0xAAAAAAAA);
+
+    } // namespace static_tests
+
 } // namespace
 
 
@@ -87,33 +123,58 @@ INSTANTIATE_TEST_SUITE_P(
         TestPackingParams{ 1024, 64, 1024, 0, 64, 16 }));
 
 
-TEST(ABC, EFG)
-{
-    const auto mask = falcon::simd::makeBlendMask32<true, false>();
-    EXPECT_EQ(mask, 0xFFFFFFFF);
-}
+// TEST(ABC, EFG)
+// {
+//     const auto mask = falcon::simd::makeBlendMask32<true, false>();
+//     EXPECT_EQ(mask, 0x0000FFFF);
+// }
 
-// /// @test Verify that makeBlendMask helper returns a correct mask given all mask combinations.
-// #define TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TestSuffix, ExpectedMask, ...)                      \
-//     TEST(SimdUtilsTests, MakeBlendMask_ReturnsValidMask_For##TestSuffix)                                               \
-//     {                                                                                                                  \
-//         bool maskBools[]{ __VA_ARGS__ };                                                                              \
-//         const auto size = sizeof(maskBools) / sizeof(bool);                                                            \
-//         auto getMask    = [&]<size_t... Indices>(std::index_sequence<Indices...>) {                                    \
-//             return falcon::simd::makeBlendMask32<maskBools[Indices]...>();                                          \
-//         };                                                                                                             \
-//         EXPECT_EQ(ExpectedMask, getMask(std::make_index_sequence<size>()));                                            \
-//     }
-//
-//
-// TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TwoBoolsWithTrue, 0x0, true, true)
-// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(0)
-// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(1)
-// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(2)
-// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(4)
-// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(7)
-// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(8)
-// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(12)
-// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(24)
-// TEST_SIMD128_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(31)
+/// @test Verify that makeBlendMask32 returns a correct mask given all mask combinations.
+#define TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TestSuffix, ExpectedMask, ...)                      \
+    TEST(SimdUtilsTests, MakeBlendMask_ReturnsValidMask_For##TestSuffix)                                               \
+    { EXPECT_EQ(ExpectedMask, (falcon::simd::makeBlendMask32<__VA_ARGS__>())); }
+
+// Aliasing to make testing easier.
+constexpr bool T = true;
+constexpr bool F = false;
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TwoBoolsWithAllTrue, 0xFFFFFFFF, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TwoBoolsWithAlternatingTrueFalse, 0x0000FFFF, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TwoBoolsWithAlternatingFalseTrue, 0xFFFF0000, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TwoBoolsWithAllFalse, 0x00000000, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(FourBoolsWithAllTrue, 0xFFFFFFFF, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(FourBoolsWithAlternatingTrueFalse, 0x00FF00FF, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(FourBoolsWithAlternatingFalseTrue, 0xFF00FF00, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(FourBoolsWithAllFalse, 0x00000000, F, F, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(EightBoolsWithAllTrue, 0xFFFFFFFF, T, T, T, T, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(EightBoolsWithAlternatingTrueFalse, 0x0F0F0F0F, T, F, T, F,
+                                                           T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(EightBoolsWithAlternatingFalseTrue, 0xF0F0F0F0, F, T, F, T,
+                                                           F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(EightBoolsWithAllFalse, 0x00000000, F, F, F, F, F, F, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(SixteenBoolsWithAllTrue, 0xFFFFFFFF, T, T, T, T, T, T, T, T,
+                                                           T, T, T, T, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(SixteenBoolsWithAlternatingTrueFalse, 0x33333333, T, F, T, F,
+                                                           T, F, T, F, T, F, T, F, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(SixteenBoolsWithAlternatingFalseTrue, 0xCCCCCCCC, F, T, F, T,
+                                                           F, T, F, T, F, T, F, T, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(SixteenBoolsWithAllFalse, 0x00000000, F, F, F, F, F, F, F, F,
+                                                           F, F, F, F, F, F, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(ThirtyTwoBoolsWithAllTrue, 0xFFFFFFFF, T, T, T, T, T, T, T,
+                                                           T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,
+                                                           T, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(ThirtyTwoBoolsWithAlternatingTrueFalse, 0x55555555, T, F, T,
+                                                           F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T,
+                                                           F, T, F, T, F, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(ThirtyTwoBoolsWithAlternatingFalseTrue, 0xAAAAAAAA, F, T, F,
+                                                           T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F,
+                                                           T, F, T, F, T, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(ThirtyTwoBoolsWithAllFalse, 0x00000000, F, F, F, F, F, F, F,
+                                                           F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
+                                                           F, F, F, F, F)
+
 /** @} */
