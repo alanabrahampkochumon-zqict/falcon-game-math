@@ -1,3 +1,15 @@
+/**
+ * @file SimdUtilsTests.cpp
+ * @author Alan Abraham P Kochumon
+ * @date Created on: September 30, 2026
+ *
+ * @brief Verifies SIMD utilities.
+ *
+ * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
+ */
+
+#include "CommonSetup.h"
+
 #include <falcon_simd/utils/SIMDUtils.h>
 #include <gtest/gtest.h>
 
@@ -23,13 +35,19 @@ namespace
         std::size_t registerCount;
     };
     /** @brief Test fixture for register packed size calculation, parameterized by @ref TestPackingParams */
-    class PackedSizeCalculatorTests: public ::testing::TestWithParam<TestPackingParams>
+    class PackedSizeCalculatorTests: public testing::TestWithParam<TestPackingParams>
     {};
 
+    template <typename>
+    class GetAllOnesTests: public testing::Test
+    {};
+
+    TYPED_TEST_SUITE(GetAllOnesTests, SupportedArithmeticTypes);
 
     /**************************************
      *          STATIC TESTS              *
      **************************************/
+
     namespace static_tests
     {
         using namespace falcon::simd;
@@ -123,15 +141,31 @@ INSTANTIATE_TEST_SUITE_P(
         TestPackingParams{ 1024, 64, 1024, 0, 64, 16 }));
 
 
-// TEST(ABC, EFG)
-// {
-//     const auto mask = falcon::simd::makeBlendMask32<true, false>();
-//     EXPECT_EQ(mask, 0x0000FFFF);
-// }
+
+TYPED_TEST(GetAllOnesTests, ReturnsValueWithOneInAllBits)
+{
+    const auto value = falcon::simd::getAllOnes<TypeParam>();
+    if constexpr (std::same_as<double, TypeParam>)
+    {
+        EXPECT_EQ(0xFFFFFFFFFFFFFFFF, std::bit_cast<uint64_t>(value));
+    }
+    else if constexpr (std::same_as<float, TypeParam>)
+    {
+        EXPECT_EQ(0xFFFFFFFF, std::bit_cast<uint32_t>(value));
+    }
+    else
+    {
+        EXPECT_EQ(static_cast<TypeParam>(0xFFFFFFFFFFFFFFFF), value);
+    }
+}
+
+
+
+/// =============================== MAKE_BLEND_MASK_32 ===============================
 
 /// @test Verify that makeBlendMask32 returns a correct mask given all mask combinations.
 #define TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TestSuffix, ExpectedMask, ...)                      \
-    TEST(SimdUtilsTests, MakeBlendMask_ReturnsValidMask_For##TestSuffix)                                               \
+    TEST(MakeBlendMask32Tests, ReturnsValidMask_For##TestSuffix)                                                       \
     { EXPECT_EQ(ExpectedMask, (falcon::simd::makeBlendMask32<__VA_ARGS__>())); }
 
 // Aliasing to make testing easier.
@@ -176,5 +210,7 @@ TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(ThirtyTwoBoolsWithAlt
 TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(ThirtyTwoBoolsWithAllFalse, 0x00000000, F, F, F, F, F, F, F,
                                                            F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
                                                            F, F, F, F, F)
+
+/// =============================== END MAKE_BLEND_MASK_32 ===============================
 
 /** @} */
