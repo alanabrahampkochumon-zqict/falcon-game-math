@@ -26,8 +26,8 @@
 
 namespace
 {
-    using namespace simd::testing;
 
+    using namespace simd::testing;
     // Test param to pass in a combination matrix for testing blend function.
     // since gtest doesn't natively support parameterized typed test(where you can pass in parameters against a type
     // vector)
@@ -136,7 +136,7 @@ namespace
 } // namespace
 
 
-TYPED_TEST(Simd128BlendTests, BlendingWithMaskReturnsRegisterWithCorrectValues)
+TYPED_TEST(Simd128BlendTests, RuntimeBlendingWithMask_ReturnsRegisterWithCorrectValues)
 {
     // Get all the parameters from the types
     using Type                            = TypeParam::Type;
@@ -165,6 +165,66 @@ TYPED_TEST(Simd128BlendTests, BlendingWithMaskReturnsRegisterWithCorrectValues)
         EXPECT_ANY_EQ(Expected[i], result[i]);
     }
 }
+
+template <typename T, size_t Size>
+constexpr std::array<bool, Size> ArrToBool(const std::array<T, Size>& array)
+{
+    std::array<bool, Size> boolArr;
+    for (size_t i = 0; i < Size; ++i)
+    {
+        boolArr[i] = static_cast<bool>(array[i]);
+    }
+    return boolArr;
+}
+
+
+
+/// =============================== START COMPILE TIME BLEND TESTS ===============================
+
+    #define SIMD128_COMPILE_TIME_BLEND_TESTS(TestSuffix, Type, Lanes, First, Second, Expected, ...)                      \
+        TEST(Simd128BlendTests, CompileTimeBlendingWithMask_ReturnsValidRegister_For##TestSuffix)                              \
+        {                                                                                                              \
+            constexpr auto mask = falcon::simd::makeBlendMask32<__VA_ARGS__>();                                       \
+                       std::cout << std::bitset<32>(mask) << '\n';                                                                                                \
+            falcon::Simd128_t<Type, Lanes> regA{}, regB{};                                                             \
+            regA.load(First.data());                                                                \
+            regB.load(Second.data());                                                               \
+                                                                                                                       \
+            Array<Type, Lanes> result{};                                                                               \
+            const auto resultReg = regA.template blend<mask>(regB);                                                    \
+            resultReg.store(result.data());                                                                            \
+                                                                                                                       \
+            for (size_t i = 0; i < Lanes; ++i)                                                                         \
+            {                                                                                                          \
+                EXPECT_ANY_EQ(Expected[i], result[i]);                                                                 \
+            }                                                                                                          \
+        }
+
+constexpr bool T = true;
+constexpr bool F = false;
+
+static Array<U8, 2> arrU8x2_First{100, 24};
+static Array<U8, 2> arrU8x2_Second{32, 15};
+static Array<U8, 2> arrU8x2_ExpFirstOnly{100, 24};
+static Array<U8, 2> arrU8x2_ExpSecondOnly{32, 15};
+static Array<U8, 2> arrU8x2_ExpMixedMask{32, 24};
+SIMD128_COMPILE_TIME_BLEND_TESTS(U8_2Lanes_FirstOnly, U8, 2, arrU8x2_First, arrU8x2_Second, arrU8x2_ExpFirstOnly, F, F)
+SIMD128_COMPILE_TIME_BLEND_TESTS(U8_2Lanes_SecondOnly, U8, 2, arrU8x2_First, arrU8x2_Second, arrU8x2_ExpSecondOnly, T, T)
+SIMD128_COMPILE_TIME_BLEND_TESTS(U8_2Lanes_MixedMask, U8, 2, arrU8x2_First, arrU8x2_Second, arrU8x2_ExpMixedMask, T, F)
+SIMD128_COMPILE_TIME_BLEND_TESTS(U8_2Lanes_MixedMask2, U8, 2, arrU8x2_First, arrU8x2_Second, arrU8x2_ExpMixedMask, F, T)
+
+static Array<U32, 2> arrU32x2_First{100, 24};
+static Array<U32, 2> arrU32x2_Second{32, 15};
+static Array<U32, 2> arrU32x2_ExpFirstOnly{100, 24};
+static Array<U32, 2> arrU32x2_ExpSecondOnly{32, 15};
+static Array<U32, 2> arrU32x2_ExpMixedMask{32, 24};
+SIMD128_COMPILE_TIME_BLEND_TESTS(U32_2Lanes_FirstOnly, U32, 2, arrU32x2_First, arrU32x2_Second, arrU32x2_ExpFirstOnly, F, F)
+SIMD128_COMPILE_TIME_BLEND_TESTS(U32_2Lanes_SecondOnly, U32, 2, arrU32x2_First, arrU32x2_Second, arrU32x2_ExpSecondOnly, T, T)
+SIMD128_COMPILE_TIME_BLEND_TESTS(U32_2Lanes_MixedMask, U32, 2, arrU32x2_First, arrU32x2_Second, arrU32x2_ExpMixedMask, T, F)
+
+/// ================================ END COMPILE TIME BLEND TESTS ================================
+
+
 
 /** @} */
 

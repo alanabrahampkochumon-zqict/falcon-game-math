@@ -1,5 +1,8 @@
 #pragma once
 #include "Simd128SSE.h"
+#include "falcon_simd/utils/SIMDUtils.h"
+
+#include <bitset>
 /**
  * @file Simd128SSE.inl
  * @author Alan Abraham P Kochumon
@@ -2611,7 +2614,19 @@ namespace falcon
         if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX2 && std::is_integral_v<DataType> &&
                       sizeof(DataType) == 4)
         {
-            return Simd128(_mm_blend_epi32(_register, other._register, Mask));
+            // auto compressToImm8 = [&]<size_t... Index>(std::index_sequence<Index...>) {
+            //     return ((Mask & (0b1 << (Index * 4)) >> (3 * (3 - Index))) | ...);
+            // };
+            // constexpr auto Imm8 = static_cast<uint8_t>(compressToImm8(std::make_index_sequence<4>{}));
+
+            constexpr auto compressToImm8 = [&]<size_t... Index>(std::index_sequence<Index...>) {
+                return (((Mask & (0x1U << (Index * 8))) >> (7 * Index)) | ...);
+            };
+            constexpr auto Imm8 = static_cast<uint8_t>(compressToImm8(std::make_index_sequence<2>{}));
+            std::cout << "FULLMASK: " << std::bitset<32>(Mask) << '\n';
+            std::cout << "IMM8: " << std::bitset<32>(Imm8) << '\n';
+            std::cout << "IMM8: " << std::bitset<32>(static_cast<uint8_t>(Imm8)) << '\n';
+            return Simd128(_mm_blend_epi32(_register, other._register, Imm8));
         }
         else if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
         {
@@ -2640,12 +2655,12 @@ namespace falcon
                 return Simd128(_mm_blend_epi16(_register, other._register, Mask));
             }
         }
-
-        auto expandLower = [&]<size_t... Index>(std::index_sequence<Index...>) {
-
-        };
-        // TODO:
-        return *this;
+        // For fallback we can use (A & ~Mask) | (B & Mask)
+        // But we need to perform a bitwise expansion on the mask and then forward it to a register.
+        const auto [upper, lower] = simd::expandFourFold(Mask);
+        const auto maskReg =
+            Simd128<SimdBackend::ARCH_SSE2, uint64_t, Lane>(_mm_set_epi64x(upper, lower)).template cast<DataType>();
+        return maskReg.andNot(*this) | (other & maskReg);
     }
 
 
