@@ -38,6 +38,24 @@ namespace
     class PackedSizeCalculatorTests: public testing::TestWithParam<TestPackingParams>
     {};
 
+    /// @brief Test fixture for @ref falcon::expandFourFolds.
+    class ExpandFourFoldTests: public testing::TestWithParam<std::pair<falcon::BlendMask32_t, falcon::uint128_t>>
+    {};
+
+    INSTANTIATE_TEST_SUITE_P(
+        ExpandFourFoldTests, ExpandFourFoldTests,
+        testing::Values(
+            std::make_pair(0x0000FFFF, falcon::uint128_t{ .upper = 0x0000000000000000, .lower = 0xFFFFFFFFFFFFFFFF }),
+            std::make_pair(0xFFFFFFFF, falcon::uint128_t{ .upper = 0xFFFFFFFFFFFFFFFF, .lower = 0xFFFFFFFFFFFFFFFF }),
+            std::make_pair(0x00000000, falcon::uint128_t{ .upper = 0x0000000000000000, .lower = 0x0000000000000000 }),
+            std::make_pair(0xFFFF0000, falcon::uint128_t{ .upper = 0xFFFFFFFFFFFFFFFF, .lower = 0x0000000000000000 }),
+            std::make_pair(0x0F0F0F0F, falcon::uint128_t{ .upper = 0x0000FFFF0000FFFF, .lower = 0x0000FFFF0000FFFF }),
+            std::make_pair(0xF0F0F0F0, falcon::uint128_t{ .upper = 0xFFFF0000FFFF0000, .lower = 0xFFFF0000FFFF0000 }),
+            std::make_pair(0x79151FEE, falcon::uint128_t{ .upper = 0x0FFFF00F000F0F0F, .lower = 0x000FFFFFFFF0FFF0 }),
+            std::make_pair(0x2AC1FC11, falcon::uint128_t{ .upper = 0x00F0F0F0FF00000F, .lower = 0xFFFFFF00000F000F }),
+            std::make_pair(0xB8A6A044, falcon::uint128_t{ .upper = 0xF0FFF000F0F00FF0, .lower = 0xF0F000000F000F00 }),
+            std::make_pair(0xFE8D8D40, falcon::uint128_t{ .upper = 0xFFFFFFF0F000FF0F, .lower = 0xF000FF0F0F000000 })));
+
     template <typename>
     class GetAllOnesTests: public testing::Test
     {};
@@ -76,6 +94,15 @@ namespace
                                       F, T, F, T, F>() == 0x55555555);
         static_assert(makeBlendMask32<F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F,
                                       T, F, T, F, T>() == 0xAAAAAAAA);
+
+
+        /// @test Verify that @ref falcon::simd::expandFourFold returns a valid value expanded four fold
+        static_assert(expandFourFold(0x79151FEE).upper == 0x0FFFF00F000F0F0F);
+        static_assert(expandFourFold(0x79151FEE).lower == 0x000FFFFFFFF0FFF0);
+        static_assert(expandFourFold(0x0000FFFF).upper == 0x0000000000000000);
+        static_assert(expandFourFold(0x0000FFFF).lower == 0xFFFFFFFFFFFFFFFF);
+        static_assert(expandFourFold(0xFFFF0000).upper == 0xFFFFFFFFFFFFFFFF);
+        static_assert(expandFourFold(0xFFFF0000).lower == 0x0000000000000000);
 
     } // namespace static_tests
 
@@ -160,13 +187,12 @@ TYPED_TEST(GetAllOnesTests, ReturnsValueWithOneInAllBits)
 }
 
 
-// TODO: Add more testcases
-TEST(ExpandFourFoldTests, ExpandsEachBitBy4TimesAndReturnsAValidPair)
+TEST_P(ExpandFourFoldTests, ExpandsEachBitBy4TimesAndReturnsAValidPair)
 {
-    auto value = falcon::simd::expandFourFold(0x0F0F0F0F);
-    // 0x0000 FFFF 0000 FFFF 0000 FFFF 0000 FFFF
-    EXPECT_EQ(0x0000FFFF0000FFFF, value.lower);
-    EXPECT_EQ(0x0000FFFF0000FFFF, value.upper);
+    const auto [blendMask, expectedValue] = GetParam();
+    const auto value                      = falcon::simd::expandFourFold(blendMask);
+    EXPECT_EQ(expectedValue.upper, value.upper);
+    EXPECT_EQ(expectedValue.lower, value.lower);
 }
 
 
