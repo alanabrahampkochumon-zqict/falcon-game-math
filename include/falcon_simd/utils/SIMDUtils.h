@@ -80,53 +80,64 @@ namespace falcon::simd
     /**
      * @brief Create a blend mask for 2 lane register selection.
      *
+     * @tparam MaxLaneCount The maximum lane count of the target register/type combination.
+     *                      Example: For a 128-bit lane with int32_t it will be 4 (128/32).
+     *                      Must be between 2 and 32(inclusive) and be a power of 2.
+     * @tparam Mask        The bool mask to be converted. First masks will be put to the lower lanes.
+     *                     Number of Mask be between 2 and @p MaxLaneCount and must be a power of 2.
+     *
      * @note Mask fills from LSB(Least Significant Bit) to MSB (Most Significant Bit).
      *       The first bool translates to the lower n-bits.
      *
      * @code
      * // int32_t x 4(lane) mask.
-     * const auto mask = makeBlendMask32<true, false, true, false>();
-     * // 0b11111111000000001111111100000000 or 0xFF00FF00
+     * const auto mask = makeBlendMask32<4, true, false, true, false>();
+     * // 0b00000000111111110000000011111111 or 0xFF00FF00
+     * const auto mask = makeBlendMask32<16, true, false, true, true>();
+     * // 0b00000000000000000000000011110011 or 0x000000F3
      * @endcode
      *
      * @return BlendMask with each 16-bits as 0b111..111 if s<n> is true and 0 otherwise.
      */
-    template <bool... Mask>
-        requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) > 0)
+    template <size_t MaxLaneCount, bool... Mask>
+        requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) > 1 && sizeof...(Mask) <= MaxLaneCount) &&
+        (MaxLaneCount > 2 && MaxLaneCount <= 32 && std::has_single_bit(MaxLaneCount))
     constexpr BlendMask32_t makeBlendMask32() noexcept
     {
         constexpr bool maskArr[]{ Mask... };
-        constexpr auto paramCount = sizeof...(Mask);
 
         // Creates the mask with appropriate shifts.
         // We create a mask by selecting an appropriate mask (0b11..11 if true, 0b0 otherwise)
         // and shifting by width required per mask for saturating the full 32-bits.
-        // Eg: For a 4 lane register mask, we with the following mask <true, false, true, true>.
+        // Eg: For a 4 lane register mask, we with the following mask <4, true, false, true, true>.
         //     That will expand into:
         //     0b11111111 << (0 * 8) | 0b00000000 << (1 * 8) | ob11111111 << (2 * 8) << | 0b00000000 << (3 * 8)
-        //     Which will return 0b11111111000000001111111100000000
+        //     Which will return 0b00000000111111110000000011111111
+        //     And <4, false, true>.
+        //     0b11111111 << (0 * 8) | 0b00000000 << (1 * 8)
+        //     0b00000000000000000000000011111111
         auto getMask = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
-            if constexpr (paramCount == 32)
+            if constexpr (MaxLaneCount == 32)
             {
                 // True Mask 0b1
                 return (((maskArr[Indices] ? 0x1 : 0x0) << Indices) | ...);
             }
-            else if constexpr (paramCount == 16)
+            else if constexpr (MaxLaneCount == 16)
             {
                 // True Mask 0b11
                 return (((maskArr[Indices] ? 0x3 : 0x0) << (Indices * 2)) | ...);
             }
-            else if constexpr (paramCount == 8)
+            else if constexpr (MaxLaneCount == 8)
             {
                 // True Mask 0b1111
                 return (((maskArr[Indices] ? 0xF : 0x0) << (Indices * 4)) | ...);
             }
-            else if constexpr (paramCount == 4)
+            else if constexpr (MaxLaneCount == 4)
             {
                 // True Mask 0b11111111
                 return (((maskArr[Indices] ? 0xFF : 0x00) << (Indices * 8)) | ...);
             }
-            else if constexpr (paramCount == 2)
+            else if constexpr (MaxLaneCount == 2)
             {
                 // True Mask 0b1111111111111111
                 return (((maskArr[Indices] ? 0xFFFF : 0x0000) << (Indices * 16)) | ...);
@@ -136,7 +147,7 @@ namespace falcon::simd
                 return 0;
             }
         };
-        return getMask(std::make_index_sequence<paramCount>());
+        return getMask(std::make_index_sequence<sizeof...(Mask)>());
     }
 
     // TODO: Make it more generalized later(2, 4, 8, 16...) and various types.

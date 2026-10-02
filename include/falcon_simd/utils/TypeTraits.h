@@ -16,7 +16,7 @@ namespace falcon
 
 
     /**
-     * Concept for constraining mixed type usage without explict casting.
+     * Concept for constraining mixed type usage without explicit casting.
      *
      * @tparam From The incoming numeric type.
      * @tparam To   The expected numeric type.
@@ -30,10 +30,17 @@ namespace falcon
         requires sizeof(From) <= sizeof(To);
     };
 
-    /// 32-bit integral mask for compile-time register blending.
-    using BlendMask32_t = uint32_t;
+
+    // TODO: Move to separate type file
+    //========================== BLEND MASK TYPES ==========================
+    using BlendMask64_t = uint64_t; /// 64-bit integral mask using full 64-bit bits for masking.
+    using BlendMask32_t = uint32_t; /// 32-bit integral mask using full 32-bit bits for masking.
+    using BlendMask16_t = uint32_t; /// 32-bit integral mask using lower 16-bits for masking.
+    using BlendMask8_t  = uint32_t; /// 32-bit integral mask using lower 8-bits for masking.
+    using BlendMask4_t  = uint32_t; /// 32-bit integral mask using lower 4-bits for masking.
 
 
+    //========================== CUSTOM INTEGRAL TYPES ==========================
     /// Structure for holding 128-bit integers(Emulated)
     struct uint128_t
     {

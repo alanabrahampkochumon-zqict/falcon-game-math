@@ -202,7 +202,7 @@ constexpr std::array<bool, Size> ArrToBool(const std::array<T, Size>& array)
 
 constexpr bool T = true;
 constexpr bool F = false;
-
+// TODO: Rename to select first, select second, selectmixed
 static Array<U8, 2> arrU8x2_First{100, 24};
 static Array<U8, 2> arrU8x2_Second{32, 15};
 static Array<U8, 2> arrU8x2_ExpFirstOnly{100, 24};
