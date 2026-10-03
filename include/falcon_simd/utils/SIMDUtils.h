@@ -177,6 +177,18 @@ namespace falcon::simd
     }
 
 
+
+    /**
+     * @brief Pack 32-bits into the lower N-bits.
+     *
+     * @note The algorithm only takes into consideration the Least Significant Bit(LSB) of the group.
+     *       For example: Packing a 32-bit integer to 4-bits will result in a group size of 8,
+     *       i.e, only the LSB from each of the 8 bits will be considered for packing.
+     *
+     * @tparam N   The resultant packing bit count.
+     * @param mask The mask to pack.
+     * @return A 32-bit mask with values packed to the lower N-bits.
+     */
     template <size_t N>
         requires(N >= 2 && N <= 16 && std::has_single_bit(N))
     constexpr BlendMask32_t packToNBits(const BlendMask32_t mask)
