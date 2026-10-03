@@ -83,16 +83,14 @@ namespace falcon::simd
      * @tparam MaxLaneCount The maximum lane count of the target register/type combination.
      *                      Example: For a 128-bit lane with int32_t it will be 4 (128/32).
      *                      Must be between 2 and 32(inclusive) and be a power of 2.
-     * @tparam Mask        The bool mask to be converted. First masks will be put to the lower lanes.
-     *                     Number of Mask be between 2 and @p MaxLaneCount and must be a power of 2.
+     * @tparam Mask         The bool mask to be converted. The first bool translates to the lower n-bits.
+     *                      Number of Mask be between 2 and @p MaxLaneCount and must be a power of 2.
      *
-     * @note Mask fills from LSB(Least Significant Bit) to MSB (Most Significant Bit).
-     *       The first bool translates to the lower n-bits.
      *
      * @code
      * // int32_t x 4(lane) mask.
      * const auto mask = makeBlendMask32<4, true, false, true, false>();
-     * // 0b00000000111111110000000011111111 or 0xFF00FF00
+     * // 0b00000000111111110000000011111111 or 0x00FF00FF
      * const auto mask = makeBlendMask32<16, true, false, true, true>();
      * // 0b00000000000000000000000011110011 or 0x000000F3
      * @endcode
@@ -101,7 +99,7 @@ namespace falcon::simd
      */
     template <size_t MaxLaneCount, bool... Mask>
         requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) > 1 && sizeof...(Mask) <= MaxLaneCount) &&
-        (MaxLaneCount > 2 && MaxLaneCount <= 32 && std::has_single_bit(MaxLaneCount))
+        (MaxLaneCount >= 2 && MaxLaneCount <= 32 && std::has_single_bit(MaxLaneCount))
     constexpr BlendMask32_t makeBlendMask32() noexcept
     {
         constexpr bool maskArr[]{ Mask... };
@@ -114,8 +112,8 @@ namespace falcon::simd
         //     0b11111111 << (0 * 8) | 0b00000000 << (1 * 8) | ob11111111 << (2 * 8) << | 0b00000000 << (3 * 8)
         //     Which will return 0b00000000111111110000000011111111
         //     And <4, false, true>.
-        //     0b11111111 << (0 * 8) | 0b00000000 << (1 * 8)
-        //     0b00000000000000000000000011111111
+        //     0b00000000 << (0 * 8) | 0b11111111 << (1 * 8)
+        //     0b00000000000000001111111100000000
         auto getMask = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
             if constexpr (MaxLaneCount == 32)
             {
@@ -150,8 +148,8 @@ namespace falcon::simd
         return getMask(std::make_index_sequence<sizeof...(Mask)>());
     }
 
-    // TODO: Make it more generalized later(2, 4, 8, 16...) and various types.
 
+    // TODO: Make it more generalized later(2, 4, 8, 16...) and various types.
     constexpr uint128_t expandFourFold(BlendMask32_t mask)
     {
         auto expandByFour = [&]<size_t... Index>(size_t Offset, std::index_sequence<Index...>) -> size_t {

@@ -73,27 +73,27 @@ namespace
         constexpr bool F = false;
 
         /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 2 booleans
-        static_assert(makeBlendMask32<T, F>() == 0x0000FFFF);
-        static_assert(makeBlendMask32<F, T>() == 0xFFFF0000);
+        static_assert(makeBlendMask32<2, T, F>() == 0x0000FFFF);
+        static_assert(makeBlendMask32<2, F, T>() == 0xFFFF0000);
 
         /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 4 booleans
-        static_assert(makeBlendMask32<T, F, T, F>() == 0x00FF00FF);
-        static_assert(makeBlendMask32<F, T, F, T>() == 0xFF00FF00);
+        static_assert(makeBlendMask32<4, T, F, T, F>() == 0x00FF00FF);
+        static_assert(makeBlendMask32<4, F, T, F, T>() == 0xFF00FF00);
 
         /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 8 booleans
-        static_assert(makeBlendMask32<T, F, T, F, T, F, T, F>() == 0x0F0F0F0F);
-        static_assert(makeBlendMask32<F, T, F, T, F, T, F, T>() == 0xF0F0F0F0);
+        static_assert(makeBlendMask32<8, T, F, T, F, T, F, T, F>() == 0x0F0F0F0F);
+        static_assert(makeBlendMask32<8, F, T, F, T, F, T, F, T>() == 0xF0F0F0F0);
 
 
         /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 16 booleans
-        static_assert(makeBlendMask32<T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F>() == 0x33333333);
-        static_assert(makeBlendMask32<F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T>() == 0xCCCCCCCC);
+        static_assert(makeBlendMask32<16, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F>() == 0x33333333);
+        static_assert(makeBlendMask32<16, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T>() == 0xCCCCCCCC);
 
         /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 32 booleans
-        static_assert(makeBlendMask32<T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T,
-                                      F, T, F, T, F>() == 0x55555555);
-        static_assert(makeBlendMask32<F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F,
-                                      T, F, T, F, T>() == 0xAAAAAAAA);
+        static_assert(makeBlendMask32<32, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F,
+                                      T, F, T, F, T, F>() == 0x55555555);
+        static_assert(makeBlendMask32<32, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T,
+                                      F, T, F, T, F, T>() == 0xAAAAAAAA);
 
 
         /// @test Verify that @ref falcon::simd::expandFourFold returns a valid value expanded four fold
@@ -200,52 +200,102 @@ TEST_P(ExpandFourFoldTests, ExpandsEachBitBy4TimesAndReturnsAValidPair)
 /// =============================== MAKE_BLEND_MASK_32 ===============================
 
 /// @test Verify that makeBlendMask32 returns a correct mask given all mask combinations.
-#define TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TestSuffix, ExpectedMask, ...)                      \
+#define TEST_SIMD_UTILS_MAKE_BLEND_MASK(TestSuffix, ExpectedMask, RegCount, ...)                                       \
     TEST(MakeBlendMask32Tests, ReturnsValidMask_For##TestSuffix)                                                       \
-    { EXPECT_EQ(ExpectedMask, (falcon::simd::makeBlendMask32<__VA_ARGS__>())); }
+    { EXPECT_EQ(ExpectedMask, (falcon::simd::makeBlendMask32<RegCount, __VA_ARGS__>())); }
 
 // Aliasing to make testing easier.
 constexpr bool T = true;
 constexpr bool F = false;
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TwoBoolsWithAllTrue, 0xFFFFFFFF, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TwoBoolsWithAlternatingTrueFalse, 0x0000FFFF, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TwoBoolsWithAlternatingFalseTrue, 0xFFFF0000, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(TwoBoolsWithAllFalse, 0x00000000, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(TwoLane_TwoBoolsWithAllTrue, 0xFFFFFFFF, 2, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(TwoLane_TwoBoolsWithAlternatingTrueFalse, 0x0000FFFF, 2, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(TwoLane_TwoBoolsWithAlternatingFalseTrue, 0xFFFF0000, 2, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(TwoLane_TwoBoolsWithAllFalse, 0x00000000, 2, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(FourBoolsWithAllTrue, 0xFFFFFFFF, T, T, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(FourBoolsWithAlternatingTrueFalse, 0x00FF00FF, T, F, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(FourBoolsWithAlternatingFalseTrue, 0xFF00FF00, F, T, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(FourBoolsWithAllFalse, 0x00000000, F, F, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_TwoBoolsWithAllTrue, 0x0000FFFF, 4, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_TwoBoolsWithAlternatingTrueFalse, 0x000000FF, 4, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_TwoBoolsWithAlternatingFalseTrue, 0x0000FF00, 4, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_TwoBoolsWithAllFalse, 0x00000000, 4, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(EightBoolsWithAllTrue, 0xFFFFFFFF, T, T, T, T, T, T, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(EightBoolsWithAlternatingTrueFalse, 0x0F0F0F0F, T, F, T, F,
-                                                           T, F, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(EightBoolsWithAlternatingFalseTrue, 0xF0F0F0F0, F, T, F, T,
-                                                           F, T, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(EightBoolsWithAllFalse, 0x00000000, F, F, F, F, F, F, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_FourBoolsWithAllTrue, 0xFFFFFFFF, 4, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_FourBoolsWithAlternatingTrueFalse, 0x00FF00FF, 4, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_FourBoolsWithAlternatingFalseTrue, 0xFF00FF00, 4, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_FourBoolsWithAllFalse, 0x00000000, 4, F, F, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(SixteenBoolsWithAllTrue, 0xFFFFFFFF, T, T, T, T, T, T, T, T,
-                                                           T, T, T, T, T, T, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(SixteenBoolsWithAlternatingTrueFalse, 0x33333333, T, F, T, F,
-                                                           T, F, T, F, T, F, T, F, T, F, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(SixteenBoolsWithAlternatingFalseTrue, 0xCCCCCCCC, F, T, F, T,
-                                                           F, T, F, T, F, T, F, T, F, T, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(SixteenBoolsWithAllFalse, 0x00000000, F, F, F, F, F, F, F, F,
-                                                           F, F, F, F, F, F, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_TwoBoolsWithAllTrue, 0x000000FF, 8, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_TwoBoolsWithAlternatingTrueFalse, 0x0000000F, 8, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_TwoBoolsWithAlternatingFalseTrue, 0x000000F0, 8, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_TwoBoolsWithAllFalse, 0x00000000, 8, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(ThirtyTwoBoolsWithAllTrue, 0xFFFFFFFF, T, T, T, T, T, T, T,
-                                                           T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,
-                                                           T, T, T, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(ThirtyTwoBoolsWithAlternatingTrueFalse, 0x55555555, T, F, T,
-                                                           F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T,
-                                                           F, T, F, T, F, T, F, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(ThirtyTwoBoolsWithAlternatingFalseTrue, 0xAAAAAAAA, F, T, F,
-                                                           T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F,
-                                                           T, F, T, F, T, F, T, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK_RETURNS_CORRECT_32BIT_MASK(ThirtyTwoBoolsWithAllFalse, 0x00000000, F, F, F, F, F, F, F,
-                                                           F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-                                                           F, F, F, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_FourBoolsWithAllTrue, 0x0000FFFF, 8, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_FourBoolsWithAlternatingTrueFalse, 0x00000F0F, 8, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_FourBoolsWithAlternatingFalseTrue, 0x0000F0F0, 8, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_FourBoolsWithAllFalse, 0x00000000, 8, F, F, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_EightBoolsWithAllTrue, 0xFFFFFFFF, 8, T, T, T, T, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_EightBoolsWithAlternatingTrueFalse, 0x0F0F0F0F, 8, T, F, T, F, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_EightBoolsWithAlternatingFalseTrue, 0xF0F0F0F0, 8, F, T, F, T, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_EightBoolsWithAllFalse, 0x00000000, 8, F, F, F, F, F, F, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_TwoBoolsWithAllTrue, 0x0000000F, 16, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_TwoBoolsWithAlternatingTrueFalse, 0x00000003, 16, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_TwoBoolsWithAlternatingFalseTrue, 0x0000000C, 16, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_TwoBoolsWithAllFalse, 0x00000000, 16, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_FourBoolsWithAllTrue, 0x000000FF, 16, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_FourBoolsWithAlternatingTrueFalse, 0x00000033, 16, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_FourBoolsWithAlternatingFalseTrue, 0x000000CC, 16, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_FourBoolsWithAllFalse, 0x00000000, 16, F, F, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_EightBoolsWithAllTrue, 0x0000FFFF, 16, T, T, T, T, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_EightBoolsWithAlternatingTrueFalse, 0x00003333, 16, T, F, T, F, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_EightBoolsWithAlternatingFalseTrue, 0x0000CCCC, 16, F, T, F, T, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_EightBoolsWithAllFalse, 0x00000000, 16, F, F, F, F, F, F, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_SixteenBoolsWithAllTrue, 0xFFFFFFFF, 16, T, T, T, T, T, T, T, T, T, T, T, T,
+                                T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_SixteenBoolsWithAlternatingTrueFalse, 0x33333333, 16, T, F, T, F, T, F, T,
+                                F, T, F, T, F, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_SixteenBoolsWithAlternatingFalseTrue, 0xCCCCCCCC, 16, F, T, F, T, F, T, F,
+                                T, F, T, F, T, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_SixteenBoolsWithAllFalse, 0x00000000, 16, F, F, F, F, F, F, F, F, F, F, F,
+                                F, F, F, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwoLane_TwoBoolsWithAllTrue, 0x00000003, 32, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwoLane_TwoBoolsWithAlternatingTrueFalse, 0x00000001, 32, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwoLane_TwoBoolsWithAlternatingFalseTrue, 0x00000002, 32, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwoLane_TwoBoolsWithAllFalse, 0x00000000, 32, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_FourBoolsWithAllTrue, 0x0000000F, 32, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_FourBoolsWithAlternatingTrueFalse, 0x00000005, 32, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_FourBoolsWithAlternatingFalseTrue, 0x0000000A, 32, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_FourBoolsWithAllFalse, 0x00000000, 32, F, F, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_EightBoolsWithAllTrue, 0x000000FF, 32, T, T, T, T, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_EightBoolsWithAlternatingTrueFalse, 0x00000055, 32, T, F, T, F, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_EightBoolsWithAlternatingFalseTrue, 0x000000AA, 32, F, T, F, T, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_EightBoolsWithAllFalse, 0x00000000, 32, F, F, F, F, F, F, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_SixteenBoolsWithAllTrue, 0x0000FFFF, 32, T, T, T, T, T, T, T, T, T, T, T, T,
+                                T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_SixteenBoolsWithAlternatingTrueFalse, 0x00005555, 32, T, F, T, F, T, F, T, F,
+                                T, F, T, F, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_SixteenBoolsWithAlternatingFalseTrue, 0x0000AAAA, 32, F, T, F, T, F, T, F, T,
+                                F, T, F, T, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_SixteenBoolsWithAllFalse, 0x00000000, 32, F, F, F, F, F, F, F, F, F, F, F, F,
+                                F, F, F, F)
+
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_ThirtyTwoBoolsWithAllTrue, 0xFFFFFFFF, 32, T, T, T, T, T, T, T, T, T, T, T, T,
+                                T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_ThirtyTwoBoolsWithAlternatingTrueFalse, 0x55555555, 32, T, F, T, F, T, F, T,
+                                F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_ThirtyTwoBoolsWithAlternatingFalseTrue, 0xAAAAAAAA, 32, F, T, F, T, F, T, F,
+                                T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_ThirtyTwoBoolsWithAllFalse, 0x00000000, 32, F, F, F, F, F, F, F, F, F, F, F,
+                                F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F)
+
+#undef TEST_SIMD_UTILS_MAKE_BLEND_MASK
 
 /// =============================== END MAKE_BLEND_MASK_32 ===============================
 
