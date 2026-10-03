@@ -197,7 +197,7 @@ TEST_P(ExpandFourFoldTests, ExpandsEachBitBy4TimesAndReturnsAValidPair)
 
 
 
-/// =============================== MAKE_BLEND_MASK_32 ===============================
+/// =============================== START MAKE_BLEND_MASK_32 ===============================
 
 /// @test Verify that makeBlendMask32 returns a correct mask given all mask combinations.
 #define TEST_SIMD_UTILS_MAKE_BLEND_MASK(TestSuffix, ExpectedMask, RegCount, ...)                                       \
@@ -297,6 +297,40 @@ TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_ThirtyTwoBoolsWithAllFalse, 0x00000000
 
 #undef TEST_SIMD_UTILS_MAKE_BLEND_MASK
 
-/// =============================== END MAKE_BLEND_MASK_32 ===============================
+/// ================================ END MAKE_BLEND_MASK_32 ================================
 
+
+
+/// =============================== START PACK_TO_N_BIT ===============================
+
+#define TEST_SIMD_UTILS_PACK_TO_N_BITS(TestSuffix, BitCount, InputMask, ExpectedValue)                                 \
+    TEST(PackToNBitsTests, ReturnsValidMask_WhenCompressedTo##TestSuffix)                                              \
+    {                                                                                                                  \
+        const auto packed = falcon::simd::packToNBits<BitCount>(InputMask);                                            \
+        EXPECT_EQ(ExpectedValue, packed);                                                                              \
+    }
+
+TEST_SIMD_UTILS_PACK_TO_N_BITS(2Bits_FullOnes, 2, 0xFFFFFFFF, 0x00000003)
+TEST_SIMD_UTILS_PACK_TO_N_BITS(2Bits_FullZeroes, 2, 0x0000000, 0x00000000)
+TEST_SIMD_UTILS_PACK_TO_N_BITS(2Bits_Alternating, 2, 0xFFFF0000, 0x00000002) // 0b10
+TEST_SIMD_UTILS_PACK_TO_N_BITS(2Bits_Random, 2, 0x0000FFFF, 0x00000001)      // 0b01
+
+TEST_SIMD_UTILS_PACK_TO_N_BITS(4Bits_FullOnes, 4, 0xFFFFFFFF, 0x0000000F)
+TEST_SIMD_UTILS_PACK_TO_N_BITS(4Bits_FullZeroes, 4, 0x0000000, 0x00000000)
+TEST_SIMD_UTILS_PACK_TO_N_BITS(4Bits_Alternating, 4, 0xFF00FF00, 0x0000000A) // 0b1010
+TEST_SIMD_UTILS_PACK_TO_N_BITS(4Bits_Random, 4, 0xFF00FFFF, 0x0000000B)      // 0b1011
+
+TEST_SIMD_UTILS_PACK_TO_N_BITS(8Bits_FullOnes, 8, 0xFFFFFFFF, 0x000000FF)
+TEST_SIMD_UTILS_PACK_TO_N_BITS(8Bits_FullZeroes, 8, 0x0000000, 0x00000000)
+TEST_SIMD_UTILS_PACK_TO_N_BITS(8Bits_Alternating, 8, 0xF0F0F0F0, 0x000000AA) // 0b10101010
+TEST_SIMD_UTILS_PACK_TO_N_BITS(8Bits_Random, 8, 0xFF00F00F, 0x000000C9)      // 0b11001001
+
+TEST_SIMD_UTILS_PACK_TO_N_BITS(16Bits_FullOnes, 16, 0xFFFFFFFF, 0x0000FFFF)
+TEST_SIMD_UTILS_PACK_TO_N_BITS(16Bits_FullZeroes, 16, 0x0000000, 0x00000000)
+TEST_SIMD_UTILS_PACK_TO_N_BITS(16Bits_Alternating, 16, 0xCCCCCCCC, 0x0000AAAA) // 0b1010101010101010
+TEST_SIMD_UTILS_PACK_TO_N_BITS(16Bits_Random, 16, 0xCF0CCF0C, 0x0000B2B2)      // 0b1011001010110010
+
+#undef TEST_SIMD_UTILS_PACK_TO_N_BITS
+
+/// ================================ END PACK_TO_N_BIT ================================
 /** @} */

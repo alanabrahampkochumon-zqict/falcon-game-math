@@ -114,7 +114,7 @@ namespace falcon::simd
         //     And <4, false, true>.
         //     0b00000000 << (0 * 8) | 0b11111111 << (1 * 8)
         //     0b00000000000000001111111100000000
-        auto getMask = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
+        const auto getMask = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
             if constexpr (MaxLaneCount == 32)
             {
                 // True Mask 0b1
@@ -149,20 +149,52 @@ namespace falcon::simd
     }
 
 
+
     // TODO: Make it more generalized later(2, 4, 8, 16...) and various types.
+    /**
+     * @brief Expand a 32-bit integer into 128-bit integer by performing bit expansion.
+     *        For e.g: When `10` is expanded, we get `1111 0000`.
+     *
+     * @param mask The 32-bit mask to expand/unfold.
+     * @return A custom @ref uint128_t type with the expanded values.
+     */
     constexpr uint128_t expandFourFold(BlendMask32_t mask)
     {
-        auto expandByFour = [&]<size_t... Index>(size_t Offset, std::index_sequence<Index...>) -> size_t {
+        const auto expandByFour = [&]<size_t... Index>(size_t Offset, std::index_sequence<Index...>) -> size_t {
             constexpr size_t trueMask  = 0b1111ULL;
             constexpr size_t falseMask = 0b0000ULL;
+            // For performing the expansion we can mask extract each bit and expand the bit value by 4,
+            // and shift it into place.
 #define __FLCN_EXP4_MASKED_EXTRACT (0b1ULL << (Index + Offset))
             return ((((mask & __FLCN_EXP4_MASKED_EXTRACT) == __FLCN_EXP4_MASKED_EXTRACT ? trueMask : falseMask)
                      << (Index * 4)) |
                     ...);
 #undef __FLCN_EXP4_MASKED_EXTRACT
         };
+
         return uint128_t{ .upper = expandByFour(16, std::make_index_sequence<16>{}),
                           .lower = expandByFour(0, std::make_index_sequence<16>{}) };
+    }
+
+
+    template <size_t N>
+        requires(N >= 2 && N <= 16 && std::has_single_bit(N))
+    constexpr BlendMask32_t packToNBits(const BlendMask32_t mask)
+    {
+        // Group Size = datatype size in bits / (number of bits to compress to)
+        // This would imply for compressing 32-bits(uint32_t) to 4-bits we take each group of 8,
+        // and extract its LSB.
+        constexpr auto groupSize = (sizeof(BlendMask32_t) * 8) / N;
+        // For compression, we only regard the Least Significant Bit(LSB) from each of groups
+        // and then shift them into place.
+        // 1111 0000 1111 1111 -> 0000 0000 0000 1011(pack to 4-bits, showing 16-bit for simplicity)
+#define _FLCN_BIT_EXTRACT (mask & (0x1U << (Index * groupSize)))
+        const auto compress = [&]<size_t... Index>(std::index_sequence<Index...>) {
+            return ((_FLCN_BIT_EXTRACT >> ((groupSize - 1) * Index)) | ...);
+        };
+
+#undef _FLCN_BIT_EXTRACT
+        return static_cast<BlendMask32_t>(compress(std::make_index_sequence<N>{}));
     }
 
 
