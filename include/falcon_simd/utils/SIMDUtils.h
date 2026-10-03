@@ -78,7 +78,7 @@ namespace falcon::simd
 
 
     /**
-     * @brief Create a blend mask for 2 lane register selection.
+     * @brief Create a mask for register value blending.
      *
      * @tparam MaxLaneCount The maximum lane count of the target register/type combination.
      *                      Example: For a 128-bit lane with int32_t it will be 4 (128/32).
@@ -86,6 +86,8 @@ namespace falcon::simd
      * @tparam Mask         The bool mask to be converted. The first bool translates to the lower n-bits.
      *                      Number of Mask be between 2 and @p MaxLaneCount and must be a power of 2.
      *
+     * @note MaxLaneCount is Register Width(128, 256, or 512)/size of the DataType in bits.
+     * @note Using the makeBlendMask32 exposed Simd classes is recommended.
      *
      * @code
      * // int32_t x 4(lane) mask.
@@ -95,7 +97,7 @@ namespace falcon::simd
      * // 0b00000000000000000000000011110011 or 0x000000F3
      * @endcode
      *
-     * @return BlendMask with each 16-bits as 0b111..111 if s<n> is true and 0 otherwise.
+     * @return A 32-bit integral mask usable across Simd128/256/512 const blending.
      */
     template <size_t MaxLaneCount, bool... Mask>
         requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) > 1 && sizeof...(Mask) <= MaxLaneCount) &&

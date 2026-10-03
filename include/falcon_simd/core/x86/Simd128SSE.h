@@ -20,6 +20,7 @@
 #include "falcon_core/Preprocessors.h"
 #include "falcon_core/traits/TypeHelpers.h"
 #include "falcon_simd/core/RegisterTraits.h"
+#include "falcon_simd/utils/SIMDUtils.h"
 #include "falcon_simd/utils/SimdTraits.h"
 #include "falcon_simd/utils/TypeTraits.h"
 
@@ -44,11 +45,12 @@ namespace falcon
     struct Simd128<SimdBackend::ARCH_SSE2, DataType, Lane>
     {
 
-        static constexpr size_t BUFFER_WIDTH = 128;      ///< Width of the register in bits.
+        static constexpr size_t BufferWidth  = 128;      ///< Width of the register in bits.
         using ValueType                      = DataType; ///< The internal data type of this Register.
         static constexpr size_t LaneCount    = Lane;     ///< Number of Lanes of current SIMD128 Register
+        static constexpr size_t MaxLaneCount = BufferWidth / (sizeof(DataType) * 8); /// Maximum Lanes in this register.
 
-        static_assert(sizeof(DataType) * Lane <= BUFFER_WIDTH && "Invalid size.");
+        static_assert(sizeof(DataType) * Lane <= BufferWidth && "Invalid size.");
         static_assert(std::has_single_bit(Lane) && Lane > 1 &&
                       "Invalid Number of Lanes. Must be a power of 2(2, 4, 8, 16...)");
 
@@ -685,6 +687,29 @@ namespace falcon
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         ///   MASKING/BLENDING
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+        /**
+         * @brief Create a mask for register value blending.
+         *
+         * @tparam Mask The bool mask to be converted. The first bool translates to the lower n-bits.
+         *              Number of Mask arguments must be between 2 and @p Lane and must be a power of 2.
+         *
+         * @code
+         * // int32_t x 4(lane) mask.
+         * const Simd128_t<float, 4> reg{ 1.0f, 2.0f, 3.0f, 4.0f };
+         * const auto mask = reg.makeBlendMask32<true, false, true, false>();
+         * // 0b00000000111111110000000011111111 or 0x00FF00FF
+         * const auto mask = reg.makeBlendMask32<true, false, true, true>();
+         * // 0b00000000000000000000000011110011 or 0x000000F3
+         * @endcode
+         *
+         * @return A 32-bit integral mask usable across Simd128 const blending.
+         */
+        template <bool... Mask>
+            requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) > 1 && sizeof...(Mask) <= Lane)
+        static constexpr BlendMask32_t makeBlendMask32() noexcept
+        { return simd::makeBlendMask32<MaxLaneCount, Mask...>(); }
+
 
         /**
          * @brief Selectively blend values from this register and @p other using the @p mask.

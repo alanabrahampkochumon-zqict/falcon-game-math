@@ -208,64 +208,64 @@ TEST_P(ExpandFourFoldTests, ExpandsEachBitBy4TimesAndReturnsAValidPair)
 constexpr bool T = true;
 constexpr bool F = false;
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(TwoLane_TwoBoolsWithAllTrue, 0xFFFFFFFF, 2, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(TwoLane_TwoBoolsWithAlternatingTrueFalse, 0x0000FFFF, 2, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(TwoLane_TwoBoolsWithAlternatingFalseTrue, 0xFFFF0000, 2, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(TwoLane_TwoBoolsWithAllFalse, 0x00000000, 2, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(TwoLanes_TwoBoolsWithAllTrue, 0xFFFFFFFF, 2, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(TwoLanes_TwoBoolsWithAlternatingTrueFalse, 0x0000FFFF, 2, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(TwoLanes_TwoBoolsWithAlternatingFalseTrue, 0xFFFF0000, 2, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(TwoLanes_TwoBoolsWithAllFalse, 0x00000000, 2, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_TwoBoolsWithAllTrue, 0x0000FFFF, 4, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_TwoBoolsWithAlternatingTrueFalse, 0x000000FF, 4, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_TwoBoolsWithAlternatingFalseTrue, 0x0000FF00, 4, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_TwoBoolsWithAllFalse, 0x00000000, 4, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLanes_TwoBoolsWithAllTrue, 0x0000FFFF, 4, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLanes_TwoBoolsWithAlternatingTrueFalse, 0x000000FF, 4, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLanes_TwoBoolsWithAlternatingFalseTrue, 0x0000FF00, 4, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLanes_TwoBoolsWithAllFalse, 0x00000000, 4, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_FourBoolsWithAllTrue, 0xFFFFFFFF, 4, T, T, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_FourBoolsWithAlternatingTrueFalse, 0x00FF00FF, 4, T, F, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_FourBoolsWithAlternatingFalseTrue, 0xFF00FF00, 4, F, T, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLane_FourBoolsWithAllFalse, 0x00000000, 4, F, F, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLanes_FourBoolsWithAllTrue, 0xFFFFFFFF, 4, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLanes_FourBoolsWithAlternatingTrueFalse, 0x00FF00FF, 4, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLanes_FourBoolsWithAlternatingFalseTrue, 0xFF00FF00, 4, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(FourLanes_FourBoolsWithAllFalse, 0x00000000, 4, F, F, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_TwoBoolsWithAllTrue, 0x000000FF, 8, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_TwoBoolsWithAlternatingTrueFalse, 0x0000000F, 8, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_TwoBoolsWithAlternatingFalseTrue, 0x000000F0, 8, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_TwoBoolsWithAllFalse, 0x00000000, 8, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLanes_TwoBoolsWithAllTrue, 0x000000FF, 8, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLanes_TwoBoolsWithAlternatingTrueFalse, 0x0000000F, 8, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLanes_TwoBoolsWithAlternatingFalseTrue, 0x000000F0, 8, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLanes_TwoBoolsWithAllFalse, 0x00000000, 8, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_FourBoolsWithAllTrue, 0x0000FFFF, 8, T, T, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_FourBoolsWithAlternatingTrueFalse, 0x00000F0F, 8, T, F, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_FourBoolsWithAlternatingFalseTrue, 0x0000F0F0, 8, F, T, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_FourBoolsWithAllFalse, 0x00000000, 8, F, F, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLanes_FourBoolsWithAllTrue, 0x0000FFFF, 8, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLanes_FourBoolsWithAlternatingTrueFalse, 0x00000F0F, 8, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLanes_FourBoolsWithAlternatingFalseTrue, 0x0000F0F0, 8, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLanes_FourBoolsWithAllFalse, 0x00000000, 8, F, F, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_EightBoolsWithAllTrue, 0xFFFFFFFF, 8, T, T, T, T, T, T, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_EightBoolsWithAlternatingTrueFalse, 0x0F0F0F0F, 8, T, F, T, F, T, F, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_EightBoolsWithAlternatingFalseTrue, 0xF0F0F0F0, 8, F, T, F, T, F, T, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLane_EightBoolsWithAllFalse, 0x00000000, 8, F, F, F, F, F, F, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLanes_EightBoolsWithAllTrue, 0xFFFFFFFF, 8, T, T, T, T, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLanes_EightBoolsWithAlternatingTrueFalse, 0x0F0F0F0F, 8, T, F, T, F, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLanes_EightBoolsWithAlternatingFalseTrue, 0xF0F0F0F0, 8, F, T, F, T, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(EightLanes_EightBoolsWithAllFalse, 0x00000000, 8, F, F, F, F, F, F, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_TwoBoolsWithAllTrue, 0x0000000F, 16, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_TwoBoolsWithAlternatingTrueFalse, 0x00000003, 16, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_TwoBoolsWithAlternatingFalseTrue, 0x0000000C, 16, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_TwoBoolsWithAllFalse, 0x00000000, 16, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_TwoBoolsWithAllTrue, 0x0000000F, 16, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_TwoBoolsWithAlternatingTrueFalse, 0x00000003, 16, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_TwoBoolsWithAlternatingFalseTrue, 0x0000000C, 16, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_TwoBoolsWithAllFalse, 0x00000000, 16, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_FourBoolsWithAllTrue, 0x000000FF, 16, T, T, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_FourBoolsWithAlternatingTrueFalse, 0x00000033, 16, T, F, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_FourBoolsWithAlternatingFalseTrue, 0x000000CC, 16, F, T, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_FourBoolsWithAllFalse, 0x00000000, 16, F, F, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_FourBoolsWithAllTrue, 0x000000FF, 16, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_FourBoolsWithAlternatingTrueFalse, 0x00000033, 16, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_FourBoolsWithAlternatingFalseTrue, 0x000000CC, 16, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_FourBoolsWithAllFalse, 0x00000000, 16, F, F, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_EightBoolsWithAllTrue, 0x0000FFFF, 16, T, T, T, T, T, T, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_EightBoolsWithAlternatingTrueFalse, 0x00003333, 16, T, F, T, F, T, F, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_EightBoolsWithAlternatingFalseTrue, 0x0000CCCC, 16, F, T, F, T, F, T, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_EightBoolsWithAllFalse, 0x00000000, 16, F, F, F, F, F, F, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_EightBoolsWithAllTrue, 0x0000FFFF, 16, T, T, T, T, T, T, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_EightBoolsWithAlternatingTrueFalse, 0x00003333, 16, T, F, T, F, T, F, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_EightBoolsWithAlternatingFalseTrue, 0x0000CCCC, 16, F, T, F, T, F, T, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_EightBoolsWithAllFalse, 0x00000000, 16, F, F, F, F, F, F, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_SixteenBoolsWithAllTrue, 0xFFFFFFFF, 16, T, T, T, T, T, T, T, T, T, T, T, T,
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_SixteenBoolsWithAllTrue, 0xFFFFFFFF, 16, T, T, T, T, T, T, T, T, T, T, T, T,
                                 T, T, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_SixteenBoolsWithAlternatingTrueFalse, 0x33333333, 16, T, F, T, F, T, F, T,
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_SixteenBoolsWithAlternatingTrueFalse, 0x33333333, 16, T, F, T, F, T, F, T,
                                 F, T, F, T, F, T, F, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_SixteenBoolsWithAlternatingFalseTrue, 0xCCCCCCCC, 16, F, T, F, T, F, T, F,
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_SixteenBoolsWithAlternatingFalseTrue, 0xCCCCCCCC, 16, F, T, F, T, F, T, F,
                                 T, F, T, F, T, F, T, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLane_SixteenBoolsWithAllFalse, 0x00000000, 16, F, F, F, F, F, F, F, F, F, F, F,
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(SixteenLanes_SixteenBoolsWithAllFalse, 0x00000000, 16, F, F, F, F, F, F, F, F, F, F, F,
                                 F, F, F, F, F)
 
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwoLane_TwoBoolsWithAllTrue, 0x00000003, 32, T, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwoLane_TwoBoolsWithAlternatingTrueFalse, 0x00000001, 32, T, F)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwoLane_TwoBoolsWithAlternatingFalseTrue, 0x00000002, 32, F, T)
-TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwoLane_TwoBoolsWithAllFalse, 0x00000000, 32, F, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwoLanes_TwoBoolsWithAllTrue, 0x00000003, 32, T, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwoLanes_TwoBoolsWithAlternatingTrueFalse, 0x00000001, 32, T, F)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwoLanes_TwoBoolsWithAlternatingFalseTrue, 0x00000002, 32, F, T)
+TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwoLanes_TwoBoolsWithAllFalse, 0x00000000, 32, F, F)
 
 TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_FourBoolsWithAllTrue, 0x0000000F, 32, T, T, T, T)
 TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_FourBoolsWithAlternatingTrueFalse, 0x00000005, 32, T, F, T, F)
