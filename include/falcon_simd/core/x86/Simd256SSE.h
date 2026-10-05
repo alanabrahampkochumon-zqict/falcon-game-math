@@ -46,11 +46,12 @@ namespace falcon
     struct Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>
     {
 
-        static constexpr size_t BUFFER_WIDTH = 256;      ///< Width of the register in bits.
+        static constexpr size_t BufferWidth  = 256;      ///< Width of the register in bits.
         using ValueType                      = DataType; ///< The internal data type of this Register.
         static constexpr size_t LaneCount    = Lane;     ///< Number of Lanes of current SIMD256 Register
+        static constexpr size_t MaxLaneCount = BufferWidth / (sizeof(DataType) * 8); /// Maximum Lanes in this register.
 
-        static_assert(sizeof(DataType) * Lane * 8 <= BUFFER_WIDTH && "Invalid size.");
+        static_assert(sizeof(DataType) * Lane * 8 <= BufferWidth && "Invalid size.");
         static_assert(std::has_single_bit(Lane) && Lane > 1 &&
                       "Invalid Number of Lanes. Must be a power of 2(2, 4, 8, 16...)");
 

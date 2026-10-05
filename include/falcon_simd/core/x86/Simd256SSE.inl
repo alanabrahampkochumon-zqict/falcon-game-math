@@ -482,35 +482,40 @@ namespace falcon
     {
         static_assert(sizeof...(ShuffleIndex) == Lane && "There must be <Lane> shuffle indices.");
         static_assert(((ShuffleIndex < Lane) && ...) && "Indices must be between 0(inclusive) and <Lane>(exclusive).");
-        //
-        // constexpr size_t MaxLanes = MAX_128_LANE_COUNT * 2;
-        // // Packed indexing is not support until C++26, we need to use this workaround
-        // [[maybe_unused]] constexpr std::array<uint8_t, MaxLanes> indices{ { ShuffleIndex... } };
-        // // For shuffling with two indices we need to transform the array values(indices)
-        // // to be between 0 - MAX_LANE_COUNT(exclusive)
-        // [[maybe_unused]] constexpr std::array<uint8_t, MaxLanes> normalizedIndices{ { (
-        //     static_cast<uint8_t>(ShuffleIndex - MAX_128_LANE_COUNT))... } };
-        // [[maybe_unused]] constexpr std::array<DataType, MaxLanes> mask{ { (
-        //     ShuffleIndex > MAX_128_LANE_COUNT ? simd::getAllOnes<DataType>() : DataType(0))... } };
-        //
-        //
-        // auto shuffleUpper = [&]<size_t Offset, size_t... Indices>(std::index_sequence<Indices...>) {
-        //     return _upper.template shuffle<normalizedIndices[Offset + Indices]...>();
-        // };
-        // auto upperShuffledWithUpperIndices =
-        //     shuffleUpper(MAX_128_LANE_COUNT, std::make_index_sequence<UPPER_LANE_COUNT>{});
-        // auto upperShuffledWithLowerIndices = shuffleUpper(0, std::make_index_sequence<UPPER_LANE_COUNT>{});
-        //
-        //
-        // auto shuffleLower = [&]<size_t Offset, size_t... Indices>(std::index_sequence<Indices...>) {
-        //     return _lower.template shuffle<normalizedIndices[Offset + Indices]...>();
-        // };
-        // auto lowerShuffledWithUpperIndices =
-        //     shuffleLower(MAX_128_LANE_COUNT, std::make_index_sequence<UPPER_LANE_COUNT>{});
-        // auto lowerShuffledWithLowerIndices = shuffleLower(0, std::make_index_sequence<UPPER_LANE_COUNT>{});
+
+        // For shuffling we need to perform a normalized shuffle(range between 0 - Max_128_Lane_Count)
+        // and then use a mask to select values from appropriate register lanes.
+
+        // Packed indexing is not support until C++26, we need to use this workaround
+        // For shuffling with two indices we need to transform the array values(indices)
+        // to be between 0 - MAX_LANE_COUNT(exclusive)
+        constexpr std::array<uint8_t, MaxLaneCount> normalizedIndices{ { (
+            static_cast<uint8_t>(ShuffleIndex - MAX_128_LANE_COUNT))... } };
+
+        const auto makeMask = [&]<size_t... Index>(std::index_sequence<Index...>) {
+            return simd::makeBlendMask32<MaxLaneCount, (ShuffleIndex > MAX_128_LANE_COUNT)...>();
+        };
+        constexpr BlendMask32_t mask = makeMask(std::make_index_sequence<sizeof...(ShuffleIndex)>{});
+        std::cout << "Mask: " << std::bitset<32>(mask) << '\n';
 
 
-        return *this;
+        auto shuffleUpper = [&]<size_t Offset, size_t... Indices>(std::index_sequence<Indices...>) {
+            return _upper.template shuffle<normalizedIndices[Offset + Indices]...>();
+        };
+        auto upperShuffledWithUpperIndices =
+            shuffleUpper<MAX_128_LANE_COUNT>(std::make_index_sequence<UPPER_LANE_COUNT>{});
+        auto upperShuffledWithLowerIndices = shuffleUpper<0>(std::make_index_sequence<UPPER_LANE_COUNT>{});
+
+
+        auto shuffleLower = [&]<size_t Offset, size_t... Indices>(std::index_sequence<Indices...>) {
+            return _lower.template shuffle<normalizedIndices[Offset + Indices]...>();
+        };
+        auto lowerShuffledWithUpperIndices =
+            shuffleLower<MAX_128_LANE_COUNT>(std::make_index_sequence<UPPER_LANE_COUNT>{});
+        auto lowerShuffledWithLowerIndices = shuffleLower<0>(std::make_index_sequence<UPPER_LANE_COUNT>{});
+
+        return Simd256{ lowerShuffledWithUpperIndices.template blend<mask>(lowerShuffledWithLowerIndices),
+                        upperShuffledWithUpperIndices.template blend<mask>(upperShuffledWithLowerIndices) };
     }
 
 
