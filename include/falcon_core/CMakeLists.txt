@@ -6,7 +6,7 @@ add_library(FalconCore INTERFACE
 )
 target_compile_features(FalconCore INTERFACE cxx_std_20)
 target_link_libraries(FalconCore INTERFACE
-        StrictWarnings
+        ${PROJECT_NAME}-StrictWarnings
         ProjectSanitizers
 )
 

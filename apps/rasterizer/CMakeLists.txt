@@ -22,7 +22,7 @@ target_link_libraries(
         FGM
         SDL3::SDL3
         fast_float
-        StrictWarnings
+        ${PROJECT_NAME}-StrictWarnings
         ProjectSanitizers
 )
 

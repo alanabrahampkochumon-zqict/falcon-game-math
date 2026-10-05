@@ -21,6 +21,6 @@ target_link_libraries(
         benchmark::benchmark_main
         FGM
 
-        StrictWarnings
+        ${PROJECT_NAME}-StrictWarnings
         ProjectSanitizers
 )

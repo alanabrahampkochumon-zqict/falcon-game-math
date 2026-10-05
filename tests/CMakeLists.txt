@@ -18,8 +18,8 @@ target_link_libraries(
 
         GTest::gtest
         GTest::gtest_main
-        StrictWarnings
-        ProjectSanitizers
+        ${PROJECT_NAME}-StrictWarnings
+        ${PROJECT_NAME}-ProjectSanitizers
 )
 
 if (FALCON_CORE_TESTS)

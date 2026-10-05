@@ -33,8 +33,8 @@ target_link_libraries(
         GTest::gtest
         GTest::gtest_main # googletest
 
-        StrictWarnings
-        ProjectSanitizers
+        ${PROJECT_NAME}-StrictWarnings
+        ${PROJECT_NAME}-ProjectSanitizers
 )
 
 AddCompilerFlag(FalconSIMDMemoryTests PUBLIC ${FALCON_SIMD_MODE}) # Update to compile an executable per flag

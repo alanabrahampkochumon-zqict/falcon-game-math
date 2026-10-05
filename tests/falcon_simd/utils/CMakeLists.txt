@@ -15,7 +15,7 @@ target_link_libraries(
         FalconSIMD
         GTest::gtest
         GTest::gtest_main # googletest
-        StrictWarnings
-        ProjectSanitizers
+        ${PROJECT_NAME}-StrictWarnings
+        ${PROJECT_NAME}-ProjectSanitizers
         #        NonComprehensiveTestMode
 )
