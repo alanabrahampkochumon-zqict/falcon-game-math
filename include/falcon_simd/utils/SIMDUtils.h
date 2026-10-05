@@ -100,7 +100,7 @@ namespace falcon::simd
      * @return A 32-bit integral mask usable across Simd128/256/512 const blending.
      */
     template <size_t MaxLaneCount, bool... Mask>
-        requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) > 1 && sizeof...(Mask) <= MaxLaneCount) &&
+        requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) >= 2 && sizeof...(Mask) <= MaxLaneCount) &&
         (MaxLaneCount >= 2 && MaxLaneCount <= 32 && std::has_single_bit(MaxLaneCount))
     constexpr BlendMask32_t makeBlendMask32() noexcept
     {

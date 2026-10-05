@@ -1,8 +1,4 @@
 #pragma once
-#include "Simd128SSE.h"
-#include "falcon_simd/utils/SIMDUtils.h"
-
-#include <bitset>
 /**
  * @file Simd128SSE.inl
  * @author Alan Abraham P Kochumon
@@ -12,6 +8,11 @@
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
+
+
+#include "falcon_simd/utils/SIMDUtils.h"
+
+#include <bitset>
 
 namespace falcon
 {
@@ -2619,47 +2620,56 @@ namespace falcon
             // };
             // constexpr auto Imm8 = static_cast<uint8_t>(compressToImm8(std::make_index_sequence<4>{}));
 
-            constexpr auto compressToImm8 = [&]<size_t... Index>(std::index_sequence<Index...>) {
-                return (((Mask & (0x1U << (Index * 8))) >> (7 * Index)) | ...);
-            };
-            constexpr auto Imm8 = static_cast<uint8_t>(compressToImm8(std::make_index_sequence<2>{}));
-            std::cout << "FULLMASK: " << std::bitset<32>(Mask) << '\n';
-            std::cout << "IMM8: " << std::bitset<32>(Imm8) << '\n';
-            std::cout << "IMM8: " << std::bitset<32>(static_cast<uint8_t>(Imm8)) << '\n';
+            // constexpr auto compressToImm8 = [&]<size_t... Index>(std::index_sequence<Index...>) {
+            //     return (((Mask & (0x1U << (Index * 8))) >> (7 * Index)) | ...);
+            // };
+            constexpr auto Imm8 = simd::packToNBits<4>(Mask);
             return Simd128(_mm_blend_epi32(_register, other._register, Imm8));
         }
         else if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_SSE4)
         {
             if constexpr (types::IsFP64<DataType>)
             {
-                return Simd128(_mm_blend_pd(_register, other._register, Mask));
+                constexpr auto Imm8 = simd::packToNBits<2>(Mask);
+                return Simd128(_mm_blend_pd(_register, other._register, Imm8));
             }
             if constexpr (types::IsFP32<DataType>)
             {
-                return Simd128(_mm_blend_ps(_register, other._register, Mask));
+                constexpr auto Imm8 = simd::packToNBits<4>(Mask);
+                return Simd128(_mm_blend_ps(_register, other._register, Imm8));
             }
             if constexpr (sizeof(DataType) == 8)
             {
+            constexpr auto Imm8 = simd::packToNBits<2>(Mask);
                 const auto dblReg1 = _mm_castsi128_pd(_register);
                 const auto dblReg2 = _mm_castsi128_pd(*other);
-                return Simd128(_mm_castpd_si128(_mm_blend_pd(dblReg1, dblReg2, Mask)));
+                return Simd128(_mm_castpd_si128(_mm_blend_pd(dblReg1, dblReg2, Imm8)));
             }
             if constexpr (sizeof(DataType) == 4)
             {
+            constexpr auto Imm8 = simd::packToNBits<4>(Mask);
                 const auto fltReg1 = _mm_castsi128_ps(_register);
                 const auto fltReg2 = _mm_castsi128_ps(*other);
-                return Simd128(_mm_castps_si128(_mm_blend_ps(fltReg1, fltReg2, Mask)));
+                return Simd128(_mm_castps_si128(_mm_blend_ps(fltReg1, fltReg2, Imm8)));
             }
             if constexpr (sizeof(DataType) == 2)
             {
-                return Simd128(_mm_blend_epi16(_register, other._register, Mask));
+            constexpr auto Imm8 = simd::packToNBits<8>(Mask);
+                return Simd128(_mm_blend_epi16(_register, other._register, Imm8));
             }
         }
         // For fallback we can use (A & ~Mask) | (B & Mask)
         // But we need to perform a bitwise expansion on the mask and then forward it to a register.
         const auto [upper, lower] = simd::expandFourFold(Mask);
-        const auto maskReg =
-            Simd128<SimdBackend::ARCH_SSE2, uint64_t, Lane>(_mm_set_epi64x(upper, lower)).template cast<DataType>();
+        auto maskReg              = Simd128(_mm_set_epi64x(upper, lower));
+        if constexpr (std::same_as<DataType, double>)
+        {
+            maskReg = Simd128(_mm_castsi128_pd(_mm_set_epi64x(upper, lower)));
+        }
+        else if constexpr (std::same_as<DataType, float>)
+        {
+            maskReg = Simd128(_mm_castsi128_ps(_mm_set_epi64x(upper, lower)));
+        }
         return maskReg.andNot(*this) | (other & maskReg);
     }
 

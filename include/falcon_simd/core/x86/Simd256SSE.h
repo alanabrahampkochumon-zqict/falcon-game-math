@@ -50,7 +50,7 @@ namespace falcon
         using ValueType                      = DataType; ///< The internal data type of this Register.
         static constexpr size_t LaneCount    = Lane;     ///< Number of Lanes of current SIMD256 Register
 
-        static_assert(sizeof(DataType) * Lane <= BUFFER_WIDTH && "Invalid size.");
+        static_assert(sizeof(DataType) * Lane * 8 <= BUFFER_WIDTH && "Invalid size.");
         static_assert(std::has_single_bit(Lane) && Lane > 1 &&
                       "Invalid Number of Lanes. Must be a power of 2(2, 4, 8, 16...)");
 

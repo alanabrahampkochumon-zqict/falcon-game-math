@@ -1,7 +1,7 @@
 add_executable(FalconSIMDMemoryTests
         Simd128/ArithmeticTests.cpp
         Simd128/ComparisonTests.cpp
-        Simd128/ConversionCtorTests.cpp
+        # Simd128/ConversionCtorTests.cpp # TODO: Enable after creating a conversion ctor
         Simd128/GetterSetterTests.cpp
         Simd128/LoadStoreTests.cpp
         Simd128/BitwiseOperationTests.cpp

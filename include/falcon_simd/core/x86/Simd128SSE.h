@@ -50,7 +50,7 @@ namespace falcon
         static constexpr size_t LaneCount    = Lane;     ///< Number of Lanes of current SIMD128 Register
         static constexpr size_t MaxLaneCount = BufferWidth / (sizeof(DataType) * 8); /// Maximum Lanes in this register.
 
-        static_assert(sizeof(DataType) * Lane <= BufferWidth && "Invalid size.");
+        static_assert(sizeof(DataType) * 8 * Lane <= BufferWidth && "Invalid size.");
         static_assert(std::has_single_bit(Lane) && Lane > 1 &&
                       "Invalid Number of Lanes. Must be a power of 2(2, 4, 8, 16...)");
 
@@ -706,7 +706,7 @@ namespace falcon
          * @return A 32-bit integral mask usable across Simd128 const blending.
          */
         template <bool... Mask>
-            requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) > 1 && sizeof...(Mask) <= Lane)
+            requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) >= 2 && sizeof...(Mask) <= Lane)
         static constexpr BlendMask32_t makeBlendMask32() noexcept
         { return simd::makeBlendMask32<MaxLaneCount, Mask...>(); }
 
