@@ -2615,14 +2615,6 @@ namespace falcon
         if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX2 && std::is_integral_v<DataType> &&
                       sizeof(DataType) == 4)
         {
-            // auto compressToImm8 = [&]<size_t... Index>(std::index_sequence<Index...>) {
-            //     return ((Mask & (0b1 << (Index * 4)) >> (3 * (3 - Index))) | ...);
-            // };
-            // constexpr auto Imm8 = static_cast<uint8_t>(compressToImm8(std::make_index_sequence<4>{}));
-
-            // constexpr auto compressToImm8 = [&]<size_t... Index>(std::index_sequence<Index...>) {
-            //     return (((Mask & (0x1U << (Index * 8))) >> (7 * Index)) | ...);
-            // };
             constexpr auto Imm8 = simd::packToNBits<4>(Mask);
             return Simd128(_mm_blend_epi32(_register, other._register, Imm8));
         }
@@ -2640,28 +2632,28 @@ namespace falcon
             }
             if constexpr (sizeof(DataType) == 8)
             {
-            constexpr auto Imm8 = simd::packToNBits<2>(Mask);
-                const auto dblReg1 = _mm_castsi128_pd(_register);
-                const auto dblReg2 = _mm_castsi128_pd(*other);
+                constexpr auto Imm8 = simd::packToNBits<2>(Mask);
+                const auto dblReg1  = _mm_castsi128_pd(_register);
+                const auto dblReg2  = _mm_castsi128_pd(*other);
                 return Simd128(_mm_castpd_si128(_mm_blend_pd(dblReg1, dblReg2, Imm8)));
             }
             if constexpr (sizeof(DataType) == 4)
             {
-            constexpr auto Imm8 = simd::packToNBits<4>(Mask);
-                const auto fltReg1 = _mm_castsi128_ps(_register);
-                const auto fltReg2 = _mm_castsi128_ps(*other);
+                constexpr auto Imm8 = simd::packToNBits<4>(Mask);
+                const auto fltReg1  = _mm_castsi128_ps(_register);
+                const auto fltReg2  = _mm_castsi128_ps(*other);
                 return Simd128(_mm_castps_si128(_mm_blend_ps(fltReg1, fltReg2, Imm8)));
             }
             if constexpr (sizeof(DataType) == 2)
             {
-            constexpr auto Imm8 = simd::packToNBits<8>(Mask);
+                constexpr auto Imm8 = simd::packToNBits<8>(Mask);
                 return Simd128(_mm_blend_epi16(_register, other._register, Imm8));
             }
         }
         // For fallback we can use (A & ~Mask) | (B & Mask)
         // But we need to perform a bitwise expansion on the mask and then forward it to a register.
         const auto [upper, lower] = simd::expandFourFold(Mask);
-        auto maskReg              = Simd128(_mm_set_epi64x(upper, lower));
+        auto maskReg = Simd128(_mm_set_epi64x(upper, lower));
         if constexpr (std::same_as<DataType, double>)
         {
             maskReg = Simd128(_mm_castsi128_pd(_mm_set_epi64x(upper, lower)));

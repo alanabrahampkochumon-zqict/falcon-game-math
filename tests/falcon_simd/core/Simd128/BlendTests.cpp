@@ -185,7 +185,7 @@ constexpr std::array<bool, Size> ArrToBool(const std::array<T, Size>& array)
         TEST(Simd128BlendTests, CompileTimeBlendingWithMask_ReturnsValidRegister_For##TestSuffix)                      \
         {                                                                                                              \
             falcon::Simd128_t<Type, Lanes> regA{}, regB{};                                                             \
-            constexpr auto mask = falcon::simd::makeBlendMask32<Lanes,__VA_ARGS__>();                                                 \
+            constexpr auto mask = regA.makeBlendMask32<__VA_ARGS__>();                                          \
             regA.load(First.data());                                                                                   \
             regB.load(Second.data());                                                                                  \
                                                                                                                        \
@@ -202,6 +202,7 @@ constexpr std::array<bool, Size> ArrToBool(const std::array<T, Size>& array)
 constexpr bool T = true;
 constexpr bool F = false;
 
+// clang-format off
 // Unsigned integers
 static Array<U8, 2> arrU8x2_First{ 100, 24 };
 static Array<U8, 2> arrU8x2_Second{ 32, 15 };
@@ -217,9 +218,9 @@ SIMD128_COMPILE_TIME_BLEND_TESTS(U8_4Lanes_SelectFirst, U8, 4, arrU8x4_First, ar
 SIMD128_COMPILE_TIME_BLEND_TESTS(U8_4Lanes_SelectSecond, U8, 4, arrU8x4_First, arrU8x4_Second, arrU8x4_Second, T, T, T, T)
 SIMD128_COMPILE_TIME_BLEND_TESTS(U8_4Lanes_SelectMixed, U8, 4, arrU8x4_First, arrU8x4_Second, arrU8x4_SelectMixed, T, F, T, F)
 
-static Array<U8, 8> arrU8x8_First{ 100, 28, 121, 53, 8, 34, 21, 24 };
-static Array<U8, 8> arrU8x8_Second{ 32, 15, 67, 12, 93, 32, 98, 47 };
-static Array<U8, 8> arrU8x8_SelectMixed{ 32, 28, 67, 53, 93, 34, 98, 47 };
+static Array<U8, 8> arrU8x8_First{ 100, 28, 121, 53, 8, 34, 21, 24 }; // 28, 53, 34, 24
+static Array<U8, 8> arrU8x8_Second{ 32, 15, 67, 12, 93, 32, 98, 47 }; // 32, 28, 67, 53, 93, 34, 98, 24
+static Array<U8, 8> arrU8x8_SelectMixed{ 32, 28, 67, 53, 93, 34, 98, 24 };
 SIMD128_COMPILE_TIME_BLEND_TESTS(U8_8Lanes_SelectFirst, U8, 8, arrU8x8_First, arrU8x8_Second, arrU8x8_First, F, F, F, F, F, F, F, F)
 SIMD128_COMPILE_TIME_BLEND_TESTS(U8_8Lanes_SelectSecond, U8, 8, arrU8x8_First, arrU8x8_Second, arrU8x8_Second, T, T, T, T, T, T, T, T)
 SIMD128_COMPILE_TIME_BLEND_TESTS(U8_8Lanes_SelectMixed, U8, 8, arrU8x8_First, arrU8x8_Second, arrU8x8_SelectMixed, T, F, T, F, T, F, T, F)
@@ -247,7 +248,7 @@ SIMD128_COMPILE_TIME_BLEND_TESTS(U16_4Lanes_SelectMixed, U16, 4, arrU16x4_First,
 
 static Array<U16, 8> arrU16x8_First{ 100, 28, 121, 53, 8, 34, 21, 24 };
 static Array<U16, 8> arrU16x8_Second{ 32, 15, 67, 12, 93, 32, 98, 47 };
-static Array<U16, 8> arrU16x8_SelectMixed{ 32, 28, 67, 53, 93, 34, 98, 47 };
+static Array<U16, 8> arrU16x8_SelectMixed{ 32, 28, 67, 53, 93, 34, 98, 24 };
 SIMD128_COMPILE_TIME_BLEND_TESTS(U16_8Lanes_SelectFirst, U16, 8, arrU16x8_First, arrU16x8_Second, arrU16x8_First, F, F, F, F, F, F, F, F)
 SIMD128_COMPILE_TIME_BLEND_TESTS(U16_8Lanes_SelectSecond, U16, 8, arrU16x8_First, arrU16x8_Second, arrU16x8_Second, T, T, T, T, T, T, T, T)
 SIMD128_COMPILE_TIME_BLEND_TESTS(U16_8Lanes_SelectMixed, U16, 8, arrU16x8_First, arrU16x8_Second, arrU16x8_SelectMixed, T, F, T, F, T, F, T, F)
@@ -290,7 +291,7 @@ SIMD128_COMPILE_TIME_BLEND_TESTS(I8_4Lanes_SelectMixed, I8, 4, arrI8x4_First, ar
 
 static Array<I8, 8> arrI8x8_First{ 100, 28, 121, 53, 8, 34, 21, 24 };
 static Array<I8, 8> arrI8x8_Second{ 32, 15, 67, 12, 93, 32, 98, 47 };
-static Array<I8, 8> arrI8x8_SelectMixed{ 32, 28, 67, 53, 93, 34, 98, 47 };
+static Array<I8, 8> arrI8x8_SelectMixed{ 32, 28, 67, 53, 93, 34, 98, 24 };
 SIMD128_COMPILE_TIME_BLEND_TESTS(I8_8Lanes_SelectFirst, I8, 8, arrI8x8_First, arrI8x8_Second, arrI8x8_First, F, F, F, F, F, F, F, F)
 SIMD128_COMPILE_TIME_BLEND_TESTS(I8_8Lanes_SelectSecond, I8, 8, arrI8x8_First, arrI8x8_Second, arrI8x8_Second, T, T, T, T, T, T, T, T)
 SIMD128_COMPILE_TIME_BLEND_TESTS(I8_8Lanes_SelectMixed, I8, 8, arrI8x8_First, arrI8x8_Second, arrI8x8_SelectMixed, T, F, T, F, T, F, T, F)
@@ -318,7 +319,7 @@ SIMD128_COMPILE_TIME_BLEND_TESTS(I16_4Lanes_SelectMixed, I16, 4, arrI16x4_First,
 
 static Array<I16, 8> arrI16x8_First{ 100, 28, 121, 53, 8, 34, 21, 24 };
 static Array<I16, 8> arrI16x8_Second{ 32, 15, 67, 12, 93, 32, 98, 47 };
-static Array<I16, 8> arrI16x8_SelectMixed{ 32, 28, 67, 53, 93, 34, 98, 47 };
+static Array<I16, 8> arrI16x8_SelectMixed{ 32, 28, 67, 53, 93, 34, 98, 24 };
 SIMD128_COMPILE_TIME_BLEND_TESTS(I16_8Lanes_SelectFirst, I16, 8, arrI16x8_First, arrI16x8_Second, arrI16x8_First, F, F, F, F, F, F, F, F)
 SIMD128_COMPILE_TIME_BLEND_TESTS(I16_8Lanes_SelectSecond, I16, 8, arrI16x8_First, arrI16x8_Second, arrI16x8_Second, T, T, T, T, T, T, T, T)
 SIMD128_COMPILE_TIME_BLEND_TESTS(I16_8Lanes_SelectMixed, I16, 8, arrI16x8_First, arrI16x8_Second, arrI16x8_SelectMixed, T, F, T, F, T, F, T, F)
@@ -367,6 +368,7 @@ SIMD128_COMPILE_TIME_BLEND_TESTS(FP64_2Lanes_SelectFirst, FP64, 2, arrFP64x2_Fir
 SIMD128_COMPILE_TIME_BLEND_TESTS(FP64_2Lanes_SelectSecond, FP64, 2, arrFP64x2_First, arrFP64x2_Second, arrFP64x2_Second, T, T)
 SIMD128_COMPILE_TIME_BLEND_TESTS(FP64_2Lanes_SelectMixed, FP64, 2, arrFP64x2_First, arrFP64x2_Second, arrFP64x2_SelectMixed, T, F)
 
+// clang-format on
 /// ================================ END COMPILE TIME BLEND TESTS ================================
 
 
