@@ -769,7 +769,7 @@ namespace falcon
         static_assert(Lane > MAX_128_LANE_COUNT, "Payload fits in 128-bits. Use Simd128 to directly prevent emulation");
 
         static constexpr auto LOWER_LANE_COUNT = MAX_128_LANE_COUNT;
-        static constexpr auto UPPER_LANE_COUNT = Lane - MAX_128_LANE_COUNT;
+        static constexpr auto UPPER_LANE_COUNT = (Lane - MAX_128_LANE_COUNT > 0 ? Lane - MAX_128_LANE_COUNT : 0);
 
         /// [Upper][Lower]
         Simd128<SimdBackend::ARCH_SSE2, DataType, UPPER_LANE_COUNT> _upper;
