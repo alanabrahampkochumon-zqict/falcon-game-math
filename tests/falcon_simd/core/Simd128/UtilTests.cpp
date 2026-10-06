@@ -249,7 +249,7 @@ SIMD128_HAS_INF_TESTS_FP(FP64_2Lanes_AlternatingInf, FP64, 2, DATA_FP64_2LANES_M
         TEST(Simd128_MakeBlendMaskTests, ReturnsValidMask_For##TestSuffix)                                             \
         {                                                                                                              \
             const falcon::Simd128_t<DataType, RegCount> reg{ DataType(0) };                                          \
-            EXPECT_EQ(ExpectedMask, (reg.makeBlendMask32<__VA_ARGS__>()));                                             \
+            EXPECT_EQ(ExpectedMask, (reg.makeBlendMask<__VA_ARGS__>()));                                             \
         }
 
 // Aliasing to make testing easier.

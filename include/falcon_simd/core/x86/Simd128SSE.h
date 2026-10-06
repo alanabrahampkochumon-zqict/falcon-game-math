@@ -707,7 +707,7 @@ namespace falcon
          */
         template <bool... Mask>
             requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) >= 2 && sizeof...(Mask) <= Lane)
-        static constexpr BlendMask32_t makeBlendMask32() noexcept
+        static constexpr BlendMask32_t makeBlendMask() noexcept
         { return simd::makeBlendMask32<MaxLaneCount, Mask...>(); }
 
 
