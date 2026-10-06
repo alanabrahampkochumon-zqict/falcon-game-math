@@ -22,5 +22,5 @@ target_link_libraries(
         FGM
 
         ${PROJECT_NAME}-StrictWarnings
-        ProjectSanitizers
+        ${PROJECT_NAME}-ProjectSanitizers
 )

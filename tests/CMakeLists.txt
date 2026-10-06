@@ -6,9 +6,9 @@ set(ENV{FALCON_SIMD_TEST_FLAG} "AUTO") # SIMD Test Flags for Falcon Math Suite
 
 # Add Project Sanitizers to Gtest
 if (TARGET gtest AND (FGM_TESTS OR FALCON_SIMD_TESTS))
-    target_link_libraries(gtest PRIVATE ProjectSanitizers)
-    target_link_libraries(gmock PRIVATE ProjectSanitizers)
-    target_link_libraries(gtest_main PRIVATE ProjectSanitizers)
+    target_link_libraries(gtest PRIVATE ${PROJECT_NAME}-ProjectSanitizers)
+    target_link_libraries(gmock PRIVATE ${PROJECT_NAME}-ProjectSanitizers)
+    target_link_libraries(gtest_main PRIVATE ${PROJECT_NAME}-ProjectSanitizers)
 endif ()
 
 

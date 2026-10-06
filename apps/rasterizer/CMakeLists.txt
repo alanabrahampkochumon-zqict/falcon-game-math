@@ -23,7 +23,7 @@ target_link_libraries(
         SDL3::SDL3
         fast_float
         ${PROJECT_NAME}-StrictWarnings
-        ProjectSanitizers
+        ${PROJECT_NAME}-ProjectSanitizers
 )
 
 # Copy models directory to the build directory

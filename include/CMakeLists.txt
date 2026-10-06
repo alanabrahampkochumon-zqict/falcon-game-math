@@ -14,7 +14,7 @@ target_compile_features(FGM INTERFACE cxx_std_20)
 
 # NOTE: If this flag is not enabled, then NAN less than and less than or equal comparison will not work properly.
 target_compile_options(FGM INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
-target_link_libraries(FGM INTERFACE ${PROJECT_NAME}-StrictWarnings ProjectSanitizers)
+target_link_libraries(FGM INTERFACE ${PROJECT_NAME}-StrictWarnings ${PROJECT_NAME}-ProjectSanitizers)
 
 target_include_directories(FGM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 

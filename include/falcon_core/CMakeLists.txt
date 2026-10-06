@@ -7,7 +7,7 @@ add_library(FalconCore INTERFACE
 target_compile_features(FalconCore INTERFACE cxx_std_20)
 target_link_libraries(FalconCore INTERFACE
         ${PROJECT_NAME}-StrictWarnings
-        ProjectSanitizers
+        ${PROJECT_NAME}-ProjectSanitizers
 )
 
 target_include_directories(FalconCore INTERFACE ${LIBRARY_ROOT_DIR})
