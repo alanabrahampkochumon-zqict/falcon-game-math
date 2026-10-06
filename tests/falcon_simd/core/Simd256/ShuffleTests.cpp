@@ -267,7 +267,7 @@ namespace
 } // namespace
 
 
-TYPED_TEST(Simd256ShuffleTests, BlendingWithMaskReturnsRegisterWithCorrectValues)
+TYPED_TEST(Simd256ShuffleTests, ReturnsRegisterWithCorrectValues)
 {
     // Get all the parameters from the types
     using Type                            = TypeParam::Type;

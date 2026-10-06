@@ -675,27 +675,27 @@ namespace falcon
         [[nodiscard]] constexpr Simd256 shiftRightLogical() const noexcept;
 
 
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //     ///   MASKING/BLENDING
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //
-        //     /**
-        //      * @brief Selectively blend values from this register and @p other using the @p mask.
-        //      *
-        //      * @code
-        //      * // Masking sample
-        //      * this  -> 0x ff 23 15 81
-        //      * other -> 0x 32 3f ed 55
-        //      * mask  -> 0x ff 00 ff 00
-        //      * ret   -> 0x 32 23 ed 81
-        //      * @endcode
-        //      *
-        //      * @param other The register whose values are selected when mask is 0b11..11 or 0xf..f.
-        //      * @param mask  The mask to use for blending.
-        //      *
-        //      * @return Return a new register with blended values.
-        //      */
-        //     [[nodiscard]] constexpr Simd256 blend(Simd256 other, Simd256 mask) const noexcept;
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+        ///   MASKING/BLENDING
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+        /**
+         * @brief Selectively blend values from this register and @p other using the @p mask.
+         *
+         * @code
+         * // Masking sample
+         * this  -> 0x ff 23 15 81
+         * other -> 0x 32 3f ed 55
+         * mask  -> 0x ff 00 ff 00
+         * ret   -> 0x 32 23 ed 81
+         * @endcode
+         *
+         * @param other The register whose values are selected when mask is 0b11..11 or 0xf..f.
+         * @param mask  The mask to use for blending.
+         *
+         * @return Return a new register with blended values.
+         */
+        [[nodiscard]] constexpr Simd256 blend(Simd256 other, Simd256 mask) const noexcept;
 
         /**
          * Shuffle the values as per given index.

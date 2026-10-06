@@ -474,6 +474,12 @@ namespace falcon
         SimdBackend::ARCH_SSE2, DataType, Lane>::shiftRightLogical() const noexcept
     { return Simd256(_lower.template shiftRightLogical<Count>(), _upper.template shiftRightLogical<Count>()); }
 
+    // TODO: Rename makeBlendMask32 (member) to makeBlendMask
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::blend(Simd256 other, Simd256 mask) const noexcept
+    { return Simd256{ _lower.blend(other._lower, mask._lower), _upper.blend(other._upper, mask._upper) }; }
+
 
     template <typename DataType, size_t Lane>
     template <uint8_t... ShuffleIndex>
