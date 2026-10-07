@@ -24,7 +24,7 @@ target_link_libraries(
 
 if (FALCON_CORE_TESTS)
     message(STATUS "[Falcon]: Core Library tests are enabled")
-    add_subdirectory(falcon_core)
+    add_subdirectory(falcon/core)
 endif ()
 
 
@@ -42,14 +42,14 @@ target_compile_definitions(FGMTestSetup INTERFACE $<$<CONFIG:Debug>:ENABLE_DEBUG
 AddCompilerFlag(FGMTestSetup INTERFACE ${FALCON_SIMD_MODE}) # Update to compile an executable per flag
 
 if (NONCOMPREHENSIVE)
-    message(STATUS "[FGM]: Running only non-comprehensive tests")
+    message(STATUS "[Falcon]: Running only non-comprehensive tests")
     target_compile_definitions(FGMTestSetup INTERFACE NONCOMPREHENSIVE)
     target_compile_definitions(FGMTestSetup INTERFACE $ENV{FALCON_SIMD_TEST_FLAG})
 endif ()
 
 if (FGM_TESTS)
     message(STATUS "[Falcon]: Game Math tests are enabled")
-    add_subdirectory(fgm)
+    add_subdirectory(falcon/math)
 endif ()
 
 
@@ -67,5 +67,5 @@ target_link_libraries(FalconSimdTestSetup INTERFACE
 
 if (FALCON_SIMD_TESTS)
     message(STATUS "[Falcon]: SIMD tests are enabled")
-    add_subdirectory(falcon_simd)
+    add_subdirectory(falcon/simd)
 endif ()
