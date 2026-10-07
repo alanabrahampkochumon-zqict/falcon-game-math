@@ -1,4 +1,5 @@
-add_library(FalconSIMD INTERFACE
+set(FALCON_SIMD_TARGET_NAME FalconSIMD${FLCN_INTERNAL_TARGET_SUFFIX})
+add_library(${FALCON_SIMD_TARGET_NAME} INTERFACE
         core/Simd128.h
         core/RegisterTraits.h
         core/x86/Simd128SSE.h
@@ -18,11 +19,12 @@ add_library(FalconSIMD INTERFACE
         DoxygenGroups.h
 )
 
-set_target_properties(FalconSIMD PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS NO)
+set_target_properties(${FALCON_SIMD_TARGET_NAME} PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS NO)
 # TODO: REMOVE PROJECT LINKAGE
-target_link_libraries(FalconSIMD INTERFACE
+target_link_libraries(${FALCON_SIMD_TARGET_NAME} INTERFACE
+        ${FALCON_CORE_TARGET_NAME}
         ${PROJECT_NAME}-StrictWarnings
         ${PROJECT_NAME}-ProjectSanitizers
 )
 
-target_include_directories(FalconSIMD INTERFACE ${FALCON_LIBRARY_ROOT_DIR})
+target_include_directories(${FALCON_SIMD_TARGET_NAME} INTERFACE ${FALCON_LIBRARY_ROOT_DIR})

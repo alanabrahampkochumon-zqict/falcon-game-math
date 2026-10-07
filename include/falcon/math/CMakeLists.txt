@@ -1,4 +1,5 @@
-add_library(FalconGameMath INTERFACE
+set(FALCON_MATH_TARGET_NAME FalconGameMath${FALCON_INTERNAL_TARGET_SUFFIX})
+add_library(${FALCON_MATH_TARGET_NAME} INTERFACE
         common/Config.h
         common/Constants.h
         common/MathTraits.h
@@ -52,13 +53,15 @@ add_library(FalconGameMath INTERFACE
         vectors/Vec2.tpp
 )
 
-target_compile_options(FalconGameMath INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
-set_target_properties(FalconGameMath PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS NO)
+target_compile_options(${FALCON_MATH_TARGET_NAME} INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
+set_target_properties(${FALCON_MATH_TARGET_NAME} PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS NO)
 # TODO: Remove internal target linkages(as this can fail on builds not running in strict mode)
 # TODO: Remove for all targets
-target_link_libraries(FalconGameMath INTERFACE
+target_link_libraries(${FALCON_MATH_TARGET_NAME} INTERFACE
+        ${FALCON_CORE_TARGET_NAME}
+        ${FALCON_SIMD_TARGET_NAME}
         ${PROJECT_NAME}-StrictWarnings
         ${PROJECT_NAME}-ProjectSanitizers
 )
 
-target_include_directories(FalconGameMath INTERFACE ${FALCON_LIBRARY_ROOT_DIR})
+target_include_directories(${FALCON_MATH_TARGET_NAME} INTERFACE ${FALCON_LIBRARY_ROOT_DIR})
