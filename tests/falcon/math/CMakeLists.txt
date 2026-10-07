@@ -20,13 +20,14 @@ add_subdirectory(vectors)
 add_subdirectory(quaternions)
 add_subdirectory(matrices)
 
-source_group(
-        TREE
-        "${FGM_ROOT_INCLUDE_DIR}"
-        PREFIX "Header Files"
-        FILES
-        ${SetupHeaderFiles}
-        ${TestUtilities}
-)
+# TODO: FIX Directory Structuring
+#source_group(
+#        TREE
+#        "${FGM_ROOT_INCLUDE_DIR}"
+#        PREFIX "Header Files"
+#        FILES
+#        ${SetupHeaderFiles}
+#        ${TestUtilities}
+#)
 
 

@@ -1,57 +1,36 @@
-set(LIBRARY_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(FALCON_LIBRARY_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(FLCN_LIB_NAME Falcon)
+
 add_subdirectory(falcon/core)
 add_subdirectory(falcon/math)
 add_subdirectory(falcon/simd)
 
-####################
-# Falcon Game Math #
-####################
-
 # Library Options
-option(FGM_FORCE_LEFT_HANDED "Use Left-Handed Coordinate System in FGM")
+option(FGM_FORCE_LEFT_HANDED "Use Left-Handed Coordinate System in Falcon Game Math")
+add_library(${FLCN_LIB_NAME} INTERFACE
+        falcon/Falcon.h
+)
+add_library(${FLCN_LIB_NAME}:${FLCN_LIB_NAME} ALIAS ${FLCN_LIB_NAME})
 
-include(fgm/FGM.cmake)
-add_library(FGM INTERFACE ${FGM_HEADERS})
-target_compile_features(FGM INTERFACE cxx_std_20)
 
-# NOTE: If this flag is not enabled, then NAN less than and less than or equal comparison will not work properly.
-target_compile_options(FGM INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
-target_link_libraries(FGM INTERFACE ${PROJECT_NAME}-StrictWarnings ${PROJECT_NAME}-ProjectSanitizers)
+target_link_libraries(${FLCN_LIB_NAME} INTERFACE
+        FalconCore
+        FalconSIMD
+        FalconGameMath
+)
 
-target_include_directories(FGM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
-
-source_group("CMake Files/fgm/" FILES fgm/FGM.cmake fgm/common/Common.cmake fgm/matrices/Matrices.cmake fgm/vectors/Vectors.cmake)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${FGM_HEADERS})
+target_include_directories(${FLCN_LIB_NAME} INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
+)
 
 if (FGM_FORCE_LEFT_HANDED)
-    message(STATUS "FGM is using Left-Handed Coordinate System")
-    target_compile_definitions(FGM INTERFACE FGM_LEFT_HANDED)
+    message(STATUS "[Falcon]: Using Left-Handed Coordinate System")
+    target_compile_definitions(${FLCN_LIB_NAME} INTERFACE FGM_LEFT_HANDED)
+    target_compile_definitions(FalconGameMath INTERFACE FGM_LEFT_HANDED)
 else ()
-    message(STATUS "FGM is using Right-Handed Coordinate System")
+    message(STATUS "[Falcon]: Using Right-Handed Coordinate System")
 endif ()
-target_link_libraries(FGM INTERFACE
-        FalconSIMD
-        ${PROJECT_NAME}-StrictWarnings
-        ${PROJECT_NAME}-ProjectSanitizers
-        FalconCore
-        FalconSIMD
-)
 
-
-###############
-# Falcon SIMD #
-###############
-
-include(falcon_simd/FalconSimd.cmake)
-add_library(FalconSIMD INTERFACE ${FALCON_SIMD_ROOT_HEADERS})
-target_compile_features(FalconSIMD INTERFACE cxx_std_20)
-
-target_include_directories(FalconSIMD INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
-
-source_group("CMake Files/falcon_simd/" FILES falcon_simd/FalconSimd.cmake falcon_simd/utils/Utils.cmake falcon_simd/core/FalconMemory.cmake)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${FALCON_SIMD_ROOT_HEADERS})
-target_link_libraries(FalconSIMD INTERFACE
-        ${PROJECT_NAME}-StrictWarnings
-        ${PROJECT_NAME}-ProjectSanitizers
-        FalconCore
-)
+# TODO: Update to an option
+target_compile_options(${FLCN_LIB_NAME} INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict>)
