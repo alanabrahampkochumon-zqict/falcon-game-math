@@ -420,8 +420,6 @@ TYPED_TEST(Simd256ArithmeticTests, DivReg_MaintainsPrecisionForAtUpperAndLowerLi
     constexpr auto largestNumber  = std::numeric_limits<Type>::max();
     constexpr auto smallestNumber = std::numeric_limits<Type>::min();
 
-    // We are swapping for the largest and smallest for the first two indices
-    // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
     alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {

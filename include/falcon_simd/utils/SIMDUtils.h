@@ -153,8 +153,9 @@ namespace falcon::simd
 
 
     // TODO: Make it more generalized later(2, 4, 8, 16...) and various types.
+    // TODO: Update typename to Blend128_t?
     /**
-     * @brief Expand a 32-bit integer into 128-bit integer by performing bit expansion.
+     * @brief Expand a 32-bit BlendMask into 128-bit integer by performing bit expansion.
      *        For e.g: When `10` is expanded, we get `1111 0000`.
      *
      * @param mask The 32-bit mask to expand/unfold.
@@ -176,6 +177,31 @@ namespace falcon::simd
 
         return uint128_t{ .upper = expandByFour(16, std::make_index_sequence<16>{}),
                           .lower = expandByFour(0, std::make_index_sequence<16>{}) };
+    }
+
+
+    /**
+     * @brief Expand a Blend32_t into Blend64_t by performing bit expansion.
+     *        For e.g: When `10` is expanded, we get `1100`.
+     *
+     * @param mask The 32-bit mask to expand/unfold.
+     * @return A 64-bit BlendMask type with the expanded values.
+     */
+    constexpr BlendMask64_t expandTwoFold(BlendMask32_t mask)
+    {
+        const auto expandByTwo = [&]<size_t... Index>(size_t Offset, std::index_sequence<Index...>) -> size_t {
+            constexpr size_t trueMask  = 0b11ULL;
+            constexpr size_t falseMask = 0b00ULL;
+// For performing the expansion we can mask extract each bit and expand the bit value by 2,
+// and shift it into place.
+#define __FLCN_EXP2_MASKED_EXTRACT (0b1ULL << (Index + Offset))
+            return ((((mask & __FLCN_EXP2_MASKED_EXTRACT) == __FLCN_EXP2_MASKED_EXTRACT ? trueMask : falseMask)
+                     << (Index * 2)) |
+                    ...);
+#undef __FLCN_EXP2_MASKED_EXTRACT
+        };
+
+        return expandByTwo(0, std::make_index_sequence<32>{});
     }
 
 

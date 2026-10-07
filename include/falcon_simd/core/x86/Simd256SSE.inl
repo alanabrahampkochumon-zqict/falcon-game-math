@@ -10,7 +10,7 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-#include "Simd256SSE.h"
+
 #include "falcon_simd/utils/SIMDUtils.h"
 
 namespace falcon
@@ -474,11 +474,24 @@ namespace falcon
         SimdBackend::ARCH_SSE2, DataType, Lane>::shiftRightLogical() const noexcept
     { return Simd256(_lower.template shiftRightLogical<Count>(), _upper.template shiftRightLogical<Count>()); }
 
-    // TODO: Rename makeBlendMask32 (member) to makeBlendMask
+
     template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
         SimdBackend::ARCH_SSE2, DataType, Lane>::blend(Simd256 other, Simd256 mask) const noexcept
     { return Simd256{ _lower.blend(other._lower, mask._lower), _upper.blend(other._upper, mask._upper) }; }
+
+
+    template <typename DataType, size_t Lane>
+    template <BlendMask32_t Mask>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_SSE2, DataType, Lane> Simd256<
+        SimdBackend::ARCH_SSE2, DataType, Lane>::blend(Simd256 other) const noexcept
+    {
+        // Lower Mask only takes into account the lower 16-bits(expanded to 32-bits).
+        // Upper mask the upper 16-bits but shifted to to the lower lane(expanded to 32-bits).
+        constexpr auto lowerMask = static_cast<BlendMask32_t>(simd::expandTwoFold(Mask & 0x0000FFFF));
+        constexpr auto upperMask = static_cast<BlendMask32_t>(simd::expandTwoFold(Mask >> 16));
+        return Simd256(_lower.template blend<lowerMask>(other._lower), _upper.template blend<upperMask>(other._upper));
+    }
 
 
     template <typename DataType, size_t Lane>
@@ -496,19 +509,19 @@ namespace falcon
         // For shuffling with two indices we need to transform the array values(indices)
         // to be between 0 - MAX_LANE_COUNT(exclusive)
         constexpr std::array<uint8_t, MaxLaneCount> normalizedIndices{ { (
-            static_cast<uint8_t>(ShuffleIndex % MAX_128_LANE_COUNT))... } };
+            static_cast<uint8_t>(ShuffleIndex % Max128BitLaneCount))... } };
 
         // Masks for selecting values for the upper and lower 128-bit lanes.
         const auto makeMask = [&]<size_t Offset, size_t... Index>(std::index_sequence<Index...>) {
             constexpr std::array<uint8_t, MaxLaneCount> ShuffleIndices{ { ShuffleIndex... } };
-            return simd::makeBlendMask32<MAX_128_LANE_COUNT,
-                                         (ShuffleIndices[Offset + Index] >= MAX_128_LANE_COUNT)...>();
+            return simd::makeBlendMask32<Max128BitLaneCount,
+                                         (ShuffleIndices[Offset + Index] >= Max128BitLaneCount)...>();
         };
         // [up_mask1, up_mask0, lo_mask1, lo_mask0]
         constexpr BlendMask32_t upperMask =
-            makeMask.template operator()<MAX_128_LANE_COUNT>(std::make_index_sequence<MAX_128_LANE_COUNT>{});
+            makeMask.template operator()<Max128BitLaneCount>(std::make_index_sequence<Max128BitLaneCount>{});
         constexpr BlendMask32_t lowerMask =
-            makeMask.template operator()<0>(std::make_index_sequence<MAX_128_LANE_COUNT>{});
+            makeMask.template operator()<0>(std::make_index_sequence<Max128BitLaneCount>{});
 
         // low          hi
         // | a1 | b1 | | c1 | d1 |
@@ -528,7 +541,7 @@ namespace falcon
             return _upper.template shuffle<normalizedIndices[Offset + Index]...>();
         };
         auto upperShuffledWithUpperIndices =
-            shuffleUpper.template operator()<MAX_128_LANE_COUNT>(std::make_index_sequence<UPPER_LANE_COUNT>{});
+            shuffleUpper.template operator()<Max128BitLaneCount>(std::make_index_sequence<UPPER_LANE_COUNT>{});
         auto upperShuffledWithLowerIndices =
             shuffleUpper.template operator()<0>(std::make_index_sequence<UPPER_LANE_COUNT>{});
 
@@ -537,7 +550,7 @@ namespace falcon
             return _lower.template shuffle<normalizedIndices[Offset + Index]...>();
         };
         auto lowerShuffledWithUpperIndices =
-            shuffleLower.template operator()<MAX_128_LANE_COUNT>(std::make_index_sequence<LOWER_LANE_COUNT>{});
+            shuffleLower.template operator()<Max128BitLaneCount>(std::make_index_sequence<LOWER_LANE_COUNT>{});
         auto lowerShuffledWithLowerIndices =
             shuffleLower.template operator()<0>(std::make_index_sequence<LOWER_LANE_COUNT>{});
 

@@ -16,7 +16,6 @@
  */
 
 
-#include "Simd128SSE.h"
 #include "falcon_core/Preprocessors.h"
 #include "falcon_simd/core/RegisterTraits.h"
 #include "falcon_simd/utils/SimdTraits.h"
@@ -687,14 +686,14 @@ namespace falcon
          *
          * @code
          * // float x 8(lane) mask.
-         * const Simd128_t<float, 8> reg{ 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f };
+         * const Simd256_t<float, 8> reg{ 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f };
          * const auto mask = reg.makeBlendMask<true, false, true, false>();
          * // 0b00000000111111110000000011111111 or 0x00FF00FF
          * const auto mask = reg.makeBlendMask<true, false, true, true>();
          * // 0b11111111111111110000000011111111 or 0xFFFF00FF
          * @endcode
          *
-         * @return A 32-bit integral mask usable across Simd128 const blending.
+         * @return A 32-bit integral mask usable across Simd256 const blending.
          */
         template <bool... Mask>
             requires(std::has_single_bit(sizeof...(Mask)) && sizeof...(Mask) >= 2 && sizeof...(Mask) <= Lane)
@@ -719,6 +718,36 @@ namespace falcon
          * @return Return a new register with blended values.
          */
         [[nodiscard]] constexpr Simd256 blend(Simd256 other, Simd256 mask) const noexcept;
+
+
+        /**
+         * @brief Selectively blend values from this register and @p other using the compile-time @p Mask.
+         * @tparam Mask The mask to use for blending.
+         *              Use @ref falcon::makeBlendMask32<...>() to create the mask.
+         *              `true` selects values from the other register and `false` from this register.
+         * @note   Even though the mask is uint32_t, only lower 8-bit will be considered
+         *
+         * @code
+         * // Masking sample
+         * this  -> 0x ff 23 15 81
+         * other -> 0x 32 3f ed 55
+         * mask  -> 0x ff 00 ff 00
+         * ret   -> 0x 32 23 ed 81
+         *
+         * // Usage
+         * const falcon::Simd256_t<float, 8> reg1{1.0f, 2.0f, 3.0f, 4.0f, 12.0f, 13.0f, 14.0f, 15.0f};
+         * const falcon::Simd256_t<float, 8> reg2{8.0f, 9.0f, 10.0f, 11.0f, 5.0f, 6.0f, 7.0f, 8.0f};
+         * constexpr auto mask = falcon::makeBlendMask32<true, false, false, true, true, true, false, false>();
+         * const auto blended = reg1.template blend<mask>(reg2); // {8.0f, 2.0f, 3.0f, 11.0f, 5.0f, 6.0f, 14.0f, 15.0f}
+         * @endcode
+         *
+         * @param other The register whose values are selected when mask is 0b11..11 or 0xf..f.
+         *
+         * @return Return a new register with blended values.
+         */
+        template <BlendMask32_t Mask>
+        [[nodiscard]] constexpr Simd256 blend(Simd256 other) const noexcept;
+
 
         /**
          * Shuffle the values as per given index.
@@ -788,11 +817,11 @@ namespace falcon
 
 
     private:
-        static constexpr auto MAX_128_LANE_COUNT = 128 / (sizeof(DataType) * 8);
-        static_assert(Lane > MAX_128_LANE_COUNT, "Payload fits in 128-bits. Use Simd128 to directly prevent emulation");
+        static constexpr auto Max128BitLaneCount = 128 / (sizeof(DataType) * 8);
+        static_assert(Lane > Max128BitLaneCount, "Payload fits in 128-bits. Use Simd128 to directly prevent emulation");
 
-        static constexpr auto LOWER_LANE_COUNT = MAX_128_LANE_COUNT;
-        static constexpr auto UPPER_LANE_COUNT = (Lane - MAX_128_LANE_COUNT > 0 ? Lane - MAX_128_LANE_COUNT : 0);
+        static constexpr auto LOWER_LANE_COUNT = Max128BitLaneCount;
+        static constexpr auto UPPER_LANE_COUNT = (Lane - Max128BitLaneCount > 0) ? (Lane - Max128BitLaneCount) : 0;
 
         /// [Upper][Lower]
         Simd128<SimdBackend::ARCH_SSE2, DataType, UPPER_LANE_COUNT> _upper;
