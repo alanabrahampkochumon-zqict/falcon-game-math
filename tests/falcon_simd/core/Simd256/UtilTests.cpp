@@ -219,6 +219,129 @@ constexpr auto DATA_FP64_4LANES_MIXED_INF = Array<FP64, 4>{ 1.0f, Inf<FP64>, 1.0
 constexpr auto RES_FP64_4LANES_MIXED_INF  = Array<FP64, 4>{ 0, NaN<FP64>, 0, NaN<FP64> };
 SIMD256_HAS_INF_TESTS_FP(FP64_4Lanes_AlternatingInf, FP64, 4, DATA_FP64_4LANES_MIXED_INF, RES_FP64_4LANES_MIXED_INF)
 
+
+/// =============================== START MAKE_BLEND_MASK ===============================
+
+    /// @test Verify that makeBlendMask returns a correct mask a datatype and lane count.
+    #define SIMD256_MAKE_BLEND_MASK_TESTS(TestSuffix, DataType, ExpectedMask, RegCount, ...)                           \
+        TEST(Simd256_MakeBlendMaskTests, ReturnsValidMask_For##TestSuffix)                                             \
+        {                                                                                                              \
+            const falcon::Simd256_t<DataType, RegCount> reg{ DataType(0) };                                            \
+            EXPECT_EQ(ExpectedMask, (reg.makeBlendMask<__VA_ARGS__>()));                                               \
+        }
+
+// Aliasing to make testing easier.
+constexpr bool T = true;
+constexpr bool F = false;
+
+// clang-format off
+// Unsigned types
+// SIMD256_MAKE_BLEND_MASK_TESTS(U8_ThirtyTwoLanes_AllTrue, U8, 0xFFFFFFFF, 32, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U8_ThirtyTwoLanes_AlternatingTrueFalse, U8, 0x33333333, 32, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U8_ThirtyTwoLanes_AlternatingFalseTrue, U8, 0xCCCCCCCC, 32, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U8_ThirtyTwoLanes_AllFalse, U8, 0x00000000, 32, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F)
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(U16_EightLanes_EightBoolsWithAllTrue, U16, 0xFFFFFFFF, 8, T, T, T, T, T, T, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U16_EightLanes_EightBoolsWithAlternatingTrueFalse,U16, 0x0F0F0F0F,  8, T, F, T, F, T, F, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U16_EightLanes_EightBoolsWithAlternatingFalseTrue,U16, 0xF0F0F0F0,  8, F, T, F, T, F, T, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U16_EightLanes_EightBoolsWithAllFalse, U16, 0x00000000, 8, F, F, F, F, F, F, F, F)
+//
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(U32_TwoLanes_TwoBoolsWithAllTrue, U32, 0x0000FFFF, 4, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U32_TwoLanes_TwoBoolsWithAlternatingTrueFalse, U32, 0x000000FF, 4, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U32_TwoLanes_TwoBoolsWithAlternatingFalseTrue, U32, 0x0000FF00, 4, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U32_TwoLanes_TwoBoolsWithAllFalse, U32, 0x00000000, 4, F, F)
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(U32_FourLanes_FourBoolsWithAllTrue, U32, 0xFFFFFFFF, 4, T, T, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U32_FourLanes_FourBoolsWithAlternatingTrueFalse, U32, 0x00FF00FF, 4, T, F, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U32_FourLanes_FourBoolsWithAlternatingFalseTrue, U32, 0xFF00FF00, 4, F, T, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U32_FourLanes_FourBoolsWithAllFalse, U32, 0x00000000, 4, F, F, F, F)
+//
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(U64_TwoLanes_TwoBoolsWithAllTrue, U64, 0xFFFFFFFF, 2, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U64_TwoLanes_TwoBoolsWithAlternatingTrueFalse, U64, 0x0000FFFF, 2, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U64_TwoLanes_TwoBoolsWithAlternatingFalseTrue, U64, 0xFFFF0000, 2, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(U64_TwoLanes_TwoBoolsWithAllFalse, U64, 0x00000000, 2, F, F)
+//
+//
+//
+// // Signed Integrals
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_TwoLanes_TwoBoolsWithAllTrue, I8, 0x0000000F, 2, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_TwoLanes_TwoBoolsWithAlternatingTrueFalse, I8, 0x00000003, 2, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_TwoLanes_TwoBoolsWithAlternatingFalseTrue, I8, 0x0000000C, 2, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_TwoLanes_TwoBoolsWithAllFalse, I8, 0x00000000, 2, F, F)
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_FourLanes_FourBoolsWithAllTrue, I8, 0x000000FF, 16, T, T, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_FourLanes_FourBoolsWithAlternatingTrueFalse, I8, 0x00000033, 16, T, F, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_FourLanes_FourBoolsWithAlternatingFalseTrue, I8, 0x000000CC, 16, F, T, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_FourLanes_FourBoolsWithAllFalse, I8, 0x00000000, 16, F, F, F, F)
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_EightLanes_EightBoolsWithAllTrue, I8, 0x0000FFFF, 16, T, T, T, T, T, T, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_EightLanes_EightBoolsWithAlternatingTrueFalse, I8, 0x00003333, 16, T, F, T, F, T, F, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_EightLanes_EightBoolsWithAlternatingFalseTrue, I8, 0x0000CCCC, 16, F, T, F, T, F, T, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_EightLanes_EightBoolsWithAllFalse, I8, 0x00000000, 16, F, F, F, F, F, F, F, F)
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_SixteenLanes_SixteenBoolsWithAllTrue, I8, 0xFFFFFFFF, 16, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_SixteenLanes_SixteenBoolsWithAlternatingTrueFalse, I8, 0x33333333, 16, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_SixteenLanes_SixteenBoolsWithAlternatingFalseTrue, I8, 0xCCCCCCCC, 16, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I8_SixteenLanes_SixteenBoolsWithAllFalse, I8, 0x00000000, 16, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F)
+//
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(I16_TwoLanes_TwoBoolsWithAllTrue, I16, 0x000000FF, 8, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I16_TwoLanes_TwoBoolsWithAlternatingTrueFalse, I16, 0x0000000F, 8, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I16_TwoLanes_TwoBoolsWithAlternatingFalseTrue, I16, 0x000000F0, 8, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I16_TwoLanes_TwoBoolsWithAllFalse, I16, 0x00000000, 8, F, F)
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(I16_FourLanes_FourBoolsWithAllTrue, I16, 0x0000FFFF, 8, T, T, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I16_FourLanes_FourBoolsWithAlternatingTrueFalse, I16, 0x00000F0F, 8, T, F, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I16_FourLanes_FourBoolsWithAlternatingFalseTrue, I16, 0x0000F0F0, 8, F, T, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I16_FourLanes_FourBoolsWithAllFalse, I16, 0x00000000, 8, F, F, F, F)
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(I16_EightLanes_EightBoolsWithAllTrue, I16, 0xFFFFFFFF, 8, T, T, T, T, T, T, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I16_EightLanes_EightBoolsWithAlternatingTrueFalse,I16, 0x0F0F0F0F,  8, T, F, T, F, T, F, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I16_EightLanes_EightBoolsWithAlternatingFalseTrue,I16, 0xF0F0F0F0,  8, F, T, F, T, F, T, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I16_EightLanes_EightBoolsWithAllFalse, I16, 0x00000000, 8, F, F, F, F, F, F, F, F)
+//
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(I32_TwoLanes_TwoBoolsWithAllTrue, I32, 0x0000FFFF, 4, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I32_TwoLanes_TwoBoolsWithAlternatingTrueFalse, I32, 0x000000FF, 4, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I32_TwoLanes_TwoBoolsWithAlternatingFalseTrue, I32, 0x0000FF00, 4, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I32_TwoLanes_TwoBoolsWithAllFalse, I32, 0x00000000, 4, F, F)
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(I32_FourLanes_FourBoolsWithAllTrue, I32, 0xFFFFFFFF, 4, T, T, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I32_FourLanes_FourBoolsWithAlternatingTrueFalse, I32, 0x00FF00FF, 4, T, F, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I32_FourLanes_FourBoolsWithAlternatingFalseTrue, I32, 0xFF00FF00, 4, F, T, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I32_FourLanes_FourBoolsWithAllFalse, I32, 0x00000000, 4, F, F, F, F)
+//
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(I64_TwoLanes_TwoBoolsWithAllTrue, I64, 0xFFFFFFFF, 2, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I64_TwoLanes_TwoBoolsWithAlternatingTrueFalse, I64, 0x0000FFFF, 2, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I64_TwoLanes_TwoBoolsWithAlternatingFalseTrue, I64, 0xFFFF0000, 2, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(I64_TwoLanes_TwoBoolsWithAllFalse, I64, 0x00000000, 2, F, F)
+//
+//
+// // Floating Point Types
+// SIMD256_MAKE_BLEND_MASK_TESTS(FP32_TwoLanes_TwoBoolsWithAllTrue, FP32, 0x0000FFFF, 4, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(FP32_TwoLanes_TwoBoolsWithAlternatingTrueFalse, FP32, 0x000000FF, 4, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(FP32_TwoLanes_TwoBoolsWithAlternatingFalseTrue, FP32, 0x0000FF00, 4, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(FP32_TwoLanes_TwoBoolsWithAllFalse, FP32, 0x00000000, 4, F, F)
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(FP32_FourLanes_FourBoolsWithAllTrue, FP32, 0xFFFFFFFF, 4, T, T, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(FP32_FourLanes_FourBoolsWithAlternatingTrueFalse, FP32, 0x00FF00FF, 4, T, F, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(FP32_FourLanes_FourBoolsWithAlternatingFalseTrue, FP32, 0xFF00FF00, 4, F, T, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(FP32_FourLanes_FourBoolsWithAllFalse, FP32, 0x00000000, 4, F, F, F, F)
+//
+//
+// SIMD256_MAKE_BLEND_MASK_TESTS(FP64_TwoLanes_TwoBoolsWithAllTrue, FP64, 0xFFFFFFFF, 2, T, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(FP64_TwoLanes_TwoBoolsWithAlternatingTrueFalse, FP64, 0x0000FFFF, 2, T, F)
+// SIMD256_MAKE_BLEND_MASK_TESTS(FP64_TwoLanes_TwoBoolsWithAlternatingFalseTrue, FP64, 0xFFFF0000, 2, F, T)
+// SIMD256_MAKE_BLEND_MASK_TESTS(FP64_TwoLanes_TwoBoolsWithAllFalse, FP64, 0x00000000, 2, F, F)
+
+#undef SIMD256_MAKE_BLEND_MASK_TESTS
+
+// clang-format on
+/// ================================ END MAKE_BLEND_MASK ================================
+
 /** @} */
 
 #endif

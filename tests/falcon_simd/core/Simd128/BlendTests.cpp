@@ -185,7 +185,7 @@ constexpr std::array<bool, Size> ArrToBool(const std::array<T, Size>& array)
         TEST(Simd128BlendTests, CompileTimeBlendingWithMask_ReturnsValidRegister_For##TestSuffix)                      \
         {                                                                                                              \
             falcon::Simd128_t<Type, Lanes> regA{}, regB{};                                                             \
-            constexpr auto mask = regA.makeBlendMask<__VA_ARGS__>();                                          \
+            constexpr auto mask = regA.makeBlendMask<__VA_ARGS__>();                                                   \
             regA.load(First.data());                                                                                   \
             regB.load(Second.data());                                                                                  \
                                                                                                                        \

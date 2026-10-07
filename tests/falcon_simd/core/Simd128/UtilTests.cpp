@@ -242,20 +242,21 @@ SIMD128_HAS_INF_TESTS_FP(FP64_2Lanes_AlternatingInf, FP64, 2, DATA_FP64_2LANES_M
 
 
 
-/// =============================== START MAKE_BLEND_MASK_32 ===============================
+/// =============================== START MAKE_BLEND_MASK ===============================
 
-    /// @test Verify that makeBlendMask32 returns a correct mask a datatype and lane count.
+    /// @test Verify that makeBlendMask returns a correct mask a datatype and lane count.
     #define SIMD128_MAKE_BLEND_MASK_TESTS(TestSuffix, DataType, ExpectedMask, RegCount, ...)                           \
         TEST(Simd128_MakeBlendMaskTests, ReturnsValidMask_For##TestSuffix)                                             \
         {                                                                                                              \
-            const falcon::Simd128_t<DataType, RegCount> reg{ DataType(0) };                                          \
-            EXPECT_EQ(ExpectedMask, (reg.makeBlendMask<__VA_ARGS__>()));                                             \
+            const falcon::Simd128_t<DataType, RegCount> reg{ DataType(0) };                                            \
+            EXPECT_EQ(ExpectedMask, (reg.makeBlendMask<__VA_ARGS__>()));                                               \
         }
 
 // Aliasing to make testing easier.
 constexpr bool T = true;
 constexpr bool F = false;
 
+// clang-format off
 // Unsigned types
 SIMD128_MAKE_BLEND_MASK_TESTS(U8_TwoLanes_TwoBoolsWithAllTrue, U8, 0x0000000F, 2, T, T)
 SIMD128_MAKE_BLEND_MASK_TESTS(U8_TwoLanes_TwoBoolsWithAlternatingTrueFalse, U8, 0x00000003, 2, T, F)
@@ -384,10 +385,10 @@ SIMD128_MAKE_BLEND_MASK_TESTS(FP64_TwoLanes_TwoBoolsWithAlternatingTrueFalse, FP
 SIMD128_MAKE_BLEND_MASK_TESTS(FP64_TwoLanes_TwoBoolsWithAlternatingFalseTrue, FP64, 0xFFFF0000, 2, F, T)
 SIMD128_MAKE_BLEND_MASK_TESTS(FP64_TwoLanes_TwoBoolsWithAllFalse, FP64, 0x00000000, 2, F, F)
 
+#undef SIMD128_MAKE_BLEND_MASK_TESTS
 
-    #undef SIMD128_MAKE_BLEND_MASK_TESTS
-
-/// ================================ END MAKE_BLEND_MASK_32 ================================
+// clang-format on
+/// ================================ END MAKE_BLEND_MASK ================================
 
 /** @} */
 

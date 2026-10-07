@@ -695,12 +695,12 @@ namespace falcon
          *              Number of Mask arguments must be between 2 and @p Lane and must be a power of 2.
          *
          * @code
-         * // int32_t x 4(lane) mask.
+         * // float x 4(lane) mask.
          * const Simd128_t<float, 4> reg{ 1.0f, 2.0f, 3.0f, 4.0f };
-         * const auto mask = reg.makeBlendMask32<true, false, true, false>();
+         * const auto mask = reg.makeBlendMask<true, false, true, false>();
          * // 0b00000000111111110000000011111111 or 0x00FF00FF
-         * const auto mask = reg.makeBlendMask32<true, false, true, true>();
-         * // 0b00000000000000000000000011110011 or 0x000000F3
+         * const auto mask = reg.makeBlendMask<true, false, true, true>();
+         * // 0b11111111111111110000000011111111 or 0xFFFF00FF
          * @endcode
          *
          * @return A 32-bit integral mask usable across Simd128 const blending.
