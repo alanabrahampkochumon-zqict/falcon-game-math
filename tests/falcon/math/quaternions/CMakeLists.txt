@@ -1,4 +1,4 @@
-add_executable(FGMQuaternionsTests
+add_executable(FalconMathQuaternionsTests
         # Compilation Units
         ArithmeticOperationTests.cpp
         AccessAndMutationTests.cpp
@@ -13,12 +13,12 @@ add_executable(FGMQuaternionsTests
         # Headers
         include/QuaternionTestSetup.h
 )
-set_target_properties(FGMQuaternionsTests PROPERTIES CXX_STANDARD 20)
-set_target_properties(FGMQuaternionsTests PROPERTIES CXX_STANDARD_REQUIRED ON)
-set_target_properties(FGMQuaternionsTests PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(FalconMathQuaternionsTests PROPERTIES CXX_STANDARD 20)
+set_target_properties(FalconMathQuaternionsTests PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(FalconMathQuaternionsTests PROPERTIES CXX_EXTENSIONS OFF)
 
 target_sources(
-        FGMQuaternionsTests
+        FalconMathQuaternionsTests
 
         PRIVATE
         FILE_SET HEADERS
@@ -28,25 +28,25 @@ target_sources(
         ${TestUtilities}
 )
 
-target_compile_options(FGMQuaternionsTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
+target_compile_options(FalconMathQuaternionsTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
 
 target_link_libraries(
-        FGMQuaternionsTests
+        FalconMathQuaternionsTests
         PRIVATE
         FalconMathTestSetup
 )
 
 target_precompile_headers(
-        FGMQuaternionsTests
+        FalconMathQuaternionsTests
         REUSE_FROM
-        FGMCommonTests
+        FalconMathCommonTests
 )
 
 
 ##############################
 # Death Tests
 
-add_executable(FGMQuaternionsDeathTests
+add_executable(FalconMathQuaternionsDeathTests
         # Compilation Units
         death-tests/ArithmeticOperationDeathTests.cpp
         death-tests/QuaternionAlgebraTests.cpp
@@ -54,12 +54,12 @@ add_executable(FGMQuaternionsDeathTests
         # Headers
         include/QuaternionTestSetup.h
 )
-set_target_properties(FGMQuaternionsDeathTests PROPERTIES CXX_STANDARD 20)
-set_target_properties(FGMQuaternionsDeathTests PROPERTIES CXX_STANDARD_REQUIRED ON)
-set_target_properties(FGMQuaternionsDeathTests PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(FalconMathQuaternionsDeathTests PROPERTIES CXX_STANDARD 20)
+set_target_properties(FalconMathQuaternionsDeathTests PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(FalconMathQuaternionsDeathTests PROPERTIES CXX_EXTENSIONS OFF)
 
 target_sources(
-        FGMQuaternionsDeathTests
+        FalconMathQuaternionsDeathTests
 
         PRIVATE
         FILE_SET HEADERS
@@ -69,26 +69,26 @@ target_sources(
         ${TestUtilities}
 )
 
-target_compile_options(FGMQuaternionsDeathTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
+target_compile_options(FalconMathQuaternionsDeathTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
 
 target_link_libraries(
-        FGMQuaternionsDeathTests
+        FalconMathQuaternionsDeathTests
         PRIVATE
         FalconMathTestSetup
 )
 
 target_precompile_headers(
-        FGMQuaternionsDeathTests
+        FalconMathQuaternionsDeathTests
         REUSE_FROM
-        FGMCommonTests
+        FalconMathCommonTests
 )
 
 
 include(GoogleTest)
 if (FGM_COMBINED_TEST_RUN)
-    add_test(NAME FGMQuaternionsTestSuite COMMAND FGMQuaternionsTests)
-    add_test(NAME FGMQuaternionsDeathTestSuite COMMAND FGMQuaternionsDeathTests)
+    add_test(NAME FGMQuaternionsTestSuite COMMAND FalconMathQuaternionsTests)
+    add_test(NAME FGMQuaternionsDeathTestSuite COMMAND FalconMathQuaternionsDeathTests)
 else ()
-    gtest_discover_tests(FGMQuaternionsTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
-    gtest_discover_tests(FGMQuaternionsDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+    gtest_discover_tests(FalconMathQuaternionsTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+    gtest_discover_tests(FalconMathQuaternionsDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
 endif ()

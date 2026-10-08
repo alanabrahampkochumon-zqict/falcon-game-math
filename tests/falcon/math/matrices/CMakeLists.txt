@@ -1,8 +1,8 @@
-add_executable(FGMMatrixTests)
-set_target_properties(FGMMatrixTests PROPERTIES CXX_STANDARD 20)
-set_target_properties(FGMMatrixTests PROPERTIES CXX_STANDARD_REQUIRED ON)
-set_target_properties(FGMMatrixTests PROPERTIES CXX_EXTENSIONS OFF)
-target_compile_options(FGMMatrixTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
+add_executable(FalconMathMatrixTests)
+set_target_properties(FalconMathMatrixTests PROPERTIES CXX_STANDARD 20)
+set_target_properties(FalconMathMatrixTests PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(FalconMathMatrixTests PROPERTIES CXX_EXTENSIONS OFF)
+target_compile_options(FalconMathMatrixTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
 
 
 add_subdirectory(extra)
@@ -18,7 +18,7 @@ add_subdirectory(mat4x3)
 add_subdirectory(transform4)
 
 target_link_libraries(
-        FGMMatrixTests
+        FalconMathMatrixTests
         PRIVATE
         FalconMathTestSetup
 
@@ -40,9 +40,9 @@ target_link_libraries(
 )
 
 target_precompile_headers(
-        FGMMatrixTests
+        FalconMathMatrixTests
         REUSE_FROM
-        FGMCommonTests
+        FalconMathCommonTests
 )
 
 
@@ -70,7 +70,7 @@ set_target_properties(
 #####################################
 ## DEATH TESTS
 
-add_executable(FGMMatrixDeathTests
+add_executable(FalconMathMatrixDeathTests
         death-tests/Mat2.cpp
         death-tests/Mat2x3.cpp
         death-tests/Mat2x4.cpp
@@ -82,20 +82,20 @@ add_executable(FGMMatrixDeathTests
         death-tests/Mat4x3.cpp
         death-tests/Transform4.cpp
 )
-set_target_properties(FGMMatrixDeathTests PROPERTIES CXX_STANDARD 20)
-set_target_properties(FGMMatrixDeathTests PROPERTIES CXX_STANDARD_REQUIRED ON)
-set_target_properties(FGMMatrixDeathTests PROPERTIES CXX_EXTENSIONS OFF)
-target_compile_options(FGMMatrixDeathTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
+set_target_properties(FalconMathMatrixDeathTests PROPERTIES CXX_STANDARD 20)
+set_target_properties(FalconMathMatrixDeathTests PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(FalconMathMatrixDeathTests PROPERTIES CXX_EXTENSIONS OFF)
+target_compile_options(FalconMathMatrixDeathTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
 
-target_link_libraries(FGMMatrixDeathTests PRIVATE FalconMathTestSetup)
-target_precompile_headers(FGMMatrixDeathTests REUSE_FROM FGMCommonTests)
+target_link_libraries(FalconMathMatrixDeathTests PRIVATE FalconMathTestSetup)
+target_precompile_headers(FalconMathMatrixDeathTests REUSE_FROM FalconMathCommonTests)
 
 
 #### GTEST
 if (FGM_COMBINED_TEST_RUN)
-    add_test(NAME FGMMatrixTestSuite COMMAND FGMMatrixTests)
-    add_test(NAME FGMMatrixDeathTestSuite COMMAND FGMMatrixDeathTests)
+    add_test(NAME FGMMatrixTestSuite COMMAND FalconMathMatrixTests)
+    add_test(NAME FGMMatrixDeathTestSuite COMMAND FalconMathMatrixDeathTests)
 else ()
-    gtest_discover_tests(FGMMatrixTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
-    gtest_discover_tests(FGMMatrixDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+    gtest_discover_tests(FalconMathMatrixTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+    gtest_discover_tests(FalconMathMatrixDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
 endif ()

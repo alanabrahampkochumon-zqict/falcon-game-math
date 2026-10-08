@@ -1,10 +1,10 @@
-add_executable(FGMVectorTests)
-set_target_properties(FGMVectorTests PROPERTIES CXX_STANDARD 20)
-set_target_properties(FGMVectorTests PROPERTIES CXX_STANDARD_REQUIRED ON)
-set_target_properties(FGMVectorTests PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(FalconMathVectorTests)
+set_target_properties(FalconMathVectorTests PROPERTIES CXX_STANDARD 20)
+set_target_properties(FalconMathVectorTests PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(FalconMathVectorTests PROPERTIES CXX_EXTENSIONS OFF)
 
 target_sources(
-        FGMVectorTests
+        FalconMathVectorTests
 
         PRIVATE
         FILE_SET HEADERS
@@ -14,7 +14,7 @@ target_sources(
         ${TestUtilities}
 )
 
-target_compile_options(FGMVectorTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
+target_compile_options(FalconMathVectorTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
 
 # CONSTEXPR NON_SIMD
 add_subdirectory(point2)
@@ -26,7 +26,7 @@ add_subdirectory(vec4)
 add_subdirectory(vec2)
 
 target_link_libraries(
-        FGMVectorTests
+        FalconMathVectorTests
         PRIVATE
         FalconMathTestSetup
 
@@ -42,9 +42,9 @@ target_link_libraries(
 )
 
 target_precompile_headers(
-        FGMVectorTests
+        FalconMathVectorTests
         REUSE_FROM
-        FGMCommonTests
+        FalconMathCommonTests
 )
 
 set_target_properties(
@@ -60,18 +60,18 @@ set_target_properties(
 
 ###########################
 ### DEATH TESTS
-add_executable(FGMVectorDeathTests
+add_executable(FalconMathVectorDeathTests
         cvec2/DeathTests.cpp # TODO: Add death tests here
         vec3/DeathTests.cpp
         vec4/DeathTests.cpp
         vec2/DeathTests.cpp
 )
-set_target_properties(FGMVectorDeathTests PROPERTIES CXX_STANDARD 20)
-set_target_properties(FGMVectorDeathTests PROPERTIES CXX_STANDARD_REQUIRED ON)
-set_target_properties(FGMVectorDeathTests PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(FalconMathVectorDeathTests PROPERTIES CXX_STANDARD 20)
+set_target_properties(FalconMathVectorDeathTests PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(FalconMathVectorDeathTests PROPERTIES CXX_EXTENSIONS OFF)
 
 target_sources(
-        FGMVectorDeathTests
+        FalconMathVectorDeathTests
 
         PRIVATE
         FILE_SET HEADERS
@@ -81,29 +81,29 @@ target_sources(
         ${TestUtilities}
 )
 
-target_compile_options(FGMVectorDeathTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
+target_compile_options(FalconMathVectorDeathTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
 
 target_link_libraries(
-        FGMVectorDeathTests
+        FalconMathVectorDeathTests
         PRIVATE
         FalconMathTestSetup
 )
 
 target_precompile_headers(
-        FGMVectorDeathTests
+        FalconMathVectorDeathTests
         REUSE_FROM
-        FGMCommonTests
+        FalconMathCommonTests
 )
 
 
 include(GoogleTest)
 # Runs the test binary as a single test
 if (FGM_COMBINED_TEST_RUN)
-    add_test(NAME FGMVectorTestSuite COMMAND FGMVectorTests)
-    add_test(NAME FGMVectorDeathTestSuite COMMAND FGMVectorDeathTests)
+    add_test(NAME FGMVectorTestSuite COMMAND FalconMathVectorTests)
+    add_test(NAME FGMVectorDeathTestSuite COMMAND FalconMathVectorDeathTests)
 else ()
-    gtest_discover_tests(FGMVectorTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
-    gtest_discover_tests(FGMVectorDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+    gtest_discover_tests(FalconMathVectorTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+    gtest_discover_tests(FalconMathVectorDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
 endif ()
 
 

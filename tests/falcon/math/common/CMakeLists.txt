@@ -1,11 +1,11 @@
-add_executable(FGMCommonTests)
-set_target_properties(FGMCommonTests PROPERTIES DISABLE_PRECOMPILE_HEADERS OFF)
-set_target_properties(FGMCommonTests PROPERTIES CXX_STANDARD 20)
-set_target_properties(FGMCommonTests PROPERTIES CXX_STANDARD_REQUIRED ON)
-set_target_properties(FGMCommonTests PROPERTIES CXX_EXTENSIONS OFF)
+add_executable(FalconMathCommonTests)
+set_target_properties(FalconMathCommonTests PROPERTIES DISABLE_PRECOMPILE_HEADERS OFF)
+set_target_properties(FalconMathCommonTests PROPERTIES CXX_STANDARD 20)
+set_target_properties(FalconMathCommonTests PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(FalconMathCommonTests PROPERTIES CXX_EXTENSIONS OFF)
 
 target_sources(
-        FGMCommonTests PRIVATE
+        FalconMathCommonTests PRIVATE
         MathTraitTests.cpp
         OperationStatusTests.cpp
         TrivialTypeTests.cpp
@@ -13,10 +13,10 @@ target_sources(
         WrapperTests.cpp
 )
 
-target_link_libraries(FGMCommonTests PRIVATE FalconMathTestSetup)
+target_link_libraries(FalconMathCommonTests PRIVATE FalconMathTestSetup)
 
 target_precompile_headers(
-        FGMCommonTests
+        FalconMathCommonTests
         PUBLIC
         <gtest/gtest.h>
         <iostream>
@@ -27,7 +27,7 @@ target_precompile_headers(
 )
 
 if (FGM_COMBINED_TEST_RUN)
-    add_test(NAME FGMCommonTestSuite COMMAND FGMCommonTests)
+    add_test(NAME FGMCommonTestSuite COMMAND FalconMathCommonTests)
 else ()
-    gtest_discover_tests(FGMCommonTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+    gtest_discover_tests(FalconMathCommonTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
 endif ()
