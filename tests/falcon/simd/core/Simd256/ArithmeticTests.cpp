@@ -11,7 +11,6 @@
 #include "SIMDTestSetup.h"
 
 #include <array>
-#include <falcon/simd/core/Simd128.h>
 
 
 
@@ -506,7 +505,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinaryDivideOperator_MaintainsPrecisionForAtU
     constexpr auto smallestNumber = std::numeric_limits<Type>::min();
 
     // We are swapping for the largest and smallest for the first two indices
-    // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
+    // since we have at least 2 lanes(256 / 64(max data type size)) we can safely inject those values
     alignas(32) std::array<Type, Lane> lhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
@@ -590,7 +589,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundDivideOperator_MaintainsPrecisionForA
     constexpr auto smallestNumber = std::numeric_limits<Type>::min();
 
     // We are swapping for the largest and smallest for the first two indices
-    // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
+    // since we have at least 2 lanes(256 / 64(max data type size)) we can safely inject those values
     alignas(32) std::array<Type, Lane> lhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
@@ -642,7 +641,7 @@ TYPED_TEST(Simd256ArithmeticTests, FMA_ReturnsAValidResult)
     constexpr size_t Lane = TypeParam::VALUE;
 
     // We are swapping for the largest and smallest for the first two indices
-    // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
+    // since we have at least 2 lanes(256 / 64(max data type size)) we can safely inject those values
     alignas(32) std::array<Type, Lane> a{}, b{}, c{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
@@ -671,7 +670,7 @@ TYPED_TEST(Simd256ArithmeticTests, HorizontalAdd_ReturnsAValidResult)
     constexpr size_t Lane = TypeParam::VALUE;
 
     // We are swapping for the largest and smallest for the first two indices
-    // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
+    // since we have at least 2 lanes(256 / 64(max data type size)) we can safely inject those values
     alignas(32) std::array<Type, Lane> a{};
     Type sum = 0;
     for (size_t i = 0; i < Lane; ++i)

@@ -38,7 +38,7 @@ namespace
     {
         using Type                            = T;
         using IndexSequence                   = std::integer_sequence<uint8_t, Indices...>;
-        static constexpr size_t REGISTER_SIZE = 128;
+        static constexpr size_t REGISTER_SIZE = 256;
         static constexpr size_t LaneCount     = Lanes;
         static constexpr auto data            = Data;
         static constexpr auto expected        = Expected;

@@ -13,7 +13,6 @@
 #include "SIMDTestSetup.h"
 
 #include <array>
-#include <falcon/simd/core/Simd128.h>
 
 
 /**
