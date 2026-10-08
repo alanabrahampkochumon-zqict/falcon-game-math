@@ -104,7 +104,6 @@ namespace flcn::simd::internal
     using Simd256Register_t = Simd256Register<Backend, T, Lane>::Type;
 
 
-
     /**
      * @brief Defines an AVX512 Register(512-bit) for a given data type.
      *        @note Use @ref AVX512Register_t<type> for a shorter syntax.

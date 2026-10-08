@@ -56,43 +56,64 @@ namespace flcn
     // template <typename DataType, size_t Lane>
     // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::Simd256(const DataType* pBuffer) noexcept
     // { loadAligned(pBuffer); }
-    //
-    //
-    // template <typename DataType, size_t Lane>
-    // template <typename... Args>
-    //     requires(sizeof...(Args) <= Lane) && (std::same_as<Args, DataType> && ...) &&
-    //     (SimdSafeConvertible<Args, DataType> && ...)
-    // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>& Simd256<SimdBackend::ARCH_AVX, DataType,
-    //                                                                                  Lane>::set(Args... args)
-    // {
-    //     // TODO: Apply this to SIMD128
-    //     // To support variable argument passing we need to return pass down a zero for all the lanes that are
-    //     // not provided.
-    //     constexpr auto argCount  = sizeof...(args);
-    //     const DataType arr[Lane] = { args... };
-    //
-    //     // Fill the upper lane
-    //     if constexpr (argCount <= LOWER_LANE_COUNT)
-    //     {
-    //         _upper.setZero();
-    //     }
-    //     else
-    //     {
-    //         auto fillUpper = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
-    //             _upper.set(arr[LOWER_LANE_COUNT + Indices]...);
-    //         };
-    //         fillUpper(std::make_index_sequence<UPPER_LANE_COUNT>{});
-    //     }
-    //     // Fill the lower lane
-    //     auto fillLower = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
-    //         _lower.set(arr[Indices]...);
-    //     };
-    //     fillLower(std::make_index_sequence<LOWER_LANE_COUNT>{});
-    //
-    //     return *this;
-    // }
-    //
-    //
+
+
+    template <typename DataType, size_t Lane>
+    template <typename... Args>
+        requires(sizeof...(Args) <= Lane) && (std::same_as<Args, DataType> && ...) &&
+        (SimdSafeConvertible<Args, DataType> && ...)
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>& Simd256<SimdBackend::ARCH_AVX, DataType,
+                                                                                    Lane>::set(Args... args)
+    {
+        if constexpr ((std::floating_point<DataType> && CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX) ||
+                      CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX2)
+        {
+            alignas(32) std::array<DataType, MaxLaneCount> _data{ args... };
+            if constexpr (types::IsFP64<DataType>)
+            {
+                _mm256_load_pd(_data);
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                _mm256_load_ps(_data);
+            }
+            else
+            {
+                _mm256_load_si256(_data);
+            }
+        }
+        else
+        {
+            _reg.template set(args...);
+        }
+        // // TODO: Apply this to SIMD128
+        // // To support variable argument passing we need to return pass down a zero for all the lanes that are
+        // // not provided.
+        // constexpr auto argCount  = sizeof...(args);
+        // const DataType arr[Lane] = { args... };
+        //
+        // // Fill the upper lane
+        // if constexpr (argCount <= LOWER_LANE_COUNT)
+        // {
+        //     _upper.setZero();
+        // }
+        // else
+        // {
+        //     auto fillUpper = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
+        //         _upper.set(arr[LOWER_LANE_COUNT + Indices]...);
+        //     };
+        //     fillUpper(std::make_index_sequence<UPPER_LANE_COUNT>{});
+        // }
+        // // Fill the lower lane
+        // auto fillLower = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
+        //     _lower.set(arr[Indices]...);
+        // };
+        // fillLower(std::make_index_sequence<LOWER_LANE_COUNT>{});
+
+        return *this;
+    }
+
+
     // template <typename DataType, size_t Lane>
     // FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::loadAligned(
     //     const DataType* data) noexcept
@@ -157,8 +178,8 @@ namespace flcn
     //  **************************************/
     //
     // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::getAt(size_t index) const noexcept
-    // { return index >= LOWER_LANE_COUNT ? _upper.getAt(index - LOWER_LANE_COUNT) : _lower.getAt(index); }
+    // FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::getAt(size_t index) const
+    // noexcept { return index >= LOWER_LANE_COUNT ? _upper.getAt(index - LOWER_LANE_COUNT) : _lower.getAt(index); }
     //
     //
     // template <typename DataType, size_t Lane>
@@ -362,7 +383,8 @@ namespace flcn
     // template <typename DataType, size_t Lane>
     // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane> Simd256<SimdBackend::ARCH_AVX, DataType,
     //                                                                                 Lane>::fma(Simd256 b,
-    //                                                                                            Simd256 c) const noexcept
+    //                                                                                            Simd256 c) const
+    //                                                                                            noexcept
     // { return Simd256(_lower.fma(b._lower, c._lower), _upper.fma(b._upper, c._upper)); }
     //
     //
@@ -490,7 +512,8 @@ namespace flcn
     //     // Upper mask the upper 16-bits but shifted to to the lower lane(expanded to 32-bits).
     //     constexpr auto lowerMask = static_cast<BlendMask32_t>(simd::expandTwoFold(Mask & 0x0000FFFF));
     //     constexpr auto upperMask = static_cast<BlendMask32_t>(simd::expandTwoFold(Mask >> 16));
-    //     return Simd256(_lower.template blend<lowerMask>(other._lower), _upper.template blend<upperMask>(other._upper));
+    //     return Simd256(_lower.template blend<lowerMask>(other._lower), _upper.template
+    //     blend<upperMask>(other._upper));
     // }
     //
     //
@@ -500,7 +523,8 @@ namespace flcn
     //                                                                                 Lane>::shuffle() const noexcept
     // {
     //     static_assert(sizeof...(ShuffleIndex) == Lane && "There must be <Lane> shuffle indices.");
-    //     static_assert(((ShuffleIndex < Lane) && ...) && "Indices must be between 0(inclusive) and <Lane>(exclusive).");
+    //     static_assert(((ShuffleIndex < Lane) && ...) && "Indices must be between 0(inclusive) and
+    //     <Lane>(exclusive).");
     //
     //     // For shuffling we need to perform a normalized shuffle(range between 0 - Max_128_Lane_Count)
     //     // and then use a mask to select values from appropriate register lanes.
