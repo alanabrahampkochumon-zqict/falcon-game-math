@@ -2,7 +2,9 @@
 
 # Falcon Game Math
 
-High performance math library written in modern C++. *Requires C++20 or above*
+Modern High Performance Game Math library with SIMD acceleration on supported platforms.
+
+*Requires C++20 or above*
 
 ## Requirements
 
@@ -38,19 +40,24 @@ The flag is currently only available for testing targets and will need to be def
 - **FALCON_ENABLE_SSE2**: Enables SSE2 support.
 - **FALCON_DISABLE_SIMD**: Disables SIMD.
 
-## How to run
+## How to install (CMake FetchContent)
 
-1. Generate project files using
-    ```bash
-        cmake -B build -DENABLE_FALCON_DEMO
-    ```
+1. Use `FetchContent` to pull the library.
 
-2. Run the build using commandline
-    ```bash
-        cmake --build build
-        ./build/playground/Debug/Playground.exe # To Run the playground
-    ```
-   OR Run it in Visual Studio or your IDE of choice.
+```cmake
+    FetchContent_Declare(
+        falcon
+        GIT_REPOSITORY https://github.com/alanabrahampkochumon-zqict/falcon-game-math.git
+        GIT_TAG 538f41eeeda7f1d2e61f21c06ea118b7a98b4ddd
+        SYSTEM
+)
+```
+
+2. Link with your target.
+    ```cmake
+        add_executable(SampleGame)
+        target_link_libraries(SampleGame PRIVATE Falcon::Falcon)    
+   ```
 
 ## References
 
