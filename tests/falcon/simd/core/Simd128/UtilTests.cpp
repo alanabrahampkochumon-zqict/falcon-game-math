@@ -128,7 +128,7 @@ using namespace simd::testing;
     #define SIMD128_HAS_NAN_TESTS_FP(TestName, Type, Lane, Data, Expected)                                             \
         TEST(Simd128_HasNaNTests, ReturnsValidMaskGiven_##TestName)                                                    \
         {                                                                                                              \
-            flcn::Simd128_t<Type, Lane> regA{ Data };                                                                \
+            flcn::Simd128_t<Type, Lane> regA{ Data };                                                                  \
                                                                                                                        \
             alignas(16) std::array<Type, Lane> resultMask{};                                                           \
             auto regRes = regA.hasNan();                                                                               \
@@ -140,40 +140,40 @@ using namespace simd::testing;
             }                                                                                                          \
         }
 
-constexpr auto DATA_FP32_2LANES_NO_NAN = Array<FP32, 2>{ 1.0f, 2.0f };
-constexpr auto RES_FP32_2LANES_NO_NAN  = Array<FP32, 2>{ 0, 0 };
+alignas(16) constexpr auto DATA_FP32_2LANES_NO_NAN = Array<FP32, 2>{ 1.0f, 2.0f };
+alignas(16) constexpr auto RES_FP32_2LANES_NO_NAN  = Array<FP32, 2>{ 0, 0 };
 SIMD128_HAS_NAN_TESTS_FP(FP32_2Lanes_NonNaN, FP32, 2, DATA_FP32_2LANES_NO_NAN, RES_FP32_2LANES_NO_NAN)
 
-constexpr auto DATA_FP32_2LANES_FULL_NAN = Array<FP32, 2>{ NaN<FP32>, NaN<FP32> };
-constexpr auto RES_FP32_2LANES_FULL_NAN  = Array<FP32, 2>{ NaN<FP32>, NaN<FP32> };
+alignas(16) constexpr auto DATA_FP32_2LANES_FULL_NAN = Array<FP32, 2>{ NaN<FP32>, NaN<FP32> };
+alignas(16) constexpr auto RES_FP32_2LANES_FULL_NAN  = Array<FP32, 2>{ NaN<FP32>, NaN<FP32> };
 SIMD128_HAS_NAN_TESTS_FP(FP32_2Lanes_FullNaN, FP32, 2, DATA_FP32_2LANES_FULL_NAN, RES_FP32_2LANES_FULL_NAN)
 
-constexpr auto DATA_FP32_2LANES_MIXED_NAN = Array<FP32, 2>{ 1.0f, NaN<FP32> };
-constexpr auto RES_FP32_2LANES_MIXED_NAN  = Array<FP32, 2>{ 0, NaN<FP32> };
+alignas(16) constexpr auto DATA_FP32_2LANES_MIXED_NAN = Array<FP32, 2>{ 1.0f, NaN<FP32> };
+alignas(16) constexpr auto RES_FP32_2LANES_MIXED_NAN  = Array<FP32, 2>{ 0, NaN<FP32> };
 SIMD128_HAS_NAN_TESTS_FP(FP32_2Lanes_AlternatingNaN, FP32, 2, DATA_FP32_2LANES_MIXED_NAN, RES_FP32_2LANES_MIXED_NAN)
 
-constexpr auto DATA_FP32_4LANES_NO_NAN = Array<FP32, 4>{ 1.0f, 2.0f, 3.0f, 4.0f };
-constexpr auto RES_FP32_4LANES_NO_NAN  = Array<FP32, 4>{ 0, 0, 0, 0 };
+alignas(16) constexpr auto DATA_FP32_4LANES_NO_NAN = Array<FP32, 4>{ 1.0f, 2.0f, 3.0f, 4.0f };
+alignas(16) constexpr auto RES_FP32_4LANES_NO_NAN  = Array<FP32, 4>{ 0, 0, 0, 0 };
 SIMD128_HAS_NAN_TESTS_FP(FP32_4Lanes_NonNaN, FP32, 4, DATA_FP32_4LANES_NO_NAN, RES_FP32_4LANES_NO_NAN)
 
-constexpr auto DATA_FP32_4LANES_FULL_NAN = Array<FP32, 4>{ NaN<FP32>, NaN<FP32>, NaN<FP32>, NaN<FP32> };
-constexpr auto RES_FP32_4LANES_FULL_NAN  = Array<FP32, 4>{ NaN<FP32>, NaN<FP32>, NaN<FP32>, NaN<FP32> };
+alignas(16) constexpr auto DATA_FP32_4LANES_FULL_NAN = Array<FP32, 4>{ NaN<FP32>, NaN<FP32>, NaN<FP32>, NaN<FP32> };
+alignas(16) constexpr auto RES_FP32_4LANES_FULL_NAN  = Array<FP32, 4>{ NaN<FP32>, NaN<FP32>, NaN<FP32>, NaN<FP32> };
 SIMD128_HAS_NAN_TESTS_FP(FP32_4Lanes_FullNaN, FP32, 4, DATA_FP32_4LANES_FULL_NAN, RES_FP32_4LANES_FULL_NAN)
 
-constexpr auto DATA_FP32_4LANES_MIXED_NAN = Array<FP32, 4>{ 1.0f, NaN<FP32>, 1.0f, NaN<FP32> };
-constexpr auto RES_FP32_4LANES_MIXED_NAN  = Array<FP32, 4>{ 0, NaN<FP32>, 0, NaN<FP32> };
+alignas(16) constexpr auto DATA_FP32_4LANES_MIXED_NAN = Array<FP32, 4>{ 1.0f, NaN<FP32>, 1.0f, NaN<FP32> };
+alignas(16) constexpr auto RES_FP32_4LANES_MIXED_NAN  = Array<FP32, 4>{ 0, NaN<FP32>, 0, NaN<FP32> };
 SIMD128_HAS_NAN_TESTS_FP(FP32_4Lanes_AlternatingNaN, FP32, 4, DATA_FP32_4LANES_MIXED_NAN, RES_FP32_4LANES_MIXED_NAN)
 
-constexpr auto DATA_FP64_2LANES_NO_NAN = Array<FP64, 2>{ 1.0f, 2.0f };
-constexpr auto RES_FP64_2LANES_NO_NAN  = Array<FP64, 2>{ 0, 0 };
+alignas(16) constexpr auto DATA_FP64_2LANES_NO_NAN = Array<FP64, 2>{ 1.0f, 2.0f };
+alignas(16) constexpr auto RES_FP64_2LANES_NO_NAN  = Array<FP64, 2>{ 0, 0 };
 SIMD128_HAS_NAN_TESTS_FP(FP64_2Lanes_NonNaN, FP64, 2, DATA_FP64_2LANES_NO_NAN, RES_FP64_2LANES_NO_NAN)
 
-constexpr auto DATA_FP64_2LANES_FULL_NAN = Array<FP64, 2>{ NaN<FP64>, NaN<FP64> };
-constexpr auto RES_FP64_2LANES_FULL_NAN  = Array<FP64, 2>{ NaN<FP64>, NaN<FP64> };
+alignas(16) constexpr auto DATA_FP64_2LANES_FULL_NAN = Array<FP64, 2>{ NaN<FP64>, NaN<FP64> };
+alignas(16) constexpr auto RES_FP64_2LANES_FULL_NAN  = Array<FP64, 2>{ NaN<FP64>, NaN<FP64> };
 SIMD128_HAS_NAN_TESTS_FP(FP64_2Lanes_FullNaN, FP64, 2, DATA_FP64_2LANES_FULL_NAN, RES_FP64_2LANES_FULL_NAN)
 
-constexpr auto DATA_FP64_2LANES_MIXED_NAN = Array<FP64, 2>{ 1.0f, NaN<FP64> };
-constexpr auto RES_FP64_2LANES_MIXED_NAN  = Array<FP64, 2>{ 0, NaN<FP64> };
+alignas(16) constexpr auto DATA_FP64_2LANES_MIXED_NAN = Array<FP64, 2>{ 1.0f, NaN<FP64> };
+alignas(16) constexpr auto RES_FP64_2LANES_MIXED_NAN  = Array<FP64, 2>{ 0, NaN<FP64> };
 SIMD128_HAS_NAN_TESTS_FP(FP64_2Lanes_AlternatingNaN, FP64, 2, DATA_FP64_2LANES_MIXED_NAN, RES_FP64_2LANES_MIXED_NAN)
 
     #undef SIMD128_HAS_NAN_TESTS_FP
@@ -188,7 +188,7 @@ SIMD128_HAS_NAN_TESTS_FP(FP64_2Lanes_AlternatingNaN, FP64, 2, DATA_FP64_2LANES_M
     #define SIMD128_HAS_INF_TESTS_FP(TestName, Type, Lane, Data, Expected)                                             \
         TEST(Simd128_HasInfTests, ReturnsValidMaskGiven_##TestName)                                                    \
         {                                                                                                              \
-            flcn::Simd128_t<Type, Lane> regA{ Data };                                                                \
+            flcn::Simd128_t<Type, Lane> regA{ Data };                                                                  \
                                                                                                                        \
             alignas(16) std::array<Type, Lane> resultMask{};                                                           \
             auto regRes = regA.hasInf();                                                                               \
@@ -200,40 +200,40 @@ SIMD128_HAS_NAN_TESTS_FP(FP64_2Lanes_AlternatingNaN, FP64, 2, DATA_FP64_2LANES_M
             }                                                                                                          \
         }
 
-constexpr auto DATA_FP32_2LANES_NO_INF = Array<FP32, 2>{ 1.0f, 2.0f };
-constexpr auto RES_FP32_2LANES_NO_INF  = Array<FP32, 2>{ 0, 0 };
+alignas(16) constexpr auto DATA_FP32_2LANES_NO_INF = Array<FP32, 2>{ 1.0f, 2.0f };
+alignas(16) constexpr auto RES_FP32_2LANES_NO_INF  = Array<FP32, 2>{ 0, 0 };
 SIMD128_HAS_INF_TESTS_FP(FP32_2Lanes_NonInf, FP32, 2, DATA_FP32_2LANES_NO_INF, RES_FP32_2LANES_NO_INF)
 
-constexpr auto DATA_FP32_2LANES_FULL_INF = Array<FP32, 2>{ Inf<FP32>, -Inf<FP32> };
-constexpr auto RES_FP32_2LANES_FULL_INF  = Array<FP32, 2>{ NaN<FP32>, NaN<FP32> };
+alignas(16) constexpr auto DATA_FP32_2LANES_FULL_INF = Array<FP32, 2>{ Inf<FP32>, -Inf<FP32> };
+alignas(16) constexpr auto RES_FP32_2LANES_FULL_INF  = Array<FP32, 2>{ NaN<FP32>, NaN<FP32> };
 SIMD128_HAS_INF_TESTS_FP(FP32_2Lanes_FullInf, FP32, 2, DATA_FP32_2LANES_FULL_INF, RES_FP32_2LANES_FULL_INF)
 
-constexpr auto DATA_FP32_2LANES_MIXED_INF = Array<FP32, 2>{ 1.0f, Inf<FP32> };
-constexpr auto RES_FP32_2LANES_MIXED_INF  = Array<FP32, 2>{ 0, NaN<FP32> };
+alignas(16) constexpr auto DATA_FP32_2LANES_MIXED_INF = Array<FP32, 2>{ 1.0f, Inf<FP32> };
+alignas(16) constexpr auto RES_FP32_2LANES_MIXED_INF  = Array<FP32, 2>{ 0, NaN<FP32> };
 SIMD128_HAS_INF_TESTS_FP(FP32_2Lanes_AlternatingInf, FP32, 2, DATA_FP32_2LANES_MIXED_INF, RES_FP32_2LANES_MIXED_INF)
 
-constexpr auto DATA_FP32_4LANES_NO_INF = Array<FP32, 4>{ 1.0f, 2.0f, 3.0f, 4.0f };
-constexpr auto RES_FP32_4LANES_NO_INF  = Array<FP32, 4>{ 0, 0, 0, 0 };
+alignas(16) constexpr auto DATA_FP32_4LANES_NO_INF = Array<FP32, 4>{ 1.0f, 2.0f, 3.0f, 4.0f };
+alignas(16) constexpr auto RES_FP32_4LANES_NO_INF  = Array<FP32, 4>{ 0, 0, 0, 0 };
 SIMD128_HAS_INF_TESTS_FP(FP32_4Lanes_NonInf, FP32, 4, DATA_FP32_4LANES_NO_INF, RES_FP32_4LANES_NO_INF)
 
-constexpr auto DATA_FP32_4LANES_FULL_INF = Array<FP32, 4>{ Inf<FP32>, -Inf<FP32>, Inf<FP32>, -Inf<FP32> };
-constexpr auto RES_FP32_4LANES_FULL_INF  = Array<FP32, 4>{ NaN<FP32>, NaN<FP32>, NaN<FP32>, NaN<FP32> };
+alignas(16) constexpr auto DATA_FP32_4LANES_FULL_INF = Array<FP32, 4>{ Inf<FP32>, -Inf<FP32>, Inf<FP32>, -Inf<FP32> };
+alignas(16) constexpr auto RES_FP32_4LANES_FULL_INF  = Array<FP32, 4>{ NaN<FP32>, NaN<FP32>, NaN<FP32>, NaN<FP32> };
 SIMD128_HAS_INF_TESTS_FP(FP32_4Lanes_FullInf, FP32, 4, DATA_FP32_4LANES_FULL_INF, RES_FP32_4LANES_FULL_INF)
 
-constexpr auto DATA_FP32_4LANES_MIXED_INF = Array<FP32, 4>{ 1.0f, -Inf<FP32>, 1.0f, -Inf<FP32> };
-constexpr auto RES_FP32_4LANES_MIXED_INF  = Array<FP32, 4>{ 0, NaN<FP32>, 0, NaN<FP32> };
+alignas(16) constexpr auto DATA_FP32_4LANES_MIXED_INF = Array<FP32, 4>{ 1.0f, -Inf<FP32>, 1.0f, -Inf<FP32> };
+alignas(16) constexpr auto RES_FP32_4LANES_MIXED_INF  = Array<FP32, 4>{ 0, NaN<FP32>, 0, NaN<FP32> };
 SIMD128_HAS_INF_TESTS_FP(FP32_4Lanes_AlternatingInf, FP32, 4, DATA_FP32_4LANES_MIXED_INF, RES_FP32_4LANES_MIXED_INF)
 
-constexpr auto DATA_FP64_2LANES_NO_INF = Array<FP64, 2>{ 1.0f, 2.0f };
-constexpr auto RES_FP64_2LANES_NO_INF  = Array<FP64, 2>{ 0, 0 };
+alignas(16) constexpr auto DATA_FP64_2LANES_NO_INF = Array<FP64, 2>{ 1.0f, 2.0f };
+alignas(16) constexpr auto RES_FP64_2LANES_NO_INF  = Array<FP64, 2>{ 0, 0 };
 SIMD128_HAS_INF_TESTS_FP(FP64_2Lanes_NonInf, FP64, 2, DATA_FP64_2LANES_NO_INF, RES_FP64_2LANES_NO_INF)
 
-constexpr auto DATA_FP64_2LANES_FULL_INF = Array<FP64, 2>{ -Inf<FP64>, Inf<FP64> };
-constexpr auto RES_FP64_2LANES_FULL_INF  = Array<FP64, 2>{ NaN<FP64>, NaN<FP64> };
+alignas(16) constexpr auto DATA_FP64_2LANES_FULL_INF = Array<FP64, 2>{ -Inf<FP64>, Inf<FP64> };
+alignas(16) constexpr auto RES_FP64_2LANES_FULL_INF  = Array<FP64, 2>{ NaN<FP64>, NaN<FP64> };
 SIMD128_HAS_INF_TESTS_FP(FP64_2Lanes_FullInf, FP64, 2, DATA_FP64_2LANES_FULL_INF, RES_FP64_2LANES_FULL_INF)
 
-constexpr auto DATA_FP64_2LANES_MIXED_INF = Array<FP64, 2>{ 1.0f, -Inf<FP64> };
-constexpr auto RES_FP64_2LANES_MIXED_INF  = Array<FP64, 2>{ 0, NaN<FP64> };
+alignas(16) constexpr auto DATA_FP64_2LANES_MIXED_INF = Array<FP64, 2>{ 1.0f, -Inf<FP64> };
+alignas(16) constexpr auto RES_FP64_2LANES_MIXED_INF  = Array<FP64, 2>{ 0, NaN<FP64> };
 SIMD128_HAS_INF_TESTS_FP(FP64_2Lanes_AlternatingInf, FP64, 2, DATA_FP64_2LANES_MIXED_INF, RES_FP64_2LANES_MIXED_INF)
 
     #undef SIMD128_HAS_INF_TESTS_FP
@@ -248,7 +248,7 @@ SIMD128_HAS_INF_TESTS_FP(FP64_2Lanes_AlternatingInf, FP64, 2, DATA_FP64_2LANES_M
     #define SIMD128_MAKE_BLEND_MASK_TESTS(TestSuffix, DataType, ExpectedMask, RegCount, ...)                           \
         TEST(Simd128_MakeBlendMaskTests, ReturnsValidMask_For##TestSuffix)                                             \
         {                                                                                                              \
-            const flcn::Simd128_t<DataType, RegCount> reg{ DataType(0) };                                            \
+            const flcn::Simd128_t<DataType, RegCount> reg{ DataType(0) };                                              \
             EXPECT_EQ(ExpectedMask, (reg.makeBlendMask<__VA_ARGS__>()));                                               \
         }
 
