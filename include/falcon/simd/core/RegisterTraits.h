@@ -100,7 +100,6 @@ namespace flcn::simd::internal
     };
 
 
-
     template <SimdBackend Backend, typename T, size_t Lane>
     using Simd256Register_t = Simd256Register<Backend, T, Lane>::Type;
 
