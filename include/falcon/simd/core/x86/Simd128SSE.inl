@@ -2612,6 +2612,31 @@ namespace flcn
     FALCON_INLINE constexpr Simd128<SimdBackend::ARCH_SSE2, DataType, Lane> Simd128<
         SimdBackend::ARCH_SSE2, DataType, Lane>::blend(Simd128 other) const noexcept
     {
+        // For fallback we can use (A & ~Mask) | (B & Mask)
+        // But we need to perform a bitwise expansion on the mask and then forward it to a register.
+        // NOTE: Defined as a macro as some compilers can throw unreachable code when the code is not in
+        //       an else block since there will be 2 returns.
+#define _SIMD128_CONST_BLEND_FALLBACK()                                                                                \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        const auto [upper, lower] = simd::expandFourFold(Mask);                                                        \
+        Simd128 maskReg;                                                                                               \
+        if constexpr (std::same_as<DataType, double>)                                                                  \
+        {                                                                                                              \
+            maskReg = Simd128(_mm_castsi128_pd(_mm_set_epi64x(upper, lower)));                                         \
+        }                                                                                                              \
+        else if constexpr (std::same_as<DataType, float>)                                                              \
+        {                                                                                                              \
+            maskReg = Simd128(_mm_castsi128_ps(_mm_set_epi64x(upper, lower)));                                         \
+        }                                                                                                              \
+        else if constexpr (std::integral<DataType>)                                                                    \
+        {                                                                                                              \
+            maskReg = Simd128(_mm_set_epi64x(upper, lower));                                                           \
+        }                                                                                                              \
+        return maskReg.andNot(*this) | (other & maskReg);                                                              \
+    } while (0)
+
+
         if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX2 && std::is_integral_v<DataType> &&
                       sizeof(DataType) == 4)
         {
@@ -2625,44 +2650,42 @@ namespace flcn
                 constexpr auto Imm8 = simd::packToNBits<2>(Mask);
                 return Simd128(_mm_blend_pd(_register, other._register, Imm8));
             }
-            if constexpr (types::IsFP32<DataType>)
+            else if constexpr (types::IsFP32<DataType>)
             {
                 constexpr auto Imm8 = simd::packToNBits<4>(Mask);
                 return Simd128(_mm_blend_ps(_register, other._register, Imm8));
             }
-            if constexpr (sizeof(DataType) == 8)
+            else if constexpr (sizeof(DataType) == 8)
             {
                 constexpr auto Imm8 = simd::packToNBits<2>(Mask);
                 const auto dblReg1  = _mm_castsi128_pd(_register);
                 const auto dblReg2  = _mm_castsi128_pd(*other);
                 return Simd128(_mm_castpd_si128(_mm_blend_pd(dblReg1, dblReg2, Imm8)));
             }
-            if constexpr (sizeof(DataType) == 4)
+            else if constexpr (sizeof(DataType) == 4)
             {
                 constexpr auto Imm8 = simd::packToNBits<4>(Mask);
                 const auto fltReg1  = _mm_castsi128_ps(_register);
                 const auto fltReg2  = _mm_castsi128_ps(*other);
                 return Simd128(_mm_castps_si128(_mm_blend_ps(fltReg1, fltReg2, Imm8)));
             }
-            if constexpr (sizeof(DataType) == 2)
+            else if constexpr (sizeof(DataType) == 2)
             {
                 constexpr auto Imm8 = simd::packToNBits<8>(Mask);
                 return Simd128(_mm_blend_epi16(_register, other._register, Imm8));
             }
+            else
+            {
+                _SIMD128_CONST_BLEND_FALLBACK();
+            }
         }
-        // For fallback we can use (A & ~Mask) | (B & Mask)
-        // But we need to perform a bitwise expansion on the mask and then forward it to a register.
-        const auto [upper, lower] = simd::expandFourFold(Mask);
-        auto maskReg = Simd128(_mm_set_epi64x(upper, lower));
-        if constexpr (std::same_as<DataType, double>)
+        else
         {
-            maskReg = Simd128(_mm_castsi128_pd(_mm_set_epi64x(upper, lower)));
+            _SIMD128_CONST_BLEND_FALLBACK();
         }
-        else if constexpr (std::same_as<DataType, float>)
-        {
-            maskReg = Simd128(_mm_castsi128_ps(_mm_set_epi64x(upper, lower)));
-        }
-        return maskReg.andNot(*this) | (other & maskReg);
+
+#undef _SIMD128_CONST_BLEND_FALLBACK
+
     }
 
 

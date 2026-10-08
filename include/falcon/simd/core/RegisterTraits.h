@@ -72,7 +72,7 @@ namespace flcn::simd::internal
         requires(Backend >= SimdBackend::ARCH_AVX)
     struct Simd256Register<Backend, T, Lane>
     {
-        using Type = struct Simd256<Backend, T, Lane>;
+        using Type = Simd256<Backend, T, Lane>;
     };
 
 
