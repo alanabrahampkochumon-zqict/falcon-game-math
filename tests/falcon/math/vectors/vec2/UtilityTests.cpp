@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Vec2 utility functions.
+ * @brief Verify @ref flcn::Vec2 utility functions.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -27,39 +27,39 @@ namespace
         requires std::floating_point<T>
     struct Vec2UtilityParams
     {
-        fgm::Vec2<T> vec;
+        flcn::Vec2<T> vec;
         bool expected;
     };
 
 
     /**
-     * @brief Test fixture for @ref fgm::Vec2 Infinity Checking.
+     * @brief Test fixture for @ref flcn::Vec2 Infinity Checking.
      */
     class Vec2InfCheckerTests: public testing::TestWithParam<Vec2UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
         Vec2UtilsInfVectors, Vec2InfCheckerTests,
-        ::testing::Values(Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, 1.0f), true },
-                          Vec2UtilityParams{ fgm::Vec2(1.0f, fgm::constants::INFINITY_F), true },
-                          Vec2UtilityParams{ fgm::Vec2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F), true },
-                          Vec2UtilityParams{ fgm::Vec2(1.0f, 1.0f), false }));
+        ::testing::Values(Vec2UtilityParams{ flcn::Vec2(flcn::constants::INFINITY_F, 1.0f), true },
+                          Vec2UtilityParams{ flcn::Vec2(1.0f, flcn::constants::INFINITY_F), true },
+                          Vec2UtilityParams{ flcn::Vec2(flcn::constants::INFINITY_F, flcn::constants::INFINITY_F), true },
+                          Vec2UtilityParams{ flcn::Vec2(1.0f, 1.0f), false }));
 
 
     /**
-     * @brief Test fixture for @ref fgm::Vec2 NaN Checking.
+     * @brief Test fixture for @ref flcn::Vec2 NaN Checking.
      */
     class Vec2NaNCheckerTests: public testing::TestWithParam<Vec2UtilityParams<float>> {};
 
     INSTANTIATE_TEST_SUITE_P(Vec2UtilsNaNVectors, Vec2NaNCheckerTests,
-                             ::testing::Values(Vec2UtilityParams{ fgm::Vec2(fgm::constants::NaN, 1.0f), true },
-                                 Vec2UtilityParams{ fgm::Vec2(1.0f, fgm::constants::NaN), true },
-                                 Vec2UtilityParams{ fgm::Vec2(fgm::constants::NaN, fgm::constants::NaN),
+                             ::testing::Values(Vec2UtilityParams{ flcn::Vec2(flcn::constants::NaN, 1.0f), true },
+                                 Vec2UtilityParams{ flcn::Vec2(1.0f, flcn::constants::NaN), true },
+                                 Vec2UtilityParams{ flcn::Vec2(flcn::constants::NaN, flcn::constants::NaN),
                                  true },
-                                 Vec2UtilityParams{ fgm::Vec2(1.0f, 1.0f), false }));
+                                 Vec2UtilityParams{ flcn::Vec2(1.0f, 1.0f), false }));
 
 
     /**
-     * @brief Test fixture for @ref fgm::Vec2 utilities, verifying across various integral types.
+     * @brief Test fixture for @ref flcn::Vec2 utilities, verifying across various integral types.
      */
     template <typename>
     class Vec2UtilsIntTests: public testing::Test {};
@@ -88,7 +88,7 @@ TEST_P(Vec2InfCheckerTests, ReturnTrueIfAnyComponentIsInfinity)
 TYPED_TEST(Vec2UtilsIntTests, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Vec2(value, value).hasInf());
+    EXPECT_FALSE(flcn::Vec2(value, value).hasInf());
 }
 
 
@@ -99,7 +99,7 @@ TYPED_TEST(Vec2UtilsIntTests, HasInf_ReturnsFalseForIntegrals)
 TEST_P(Vec2InfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
 {
     const auto& [vec, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Vec2<float>::hasInf(vec));
+    EXPECT_EQ(expected, flcn::Vec2<float>::hasInf(vec));
 }
 
 
@@ -107,7 +107,7 @@ TEST_P(Vec2InfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
 TYPED_TEST(Vec2UtilsIntTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Vec2<TypeParam>::hasInf(fgm::Vec2(value, value)));
+    EXPECT_FALSE(flcn::Vec2<TypeParam>::hasInf(flcn::Vec2(value, value)));
 }
 
 
@@ -130,7 +130,7 @@ TEST_P(Vec2NaNCheckerTests, ReturnTrueIfAnyComponentIsNaN)
 TYPED_TEST(Vec2UtilsIntTests, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Vec2(value, value).hasNaN());
+    EXPECT_FALSE(flcn::Vec2(value, value).hasNaN());
 }
 
 
@@ -141,7 +141,7 @@ TYPED_TEST(Vec2UtilsIntTests, HasNaN_ReturnsFalseForIntegrals)
 TEST_P(Vec2NaNCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
 {
     const auto& [vec, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Vec2<float>::hasNaN(vec));
+    EXPECT_EQ(expected, flcn::Vec2<float>::hasNaN(vec));
 }
 
 
@@ -149,7 +149,7 @@ TEST_P(Vec2NaNCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
 TYPED_TEST(Vec2UtilsIntTests, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Vec2<TypeParam>::hasNaN(fgm::Vec2(value, value)));
+    EXPECT_FALSE(flcn::Vec2<TypeParam>::hasNaN(flcn::Vec2(value, value)));
 }
 
 /** @} */

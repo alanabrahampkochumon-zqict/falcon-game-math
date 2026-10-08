@@ -20,7 +20,7 @@
  * @addtogroup FALCON_Math_Constants
  * @{
  */
-namespace fgm::constants
+namespace flcn::constants
 {
 
     /** @brief Positive infinity for single-precision floats. */
@@ -35,7 +35,7 @@ namespace fgm::constants
     /** @brief Quiet Not-a-Number for double-precision floats. */
     inline constexpr double NaN_D = std::numeric_limits<double>::quiet_NaN();
 
-    /** @brief The maximum possible swizzling dimension allowable for @ref fgm::Vector. */
+    /** @brief The maximum possible swizzling dimension allowable for @ref flcn::Vector. */
     inline constexpr std::size_t MAX_VECTOR_SWIZZLE_DIMENSION = 4; // TODO: Remove
 
     /** @brief Standard value for PI. */
@@ -60,10 +60,10 @@ namespace fgm::constants
     template <typename T>
     inline constexpr T FalseMask = static_cast<T>(0);
 
-} // namespace fgm::constants
+} // namespace flcn::constants
 
 
-namespace fgm::reflect
+namespace flcn::reflect
 {
     // NOTE: The last 3 bits are treated as x,y,z indicating in which axis reflection takes place.
     using RT                   = uint8_t;
@@ -75,37 +75,37 @@ namespace fgm::reflect
     inline constexpr RT Z      = 0b00000110; ///< Alias for z-axis reflection
     inline constexpr RT ORIGIN = 0b00000111; ///< Alias for origin reflection
 
-} // namespace fgm::reflect
+} // namespace flcn::reflect
 
 
-namespace fgm::axis
+namespace flcn::axis
 {
-    /// @brief Alias for axis used in fgm.
+    /// @brief Alias for axis used in falcon.
     /// @typedef AT stands for Axis Type, which is uint8_t by default.
     using AT              = uint8_t;
     inline constexpr AT X = 0; ///< Alias for x-coordinate
     inline constexpr AT Y = 1; ///< Alias for y-coordinate
     inline constexpr AT Z = 2; ///< Alias for z-coordinate
     inline constexpr AT W = 3; ///< Alias for w-coordinate
-} // namespace fgm::axis
+} // namespace flcn::axis
 
 
-namespace fgm::colors
+namespace flcn::colors
 {
     inline constexpr std::size_t R = 0; ///< Alias for red channel
     inline constexpr std::size_t G = 1; ///< Alias for green channel
     inline constexpr std::size_t B = 2; ///< Alias for blue channel
     inline constexpr std::size_t A = 3; ///< Alias for alpha channel
-} // namespace fgm::colors
+} // namespace flcn::colors
 
 
-namespace fgm::stp
+namespace flcn::stp
 {
     inline constexpr std::size_t S = 0; ///< Alias for s-coordinate
     inline constexpr std::size_t T = 1; ///< Alias for t-coordinate
     inline constexpr std::size_t P = 2; ///< Alias for p-coordinate
     inline constexpr std::size_t Q = 3; ///< Alias for q-coordinate
-} // namespace fgm::stp
+} // namespace flcn::stp
 
 /**
  * @}

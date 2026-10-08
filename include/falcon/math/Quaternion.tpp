@@ -10,7 +10,7 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-namespace fgm
+namespace flcn
 {
 
     /**************************************
@@ -263,7 +263,7 @@ namespace fgm
     FALCON_INLINE constexpr Magnitude<T> Quaternion<T>::mag() const noexcept
         requires StrictArithmetic<T>
     {
-        // TODO: Update to use fgm::sqrt
+        // TODO: Update to use flcn::sqrt
         return Magnitude<T>(std::sqrt(dot(*this)));
     }
 
@@ -279,7 +279,7 @@ namespace fgm
         requires SignedStrictArithmetic<T>
     {
         // note: this->conjugate(this is implied)
-        FALCON_ASSERT_MSG(dot(*this) > 0, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
+        FALCON_ASSERT_MSG(dot(*this) > 0, flcn::messages::assertion::QUAT_DIV_BY_ZERO);
         using M = Magnitude<T>;
         return static_cast<Quaternion<M>>(conjugate()) / static_cast<M>(dot(*this));
     }
@@ -357,15 +357,15 @@ namespace fgm
 
         if constexpr (std::is_floating_point_v<R>)
         {
-            FALCON_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
-            FALCON_ASSERT_MSG(!fgm::isnan(scalar) && !hasNaN(), fgm::messages::assertion::QUAT_HAS_NAN);
+            FALCON_ASSERT_MSG(flcn::abs(scalar) >= flcn::Config::EPSILON<R>, flcn::messages::assertion::QUAT_DIV_BY_ZERO);
+            FALCON_ASSERT_MSG(!flcn::isnan(scalar) && !hasNaN(), flcn::messages::assertion::QUAT_HAS_NAN);
 
             R factor = R(1) / static_cast<R>(scalar);
             return Quaternion<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor, _data[3] * factor);
         }
         else
         {
-            FALCON_ASSERT_MSG(fgm::abs(scalar) != R(0), fgm::messages::assertion::QUAT_DIV_BY_ZERO);
+            FALCON_ASSERT_MSG(flcn::abs(scalar) != R(0), flcn::messages::assertion::QUAT_DIV_BY_ZERO);
             R tScalar = static_cast<R>(scalar);
             return Quaternion<R>(_data[0] / tScalar, _data[1] / tScalar, _data[2] / tScalar, _data[3] / tScalar);
         }
@@ -382,8 +382,8 @@ namespace fgm
 
         if constexpr (std::is_floating_point_v<R>)
         {
-            FALCON_ASSERT_MSG(fgm::abs(scalar) > fgm::Config::EPSILON<S>, fgm::messages::assertion::QUAT_DIV_BY_ZERO);
-            FALCON_ASSERT_MSG(!fgm::isnan(scalar) && !hasNaN(), fgm::messages::assertion::QUAT_HAS_NAN);
+            FALCON_ASSERT_MSG(flcn::abs(scalar) > flcn::Config::EPSILON<S>, flcn::messages::assertion::QUAT_DIV_BY_ZERO);
+            FALCON_ASSERT_MSG(!flcn::isnan(scalar) && !hasNaN(), flcn::messages::assertion::QUAT_HAS_NAN);
 
             R factor = R(1) / static_cast<R>(scalar);
 
@@ -394,7 +394,7 @@ namespace fgm
         }
         else
         {
-            FALCON_ASSERT_MSG(fgm::abs(scalar) != R(0), fgm::messages::assertion::QUAT_DIV_BY_ZERO);
+            FALCON_ASSERT_MSG(flcn::abs(scalar) != R(0), flcn::messages::assertion::QUAT_DIV_BY_ZERO);
             _data[0] = static_cast<T>(_data[0] / static_cast<R>(scalar));
             _data[1] = static_cast<T>(_data[1] / static_cast<R>(scalar));
             _data[2] = static_cast<T>(_data[2] / static_cast<R>(scalar));
@@ -440,10 +440,10 @@ namespace fgm
             }
 #endif
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return (x() == rhs.x() || fgm::abs(x() - rhs.x()) <= epsilon) &&
-                (y() == rhs.y() || fgm::abs(y() - rhs.y()) <= epsilon) &&
-                (z() == rhs.z() || fgm::abs(z() - rhs.z()) <= epsilon) &&
-                (w() == rhs.w() || fgm::abs(w() - rhs.w()) <= epsilon);
+            return (x() == rhs.x() || flcn::abs(x() - rhs.x()) <= epsilon) &&
+                (y() == rhs.y() || flcn::abs(y() - rhs.y()) <= epsilon) &&
+                (z() == rhs.z() || flcn::abs(z() - rhs.z()) <= epsilon) &&
+                (w() == rhs.w() || flcn::abs(w() - rhs.w()) <= epsilon);
         }
     }
 
@@ -468,10 +468,10 @@ namespace fgm
         else
         {
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return (x() != rhs.x() && !(fgm::abs(x() - rhs.x()) <= epsilon)) ||
-                (y() != rhs.y() && !(fgm::abs(y() - rhs.y()) <= epsilon)) ||
-                (z() != rhs.z() && !(fgm::abs(z() - rhs.z()) <= epsilon)) ||
-                (w() != rhs.w() && !(fgm::abs(w() - rhs.w()) <= epsilon));
+            return (x() != rhs.x() && !(flcn::abs(x() - rhs.x()) <= epsilon)) ||
+                (y() != rhs.y() && !(flcn::abs(y() - rhs.y()) <= epsilon)) ||
+                (z() != rhs.z() && !(flcn::abs(z() - rhs.z()) <= epsilon)) ||
+                (w() != rhs.w() && !(flcn::abs(w() - rhs.w()) <= epsilon));
         }
     }
 
@@ -497,10 +497,10 @@ namespace fgm
         else
         {
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return Quaternion<bool>{ x() == rhs.x() || fgm::abs(x() - rhs.x()) <= epsilon,
-                                     y() == rhs.y() || fgm::abs(y() - rhs.y()) <= epsilon,
-                                     z() == rhs.z() || fgm::abs(z() - rhs.z()) <= epsilon,
-                                     w() == rhs.w() || fgm::abs(w() - rhs.w()) <= epsilon };
+            return Quaternion<bool>{ x() == rhs.x() || flcn::abs(x() - rhs.x()) <= epsilon,
+                                     y() == rhs.y() || flcn::abs(y() - rhs.y()) <= epsilon,
+                                     z() == rhs.z() || flcn::abs(z() - rhs.z()) <= epsilon,
+                                     w() == rhs.w() || flcn::abs(w() - rhs.w()) <= epsilon };
         }
     }
 
@@ -525,10 +525,10 @@ namespace fgm
         else
         {
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return Quaternion<bool>{ x() != rhs.x() && !(fgm::abs(x() - rhs.x()) <= epsilon),
-                                     y() != rhs.y() && !(fgm::abs(y() - rhs.y()) <= epsilon),
-                                     z() != rhs.z() && !(fgm::abs(z() - rhs.z()) <= epsilon),
-                                     w() != rhs.w() && !(fgm::abs(w() - rhs.w()) <= epsilon) };
+            return Quaternion<bool>{ x() != rhs.x() && !(flcn::abs(x() - rhs.x()) <= epsilon),
+                                     y() != rhs.y() && !(flcn::abs(y() - rhs.y()) <= epsilon),
+                                     z() != rhs.z() && !(flcn::abs(z() - rhs.z()) <= epsilon),
+                                     w() != rhs.w() && !(flcn::abs(w() - rhs.w()) <= epsilon) };
         }
     }
 
@@ -565,9 +565,9 @@ namespace fgm
             }
 #endif
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return (x() == rhs.x() || fgm::abs(x() - rhs.x()) <= epsilon) &&
-                (y() == rhs.y() || fgm::abs(y() - rhs.y()) <= epsilon) &&
-                (z() == rhs.z() || fgm::abs(z() - rhs.z()) <= epsilon);
+            return (x() == rhs.x() || flcn::abs(x() - rhs.x()) <= epsilon) &&
+                (y() == rhs.y() || flcn::abs(y() - rhs.y()) <= epsilon) &&
+                (z() == rhs.z() || flcn::abs(z() - rhs.z()) <= epsilon);
         }
     }
 
@@ -592,9 +592,9 @@ namespace fgm
         else
         {
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return (x() != rhs.x() && !(fgm::abs(x() - rhs.x()) <= epsilon)) ||
-                (y() != rhs.y() && !(fgm::abs(y() - rhs.y()) <= epsilon)) ||
-                (z() != rhs.z() && !(fgm::abs(z() - rhs.z()) <= epsilon));
+            return (x() != rhs.x() && !(flcn::abs(x() - rhs.x()) <= epsilon)) ||
+                (y() != rhs.y() && !(flcn::abs(y() - rhs.y()) <= epsilon)) ||
+                (z() != rhs.z() && !(flcn::abs(z() - rhs.z()) <= epsilon));
         }
     }
 
@@ -632,7 +632,7 @@ namespace fgm
     {
         if constexpr (std::is_floating_point_v<T>)
         {
-            return fgm::isinf(_data[0]) || fgm::isinf(_data[1]) || fgm::isinf(_data[2]) || fgm::isinf(_data[3]);
+            return flcn::isinf(_data[0]) || flcn::isinf(_data[1]) || flcn::isinf(_data[2]) || flcn::isinf(_data[3]);
         }
         else
         {
@@ -651,7 +651,7 @@ namespace fgm
     {
         if constexpr (std::is_floating_point_v<T>)
         {
-            return fgm::isnan(_data[0]) || fgm::isnan(_data[1]) || fgm::isnan(_data[2]) || fgm::isnan(_data[3]);
+            return flcn::isnan(_data[0]) || flcn::isnan(_data[1]) || flcn::isnan(_data[2]) || flcn::isnan(_data[3]);
         }
         else
         {
@@ -665,4 +665,4 @@ namespace fgm
     { return quat.hasNaN(); }
 
 
-} // namespace fgm
+} // namespace flcn

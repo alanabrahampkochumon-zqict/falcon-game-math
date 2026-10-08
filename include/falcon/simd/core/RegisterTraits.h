@@ -25,7 +25,7 @@
  * @brief Defines a SSE(1/2/3/4) Register(128-bit) for a given data type.
  *        @note Use @ref SSERegister_t<type> for a shorter syntax.
  */
-namespace falcon::simd::internal
+namespace flcn::simd::internal
 {
     template <typename>
     struct SSERegister
@@ -100,13 +100,13 @@ namespace falcon::simd::internal
 
     template <typename T>
     using AVX512Register_t = AVX512Register<T>::Type;
-} // namespace falcon::simd::internal
+} // namespace flcn::simd::internal
 #elif defined(FALCON_PLATFORM_ARM)
-namespace falcon::simd::internal
+namespace flcn::simd::internal
 {
     // TODO: Add Neon Intrinsics here
 }
 #endif
-// namespace falcon::simd::internal
+// namespace flcn::simd::internal
 
 /** @} */

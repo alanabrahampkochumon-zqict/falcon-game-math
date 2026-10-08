@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 22, 2026
  *
- * @brief Verify the @ref fgm::CVec2 p-Norm length logic.
+ * @brief Verify the @ref flcn::CVec2 p-Norm length logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -31,7 +31,7 @@ namespace
     class CVec2ManhattanNormTests: public testing::Test
     {
     protected:
-        fgm::CVec2<T> _vec;
+        flcn::CVec2<T> _vec;
         T _norm;
 
         void SetUp() override
@@ -52,7 +52,7 @@ namespace
     class CVec2ChebyshevNormTests: public testing::Test
     {
     protected:
-        fgm::CVec2<T> _vec;
+        flcn::CVec2<T> _vec;
         T _norm;
 
         void SetUp() override
@@ -71,18 +71,18 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::CVec2 VEC(1, -2);
+        constexpr flcn::CVec2 VEC(1, -2);
 
         /// @test Verify that CVec2 Manhattan Norm returns a valid scalar.
         static_assert(VEC.manhattanNorm() == 3);
         /// @test Verify that CVec2 Manhattan Norm (static wrapper) returns a valid scalar.
-        static_assert(fgm::CVec2<int>::manhattanNorm(VEC) == 3);
+        static_assert(flcn::CVec2<int>::manhattanNorm(VEC) == 3);
 
 
         /// @test Verify that CVec2 Chebyshev Norm returns a valid scalar.
         static_assert(VEC.chebyshevNorm() == 2);
         /// @test Verify that CVec2 Chebyshev Norm (static wrapper) returns a valid scalar.
-        static_assert(fgm::CVec2<int>::chebyshevNorm(VEC) == 2);
+        static_assert(flcn::CVec2<int>::chebyshevNorm(VEC) == 2);
 
     } // namespace static_tests
 } // namespace
@@ -103,11 +103,11 @@ TYPED_TEST(CVec2ManhattanNormTests, ReturnsSumOfAbsoluteValueOfComponents)
 
 /**
  * @test Verify that taking the manhattan norm of a non-unit vector using static variant of
- *        @ref fgm::CVec2::manhattanNorm returns non-unit scalar.
+ *        @ref flcn::CVec2::manhattanNorm returns non-unit scalar.
  */
 TYPED_TEST(CVec2ManhattanNormTests, StaticWrapper_ReturnsSumOfAbsoluteValueOfComponents)
 {
-    const auto magnitude = fgm::CVec2<TypeParam>::manhattanNorm(this->_vec);
+    const auto magnitude = flcn::CVec2<TypeParam>::manhattanNorm(this->_vec);
     EXPECT_MAG_EQ(this->_norm, magnitude);
 }
 
@@ -127,11 +127,11 @@ TYPED_TEST(CVec2ChebyshevNormTests, ReturnsLongestAbsoluteComponent)
 
 /**
  * @test Verify that taking the chebyshev norm of a non-unit vector using static variant of
- *        @ref fgm::CVec2::chebyshevNorm returns non-unit scalar.
+ *        @ref flcn::CVec2::chebyshevNorm returns non-unit scalar.
  */
 TYPED_TEST(CVec2ChebyshevNormTests, StaticWrapper_ReturnsLongestAbsoluteComponent)
 {
-    const auto magnitude = fgm::CVec2<TypeParam>::chebyshevNorm(this->_vec);
+    const auto magnitude = flcn::CVec2<TypeParam>::chebyshevNorm(this->_vec);
     EXPECT_MAG_EQ(this->_norm, magnitude);
 }
 

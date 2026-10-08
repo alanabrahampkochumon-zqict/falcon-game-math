@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: September 15, 2026
  *
- * @brief Verify @ref fgm::Vec2 accessors and mutators.
+ * @brief Verify @ref flcn::Vec2 accessors and mutators.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,7 +26,7 @@
 /** @test Verify that the components are accessible via named spatial aliases (x, y). */
 TEST(Vec2AccessTests, AccessibleAsXY)
 {
-    static const fgm::Vec2 vec(3.0f, 1.0f);
+    static const flcn::Vec2 vec(3.0f, 1.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.x());
     EXPECT_FLOAT_EQ(1.0f, vec.y());
@@ -36,7 +36,7 @@ TEST(Vec2AccessTests, AccessibleAsXY)
 /** @test Verify that the components are accessible via named spatial aliases (s, t). */
 TEST(Vec2AccessTests, AccessibleAsST)
 {
-    const fgm::Vec2 vec(3.0f, 1.0f);
+    const flcn::Vec2 vec(3.0f, 1.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.s());
     EXPECT_FLOAT_EQ(1.0f, vec.t());
@@ -46,7 +46,7 @@ TEST(Vec2AccessTests, AccessibleAsST)
 /** @test Verify that the components are accessible via named spatial aliases (r, g). */
 TEST(Vec2AccessTests, AccessibleAsRG)
 {
-    const fgm::Vec2 vec(3.0f, 1.0f);
+    const flcn::Vec2 vec(3.0f, 1.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.r());
     EXPECT_FLOAT_EQ(1.0f, vec.g());
@@ -56,7 +56,7 @@ TEST(Vec2AccessTests, AccessibleAsRG)
 /** @test Verify that the components are accessible via subscript indexing for reads. */
 TEST(Vec2AccessTests, AccessibleAsArray)
 {
-    const fgm::Vec2 vec(3.0f, 1.0f);
+    const flcn::Vec2 vec(3.0f, 1.0f);
     EXPECT_FLOAT_EQ(3.0f, vec[0]);
     EXPECT_FLOAT_EQ(1.0f, vec[1]);
 }
@@ -64,7 +64,7 @@ TEST(Vec2AccessTests, AccessibleAsArray)
 
 TEST(Vec2AccessTests, ConstVec_AccessibleAsCompileTimeIndex)
 {
-    const fgm::Vec2 vec(3.0f, 1.0f);
+    const flcn::Vec2 vec(3.0f, 1.0f);
     EXPECT_FLOAT_EQ(3.0f, vec.get<0>());
     EXPECT_FLOAT_EQ(1.0f, vec.get<1>());
 }
@@ -72,7 +72,7 @@ TEST(Vec2AccessTests, ConstVec_AccessibleAsCompileTimeIndex)
 
 TEST(Vec2AccessTests, NonConstVec_AccessibleAsCompileTimeIndex)
 {
-    fgm::Vec2 vec(3.0f, 1.0f);
+    flcn::Vec2 vec(3.0f, 1.0f);
     EXPECT_FLOAT_EQ(3.0f, vec.get<0>());
     EXPECT_FLOAT_EQ(1.0f, vec.get<1>());
 }
@@ -86,7 +86,7 @@ TEST(Vec2AccessTests, NonConstVec_AccessibleAsCompileTimeIndex)
 /** @test Verify that the components can be mutated via named spatial aliases (x, y). */
 TEST(Vec2MutationTests, ElementsCanBeMutatedUsingXY)
 {
-    fgm::Vec2<float> vec;
+    flcn::Vec2<float> vec;
 
     vec.x() = 3.0f;
     vec.y() = 1.0f;
@@ -99,7 +99,7 @@ TEST(Vec2MutationTests, ElementsCanBeMutatedUsingXY)
 /** @test Verify that the components can be mutated via named spatial aliases (s, t). */
 TEST(Vec2MutationTests, ElementsCanBeMutatedUsingST)
 {
-    fgm::Vec2<float> vec;
+    flcn::Vec2<float> vec;
 
     vec.s() = 3.0f;
     vec.t() = 1.0f;
@@ -112,7 +112,7 @@ TEST(Vec2MutationTests, ElementsCanBeMutatedUsingST)
 /** @test Verify that the components can be mutated via named spatial aliases (r, g). */
 TEST(Vec2MutationTests, ElementsCanBeMutatedUsingRG)
 {
-    fgm::Vec2<float> vec;
+    flcn::Vec2<float> vec;
 
     vec.r() = 3.0f;
     vec.g() = 1.0f;
@@ -125,7 +125,7 @@ TEST(Vec2MutationTests, ElementsCanBeMutatedUsingRG)
 /** @test Verify that the components are accessible via subscript indexing for writing. */
 TEST(Vec2MutationTests, ElementsCanBeMutatedUsingIndex)
 {
-    fgm::Vec2<float> vec;
+    flcn::Vec2<float> vec;
 
     vec[0] = 3.0f;
     vec[1] = 1.0f;
@@ -136,7 +136,7 @@ TEST(Vec2MutationTests, ElementsCanBeMutatedUsingIndex)
 
 TEST(Vec2MutationTests, ElementsCanBeMutatedUsingCompileTimeIndexing)
 {
-    fgm::Vec2<float> vec;
+    flcn::Vec2<float> vec;
 
     vec.set<0>(3.0f);
     vec.set<1>(1.0f);

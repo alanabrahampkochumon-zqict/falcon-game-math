@@ -27,7 +27,7 @@
  *                                    *
  **************************************/
 
-namespace fgm
+namespace flcn
 {
 
     /// Forward declarations
@@ -242,6 +242,6 @@ namespace fgm
     using PromotedTransform4 = Transform4<PromotedValue_t<T, U>>;
 
 
-} // namespace fgm
+} // namespace flcn
 
 /** @} */

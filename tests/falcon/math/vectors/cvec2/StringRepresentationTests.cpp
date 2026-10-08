@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::CVec2 string representation.
+ * @brief Verify @ref flcn::CVec2 string representation.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,16 +26,16 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::CVec2 string representation.
+     * @brief Test fixture for @ref flcn::CVec2 string representation.
      */
     class CVec2StringRepresentationTests: public testing::Test
     {
     protected:
         /** @brief Switch to use full precision for testing. */
-        void SetUp() override { fgm::Config::useFullPrecision = true; }
+        void SetUp() override { flcn::Config::useFullPrecision = true; }
 
         /** @brief Switch back to normal log precision. */
-        void TearDown() override { fgm::Config::useFullPrecision = false; }
+        void TearDown() override { flcn::Config::useFullPrecision = false; }
     };
 } // namespace
 
@@ -47,7 +47,7 @@ namespace
 
 TEST_F(CVec2StringRepresentationTests, IntegralVector_ReturnsFormattedString)
 {
-    const fgm::CVec2 vec(1, 2);
+    const flcn::CVec2 vec(1, 2);
     std::stringstream ss;
 
     ss << vec;
@@ -58,7 +58,7 @@ TEST_F(CVec2StringRepresentationTests, IntegralVector_ReturnsFormattedString)
 
 TEST_F(CVec2StringRepresentationTests, FloatingPointVector_ReturnsFormattedString)
 {
-    const fgm::CVec2 vec(1.2345f, 2.0f);
+    const flcn::CVec2 vec(1.2345f, 2.0f);
     std::stringstream ss;
 
     ss << vec;
@@ -69,7 +69,7 @@ TEST_F(CVec2StringRepresentationTests, FloatingPointVector_ReturnsFormattedStrin
 
 TEST_F(CVec2StringRepresentationTests, DoublePrecisionFloatingPointVector_ReturnsFormattedString)
 {
-    const fgm::CVec2 vec(1.2345789777, 2.65831);
+    const flcn::CVec2 vec(1.2345789777, 2.65831);
     std::stringstream ss;
 
     ss << vec;

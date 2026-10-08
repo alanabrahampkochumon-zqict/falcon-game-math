@@ -38,10 +38,10 @@ TYPED_TEST(Vec2ToCVec2ConversionTests, ToVec2_ReturnsAValidVec2)
 {
     const TypeParam a = TypeParam(7);
     const TypeParam b = TypeParam(12);
-    const fgm::Vec2 vec(a, b);
+    const flcn::Vec2 vec(a, b);
     const auto cVec = vec.toCVec2();
 
-    static_assert(std::is_same_v<decltype(cVec), const fgm::CVec2<TypeParam>>);
+    static_assert(std::is_same_v<decltype(cVec), const flcn::CVec2<TypeParam>>);
 
     EXPECT_MAG_EQ(vec.x(), cVec.x());
     EXPECT_MAG_EQ(vec.y(), cVec.y());
@@ -52,10 +52,10 @@ TYPED_TEST(Vec2ToCVec2ConversionTests, StaticWrapper_ToVec2_ReturnsAValidVec2)
 {
     const TypeParam a = TypeParam(7);
     const TypeParam b = TypeParam(12);
-    const fgm::Vec2 vec(a, b);
+    const flcn::Vec2 vec(a, b);
     const auto cVec = vec.toCVec2();
 
-    static_assert(std::is_same_v<decltype(cVec), const fgm::CVec2<TypeParam>>);
+    static_assert(std::is_same_v<decltype(cVec), const flcn::CVec2<TypeParam>>);
 
     EXPECT_MAG_EQ(vec.x(), cVec.x());
     EXPECT_MAG_EQ(vec.y(), cVec.y());

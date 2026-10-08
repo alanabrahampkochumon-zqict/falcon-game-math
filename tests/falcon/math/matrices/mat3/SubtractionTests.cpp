@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 24, 2026
  *
- * @brief Verify @ref fgm::Mat3 subtraction logic.
+ * @brief Verify @ref flcn::Mat3 subtraction logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,7 +26,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 Subtraction.
+     * @brief Test fixture for @ref flcn::Mat3 Subtraction.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -34,15 +34,15 @@ namespace
     class Mat3SubtractionTests: public testing::Test
     {
     protected:
-        fgm::Mat3<T> _matA;
-        fgm::Mat3<T> _matB;
-        fgm::Mat3<T> _expectedDifference;
+        flcn::Mat3<T> _matA;
+        flcn::Mat3<T> _matB;
+        flcn::Mat3<T> _expectedDifference;
 
         void SetUp() override
         {
-            _matA               = { fgm::Vec3<T>{ 5, 6, 9 }, fgm::Vec3<T>{ 13, 8, 5 }, fgm::Vec3<T>{ 5, 4, 10 } };
-            _matB               = { fgm::Vec3<T>{ 3, 1, 6 }, fgm::Vec3<T>{ 8, 1, 5 }, fgm::Vec3<T>{ 2, 3, 1 } };
-            _expectedDifference = { fgm::Vec3<T>{ 2, 5, 3 }, fgm::Vec3<T>{ 5, 7, 0 }, fgm::Vec3<T>{ 3, 1, 9 } };
+            _matA               = { flcn::Vec3<T>{ 5, 6, 9 }, flcn::Vec3<T>{ 13, 8, 5 }, flcn::Vec3<T>{ 5, 4, 10 } };
+            _matB               = { flcn::Vec3<T>{ 3, 1, 6 }, flcn::Vec3<T>{ 8, 1, 5 }, flcn::Vec3<T>{ 2, 3, 1 } };
+            _expectedDifference = { flcn::Vec3<T>{ 2, 5, 3 }, flcn::Vec3<T>{ 5, 7, 0 }, flcn::Vec3<T>{ 3, 1, 9 } };
         }
     };
     TYPED_TEST_SUITE(Mat3SubtractionTests, SupportedArithmeticTypes);
@@ -55,12 +55,12 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat3 MAT1{ 8, 2, 12, 4, 15, -11, 23, -55, 12 };
-        constexpr fgm::Mat3 MAT2{ 80, -5, 15, 3, 1, -13, 0, 55, 38 };
+        constexpr flcn::Mat3 MAT1{ 8, 2, 12, 4, 15, -11, 23, -55, 12 };
+        constexpr flcn::Mat3 MAT2{ 80, -5, 15, 3, 1, -13, 0, 55, 38 };
 
 
         /** @test Verify that matrix subtraction operations return a valid matrix at compile time. */
-        constexpr fgm::Mat3 BINARY_DIFF = MAT1 - MAT2;
+        constexpr flcn::Mat3 BINARY_DIFF = MAT1 - MAT2;
         static_assert(BINARY_DIFF(0, 0) == -72);
         static_assert(BINARY_DIFF(0, 1) == 7);
         static_assert(BINARY_DIFF(0, 2) == -3);
@@ -82,17 +82,17 @@ namespace
 
 TYPED_TEST(Mat3SubtractionTests, MinusOperator_ReturnsMatrixDifference)
 {
-    const fgm::Mat3 difference = this->_matA - this->_matB;
+    const flcn::Mat3 difference = this->_matA - this->_matB;
     EXPECT_MAT_EQ(this->_expectedDifference, difference);
 }
 
 
 TEST(Mat3SubtractionTests, MinusOperator_MixedType_PromotesType)
 {
-    const fgm::Mat3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f);
-    const fgm::Mat3 mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0);
+    const flcn::Mat3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f);
+    const flcn::Mat3 mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0);
 
-    [[maybe_unused]] const fgm::Mat3 difference = mat1 - mat2;
+    [[maybe_unused]] const flcn::Mat3 difference = mat1 - mat2;
     static_assert(std::is_same_v<decltype(difference)::value_type, double>);
 }
 
@@ -106,8 +106,8 @@ TYPED_TEST(Mat3SubtractionTests, MinusEqualsOperator_ReturnsSameMatrixWithDiffer
 
 TEST(Mat3SubtractionTests, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    fgm::Mat3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f);
-    const fgm::Mat3 mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0);
+    flcn::Mat3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 4.0f, 5.0f, 3.0f, 3.0f, 12.0f);
+    const flcn::Mat3 mat2(9.0, 10.0, 3.0, 4.0, -1.0, 0.0, 5.0, 12.0, -22.0);
 
     mat1 -= mat2;
     static_assert(std::is_same_v<decltype(mat1)::value_type, float>);

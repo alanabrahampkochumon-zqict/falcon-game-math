@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 07, 2026
  *
- * @brief Verify @ref fgm::Mat4 transpose logic.
+ * @brief Verify @ref flcn::Mat4 transpose logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -25,7 +25,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4 Transpose.
+     * @brief Test fixture for @ref flcn::Mat4 Transpose.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -33,7 +33,7 @@ namespace
     class Mat4TransposeTests: public ::testing::Test
     {
     protected:
-        fgm::Mat4<T> _matrix, _expectedTranspose;
+        flcn::Mat4<T> _matrix, _expectedTranspose;
 
         void SetUp() override
         {
@@ -57,11 +57,11 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat4 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+        constexpr flcn::Mat4 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 
 
         /** @test Verify that matrix transpose returns a valid matrix at compile time. */
-        constexpr fgm::Mat4 TRANSPOSE_MAT = MAT.transpose();
+        constexpr flcn::Mat4 TRANSPOSE_MAT = MAT.transpose();
         static_assert(TRANSPOSE_MAT(0, 0) == 1);
         static_assert(TRANSPOSE_MAT(0, 1) == 5);
         static_assert(TRANSPOSE_MAT(0, 2) == 9);
@@ -84,7 +84,7 @@ namespace
 
 
         /** @test Verify that matrix transpose (static wrapper) returns a valid matrix at compile time. */
-        constexpr fgm::Mat4 TRANSPOSE_MAT_S = fgm::Mat4<int>::transpose(MAT);
+        constexpr flcn::Mat4 TRANSPOSE_MAT_S = flcn::Mat4<int>::transpose(MAT);
         static_assert(TRANSPOSE_MAT_S(0, 0) == 1);
         static_assert(TRANSPOSE_MAT_S(0, 1) == 5);
         static_assert(TRANSPOSE_MAT_S(0, 2) == 9);
@@ -119,6 +119,6 @@ TYPED_TEST(Mat4TransposeTests, ReturnsMatrixWithExchangedRowsAndColumnElements)
 
 
 TYPED_TEST(Mat4TransposeTests, StaticWrapper_ReturnsMatrixWithExchangedRowsAndColumnElements)
-{ EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Mat4<TypeParam>::transpose(this->_matrix)); }
+{ EXPECT_MAT_EQ(this->_expectedTranspose, flcn::Mat4<TypeParam>::transpose(this->_matrix)); }
 
 /** @} */

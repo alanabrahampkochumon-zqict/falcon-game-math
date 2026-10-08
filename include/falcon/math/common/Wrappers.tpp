@@ -16,7 +16,7 @@
 #include <limits>
 
 
-namespace fgm
+namespace flcn
 {
     template <Arithmetic T>
     constexpr bool isnan(T num) noexcept
@@ -55,7 +55,7 @@ namespace fgm
                 {
                     // In MSVC, taking abs with NaN returns wrong results, so an explicit check is required.
                     // #ifdef _MSC_VER
-                    //                if (fgm::isnan(num))
+                    //                if (flcn::isnan(num))
                     //                    return num;
                     // #endif
                     if constexpr (sizeof(T) == 4)
@@ -105,4 +105,4 @@ namespace fgm
         }
         return std::isinf(num);
     }
-} // namespace fgm
+} // namespace flcn

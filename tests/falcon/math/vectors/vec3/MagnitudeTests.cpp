@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 03, 2026
  *
- * @brief Verify @ref fgm::Vec3 magnitude logic.
+ * @brief Verify @ref flcn::Vec3 magnitude logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -32,14 +32,14 @@ namespace
     class Vec3MagnitudeTests: public testing::Test
     {
     protected:
-        fgm::Vec3<T> _vec;
-        fgm::Magnitude<T> _expectedMagnitude;
+        flcn::Vec3<T> _vec;
+        flcn::Magnitude<T> _expectedMagnitude;
         T _expectedMagnitudeSquare;
 
         void SetUp() override
         {
             _vec                     = { T(9), T(6), T(2) };
-            _expectedMagnitude       = fgm::Magnitude<T>(11);
+            _expectedMagnitude       = flcn::Magnitude<T>(11);
             _expectedMagnitudeSquare = T(121);
         }
     };
@@ -54,13 +54,13 @@ namespace
     class Vec3UncleanMagnitudeTests: public testing::Test
     {
     protected:
-        fgm::Vec3<T> _vec;
-        fgm::Magnitude<T> _expectedMagnitude;
+        flcn::Vec3<T> _vec;
+        flcn::Magnitude<T> _expectedMagnitude;
 
         void SetUp() override
         {
             _vec               = { T(1), T(2), T(3) };
-            _expectedMagnitude = fgm::Magnitude<T>(3.7416573867739413);
+            _expectedMagnitude = flcn::Magnitude<T>(3.7416573867739413);
         }
     };
     TYPED_TEST_SUITE(Vec3UncleanMagnitudeTests, SupportedArithmeticTypes);
@@ -73,20 +73,20 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Vec3 VEC_A(1, 2, 3);
+        constexpr flcn::Vec3 VEC_A(1, 2, 3);
 
         // TODO: Add static test after making sqrt constexpr
         /// @test Verify that mag returns a valid value at compile time.
         // constexpr auto MAG = Vec.mag();
         /// @test Verify that mag (static wrapper) returns a valid value at compile time.
-        // constexpr auto MAG_STATIC = fgm::Vec3<int>::mag(Vec);
+        // constexpr auto MAG_STATIC = flcn::Vec3<int>::mag(Vec);
 
         /// @test Verify that magSq returns a valid value at compile time.
         constexpr auto MAG_SQ = VEC_A.magSq();
         static_assert(MAG_SQ - 14.0 < 1e5);
 
         /// @test Verify that magSq (static wrapper) returns a valid value at compile time.
-        constexpr auto MAG_SQ_STATIC = fgm::Vec3<int>::magSq(VEC_A);
+        constexpr auto MAG_SQ_STATIC = flcn::Vec3<int>::magSq(VEC_A);
         static_assert(MAG_SQ_STATIC - 14.0 < 1e5);
 
     } // namespace static_tests
@@ -102,7 +102,7 @@ namespace
 /** @test Verify that taking the magnitude of a zero vector returns exactly zero. */
 TEST(Vec3Magnitude, ZeroVectorReturnsZero)
 {
-    const fgm::Vec3 vec(0.0f, 0.0f, 0.0f);
+    const flcn::Vec3 vec(0.0f, 0.0f, 0.0f);
     EXPECT_FLOAT_EQ(0.0f, vec.mag());
 }
 
@@ -110,7 +110,7 @@ TEST(Vec3Magnitude, ZeroVectorReturnsZero)
 /** @test Verify that taking the magnitude of a one vector returns non-unit scalar. */
 TEST(Vec3Magnitude, OneComponentVectorReturnsNonUnitScalar)
 {
-    const fgm::Vec3 vec(1.0f, 1.0f, 1.0f);
+    const flcn::Vec3 vec(1.0f, 1.0f, 1.0f);
     EXPECT_NE(1.0f, vec.mag());
 }
 
@@ -132,12 +132,12 @@ TYPED_TEST(Vec3MagnitudeTests, MagnitudeIsAlwaysTypedPromotedToFloatingPointType
 
 
 /**
- * @test Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vec3::mag
+ * @test Verify that taking the magnitude of a non-unit vector using static variant of @ref flcn::Vec3::mag
  *       returns non-unit scalar.
  */
 TYPED_TEST(Vec3MagnitudeTests, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
 {
-    const auto magnitude = fgm::Vec3<TypeParam>::mag(this->_vec);
+    const auto magnitude = flcn::Vec3<TypeParam>::mag(this->_vec);
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
@@ -151,12 +151,12 @@ TYPED_TEST(Vec3UncleanMagnitudeTests, NonUnitVectorReturnsCorrectMagnitudeWithMi
 
 
 /**
- * @test Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vec3::mag
+ * @test Verify that the magnitude calculations for non-unit vectors using static variant of @ref flcn::Vec3::mag
  *       ensure minimal precision loss.
  */
 TYPED_TEST(Vec3UncleanMagnitudeTests, StaticWrapper_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
 {
-    const auto magnitude = fgm::Vec3<TypeParam>::mag(this->_vec);
+    const auto magnitude = flcn::Vec3<TypeParam>::mag(this->_vec);
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
@@ -175,11 +175,11 @@ TYPED_TEST(Vec3MagnitudeTests, MagSq_ReturnsSquaredMagnitude)
 
 /**
  * @test Verify that taking the magnitude square of a non-unit vector using static variant of
- *        @ref fgm::Vec3::mag returns non-unit scalar.
+ *        @ref flcn::Vec3::mag returns non-unit scalar.
  */
 TYPED_TEST(Vec3MagnitudeTests, StaticWrapper_MagSq_ReturnsSquaredMagnitude)
 {
-    const auto magnitude = fgm::Vec3<TypeParam>::magSq(this->_vec);
+    const auto magnitude = flcn::Vec3<TypeParam>::magSq(this->_vec);
     EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }
 

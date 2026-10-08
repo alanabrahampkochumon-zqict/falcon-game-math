@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 05, 2026
  *
- * @brief Verify @ref fgm::Mat3 trace operation logic.
+ * @brief Verify @ref flcn::Mat3 trace operation logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -25,7 +25,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 Trace (Sum along diagonals).
+     * @brief Test fixture for @ref flcn::Mat3 Trace (Sum along diagonals).
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -33,7 +33,7 @@ namespace
     class Mat3TraceTests: public testing::Test
     {
     protected:
-        fgm::Mat3<T> _mat;
+        flcn::Mat3<T> _mat;
         T _expectedSum;
 
         void SetUp() override
@@ -54,13 +54,13 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat3 MAT(3, 2, 5, 7, 5, 12, 8, 11, 12);
+        constexpr flcn::Mat3 MAT(3, 2, 5, 7, 5, 12, 8, 11, 12);
 
         /// @test Verify that the Mat3 trace returns valid scalar at compile time.
         static_assert(MAT.trace() == 20);
 
         /// @test Verify that the Mat3 trace (static wrapper) returns valid scalar at compile time.
-        static_assert(fgm::Mat3<int>::trace(MAT) == 20);
+        static_assert(flcn::Mat3<int>::trace(MAT) == 20);
 
     } // namespace static_tests
 } // namespace
@@ -75,6 +75,6 @@ TYPED_TEST(Mat3TraceTests, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_
 
 
 TYPED_TEST(Mat3TraceTests, StaticWrapper_ReturnsSumOfDiagonalElements)
-{ EXPECT_MAG_EQ(this->_expectedSum, fgm::Mat3<TypeParam>::trace(this->_mat)); }
+{ EXPECT_MAG_EQ(this->_expectedSum, flcn::Mat3<TypeParam>::trace(this->_mat)); }
 
 /** @} */

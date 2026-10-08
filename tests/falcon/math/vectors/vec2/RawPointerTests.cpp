@@ -23,7 +23,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Vec2 store and storeUnaligned.
+     * @brief Test fixture for @ref flcn::Vec2 store and storeUnaligned.
      *
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
@@ -31,7 +31,7 @@ namespace
     class Vec2StorageTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vec;
+        flcn::Vec2<T> _vec;
 
         void SetUp() override { _vec = { T(7), T(12) }; }
     };

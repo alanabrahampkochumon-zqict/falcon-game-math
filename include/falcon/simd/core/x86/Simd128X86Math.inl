@@ -10,7 +10,7 @@
  */
 
 
-namespace falcon
+namespace flcn
 {
     template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr _REG_128_SSE<DataType, Lane> min(_REG_128_SSE<DataType, Lane> a,
@@ -139,4 +139,4 @@ namespace falcon
     template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr _REG_128_SSE<DataType, Lane> sqrt(_REG_128_SSE<DataType, Lane> reg) noexcept
     { return reg.sqrt(); }
-} // namespace falcon
+} // namespace flcn

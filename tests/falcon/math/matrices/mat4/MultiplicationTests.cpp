@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 05, 2026
  *
- * @brief Verify @ref fgm::Mat4 multiplication logic.
+ * @brief Verify @ref flcn::Mat4 multiplication logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -24,7 +24,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4 scalar multiplication.
+     * @brief Test fixture for @ref flcn::Mat4 scalar multiplication.
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
@@ -32,10 +32,10 @@ namespace
     class Mat4ScalarMultiplicationTests: public testing::Test
     {
     protected:
-        fgm::Mat4<T> _mat;
+        flcn::Mat4<T> _mat;
         T _scalar;
-        fgm::Mat4<T> _expectedFloatingMat;
-        fgm::Mat4<T> _expectedIntegralMat;
+        flcn::Mat4<T> _expectedFloatingMat;
+        flcn::Mat4<T> _expectedIntegralMat;
 
 
 
@@ -65,7 +65,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4 vector multiplication.
+     * @brief Test fixture for @ref flcn::Mat4 vector multiplication.
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
@@ -73,17 +73,17 @@ namespace
     class Mat4VectorMultiplicationTests: public testing::Test
     {
     protected:
-        fgm::Mat4<T> _mat;
-        fgm::Vec4<T> _vec;
-        fgm::Vec4<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
+        flcn::Mat4<T> _mat;
+        flcn::Vec4<T> _vec;
+        flcn::Vec4<T> _expectedFloatingColVector, _expectedIntegralColVector, _expectedFloatingRowVector,
             _expectedIntegralRowVector;
 
         void SetUp() override
         {
-            _mat = { fgm::Vec4{ T(7.12345678912345), T(13.12345678912345), T(1.32893912338), T(1.2384912349) },
-                     fgm::Vec4{ T(5.12345678912345), T(4.12345678912345), T(3.3129381239321), T(3.2983192312) },
-                     fgm::Vec4{ T(2.238929123125), T(11.238924194839), T(9.2389291239898), T(8.2813941329) },
-                     fgm::Vec4{ T(7.32129123125), T(8.2314213412), T(2.2323329898), T(3.12343151324) } };
+            _mat = { flcn::Vec4{ T(7.12345678912345), T(13.12345678912345), T(1.32893912338), T(1.2384912349) },
+                     flcn::Vec4{ T(5.12345678912345), T(4.12345678912345), T(3.3129381239321), T(3.2983192312) },
+                     flcn::Vec4{ T(2.238929123125), T(11.238924194839), T(9.2389291239898), T(8.2813941329) },
+                     flcn::Vec4{ T(7.32129123125), T(8.2314213412), T(2.2323329898), T(3.12343151324) } };
             _vec = { T(2.123456789123456), T(3.123456832912), T(1.2318492394128), T(4.18293482134) };
             _expectedFloatingColVector = { T(64.5117559627963), T(89.02269187729473), T(33.888435234319466),
                                            T(36.19857986352777) };
@@ -98,7 +98,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4 vector multiplication with floating point elements.
+     * @brief Test fixture for @ref flcn::Mat4 vector multiplication with floating point elements.
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
@@ -106,8 +106,8 @@ namespace
     class Mat4VectorFractionalMultiplicationTests: public testing::Test
     {
     protected:
-        fgm::Mat4<T> _mat;
-        fgm::Vec4<T> _vec, _expectedColVector, _expectedRowVector;
+        flcn::Mat4<T> _mat;
+        flcn::Vec4<T> _vec, _expectedColVector, _expectedRowVector;
 
         void SetUp() override
         {
@@ -115,12 +115,12 @@ namespace
                      { T(-0.123489823149), T(-0.123489757623), T(0.89281239432), T(0.00123849123) },
                      { T(-0.38291023892), T(0.29381938232), T(-0.0038291382), T(0.000832891234231) },
                      { T(0.58291023892), T(0.6381938232), T(-0.000291382), T(0.008391234231) } };
-            _vec = fgm::Vec4{ T(0.8923764912287), T(0.78352829112384), T(0.234891238341), T(-0.9382938123) };
+            _vec = flcn::Vec4{ T(0.8923764912287), T(0.78352829112384), T(0.234891238341), T(-0.9382938123) };
 
             _expectedColVector =
-                fgm::Vec4{ T(-0.623471066313721), T(-0.516417000150393), T(0.809116633699507), T(0.073055804425393) };
+                flcn::Vec4{ T(-0.623471066313721), T(-0.516417000150393), T(0.809116633699507), T(0.073055804425393) };
             _expectedRowVector =
-                fgm::Vec4{ T(0.152013362841589), T(0.001594606404517), T(-0.113165224639696), T(1.012276423171081) };
+                flcn::Vec4{ T(0.152013362841589), T(0.001594606404517), T(-0.113165224639696), T(1.012276423171081) };
         }
     };
     TYPED_TEST_SUITE(Mat4VectorFractionalMultiplicationTests, SupportedFloatingPointTypes);
@@ -128,7 +128,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4 matrix-matrix multiplication.
+     * @brief Test fixture for @ref flcn::Mat4 matrix-matrix multiplication.
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
@@ -136,7 +136,7 @@ namespace
     class Mat4MatrixMultiplicationTests: public testing::Test
     {
     protected:
-        fgm::Mat4<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
+        flcn::Mat4<T> _matA, _matB, _expectedFloatingMat, _expectedIntegralMat;
 
         void SetUp() override
         {
@@ -170,7 +170,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4 matrix-matrix multiplication with floating-point elements.
+     * @brief Test fixture for @ref flcn::Mat4 matrix-matrix multiplication with floating-point elements.
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
@@ -178,7 +178,7 @@ namespace
     class Mat4FractionalMultiplicationTests: public testing::Test
     {
     protected:
-        fgm::Mat4<T> _matA, _matB, _expectedMat;
+        flcn::Mat4<T> _matA, _matB, _expectedMat;
 
         void SetUp() override
         {
@@ -208,12 +208,12 @@ namespace
 
     namespace static_test
     {
-        constexpr fgm::Mat4 mat1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-        constexpr fgm::Mat4 mat2(5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21);
-        constexpr fgm::Vec4 vec4D(1, 2, 3, 4);
+        constexpr flcn::Mat4 mat1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+        constexpr flcn::Mat4 mat2(5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21);
+        constexpr flcn::Vec4 vec4D(1, 2, 3, 4);
 
         /// @test Verify that matrix * scalar multiplication returns 4D matrix at compile time.
-        constexpr fgm::Mat4 binaryProduct1 = mat1 * 2;
+        constexpr flcn::Mat4 binaryProduct1 = mat1 * 2;
         static_assert(binaryProduct1(0, 0) == 2);
         static_assert(binaryProduct1(0, 1) == 4);
         static_assert(binaryProduct1(0, 2) == 6);
@@ -233,7 +233,7 @@ namespace
 
 
         /// @test Verify scalar * matrix multiplication returns 4D matrix at compile time.
-        constexpr fgm::Mat4 binaryProduct2 = 2 * mat1;
+        constexpr flcn::Mat4 binaryProduct2 = 2 * mat1;
         static_assert(binaryProduct2(0, 0) == 2);
         static_assert(binaryProduct2(0, 1) == 4);
         static_assert(binaryProduct2(0, 2) == 6);
@@ -252,21 +252,21 @@ namespace
         static_assert(binaryProduct2(3, 3) == 32);
 
         /// @test Verify matrix * vector multiplication returns 4D column vector at compile time.
-        constexpr fgm::Vec4 colVectorProduct = mat1 * vec4D;
+        constexpr flcn::Vec4 colVectorProduct = mat1 * vec4D;
         static_assert(colVectorProduct[0] == 30);
         static_assert(colVectorProduct[1] == 70);
         static_assert(colVectorProduct[2] == 110);
         static_assert(colVectorProduct[3] == 150);
 
         /// @test Verify vector * matrix multiplication returns 4D row vector at compile time.
-        constexpr fgm::Vec4 rowVectorProduct = vec4D * mat1;
+        constexpr flcn::Vec4 rowVectorProduct = vec4D * mat1;
         static_assert(rowVectorProduct[0] == 90);
         static_assert(rowVectorProduct[1] == 100);
         static_assert(rowVectorProduct[2] == 110);
         static_assert(rowVectorProduct[3] == 120);
 
         /// @test Verify that matrix * matrix multiplication returns 4D matrix at compile time.
-        constexpr fgm::Mat4 matProduct = mat1 * mat2;
+        constexpr flcn::Mat4 matProduct = mat1 * mat2;
         static_assert(matProduct(0, 0) == 139);
         static_assert(matProduct(0, 1) == 149);
         static_assert(matProduct(0, 2) == 159);
@@ -295,40 +295,40 @@ namespace
 
 TEST(Mat4ScalarMultiplicationTests, TimesOperator_ByZeroReturnsZeroMatrix)
 {
-    const fgm::Mat4 mat{ 3.0f,  4.0f,  5.0f,  6.0f,  7.0f,  8.0f,  9.0f,  10.0f,
+    const flcn::Mat4 mat{ 3.0f,  4.0f,  5.0f,  6.0f,  7.0f,  8.0f,  9.0f,  10.0f,
                          11.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
 
-    const fgm::Mat4 product = mat * 0;
+    const flcn::Mat4 product = mat * 0;
     EXPECT_MAT_ZERO(product);
 }
 
 
 TEST(Mat4ScalarMultiplicationTests, TimesOperator_ByOneReturnsOriginalMatrix)
 {
-    const fgm::Mat4 mat{ 3.0f,  4.0f,  5.0f,  6.0f,  7.0f,  8.0f,  9.0f,  10.0f,
+    const flcn::Mat4 mat{ 3.0f,  4.0f,  5.0f,  6.0f,  7.0f,  8.0f,  9.0f,  10.0f,
                          11.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
 
-    const fgm::Mat4 product = mat * 1;
+    const flcn::Mat4 product = mat * 1;
     EXPECT_MAT_EQ(mat, product);
 }
 
 
 TEST(Mat4ScalarMultiplicationTests, TimesOperator_ByNegativeScalarFlipsSigns)
 {
-    const fgm::Mat4 mat      = { 1.0f,  -2.0f, 3.0f,  -4.0f, 5.0f,  6.0f,  7.0f,  8.0f,
+    const flcn::Mat4 mat      = { 1.0f,  -2.0f, 3.0f,  -4.0f, 5.0f,  6.0f,  7.0f,  8.0f,
                                  -9.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
-    const fgm::Mat4 expected = { -2.0f, 4.0f,   -6.0f,  8.0f,   -10.0f, -12.0f, -14.0f, -16.0f,
+    const flcn::Mat4 expected = { -2.0f, 4.0f,   -6.0f,  8.0f,   -10.0f, -12.0f, -14.0f, -16.0f,
                                  18.0f, -24.0f, -26.0f, -28.0f, -30.0f, -32.0f, -34.0f, -36.0f };
     const float scalar       = -2.0f;
 
-    const fgm::Mat4 product = mat * scalar;
+    const flcn::Mat4 product = mat * scalar;
     EXPECT_MAT_EQ(expected, product);
 }
 
 
 TYPED_TEST(Mat4ScalarMultiplicationTests, TimesOperator_ByScalarReturnsScaledMatrix)
 {
-    const fgm::Mat4 product = this->_mat * this->_scalar;
+    const flcn::Mat4 product = this->_mat * this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
     {
@@ -343,7 +343,7 @@ TYPED_TEST(Mat4ScalarMultiplicationTests, TimesOperator_ByScalarReturnsScaledMat
 
 TYPED_TEST(Mat4ScalarMultiplicationTests, TimesOperator_ScalarTimesMatrixReturnsScaledMatrix)
 {
-    const fgm::Mat4 product = this->_scalar * this->_mat;
+    const flcn::Mat4 product = this->_scalar * this->_mat;
 
     if (std::is_floating_point_v<TypeParam>)
     {
@@ -375,7 +375,7 @@ TYPED_TEST(Mat4ScalarMultiplicationTests, TimesOperator_MixedType_PromotesType)
 {
     const double scalar = 2.123456789123456;
 
-    [[maybe_unused]] const fgm::Mat4 product = this->_mat * scalar;
+    [[maybe_unused]] const flcn::Mat4 product = this->_mat * scalar;
 
     static_assert(std::is_same_v<typename decltype(product)::value_type, double>);
 }
@@ -384,7 +384,7 @@ TYPED_TEST(Mat4ScalarMultiplicationTests, TimesOperator_MixedType_PromotesType)
 
 TEST(Mat4ScalarMultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    fgm::Mat4 mat       = { 1.0f,  -2.0f, 3.0f,  -4.0f, 5.0f,  6.0f,  7.0f,  8.0f,
+    flcn::Mat4 mat       = { 1.0f,  -2.0f, 3.0f,  -4.0f, 5.0f,  6.0f,  7.0f,  8.0f,
                             -9.0f, 12.0f, 13.0f, 14.0f, 15.0f, 16.0f, 17.0f, 18.0f };
     const double scalar = 5.0;
     mat *= scalar;
@@ -396,9 +396,9 @@ TEST(Mat4ScalarMultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromote
 
 TEST(Mat4ScalarMultiplicationTests, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
-    fgm::Mat4 mat       = { 1, -2, 3, -4, 5, 6, 7, 8, -9, 10, 12, 13, 14, 16, 18, 20 };
+    flcn::Mat4 mat       = { 1, -2, 3, -4, 5, 6, 7, 8, -9, 10, 12, 13, 14, 16, 18, 20 };
     const double scalar = 2.5;
-    const fgm::Mat4 expected{ 2, -5, 7, -10, 12, 15, 17, 20, -22, 25, 30, 32, 35, 40, 45, 50 };
+    const flcn::Mat4 expected{ 2, -5, 7, -10, 12, 15, 17, 20, -22, 25, 30, 32, 35, 40, 45, 50 };
 
     mat *= scalar;
 
@@ -434,10 +434,10 @@ TYPED_TEST(Mat4VectorFractionalMultiplicationTests, ColumnVector_ReturnsATransfo
 
 TEST(Mat4VectorMultiplicationTests, IdentityMatrixTimesColumnVector_ReturnsOriginalColumnVector)
 {
-    const fgm::Mat4<float> iMatrix = fgm::Mat4<float>::identity();
-    const fgm::Vec4F vec{ 2.0f, 1.0f, 2.5f, 12.5f };
+    const flcn::Mat4<float> iMatrix = flcn::Mat4<float>::identity();
+    const flcn::Vec4F vec{ 2.0f, 1.0f, 2.5f, 12.5f };
 
-    const fgm::Vec4F transformedVector = iMatrix * vec;
+    const flcn::Vec4F transformedVector = iMatrix * vec;
 
     EXPECT_VEC_EQ(vec, transformedVector);
 }
@@ -445,8 +445,8 @@ TEST(Mat4VectorMultiplicationTests, IdentityMatrixTimesColumnVector_ReturnsOrigi
 
 TEST(Mat4VectorMultiplicationTests, ColumnVector_MixedType_PromotesType)
 {
-    const fgm::Mat4 mat{ 1.0, 2.0, 3.0, 4.0 };
-    const fgm::Vec4I vec{ 2, 1, 3, 4 };
+    const flcn::Mat4 mat{ 1.0, 2.0, 3.0, 4.0 };
+    const flcn::Vec4I vec{ 2, 1, 3, 4 };
 
     [[maybe_unused]] const auto transformedVector = mat * vec;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -476,10 +476,10 @@ TYPED_TEST(Mat4VectorFractionalMultiplicationTests, RowFloatVector_ReturnsARowVe
 
 TEST(Mat4VectorMultiplicationTests, RowVectorTimesIdentityMatrix_ReturnsOriginalVector)
 {
-    const fgm::Mat4<float> iMatrix = fgm::Mat4<float>::identity();
-    const fgm::Vec4F vec{ 2.0f, 1.0f, 2.5f, 12.5f };
+    const flcn::Mat4<float> iMatrix = flcn::Mat4<float>::identity();
+    const flcn::Vec4F vec{ 2.0f, 1.0f, 2.5f, 12.5f };
 
-    const fgm::Vec4F transformedVector = vec * iMatrix;
+    const flcn::Vec4F transformedVector = vec * iMatrix;
 
     EXPECT_VEC_EQ(vec, transformedVector);
 }
@@ -488,8 +488,8 @@ TEST(Mat4VectorMultiplicationTests, RowVectorTimesIdentityMatrix_ReturnsOriginal
 
 TEST(Mat4VectorMultiplicationTests, RowVector_MixedType_PromotesType)
 {
-    const fgm::Mat4 mat{ 1.0, 2.0, 3.0, 4.0 };
-    const fgm::Vec4I vec{ 2, 1, 3, 4 };
+    const flcn::Mat4 mat{ 1.0, 2.0, 3.0, 4.0 };
+    const flcn::Vec4I vec{ 2, 1, 3, 4 };
 
     [[maybe_unused]] const auto transformedVector = vec * mat;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -513,8 +513,8 @@ TYPED_TEST(Mat4VectorMultiplicationTests, TimesEqualOperator_RowVector_ReturnsAT
 
 TEST(Mat4VectorMultiplicationTests, TimesEqualOperator_RowVector_IdentityMatrix_ReturnsOriginalRowVector)
 {
-    const fgm::Mat4<float> iMatrix = fgm::Mat4<float>::identity();
-    fgm::Vec4F vec{ 2.0f, 1.0f, 3.0f, 12.0f };
+    const flcn::Mat4<float> iMatrix = flcn::Mat4<float>::identity();
+    flcn::Vec4F vec{ 2.0f, 1.0f, 3.0f, 12.0f };
 
     vec *= iMatrix;
 
@@ -524,8 +524,8 @@ TEST(Mat4VectorMultiplicationTests, TimesEqualOperator_RowVector_IdentityMatrix_
 
 TEST(Mat4VectorMultiplicationTests, TimesEqualOperator_MixedType_DoesNotPromoteType)
 {
-    const fgm::Mat4<double> iMatrix = fgm::Mat4<double>::identity();
-    [[maybe_unused]] fgm::Vec4I vec{ 2, 1, 5, 4 };
+    const flcn::Mat4<double> iMatrix = flcn::Mat4<double>::identity();
+    [[maybe_unused]] flcn::Vec4I vec{ 2, 1, 5, 4 };
 
     (void) (vec *= iMatrix);
     static_assert(std::is_same_v<decltype(vec)::value_type, int>);
@@ -534,9 +534,9 @@ TEST(Mat4VectorMultiplicationTests, TimesEqualOperator_MixedType_DoesNotPromoteT
 
 TEST(Mat4VectorMultiplicationTests, TimesEqualOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
-    const fgm::Mat4 mat{ 2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0, 20.0, 12.0, 12.25, 15.0, 16.0, 13.75, 15.5 };
-    fgm::Vec4 vec{ 10, 20, 30, 40 };
-    const fgm::Vec4 expected{ 1015, 1340, 1015, 1232 };
+    const flcn::Mat4 mat{ 2.5, 3.5, 0.5, 1.5, 12.0, 3.25, 5.0, 11.5, 5.0, 20.0, 12.0, 12.25, 15.0, 16.0, 13.75, 15.5 };
+    flcn::Vec4 vec{ 10, 20, 30, 40 };
+    const flcn::Vec4 expected{ 1015, 1340, 1015, 1232 };
 
     vec *= mat;
 
@@ -573,10 +573,10 @@ TYPED_TEST(Mat4FractionalMultiplicationTests, TimesOperator_ReturnsMatrixWithPre
 
 TEST(Mat4MultiplicationTests, TimesOperator_IdentityMatrix_ReturnsOriginalMatrix)
 {
-    const fgm::Mat4<float> iMatrix = fgm::Mat4<float>::identity();
-    const fgm::Mat4 mat{ 1.0f, 2.0f, 3.0f, 4.0f };
+    const flcn::Mat4<float> iMatrix = flcn::Mat4<float>::identity();
+    const flcn::Mat4 mat{ 1.0f, 2.0f, 3.0f, 4.0f };
 
-    const fgm::Mat4 matrixProduct = iMatrix * mat;
+    const flcn::Mat4 matrixProduct = iMatrix * mat;
 
     EXPECT_MAT_EQ(mat, matrixProduct);
 }
@@ -585,8 +585,8 @@ TEST(Mat4MultiplicationTests, TimesOperator_IdentityMatrix_ReturnsOriginalMatrix
 
 TEST(Mat4MultiplicationTests, TimesOperator_PromotesType)
 {
-    const fgm::Mat4 matA{ 1.0, 2.0, 3.0, 4.0 };
-    const fgm::Mat4 matB{ 2, 1, 3, 4 };
+    const flcn::Mat4 matA{ 1.0, 2.0, 3.0, 4.0 };
+    const flcn::Mat4 matB{ 2, 1, 3, 4 };
 
     [[maybe_unused]] const auto transformedVector = matA * matB;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -611,8 +611,8 @@ TYPED_TEST(Mat4MatrixMultiplicationTests, TimesEqualsOperator_PerformInPlaceMatr
 
 TEST(Mat4MultiplicationTests, TimesEqualsOperator_IdentityMatrix_ReturnsOriginalMatrix)
 {
-    const fgm::Mat4<float> iMatrix = fgm::Mat4<float>::identity();
-    fgm::Mat4 mat{ 1.0f, 2.0f, 3.0f, 4.0f };
+    const flcn::Mat4<float> iMatrix = flcn::Mat4<float>::identity();
+    flcn::Mat4 mat{ 1.0f, 2.0f, 3.0f, 4.0f };
 
     mat *= iMatrix;
     EXPECT_MAT_CONTAINS(
@@ -623,8 +623,8 @@ TEST(Mat4MultiplicationTests, TimesEqualsOperator_IdentityMatrix_ReturnsOriginal
 
 TEST(Mat4MultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    const fgm::Mat4<double> iMatrix = fgm::Mat4<double>::identity();
-    fgm::Mat4 mat{ 1, 2, 3, 4 };
+    const flcn::Mat4<double> iMatrix = flcn::Mat4<double>::identity();
+    flcn::Mat4 mat{ 1, 2, 3, 4 };
 
     mat *= iMatrix;
     static_assert(std::is_same_v<decltype(mat)::value_type, int>);
@@ -633,9 +633,9 @@ TEST(Mat4MultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 
 TEST(Mat4MultiplicationTests, TimesEqualsOperator_EnsuresMinimalPrecisionLoss)
 {
-    fgm::Mat4 matA{ 2.5, 3.5, 0.5, 1.5, 2.5, -12.5, 5.45, 23.25, 85.5, 12.5, 0.5, 1.75, 15.5, 13.5, 14.5, 16.5 };
-    const fgm::Mat4 matB{ 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80 };
-    const fgm::Mat4 expectedMatrix{
+    flcn::Mat4 matA{ 2.5, 3.5, 0.5, 1.5, 2.5, -12.5, 5.45, 23.25, 85.5, 12.5, 0.5, 1.75, 15.5, 13.5, 14.5, 16.5 };
+    const flcn::Mat4 matB{ 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80 };
+    const flcn::Mat4 expectedMatrix{
         220, 260, 300, 340, 1456, 1550, 1643, 1737, 876, 1377, 1878, 2380, 2140, 2440, 2740, 3040,
     };
 

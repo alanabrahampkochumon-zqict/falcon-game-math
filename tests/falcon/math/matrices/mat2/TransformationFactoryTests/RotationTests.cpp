@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 08, 2026
  *
- * @brief Verify @ref fgm::Mat2 rotation factory logic.
+ * @brief Verify @ref flcn::Mat2 rotation factory logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -25,7 +25,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Rotation Factory (integrals).
+     * @brief Test fixture for @ref flcn::Mat2 Rotation Factory (integrals).
      *
      * @tparam T The numeric type (int, long...) for matrix values.
      */
@@ -37,16 +37,16 @@ namespace
         using COM_T = T::second_type; // COM_T -> Common Type
 
         FP_T _angle;
-        fgm::Mat2<COM_T> _expectedMat;
+        flcn::Mat2<COM_T> _expectedMat;
 
 
         void SetUp() override
         {
-            _angle = fgm::constants::PI<FP_T> / FP_T(2.0);
+            _angle = flcn::constants::PI<FP_T> / FP_T(2.0);
 #ifdef FALCON_LEFT_HANDED
-            _expectedMat = { fgm::CVec2{ COM_T(0), COM_T(-1) }, fgm::CVec2 { COM_T(1), COM_T(0) } };
+            _expectedMat = { flcn::CVec2{ COM_T(0), COM_T(-1) }, flcn::CVec2 { COM_T(1), COM_T(0) } };
 #else
-            _expectedMat = { fgm::CVec2{ COM_T(0), COM_T(1) }, fgm::CVec2{ COM_T(-1), COM_T(0) } };
+            _expectedMat = { flcn::CVec2{ COM_T(0), COM_T(1) }, flcn::CVec2{ COM_T(-1), COM_T(0) } };
 #endif
         }
     };
@@ -55,7 +55,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Reflection Factory(Floating Point Numbers).
+     * @brief Test fixture for @ref flcn::Mat2 Reflection Factory(Floating Point Numbers).
      *
      * @tparam T The numeric type (float, double) for matrix values.
      */
@@ -64,22 +64,22 @@ namespace
     {
     protected:
         T _angle;
-        fgm::Mat2<T> _expectedMat;
+        flcn::Mat2<T> _expectedMat;
 
 
         void SetUp() override
         {
-            _angle = fgm::constants::PI<T> / T(4.0);
+            _angle = flcn::constants::PI<T> / T(4.0);
 
 #ifdef FALCON_LEFT_HANDED
             _expectedMat = {
-                fgm::CVec2{ T(0.70710678118654757), T(-0.70710678118654757) },
-                fgm::CVec2{ T(0.70710678118654757), T(0.70710678118654757) },
+                flcn::CVec2{ T(0.70710678118654757), T(-0.70710678118654757) },
+                flcn::CVec2{ T(0.70710678118654757), T(0.70710678118654757) },
             };
 
 #else
-            _expectedMat = { fgm::CVec2{ T(0.70710678118654757), T(0.70710678118654757) },
-                             fgm::CVec2{ T(-0.70710678118654757), T(0.70710678118654757) } };
+            _expectedMat = { flcn::CVec2{ T(0.70710678118654757), T(0.70710678118654757) },
+                             flcn::CVec2{ T(-0.70710678118654757), T(0.70710678118654757) } };
 
 #endif
         }
@@ -97,7 +97,7 @@ namespace
 // TODO: Add static tests after implementing constexpr evaluation for trig funcs
 #if __cplusplus >= 202603L
         // Rotation matrix for 180° or 2π radians
-        constexpr auto ROTATION_MAT = fgm::Mat2<int>::makeRotation(fgm::constants::PI<float>);
+        constexpr auto ROTATION_MAT = flcn::Mat2<int>::makeRotation(flcn::constants::PI<float>);
         static_assert(ROTATION_MAT(0, 0) == 0);
         static_assert(ROTATION_MAT(0, 1) == -1);
         static_assert(ROTATION_MAT(1, 0) == 1);
@@ -115,11 +115,11 @@ namespace
  **************************************/
 
 TYPED_TEST(Mat2RotationFactoryTests, ReturnsValidRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat2<typename TypeParam::first_type>::makeRotation(this->_angle)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, flcn::Mat2<typename TypeParam::first_type>::makeRotation(this->_angle)); }
 
 
 TYPED_TEST(Mat2RotationFactoryFPTests, ReturnsValidRotationMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat2<TypeParam>::makeRotation(this->_angle)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, flcn::Mat2<TypeParam>::makeRotation(this->_angle)); }
 
 
 /** @} */

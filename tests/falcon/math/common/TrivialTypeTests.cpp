@@ -31,24 +31,24 @@
  */
 
 /** @test Verify that @ref fgm Vectors are trivial types. */
-ASSERT_TRIVIAL_TYPE(fgm::CVec2<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Vec3<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Vec4<float>);
+ASSERT_TRIVIAL_TYPE(flcn::CVec2<float>);
+ASSERT_TRIVIAL_TYPE(flcn::Vec3<float>);
+ASSERT_TRIVIAL_TYPE(flcn::Vec4<float>);
 
 
 /** @test Verify that @ref fgm Matrices are trivial types. */
-ASSERT_TRIVIAL_TYPE(fgm::Mat2<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Mat2x3<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Mat2x4<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Mat3<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Mat3x2<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Mat3x4<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Mat4<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Mat4x2<float>);
-ASSERT_TRIVIAL_TYPE(fgm::Mat4x3<float>);
+ASSERT_TRIVIAL_TYPE(flcn::Mat2<float>);
+ASSERT_TRIVIAL_TYPE(flcn::Mat2x3<float>);
+ASSERT_TRIVIAL_TYPE(flcn::Mat2x4<float>);
+ASSERT_TRIVIAL_TYPE(flcn::Mat3<float>);
+ASSERT_TRIVIAL_TYPE(flcn::Mat3x2<float>);
+ASSERT_TRIVIAL_TYPE(flcn::Mat3x4<float>);
+ASSERT_TRIVIAL_TYPE(flcn::Mat4<float>);
+ASSERT_TRIVIAL_TYPE(flcn::Mat4x2<float>);
+ASSERT_TRIVIAL_TYPE(flcn::Mat4x3<float>);
 
 
 /** @test Verify that @ref fgm Quaternions are trivial types. */
-ASSERT_TRIVIAL_TYPE(fgm::Quaternion<float>);
+ASSERT_TRIVIAL_TYPE(flcn::Quaternion<float>);
 
 /** @} */

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::CVec2 conversion constructor logic.
+ * @brief Verify @ref flcn::CVec2 conversion constructor logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,14 +26,14 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::CVec2 VEC(3.0f, 1.0f);
+        constexpr flcn::CVec2 VEC(3.0f, 1.0f);
 
         /// @test Verify that vector conversion constructor can promote type at compile time. */
-        constexpr fgm::CVec2<double> PROMOTED_VEC(VEC);
+        constexpr flcn::CVec2<double> PROMOTED_VEC(VEC);
         static_assert(std::is_same_v<decltype(PROMOTED_VEC)::value_type, double>);
 
         /// @test Verify that vector conversion constructor can demote type at compile time. */
-        [[maybe_unused]] constexpr fgm::CVec2<float> DEMOTED_VEC(PROMOTED_VEC);
+        [[maybe_unused]] constexpr flcn::CVec2<float> DEMOTED_VEC(PROMOTED_VEC);
         static_assert(std::is_same_v<decltype(DEMOTED_VEC)::value_type, float>);
 
     } // namespace static_tests
@@ -47,9 +47,9 @@ namespace
 
 TEST(CVec2TypeConversionTests, ConversionCtor_PromotesType)
 {
-    const fgm::CVec2 vec1(3.0f, 1.0f);
+    const flcn::CVec2 vec1(3.0f, 1.0f);
 
-    [[maybe_unused]] const fgm::CVec2<double> vec2(vec1);
+    [[maybe_unused]] const flcn::CVec2<double> vec2(vec1);
 
     static_assert(std::is_same_v<decltype(vec2)::value_type, double>);
 }
@@ -58,10 +58,10 @@ TEST(CVec2TypeConversionTests, ConversionCtor_PromotesType)
 TEST(CVec2TypeConversionTests, ConversionCtor_ReturnsNewInstance)
 {
     // Given a float vector
-    const fgm::CVec2 vec1(3.0f, 1.0f);
+    const flcn::CVec2 vec1(3.0f, 1.0f);
 
     // When converted to a double vector
-    fgm::CVec2<double> vec2(vec1);
+    flcn::CVec2<double> vec2(vec1);
     // And one of its value mutated
     vec2.x() = 5;
 
@@ -75,9 +75,9 @@ TEST(CVec2TypeConversionTests, ConversionCtor_ReturnsNewInstance)
 
 TEST(CVec2TypeConversionTests, ConversionCtor_DemotesType)
 {
-    const fgm::CVec2 vec1(3.0, 1.0);
+    const flcn::CVec2 vec1(3.0, 1.0);
 
-    [[maybe_unused]] const fgm::CVec2<float> vec2(vec1);
+    [[maybe_unused]] const flcn::CVec2<float> vec2(vec1);
 
     static_assert(std::is_same_v<decltype(vec2)::value_type, float>);
 }

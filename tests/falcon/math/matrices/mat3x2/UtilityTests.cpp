@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 18, 2026
  *
- * @brief Verify @ref fgm::Mat3x2 utility functions.
+ * @brief Verify @ref flcn::Mat3x2 utility functions.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -28,60 +28,60 @@ namespace
         requires std::floating_point<T>
     struct Mat3x2UtilityParams
     {
-        fgm::Mat3x2<T> mat;
+        flcn::Mat3x2<T> mat;
         bool expected;
     };
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x2 Infinity Checking.
+     * @brief Test fixture for @ref flcn::Mat3x2 Infinity Checking.
      */
     class Mat3x2InfCheckerTests: public testing::TestWithParam<Mat3x2UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
         Mat3x2UtilsInfMatrices, Mat3x2InfCheckerTests,
         ::testing::Values(
-            Mat3x2UtilityParams{ fgm::Mat3x2(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-            Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f), true },
-            Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
-            Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
-            Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-            Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
-            Mat3x2UtilityParams{ fgm::Mat3x2(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                             fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                             fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
+            Mat3x2UtilityParams{ flcn::Mat3x2(flcn::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+            Mat3x2UtilityParams{ flcn::Mat3x2(1.0f, flcn::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f), true },
+            Mat3x2UtilityParams{ flcn::Mat3x2(1.0f, 1.0f, flcn::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
+            Mat3x2UtilityParams{ flcn::Mat3x2(1.0f, 1.0f, 1.0f, flcn::constants::INFINITY_F, 1.0f, 1.0f), true },
+            Mat3x2UtilityParams{ flcn::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::INFINITY_F, 1.0f), true },
+            Mat3x2UtilityParams{ flcn::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::INFINITY_F), true },
+            Mat3x2UtilityParams{ flcn::Mat3x2(flcn::constants::INFINITY_F, flcn::constants::INFINITY_F,
+                                             flcn::constants::INFINITY_F, flcn::constants::INFINITY_F,
+                                             flcn::constants::INFINITY_F, flcn::constants::INFINITY_F),
                                  true },
-            Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
+            Mat3x2UtilityParams{ flcn::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x2 NaN Checking.
+     * @brief Test fixture for @ref flcn::Mat3x2 NaN Checking.
      */
     class Mat3x2NaNCheckerTests: public testing::TestWithParam<Mat3x2UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
         Mat3x2UtilsNaNMatrices, Mat3x2NaNCheckerTests,
-        ::testing::Values(Mat3x2UtilityParams{ fgm::Mat3x2(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-                          Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f), true },
-                          Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
-                          Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
-                          Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-                          Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-                          Mat3x2UtilityParams{ fgm::Mat3x2(fgm::constants::NaN, fgm::constants::NaN,
-                                                           fgm::constants::NaN, fgm::constants::NaN,
-                                                           fgm::constants::NaN, fgm::constants::NaN),
+        ::testing::Values(Mat3x2UtilityParams{ flcn::Mat3x2(flcn::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+                          Mat3x2UtilityParams{ flcn::Mat3x2(1.0f, flcn::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f), true },
+                          Mat3x2UtilityParams{ flcn::Mat3x2(1.0f, 1.0f, flcn::constants::NaN, 1.0f, 1.0f, 1.0f), true },
+                          Mat3x2UtilityParams{ flcn::Mat3x2(1.0f, 1.0f, 1.0f, flcn::constants::NaN, 1.0f, 1.0f), true },
+                          Mat3x2UtilityParams{ flcn::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::NaN, 1.0f), true },
+                          Mat3x2UtilityParams{ flcn::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::NaN), true },
+                          Mat3x2UtilityParams{ flcn::Mat3x2(flcn::constants::NaN, flcn::constants::NaN,
+                                                           flcn::constants::NaN, flcn::constants::NaN,
+                                                           flcn::constants::NaN, flcn::constants::NaN),
                                                true },
-                          Mat3x2UtilityParams{ fgm::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
+                          Mat3x2UtilityParams{ flcn::Mat3x2(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x2 utilities, verifying across various integral types.
+     * @brief Test fixture for @ref flcn::Mat3x2 utilities, verifying across various integral types.
      */
     template <typename>
     class Mat3x2UtilsIntTests: public testing::Test
     {};
-    /** @brief Test fixture for @ref fgm::Mat3x2 utilities, parameterized by @ref SupportedIntegralTypes */
+    /** @brief Test fixture for @ref flcn::Mat3x2 utilities, parameterized by @ref SupportedIntegralTypes */
     TYPED_TEST_SUITE(Mat3x2UtilsIntTests, SupportedIntegralTypes);
 
 
@@ -93,9 +93,9 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat3x2 INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
-        constexpr fgm::Mat3x2 NAN_MAT(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
-        constexpr fgm::Mat3x2 MAT(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+        constexpr flcn::Mat3x2 INF_MAT(flcn::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+        constexpr flcn::Mat3x2 NAN_MAT(flcn::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+        constexpr flcn::Mat3x2 MAT(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 
 
         /** @test Verify that the Mat3x2 hasNaN return correct boolean at compile time. */
@@ -103,8 +103,8 @@ namespace
         static_assert(NAN_MAT.hasNaN() == true);
 
         /** @test Verify that the Mat3x2 hasNaN (static wrapper) return correct boolean at compile time. */
-        static_assert(fgm::Mat3x2<float>::hasNaN(MAT) == false);
-        static_assert(fgm::Mat3x2<float>::hasNaN(NAN_MAT) == true);
+        static_assert(flcn::Mat3x2<float>::hasNaN(MAT) == false);
+        static_assert(flcn::Mat3x2<float>::hasNaN(NAN_MAT) == true);
 
 
         /** @test Verify that the Mat3x2 hasInf return correct boolean at compile time. */
@@ -113,8 +113,8 @@ namespace
 
 
         /** @test Verify that the Mat3x2 hasInf (static wrapper) return correct boolean at compile time. */
-        static_assert(fgm::Mat3x2<float>::hasInf(INF_MAT) == true);
-        static_assert(fgm::Mat3x2<float>::hasInf(MAT) == false);
+        static_assert(flcn::Mat3x2<float>::hasInf(INF_MAT) == true);
+        static_assert(flcn::Mat3x2<float>::hasInf(MAT) == false);
 
     } // namespace static_tests
 
@@ -136,21 +136,21 @@ TEST_P(Mat3x2InfCheckerTests, ReturnTrueIfAnyElementIsInfinity)
 TYPED_TEST(Mat3x2UtilsIntTests, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Mat3x2(value, value, value, value, value, value).hasInf());
+    EXPECT_FALSE(flcn::Mat3x2(value, value, value, value, value, value).hasInf());
 }
 
 
 TEST_P(Mat3x2InfCheckerTests, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
 {
     const auto& [mat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Mat3x2<float>::hasInf(mat));
+    EXPECT_EQ(expected, flcn::Mat3x2<float>::hasInf(mat));
 }
 
 
 TYPED_TEST(Mat3x2UtilsIntTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Mat3x2<TypeParam>::hasInf(fgm::Mat3x2(value, value, value, value, value, value)));
+    EXPECT_FALSE(flcn::Mat3x2<TypeParam>::hasInf(flcn::Mat3x2(value, value, value, value, value, value)));
 }
 
 
@@ -169,21 +169,21 @@ TEST_P(Mat3x2NaNCheckerTests, ReturnTrueIfAnyElementIsNaN)
 TYPED_TEST(Mat3x2UtilsIntTests, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Mat3x2(value, value, value, value, value, value).hasNaN());
+    EXPECT_FALSE(flcn::Mat3x2(value, value, value, value, value, value).hasNaN());
 }
 
 
 TEST_P(Mat3x2NaNCheckerTests, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
 {
     const auto& [mat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Mat3x2<float>::hasNaN(mat));
+    EXPECT_EQ(expected, flcn::Mat3x2<float>::hasNaN(mat));
 }
 
 
 TYPED_TEST(Mat3x2UtilsIntTests, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Mat3x2<TypeParam>::hasNaN(fgm::Mat3x2(value, value, value, value, value, value)));
+    EXPECT_FALSE(flcn::Mat3x2<TypeParam>::hasNaN(flcn::Mat3x2(value, value, value, value, value, value)));
 }
 
 /** @} */

@@ -11,7 +11,7 @@
 
 #include <type_traits>
 
-namespace falcon
+namespace flcn
 {
 
 
@@ -48,4 +48,4 @@ namespace falcon
         uint64_t lower;
     };
 
-} // namespace falcon
+} // namespace flcn

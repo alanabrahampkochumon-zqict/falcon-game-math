@@ -69,11 +69,11 @@ TYPED_TEST(Simd128BasicMathTests, Min_ReturnsARegisterWithMinimumValuesFromEithe
         expected[i] = std::min(lhs[i], rhs[i]);
     }
 
-    falcon::Simd128_t<Type, Lane> regA, regB;
+    flcn::Simd128_t<Type, Lane> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
-    auto regRes = falcon::min(regA, regB);
+    auto regRes = flcn::min(regA, regB);
 
     regRes.storeAligned(result.data());
 
@@ -97,11 +97,11 @@ TYPED_TEST(Simd128BasicMathTests, Max_ReturnsARegisterWithMaximumValuesFromEithe
         expected[i] = std::max(lhs[i], rhs[i]);
     }
 
-    falcon::Simd128_t<Type, Lane> regA, regB;
+    flcn::Simd128_t<Type, Lane> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
-    auto regRes = falcon::max(regA, regB);
+    auto regRes = flcn::max(regA, regB);
 
     regRes.storeAligned(result.data());
 
@@ -132,7 +132,7 @@ TYPED_TEST(Simd128BasicMathTests, MemberAbsFunction_ReturnsARegisterWithAbsolute
         }
     }
 
-    falcon::Simd128_t<Type, Lane> reg;
+    flcn::Simd128_t<Type, Lane> reg;
     reg.loadAligned(data.data());
 
     auto regRes = reg.abs();
@@ -168,10 +168,10 @@ TYPED_TEST(Simd128BasicMathTests, Abs_ReturnsARegisterWithAbsoluteValues)
         }
     }
 
-    falcon::Simd128_t<Type, Lane> reg;
+    flcn::Simd128_t<Type, Lane> reg;
     reg.loadAligned(data.data());
 
-    auto regRes = falcon::abs(reg);
+    auto regRes = flcn::abs(reg);
 
     regRes.storeAligned(result.data());
 
@@ -200,7 +200,7 @@ TYPED_TEST(Simd128BasicMathTests, MemberSqrtFunction_ReturnsARegisterWithSquareR
         expected[i] = static_cast<Type>(std::sqrt(clampedVal));
     }
 
-    falcon::Simd128_t<Type, Lane> reg;
+    flcn::Simd128_t<Type, Lane> reg;
     reg.loadAligned(data.data());
 
     auto regRes = reg.sqrt();
@@ -231,10 +231,10 @@ TYPED_TEST(Simd128BasicMathTests, Sqrt_ReturnsARegisterWithSquareRootValues)
         expected[i] = static_cast<Type>(std::sqrt(clampedVal));
     }
 
-    falcon::Simd128_t<Type, Lane> reg;
+    flcn::Simd128_t<Type, Lane> reg;
     reg.loadAligned(data.data());
 
-    auto regRes = falcon::sqrt(reg);
+    auto regRes = flcn::sqrt(reg);
     regRes.storeAligned(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -259,7 +259,7 @@ TYPED_TEST(Simd128BasicMathTests, HorizontalMax_ReturnsTheMaxValueFromTheRegiste
         max     = std::max(max, data[i]);
     }
 
-    falcon::Simd128_t<Type, Lane> reg{ data };
+    flcn::Simd128_t<Type, Lane> reg{ data };
 
     auto res = reg.horizontalMax();
 
@@ -280,7 +280,7 @@ TYPED_TEST(Simd128BasicMathTests, HorizontalMin_ReturnsTheMaxValueFromTheRegiste
         min     = std::min(min, data[i]);
     }
 
-    falcon::Simd128_t<Type, Lane> reg{ data };
+    flcn::Simd128_t<Type, Lane> reg{ data };
 
     auto res = reg.horizontalMin();
 

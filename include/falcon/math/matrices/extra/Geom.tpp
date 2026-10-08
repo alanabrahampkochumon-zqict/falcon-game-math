@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-namespace fgm
+namespace flcn
 {
 
     /**************************************
@@ -178,4 +178,4 @@ namespace fgm
                      R(vec.x() * mat(0, 2) + vec.y() * mat(1, 2) + vec.z() * mat(2, 2) + vec.w() * mat(3, 2)) };
     }
 
-} // namespace fgm
+} // namespace flcn

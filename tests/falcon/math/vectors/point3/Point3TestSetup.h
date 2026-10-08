@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 30, 2026
  *
- * @brief Define test setups common to all @ref fgm::Point3 tests.
+ * @brief Define test setups common to all @ref flcn::Point3 tests.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */

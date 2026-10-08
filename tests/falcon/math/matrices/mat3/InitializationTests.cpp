@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 22, 2026
  *
- * @brief Verify @ref fgm::Mat3 initialization.
+ * @brief Verify @ref flcn::Mat3 initialization.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -24,7 +24,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 initialization.
+     * @brief Test fixture for @ref flcn::Mat3 initialization.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -34,7 +34,7 @@ namespace
     protected:
         std::vector<T> _elements;
         std::vector<T> _diagonalElements;
-        fgm::Vec3<T> _col0, _col1, _col2;
+        flcn::Vec3<T> _col0, _col1, _col2;
         T _diagonal0, _diagonal1, _diagonal2;
 
         void SetUp() override
@@ -60,7 +60,7 @@ namespace
     namespace static_tests
     {
         /// @test Verify that the matrix can be initialized at compile time using scalar values.
-        constexpr fgm::Mat3 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        constexpr flcn::Mat3 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9);
         static_assert(MAT1(0, 0) == 1);
         static_assert(MAT1(0, 1) == 2);
         static_assert(MAT1(0, 2) == 3);
@@ -73,7 +73,7 @@ namespace
 
 
         /// @test Verify that the matrix can be initialized at compile time using column vectors.
-        constexpr fgm::Mat3 MAT2(fgm::Vec3(1, 4, 7), fgm::Vec3(2, 5, 8), fgm::Vec3(3, 6, 9));
+        constexpr flcn::Mat3 MAT2(flcn::Vec3(1, 4, 7), flcn::Vec3(2, 5, 8), flcn::Vec3(3, 6, 9));
         static_assert(MAT2(0, 0) == 1);
         static_assert(MAT2(0, 1) == 2);
         static_assert(MAT2(0, 2) == 3);
@@ -86,7 +86,7 @@ namespace
 
 
         /// @test Verify that the matrix can be initialized at compile time using diagonals.
-        constexpr fgm::Mat3 MAT3(3, 4, 5);
+        constexpr flcn::Mat3 MAT3(3, 4, 5);
         static_assert(MAT3(0, 0) == 3);
         static_assert(MAT3(0, 1) == 0);
         static_assert(MAT3(0, 2) == 0);
@@ -99,7 +99,7 @@ namespace
 
 
         /// @test Verify that the matrix can be initialized at compile time using value initialization.
-        constexpr fgm::Mat3<int> MAT4{};
+        constexpr flcn::Mat3<int> MAT4{};
         static_assert(MAT4(0, 0) == 0);
         static_assert(MAT4(0, 1) == 0);
         static_assert(MAT4(0, 2) == 0);
@@ -121,7 +121,7 @@ namespace
 
 TYPED_TEST(Mat3InitializationTests, EmptyCtor_ReturnsIdentityMatrix)
 {
-    const fgm::Mat3<TypeParam> matrix{};
+    const flcn::Mat3<TypeParam> matrix{};
 
     EXPECT_MAT_ZERO(matrix);
 }
@@ -129,7 +129,7 @@ TYPED_TEST(Mat3InitializationTests, EmptyCtor_ReturnsIdentityMatrix)
 
 TYPED_TEST(Mat3InitializationTests, ParameterizedCtor_InitializesMatrixWithElements)
 {
-    const fgm::Mat3<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
+    const flcn::Mat3<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
                                       this->_elements[4], this->_elements[5], this->_elements[6], this->_elements[7],
                                       this->_elements[8]);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
@@ -138,21 +138,21 @@ TYPED_TEST(Mat3InitializationTests, ParameterizedCtor_InitializesMatrixWithEleme
 
 TYPED_TEST(Mat3InitializationTests, ParameterizedCtor_InitializesMatrixWithVectors)
 {
-    const fgm::Mat3<TypeParam> matrix(this->_col0, this->_col1, this->_col2);
+    const flcn::Mat3<TypeParam> matrix(this->_col0, this->_col1, this->_col2);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 
 
 TYPED_TEST(Mat3InitializationTests, ParameterizedCtor_InitializesDiagonalMatrix)
 {
-    const fgm::Mat3<TypeParam> matrix(this->_diagonal0, this->_diagonal1, this->_diagonal2);
+    const flcn::Mat3<TypeParam> matrix(this->_diagonal0, this->_diagonal1, this->_diagonal2);
     EXPECT_MAT_CONTAINS(this->_diagonalElements, matrix);
 }
 
 
 TYPED_TEST(Mat3InitializationTests, CanBeConstructedWithBracedInitialization)
 {
-    const fgm::Mat3<TypeParam> matrix = { { TypeParam(1), TypeParam(4), TypeParam(7) },
+    const flcn::Mat3<TypeParam> matrix = { { TypeParam(1), TypeParam(4), TypeParam(7) },
                                           { TypeParam(2), TypeParam(5), TypeParam(8) },
                                           { TypeParam(3), TypeParam(6), TypeParam(9) } };
     EXPECT_MAT_CONTAINS(this->_elements, matrix);

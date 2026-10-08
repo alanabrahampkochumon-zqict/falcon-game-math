@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 16, 2026
  *
- * @brief Verify @ref fgm::Vec4 string representation.
+ * @brief Verify @ref flcn::Vec4 string representation.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -27,16 +27,16 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Vec3 string representation.
+     * @brief Test fixture for @ref flcn::Vec3 string representation.
      */
     class Vec4StringRepresentationTests: public testing::Test
     {
     protected:
         /** @brief Switch to use full precision for testing. */
-        void SetUp() override { fgm::Config::useFullPrecision = true; }
+        void SetUp() override { flcn::Config::useFullPrecision = true; }
 
         /** @brief Switch back to normal log precision. */
-        void TearDown() override { fgm::Config::useFullPrecision = false; }
+        void TearDown() override { flcn::Config::useFullPrecision = false; }
     };
 } // namespace
 
@@ -48,7 +48,7 @@ namespace
 
 TEST_F(Vec4StringRepresentationTests, IntegralVector_ReturnsFormattedString)
 {
-    const fgm::Vec4 vec(1, 2, 3, 4);
+    const flcn::Vec4 vec(1, 2, 3, 4);
     std::stringstream ss;
 
     ss << vec;
@@ -59,7 +59,7 @@ TEST_F(Vec4StringRepresentationTests, IntegralVector_ReturnsFormattedString)
 
 TEST_F(Vec4StringRepresentationTests, FloatingPointVector_ReturnsFormattedString)
 {
-    const fgm::Vec4 vec(1.2345f, 2.0f, 3.56789f, 4.2f);
+    const flcn::Vec4 vec(1.2345f, 2.0f, 3.56789f, 4.2f);
     std::stringstream ss;
 
     ss << vec;
@@ -70,7 +70,7 @@ TEST_F(Vec4StringRepresentationTests, FloatingPointVector_ReturnsFormattedString
 
 TEST_F(Vec4StringRepresentationTests, DoublePrecisionFloatingPointVector_ReturnsFormattedString)
 {
-    const fgm::Vec4 vec(1.2345789777, 2.65831, 3.161285, 4.0);
+    const flcn::Vec4 vec(1.2345789777, 2.65831, 3.161285, 4.0);
     std::stringstream ss;
 
     ss << vec;

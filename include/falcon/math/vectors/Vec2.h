@@ -10,7 +10,7 @@
  * @warning Due to the inherent nature of SIMD, indexing using operator[] is strongly discouraged.
  *          For non-frequent indices use functional variants like x(), y(), s(), t(), etc.
  *          or compile-time indexing using get<Index> or set<Index>.
- *          If your program require frequent mutation of types, it is recommended to use @ref fgm::CVec2
+ *          If your program require frequent mutation of types, it is recommended to use @ref flcn::CVec2
  *          and convert it to Vec2 after mutation logic, prior to operations.
  *
  * @par Configuration
@@ -34,10 +34,10 @@
 #include <type_traits>
 
 
-namespace fgm
+namespace flcn
 {
-    using namespace falcon::types;
-    using namespace fgm::constants;
+    using namespace flcn::types;
+    using namespace flcn::constants;
 
     template <typename T>
     using Mask_t = UInt_t<T>;
@@ -77,7 +77,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::Vec2<T>::zero() to guarantee a zeroed vector.
+         *       @ref flcn::Vec2<T>::zero() to guarantee a zeroed vector.
          */
         Vec2() = default;
 
@@ -114,7 +114,7 @@ namespace fgm
          * @brief Initialize a @ref Vec2 with an Simd128_t register.
          * @param reg The register to bind to this vector.
          */
-        [[nodiscard]] explicit constexpr Vec2(const falcon::Simd128_t<T, DIMENSION>& reg) noexcept;
+        [[nodiscard]] explicit constexpr Vec2(const flcn::Simd128_t<T, DIMENSION>& reg) noexcept;
 
 
         /// @brief Convert this Vec2 to CVec2.
@@ -278,7 +278,7 @@ namespace fgm
          *       runtime overhead.
          *
          * @tparam Indices The component indices used to construct the new vector.
-         *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
+         *                 See @ref flcn::axis, @ref flcn::colors, and @ref flcn::stp for available swizzle aliases.
          *
          * @return A new vector containing the requested components or the component if @p Indices is 1.
          *         The dimension of the returned vector perfectly matches the number of indices provided.
@@ -296,7 +296,7 @@ namespace fgm
          *       runtime overhead.
          *
          * @tparam Indices The component indices used to construct the new vector.
-         *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
+         *                 See @ref flcn::axis, @ref flcn::colors, and @ref flcn::stp for available swizzle aliases.
          *
          * @param vec The vector to shuffle, rearrange or isolate components.
          *
@@ -535,7 +535,7 @@ namespace fgm
          * @param[in] rhs     The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         * @note For direct comparisons use @ref flcn::TrueMask<T> or flcn::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -552,7 +552,7 @@ namespace fgm
          * @param[in] rhs     The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         * @note For direct comparisons use @ref flcn::TrueMask<T> or flcn::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -568,7 +568,7 @@ namespace fgm
          * @param[in] rhs     The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         * @note For direct comparisons use @ref flcn::TrueMask<T> or flcn::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -583,7 +583,7 @@ namespace fgm
          * @param[in] rhs     The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         * @note For direct comparisons use @ref flcn::TrueMask<T> or flcn::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -608,7 +608,7 @@ namespace fgm
          * @param[in] rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         * @note For direct comparisons use @ref flcn::TrueMask<T> or flcn::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -624,7 +624,7 @@ namespace fgm
          * @param[in]  rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         * @note For direct comparisons use @ref flcn::TrueMask<T> or flcn::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -639,7 +639,7 @@ namespace fgm
          * @param[in] rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         * @note For direct comparisons use @ref flcn::TrueMask<T> or flcn::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -655,7 +655,7 @@ namespace fgm
          * @param[in]  rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         * @note For direct comparisons use @ref flcn::TrueMask<T> or flcn::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -674,7 +674,7 @@ namespace fgm
          * @param[in] rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         * @note For direct comparisons use @ref flcn::TrueMask<T> or flcn::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -694,7 +694,7 @@ namespace fgm
          * @param[in]  rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         * @note For direct comparisons use @ref flcn::TrueMask<T> or flcn::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -713,7 +713,7 @@ namespace fgm
          * @param[in] rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         * @note For direct comparisons use @ref flcn::TrueMask<T> or flcn::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -733,7 +733,7 @@ namespace fgm
          * @param[in]  rhs The vector to compare against.
          *
          * @note Use @ref toBool to convert mask vector to a boolean vector.
-         * @note For direct comparisons use @ref fgm::TrueMask<T> or fgm::FalseMask<T>.
+         * @note For direct comparisons use @ref flcn::TrueMask<T> or flcn::FalseMask<T>.
          *
          * @return A @ref Mask_t(unsigned integral) Vec2 with `true` represented by 111...111 and `false` by 000...000.
          */
@@ -918,7 +918,7 @@ namespace fgm
          *
          * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
          *
-         * @return A new @ref fgm::Vec2 with negated components.
+         * @return A new @ref flcn::Vec2 with negated components.
          */
         [[nodiscard]] constexpr Vec2 operator-() const noexcept
             requires SignedStrictArithmetic<T>;
@@ -1002,11 +1002,11 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN
          *       components, returns a zero vector.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref flcn::StrictArithmetic.
          *
          * @warning The scalar value will be cast to the numeric type of the vector.
          *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         * @tparam S Numeric type of the scalar. Must satisfy @ref flcn::StrictArithmetic.
          *
          * @param[in] scalar The value to divide the vector components by.
          *
@@ -1023,11 +1023,11 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN
          *       components, returns a zero vector.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref flcn::StrictArithmetic.
          *
          * @warning The scalar value will be cast to the numeric type of the vector.
          *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         * @tparam S Numeric type of the scalar. Must satisfy @ref flcn::StrictArithmetic.
          *
          * @param[in] vec The vector to divide.
          * @param[in] scalar The value to divide the vector components by.
@@ -1046,13 +1046,13 @@ namespace fgm
          *
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN
          *       components, returns a zero vector.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref flcn::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
          *       mathematical invalidity (Division by Zero) when reporting status.
          *
          * @warning The scalar value will be cast to the numeric type of the vector.
          *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         * @tparam S Numeric type of the scalar. Must satisfy @ref flcn::StrictArithmetic.
          *
          * @param[in] scalar  The value to divide the vector components by.
          * @param[out] status The status flag to store the status of the current operation result.
@@ -1073,13 +1073,13 @@ namespace fgm
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN
          *       components, returns a zero vector.
          * @note Promotes the result to the wider type using @ref PromotedVec2<T, S>.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref flcn::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over
          *       mathematical invalidity (Division by Zero) when reporting status.
          *
          * @warning The scalar value will be cast to the numeric type of the vector.
          *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         * @tparam S Numeric type of the scalar. Must satisfy @ref flcn::StrictArithmetic.
          *
          * @param[in] vec     The vector to divide.
          * @param[in] scalar  The value to divide the vector components by.
@@ -1502,7 +1502,7 @@ namespace fgm
          *
          * @param[in] vec The vector to be normalized.
          *
-         * @return A @ref fgm::Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is
+         * @return A @ref flcn::Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is
          *         below the epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] static constexpr Vec2<Magnitude<T>> safeNormalize(const Vec2& vec) noexcept
@@ -1521,7 +1521,7 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.*
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return A @ref fgm::Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is
+         * @return A @ref flcn::Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is
          *         below the epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr Vec2<Magnitude<T>> tryNormalize(OperationStatus& status) const noexcept
@@ -1541,7 +1541,7 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.*
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return A @ref fgm::Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is
+         * @return A @ref flcn::Vec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is
          *         below the epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] static constexpr Vec2<Magnitude<T>> tryNormalize(const Vec2& vec,
@@ -2208,7 +2208,7 @@ namespace fgm
         /** @} */
 
     private:
-        falcon::Simd128_t<T, DIMENSION> _data;
+        flcn::Simd128_t<T, DIMENSION> _data;
 
 
         /**************************************
@@ -2334,7 +2334,7 @@ namespace fgm
         requires Arithmetic<T>
     Vec2(T, T) -> Vec2<T>;
 
-} // namespace fgm
+} // namespace flcn
 
 
 #include "Vec2.tpp"

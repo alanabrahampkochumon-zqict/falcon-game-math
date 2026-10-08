@@ -23,7 +23,7 @@ namespace
      **************************************/
     namespace static_tests
     {
-        using namespace falcon::types;
+        using namespace flcn::types;
 
         /// @test Verify that IsByte returns true only for 8-bit signed integrals.
         static_assert(IsByte<uint8_t> == false);

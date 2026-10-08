@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 17, 2026
  *
- * @brief Verify fgm::Mat2x3 equality operator (==, !=) and their functional counterpart's
+ * @brief Verify flcn::Mat2x3 equality operator (==, !=) and their functional counterpart's
  *        (eq, neq, allEq, anyNeq) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -22,8 +22,8 @@
 
 namespace
 {
-    constexpr auto NAN_F = fgm::constants::NaN;
-    constexpr auto INF   = fgm::constants::INFINITY_F;
+    constexpr auto NAN_F = flcn::constants::NaN;
+    constexpr auto INF   = flcn::constants::INFINITY_F;
 
 
     /**************************************
@@ -31,7 +31,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2x3 Equality.
+     * @brief Test fixture for @ref flcn::Mat2x3 Equality.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -39,9 +39,9 @@ namespace
     class Mat2x3EqualityTests: public testing::Test
     {
     protected:
-        fgm::Mat2x3<T> _eqMatA;
-        fgm::Mat2x3<T> _eqMatB;
-        fgm::Mat2x3<T> _unEqualMat;
+        flcn::Mat2x3<T> _eqMatA;
+        flcn::Mat2x3<T> _eqMatB;
+        flcn::Mat2x3<T> _unEqualMat;
 
 
         void SetUp() override
@@ -63,11 +63,11 @@ namespace
 
     struct Mat2x3ElementParam
     {
-        fgm::Mat2x3<int> first, second;
+        flcn::Mat2x3<int> first, second;
         bool expected;
     };
 
-    /// @brief Test fixture for @ref fgm::Mat2x3 Equality on a per-element basis.
+    /// @brief Test fixture for @ref flcn::Mat2x3 Equality on a per-element basis.
     class Mat2x3PerElementEqualityTests: public testing::TestWithParam<Mat2x3ElementParam>
     {};
     INSTANTIATE_TEST_SUITE_P(
@@ -82,7 +82,7 @@ namespace
             Mat2x3ElementParam{ .first = { 1, 2, 3, 4, 5, 6 }, .second = { 1, 2, 3, 4, 5, 1 }, .expected = false }));
 
 
-    /// @brief Test fixture for @ref fgm::Mat2x3 Inequality on a per-element basis.
+    /// @brief Test fixture for @ref flcn::Mat2x3 Inequality on a per-element basis.
     class Mat2x3PerElementInequalityTests: public testing::TestWithParam<Mat2x3ElementParam>
     {};
     INSTANTIATE_TEST_SUITE_P(
@@ -104,15 +104,15 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat2x3 MAT1(1, 2, 3, 4, 5, 6);
-        constexpr fgm::Mat2x3 MAT2(1, 2, 3, 4, 5, 6);
-        constexpr fgm::Mat2x3 MAT3(4, 2, 2, 4, 5, 6);
-        constexpr fgm::Mat2x3 INF_MAT1(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                       -fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                       fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
-        constexpr fgm::Mat2x3 INF_MAT2(-fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                       -fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                       fgm::constants::INFINITY_F, fgm::constants::INFINITY_F);
+        constexpr flcn::Mat2x3 MAT1(1, 2, 3, 4, 5, 6);
+        constexpr flcn::Mat2x3 MAT2(1, 2, 3, 4, 5, 6);
+        constexpr flcn::Mat2x3 MAT3(4, 2, 2, 4, 5, 6);
+        constexpr flcn::Mat2x3 INF_MAT1(-flcn::constants::INFINITY_F, flcn::constants::INFINITY_F,
+                                       -flcn::constants::INFINITY_F, flcn::constants::INFINITY_F,
+                                       flcn::constants::INFINITY_F, flcn::constants::INFINITY_F);
+        constexpr flcn::Mat2x3 INF_MAT2(-flcn::constants::INFINITY_F, flcn::constants::INFINITY_F,
+                                       -flcn::constants::INFINITY_F, flcn::constants::INFINITY_F,
+                                       flcn::constants::INFINITY_F, flcn::constants::INFINITY_F);
 
 
 
@@ -127,14 +127,14 @@ namespace
 
 
         /** @test Verify that Mat2x3 allEq (static wrapper) returns true for equal matrices at compile time. */
-        static_assert(fgm::Mat2x3<int>::allEq(MAT1, MAT2) == true);
+        static_assert(flcn::Mat2x3<int>::allEq(MAT1, MAT2) == true);
 
         /** @test Verify that Mat2x3 allEq (static wrapper) returns false for unequal matrices at compile time. */
-        static_assert(fgm::Mat2x3<int>::allEq(MAT1, MAT3) == false);
+        static_assert(flcn::Mat2x3<int>::allEq(MAT1, MAT3) == false);
 
 
         /** @test Verify that Mat2x3 allEq (static wrapper) returns true for equal infinite matrices at compile time. */
-        static_assert(fgm::Mat2x3<float>::allEq(INF_MAT1, INF_MAT2) == true);
+        static_assert(flcn::Mat2x3<float>::allEq(INF_MAT1, INF_MAT2) == true);
 
         /** @test Verify that Mat2x3 anyNeq returns false for equal matrices at compile time. */
         static_assert(MAT1.anyNeq(MAT2) == false);
@@ -148,13 +148,13 @@ namespace
 
 
         /** @test Verify that Mat2x3 anyNeq (static wrapper) returns false for equal matrices at compile time. */
-        static_assert(fgm::Mat2x3<int>::anyNeq(MAT1, MAT2) == false);
+        static_assert(flcn::Mat2x3<int>::anyNeq(MAT1, MAT2) == false);
 
         /** @test Verify that Mat2x3 anyNeq (static wrapper) returns true for unequal matrices at compile time. */
-        static_assert(fgm::Mat2x3<int>::anyNeq(MAT1, MAT3) == true);
+        static_assert(flcn::Mat2x3<int>::anyNeq(MAT1, MAT3) == true);
 
         /** @test Verify that Mat2x3 anyNeq (static wrapper) returns false for equal infinite matrices at compile time. */
-        static_assert(fgm::Mat2x3<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
+        static_assert(flcn::Mat2x3<float>::anyNeq(INF_MAT1, INF_MAT2) == false);
 
     } // namespace static_tests
 
@@ -182,8 +182,8 @@ TYPED_TEST(Mat2x3EqualityTests, AllEq_DifferentMatricesReturnFalse)
 
 TEST(Mat2x3EqualityTests, AllEq_NanMatrixReturnsFalse)
 {
-    const fgm::Mat2x3 matA(NAN_F, NAN_F, NAN_F, NAN_F, NAN_F, 1.0f);
-    const fgm::Mat2x3 matB(1.0f, -5.88874789f, 2.0f, 0.888749f, 0.5329f, 5.23193f);
+    const flcn::Mat2x3 matA(NAN_F, NAN_F, NAN_F, NAN_F, NAN_F, 1.0f);
+    const flcn::Mat2x3 matB(1.0f, -5.88874789f, 2.0f, 0.888749f, 0.5329f, 5.23193f);
 
     const bool equality = matA.allEq(matB);
 
@@ -193,8 +193,8 @@ TEST(Mat2x3EqualityTests, AllEq_NanMatrixReturnsFalse)
 
 TEST(Mat2x3EqualityTests, AllEq_IdenticalInfiniteMatricesReturnTrue)
 {
-    const fgm::Mat2x3 matA(INF, -INF, INF, -INF, -INF, INF);
-    const fgm::Mat2x3 matB(INF, -INF, INF, -INF, -INF, INF);
+    const flcn::Mat2x3 matA(INF, -INF, INF, -INF, -INF, INF);
+    const flcn::Mat2x3 matB(INF, -INF, INF, -INF, -INF, INF);
 
     const bool equality = matA.allEq(matB);
 
@@ -204,8 +204,8 @@ TEST(Mat2x3EqualityTests, AllEq_IdenticalInfiniteMatricesReturnTrue)
 
 TEST(Mat2x3EqualityTests, AllEq_DifferentInfiniteMatricesReturnFalse)
 {
-    const fgm::Mat2x3 matA(INF, -INF, INF, -INF, INF, INF);
-    const fgm::Mat2x3 matB(-INF, -INF, INF, INF, INF, INF);
+    const flcn::Mat2x3 matA(INF, -INF, INF, -INF, INF, INF);
+    const flcn::Mat2x3 matB(-INF, -INF, INF, INF, INF, INF);
 
     const bool equality = matA.allEq(matB);
 
@@ -215,8 +215,8 @@ TEST(Mat2x3EqualityTests, AllEq_DifferentInfiniteMatricesReturnFalse)
 
 TYPED_TEST(Mat2x3EqualityTests, AllEq_MixedType_IdenticalMatricesReturnTrue)
 {
-    const fgm::Mat2x3 matA(1, 2, 3, 4, 5, 6);
-    const fgm::Mat2x3 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
+    const flcn::Mat2x3 matA(1, 2, 3, 4, 5, 6);
+    const flcn::Mat2x3 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
 
     const bool equality = matA.allEq(matB);
 
@@ -226,8 +226,8 @@ TYPED_TEST(Mat2x3EqualityTests, AllEq_MixedType_IdenticalMatricesReturnTrue)
 
 TYPED_TEST(Mat2x3EqualityTests, AllEq_MixedType_DifferentMatricesReturnFalse)
 {
-    const fgm::Mat2x3 matA(5, 6, 7, 8, 9, 10);
-    const fgm::Mat2x3 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
+    const flcn::Mat2x3 matA(5, 6, 7, 8, 9, 10);
+    const flcn::Mat2x3 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
 
     const bool equality = matA.allEq(matB);
 
@@ -244,14 +244,14 @@ TEST_P(Mat2x3PerElementEqualityTests, AllEq_VerifiesElementwiseEquality)
 
 TYPED_TEST(Mat2x3EqualityTests, StaticWrapper_AllEq_IdenticalMatricesReturnTrue)
 {
-    const bool equality = fgm::Mat2x3<TypeParam>::allEq(this->_eqMatA, this->_eqMatB);
+    const bool equality = flcn::Mat2x3<TypeParam>::allEq(this->_eqMatA, this->_eqMatB);
     EXPECT_TRUE(equality);
 }
 
 
 TYPED_TEST(Mat2x3EqualityTests, StaticWrapper_AllEq_DifferentMatricesReturnFalse)
 {
-    const bool equality = fgm::Mat2x3<TypeParam>::allEq(this->_eqMatA, this->_unEqualMat);
+    const bool equality = flcn::Mat2x3<TypeParam>::allEq(this->_eqMatA, this->_unEqualMat);
     EXPECT_FALSE(equality);
 }
 
@@ -259,7 +259,7 @@ TYPED_TEST(Mat2x3EqualityTests, StaticWrapper_AllEq_DifferentMatricesReturnFalse
 TEST_P(Mat2x3PerElementEqualityTests, StaticWrapper_AllEq_VerifiesElementwiseEquality)
 {
     const auto& [firstMat, secondMat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Mat2x3<int>::allEq(firstMat, secondMat));
+    EXPECT_EQ(expected, flcn::Mat2x3<int>::allEq(firstMat, secondMat));
 }
 
 
@@ -291,8 +291,8 @@ TEST_P(Mat2x3PerElementEqualityTests, DoubleEqualsOperator_AllEq_VerifiesElement
 
 TEST(Mat2x3EqualityTests, DoubleEqualsOperator_IdenticalBooleanMatricesReturnTrue)
 {
-    const fgm::Mat2x3 matA(true, false, true, false, false, true);
-    const fgm::Mat2x3 matB(true, false, true, false, false, true);
+    const flcn::Mat2x3 matA(true, false, true, false, false, true);
+    const flcn::Mat2x3 matB(true, false, true, false, false, true);
 
     const bool equality = matA == matB;
     EXPECT_TRUE(equality);
@@ -301,8 +301,8 @@ TEST(Mat2x3EqualityTests, DoubleEqualsOperator_IdenticalBooleanMatricesReturnTru
 
 TEST(Mat2x3EqualityTests, DoubleEqualsOperator_DifferentBooleanMatricesReturnFalse)
 {
-    const fgm::Mat2x3 matA(true, false, false, true, false, false);
-    const fgm::Mat2x3 matB(true, true, false, true, true, false);
+    const flcn::Mat2x3 matA(true, false, false, true, false, false);
+    const flcn::Mat2x3 matB(true, true, false, true, true, false);
 
     const bool equality = matA == matB;
     EXPECT_FALSE(equality);
@@ -335,8 +335,8 @@ TYPED_TEST(Mat2x3EqualityTests, AnyNeq_DifferentMatricesReturnTrue)
 
 TEST(Mat2x3EqualityTests, AnyNeq_NanMatrixReturnsTrue)
 {
-    const fgm::Mat2x3 matA(NAN_F, NAN_F, NAN_F, NAN_F, NAN_F, NAN_F);
-    const fgm::Mat2x3 matB(1.0f, -5.88874789f, INF, -INF, INF, NAN_F);
+    const flcn::Mat2x3 matA(NAN_F, NAN_F, NAN_F, NAN_F, NAN_F, NAN_F);
+    const flcn::Mat2x3 matB(1.0f, -5.88874789f, INF, -INF, INF, NAN_F);
 
     const bool inequality = matA.anyNeq(matB);
 
@@ -346,8 +346,8 @@ TEST(Mat2x3EqualityTests, AnyNeq_NanMatrixReturnsTrue)
 
 TEST(Mat2x3EqualityTests, AnyNeq_IdenticalInfiniteMatricesReturnFalse)
 {
-    const fgm::Mat2x3 matA(INF, -INF, INF, -INF, INF, INF);
-    const fgm::Mat2x3 matB(INF, -INF, INF, -INF, INF, INF);
+    const flcn::Mat2x3 matA(INF, -INF, INF, -INF, INF, INF);
+    const flcn::Mat2x3 matB(INF, -INF, INF, -INF, INF, INF);
 
     const bool inequality = matA.anyNeq(matB);
     EXPECT_FALSE(inequality);
@@ -356,8 +356,8 @@ TEST(Mat2x3EqualityTests, AnyNeq_IdenticalInfiniteMatricesReturnFalse)
 
 TEST(Mat2x3EqualityTests, AnyNeq_DifferentInfiniteMatricesReturnTrue)
 {
-    const fgm::Mat2x3 matA(-INF, INF, INF, -INF, INF, -INF);
-    const fgm::Mat2x3 matB(INF, INF, -INF, -INF, INF, INF);
+    const flcn::Mat2x3 matA(-INF, INF, INF, -INF, INF, -INF);
+    const flcn::Mat2x3 matB(INF, INF, -INF, -INF, INF, INF);
 
     const bool inequality = matA.anyNeq(matB);
     EXPECT_TRUE(inequality);
@@ -366,8 +366,8 @@ TEST(Mat2x3EqualityTests, AnyNeq_DifferentInfiniteMatricesReturnTrue)
 
 TYPED_TEST(Mat2x3EqualityTests, AnyNeq_MixedType_IdenticalMatricesReturnFalse)
 {
-    const fgm::Mat2x3 matA(1, 2, 3, 4, 5, 6);
-    const fgm::Mat2x3 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
+    const flcn::Mat2x3 matA(1, 2, 3, 4, 5, 6);
+    const flcn::Mat2x3 matB(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
 
     const bool inequality = matA.anyNeq(matB);
     EXPECT_FALSE(inequality);
@@ -376,8 +376,8 @@ TYPED_TEST(Mat2x3EqualityTests, AnyNeq_MixedType_IdenticalMatricesReturnFalse)
 
 TYPED_TEST(Mat2x3EqualityTests, AnyNeq_MixedType_DifferentMatricesReturnTrue)
 {
-    const fgm::Mat2x3 matA(5, 6, 7, 8, 10, 11);
-    const fgm::Mat2x3 matB(1.0, 2.0, 7.0, 8.0, 9.0, 10.0);
+    const flcn::Mat2x3 matA(5, 6, 7, 8, 10, 11);
+    const flcn::Mat2x3 matB(1.0, 2.0, 7.0, 8.0, 9.0, 10.0);
 
     const bool inequality = matA.anyNeq(matB);
     EXPECT_TRUE(inequality);
@@ -393,14 +393,14 @@ TEST_P(Mat2x3PerElementInequalityTests, AnyNeq_VerifiesElementwiseInequality)
 
 TYPED_TEST(Mat2x3EqualityTests, StaticWrapper_AnyNeq_IdenticalMatricesReturnFalse)
 {
-    const bool inequality = fgm::Mat2x3<TypeParam>::anyNeq(this->_eqMatA, this->_eqMatB);
+    const bool inequality = flcn::Mat2x3<TypeParam>::anyNeq(this->_eqMatA, this->_eqMatB);
     EXPECT_FALSE(inequality);
 }
 
 
 TYPED_TEST(Mat2x3EqualityTests, StaticWrapper_AnyNeq_DifferentMatricesReturnTrue)
 {
-    const bool inequality = fgm::Mat2x3<TypeParam>::anyNeq(this->_eqMatA, this->_unEqualMat);
+    const bool inequality = flcn::Mat2x3<TypeParam>::anyNeq(this->_eqMatA, this->_unEqualMat);
     EXPECT_TRUE(inequality);
 }
 
@@ -408,7 +408,7 @@ TYPED_TEST(Mat2x3EqualityTests, StaticWrapper_AnyNeq_DifferentMatricesReturnTrue
 TEST_P(Mat2x3PerElementInequalityTests, StaticWrapper_AnyNeq_VerifiesElementwiseInequality)
 {
     const auto& [firstMat, secondMat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Mat2x3<int>::anyNeq(firstMat, secondMat));
+    EXPECT_EQ(expected, flcn::Mat2x3<int>::anyNeq(firstMat, secondMat));
 }
 
 
@@ -434,8 +434,8 @@ TYPED_TEST(Mat2x3EqualityTests, NotEqualsOperator_DifferentMatricesReturnTrue)
 
 TEST(Mat2x3EqualityTests, NotEqualsOperator_IdenticalBooleanMatricesReturnFalse)
 {
-    const fgm::Mat2x3 matA(true, false, false, true, false, false);
-    const fgm::Mat2x3 matB(true, false, false, true, false, false);
+    const flcn::Mat2x3 matA(true, false, false, true, false, false);
+    const flcn::Mat2x3 matB(true, false, false, true, false, false);
 
     const bool inequality = matA != matB;
 
@@ -445,8 +445,8 @@ TEST(Mat2x3EqualityTests, NotEqualsOperator_IdenticalBooleanMatricesReturnFalse)
 
 TEST(Mat2x3EqualityTests, NotEqualsOperator_DifferentBooleanMatricesReturnTrue)
 {
-    const fgm::Mat2x3 matA(true, false, true, false, false, true);
-    const fgm::Mat2x3 matB(true, true, false, true, false, true);
+    const flcn::Mat2x3 matA(true, false, true, false, false, true);
+    const flcn::Mat2x3 matB(true, true, false, true, false, true);
 
     const bool inequality = matA != matB;
 

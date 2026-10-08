@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 25, 2026
  *
- * @brief Verify @ref fgm::Mat4x2 vector and matrix GeometricOps logic.
+ * @brief Verify @ref flcn::Mat4x2 vector and matrix GeometricOps logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -33,7 +33,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4x2 matrix geometric operations (Matrix-Vector Multiplication).
+     * @brief Test fixture for @ref flcn::Mat4x2 matrix geometric operations (Matrix-Vector Multiplication).
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices and vectors.
      */
@@ -42,30 +42,30 @@ namespace
     {
 
     protected:
-        fgm::CVec2<T> _vec2, _expectedFPCVec2, _expectedIntCVec2;
-        fgm::Vec4<T> _vec4, _expectedFPVec4, _expectedIntVec4;
+        flcn::CVec2<T> _vec2, _expectedFPCVec2, _expectedIntCVec2;
+        flcn::Vec4<T> _vec4, _expectedFPVec4, _expectedIntVec4;
 
-        fgm::Mat4x2<T> _mat4x2;
+        flcn::Mat4x2<T> _mat4x2;
 
 
         void SetUp() override
         {
 
-            _vec2            = fgm::CVec2{ T(1.23412341000000003), T(2.21341324399999984) };
-            _expectedFPCVec2  = fgm::CVec2{ T(43.60881556301329454), T(13.13528635912819098) };
-            _expectedIntCVec2 = fgm::CVec2{ T(41), T(12) };
+            _vec2            = flcn::CVec2{ T(1.23412341000000003), T(2.21341324399999984) };
+            _expectedFPCVec2  = flcn::CVec2{ T(43.60881556301329454), T(13.13528635912819098) };
+            _expectedIntCVec2 = flcn::CVec2{ T(41), T(12) };
 
 
-            _vec4            = fgm::Vec4{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988),
+            _vec4            = flcn::Vec4{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988),
                                T(4.01283041000000029) };
-            _expectedFPVec4  = { fgm::Vec4{ T(8.57723503050675617), T(10.64013783192313589), T(4.74965736129900851),
+            _expectedFPVec4  = { flcn::Vec4{ T(8.57723503050675617), T(10.64013783192313589), T(4.74965736129900851),
                                            T(8.62585211223543524) } };
-            _expectedIntVec4 = { fgm::Vec4{ T(7), T(9), T(4), T(7) } };
+            _expectedIntVec4 = { flcn::Vec4{ T(7), T(9), T(4), T(7) } };
 
 
-            _mat4x2 = { fgm::Vec4{ T(5.12390421300000032), T(5.01238399999999995), T(2.01234000000000002),
+            _mat4x2 = { flcn::Vec4{ T(5.12390421300000032), T(5.01238399999999995), T(2.01234000000000002),
                                    T(5.01238401234000008) },
-                        fgm::Vec4{ T(1.01820339999999998), T(2.01238399999999995), T(1.02384019999999998),
+                        flcn::Vec4{ T(1.01820339999999998), T(2.01238399999999995), T(1.02384019999999998),
                                    T(1.10234800000000011) } };
         }
     };
@@ -80,10 +80,10 @@ namespace
     namespace static_tests
     {
         // STATIC TEST SETUP
-        constexpr fgm::CVec2 VEC2(1, 2);
-        constexpr fgm::Vec4 ROW_VEC4(1, 2, 3, 4);
+        constexpr flcn::CVec2 VEC2(1, 2);
+        constexpr flcn::Vec4 ROW_VEC4(1, 2, 3, 4);
 
-        constexpr fgm::Mat4x2 MAT4X2(5, 1, 5, 2, 2, 1, 5, 1);
+        constexpr flcn::Mat4x2 MAT4X2(5, 1, 5, 2, 2, 1, 5, 1);
 
 
         /// @test Verify that 4x2 matrix times a 2D column vector yields a 4D column vector at compile time.

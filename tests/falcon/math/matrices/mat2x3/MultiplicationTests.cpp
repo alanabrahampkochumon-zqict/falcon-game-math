@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 17, 2026
  *
- * @brief Verify @ref fgm::Mat2x3 scalar multiplication logic.
+ * @brief Verify @ref flcn::Mat2x3 scalar multiplication logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -23,7 +23,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 scalar multiplication.
+     * @brief Test fixture for @ref flcn::Mat2 scalar multiplication.
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
@@ -31,21 +31,21 @@ namespace
     class Mat2x3ScalarMultiplicationTests: public ::testing::Test
     {
     protected:
-        fgm::Mat2x3<T> _mat;
+        flcn::Mat2x3<T> _mat;
         T _scalar;
-        fgm::Mat2x3<T> _expectedFloatingMat;
-        fgm::Mat2x3<T> _expectedIntegralMat;
+        flcn::Mat2x3<T> _expectedFloatingMat;
+        flcn::Mat2x3<T> _expectedIntegralMat;
 
 
 
         void SetUp() override
         {
-            _mat                 = { fgm::CVec2{ T(7), T(13) }, fgm::CVec2{ T(5), T(4) }, fgm::CVec2{ T(11), T(2) } };
+            _mat                 = { flcn::CVec2{ T(7), T(13) }, flcn::CVec2{ T(5), T(4) }, flcn::CVec2{ T(11), T(2) } };
             _scalar              = T(2.123456789123456);
-            _expectedFloatingMat = { fgm::CVec2{ T(14.864197523864192), T(27.604938258604928) },
-                                     fgm::CVec2{ T(10.61728394561728), T(8.493827156493824) },
-                                     fgm::CVec2{ T(23.358024680358014), T(4.246913578246912) } };
-            _expectedIntegralMat = { fgm::CVec2{ T(14), T(26) }, fgm::CVec2{ T(10), T(8) }, fgm::CVec2{ T(22), T(4) } };
+            _expectedFloatingMat = { flcn::CVec2{ T(14.864197523864192), T(27.604938258604928) },
+                                     flcn::CVec2{ T(10.61728394561728), T(8.493827156493824) },
+                                     flcn::CVec2{ T(23.358024680358014), T(4.246913578246912) } };
+            _expectedIntegralMat = { flcn::CVec2{ T(14), T(26) }, flcn::CVec2{ T(10), T(8) }, flcn::CVec2{ T(22), T(4) } };
         }
     };
     TYPED_TEST_SUITE(Mat2x3ScalarMultiplicationTests, SupportedArithmeticTypes);
@@ -59,10 +59,10 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat2x3 MAT1(1, 2, 3, 4, 5, 6);
+        constexpr flcn::Mat2x3 MAT1(1, 2, 3, 4, 5, 6);
 
         /// @test Verify that matrix * scalar multiplication returns 2x3 matrix at compile time.
-        constexpr fgm::Mat2x3 BINARY_PRODUCT_1 = MAT1 * 2;
+        constexpr flcn::Mat2x3 BINARY_PRODUCT_1 = MAT1 * 2;
         static_assert(BINARY_PRODUCT_1(0, 0) == 2);
         static_assert(BINARY_PRODUCT_1(0, 1) == 4);
         static_assert(BINARY_PRODUCT_1(0, 2) == 6);
@@ -72,7 +72,7 @@ namespace
 
 
         /// @test Verify scalar * matrix multiplication returns 2x3 matrix at compile time.
-        constexpr fgm::Mat2x3 BINARY_PRODUCT_2 = 2 * MAT1;
+        constexpr flcn::Mat2x3 BINARY_PRODUCT_2 = 2 * MAT1;
         static_assert(BINARY_PRODUCT_2(0, 0) == 2);
         static_assert(BINARY_PRODUCT_2(0, 1) == 4);
         static_assert(BINARY_PRODUCT_2(0, 2) == 6);
@@ -92,17 +92,17 @@ namespace
 
 TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ByZeroReturnsZeroMatrix)
 {
-    const fgm::Mat2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
-    const fgm::Mat2x3 product = mat * 0;
+    const flcn::Mat2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
+    const flcn::Mat2x3 product = mat * 0;
     EXPECT_MAT_ZERO(product);
 }
 
 
 TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ByOneReturnsOriginalMatrix)
 {
-    const fgm::Mat2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
+    const flcn::Mat2x3 mat(3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f);
 
-    const fgm::Mat2x3 product = mat * 1;
+    const flcn::Mat2x3 product = mat * 1;
 
     EXPECT_MAT_EQ(mat, product);
 }
@@ -110,11 +110,11 @@ TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ByOneReturnsOriginalMatrix)
 
 TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ByNegativeScalarFlipsSigns)
 {
-    const fgm::Mat2x3 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f };
-    const fgm::Mat2x3 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f };
+    const flcn::Mat2x3 mat      = { 1.0f, -2.0f, -4.0f, 5.0f, 10.0f, -1.0f };
+    const flcn::Mat2x3 expected = { -2.0f, 4.0f, 8.0f, -10.0f, -20.f, 2.0f };
     const float scalar         = -2.0f;
 
-    const fgm::Mat2x3<float> product = mat * scalar;
+    const flcn::Mat2x3<float> product = mat * scalar;
 
     EXPECT_MAT_EQ(expected, product);
 }
@@ -122,7 +122,7 @@ TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ByNegativeScalarFlipsSigns)
 
 TYPED_TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ByScalarReturnsScaledMatrix)
 {
-    const fgm::Mat2x3 product = this->_mat * this->_scalar;
+    const flcn::Mat2x3 product = this->_mat * this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
     {
@@ -141,7 +141,7 @@ TYPED_TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ByScalarReturnsScaledM
  */
 TYPED_TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_ScalarTimesMatrixReturnsScaledMatrix)
 {
-    const fgm::Mat2x3 product = this->_scalar * this->_mat;
+    const flcn::Mat2x3 product = this->_scalar * this->_mat;
 
     if (std::is_floating_point_v<TypeParam>)
     {
@@ -158,7 +158,7 @@ TYPED_TEST(Mat2x3ScalarMultiplicationTests, TimesOperator_MixedType_PromotesType
 {
     const double scalar = 2.123456789123456;
 
-    [[maybe_unused]] const fgm::Mat2x3 product = this->_mat * scalar;
+    [[maybe_unused]] const flcn::Mat2x3 product = this->_mat * scalar;
 
     static_assert(std::is_same_v<typename decltype(product)::value_type, double>);
 }
@@ -182,7 +182,7 @@ TYPED_TEST(Mat2x3ScalarMultiplicationTests, TimesEqualsOperator_MatrixTimesEqual
 
 TEST(Mat2x3ScalarMultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    fgm::Mat2x3 mat(3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f);
+    flcn::Mat2x3 mat(3.0f, -1.0f, -12.0f, 14.0f, 12.0f, 3.2f);
     const double scalar = 5.0;
     mat *= scalar;
 
@@ -192,9 +192,9 @@ TEST(Mat2x3ScalarMultiplicationTests, TimesEqualsOperator_MixedType_DoesNotPromo
 
 TEST(Mat2x3ScalarMultiplicationTests, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
-    fgm::Mat2x3 mat(3, -1, 10, 5, 50, 12);
+    flcn::Mat2x3 mat(3, -1, 10, 5, 50, 12);
     const double scalar = 2.5;
-    const fgm::Mat2x3 expected(7, -2, 25, 12, 125, 30);
+    const flcn::Mat2x3 expected(7, -2, 25, 12, 125, 30);
 
     mat *= scalar;
 

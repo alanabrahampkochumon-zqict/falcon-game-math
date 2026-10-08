@@ -24,13 +24,13 @@
 namespace
 {
 
-    constexpr auto NAN_F = fgm::constants::NaN;
-    constexpr auto INF   = fgm::constants::INFINITY_F;
+    constexpr auto NAN_F = flcn::constants::NaN;
+    constexpr auto INF   = flcn::constants::INFINITY_F;
 
     template <typename T>
-    constexpr auto False = fgm::FalseMask<fgm::Mask_t<T>>;
+    constexpr auto False = flcn::FalseMask<flcn::Mask_t<T>>;
     template <typename T>
-    constexpr auto True = fgm::TrueMask<fgm::Mask_t<T>>;
+    constexpr auto True = flcn::TrueMask<flcn::Mask_t<T>>;
 
 
     /**************************************
@@ -45,9 +45,9 @@ namespace
     class Vec2ComparisonTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vecA;
-        fgm::Vec2<T> _vecB;
-        fgm::Vec2<fgm::Mask_t<T>> _expectedGT, _expectedGTE, _expectedLT,
+        flcn::Vec2<T> _vecA;
+        flcn::Vec2<T> _vecB;
+        flcn::Vec2<flcn::Mask_t<T>> _expectedGT, _expectedGTE, _expectedLT,
             _expectedLTE; // GT-> Greater Than, GTE-> Greater Than or Equal, LT -> Less than, LTE -> Less than or equal
 
         void SetUp() override
@@ -80,9 +80,9 @@ TYPED_TEST(Vec2ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
 TEST(Vec2ComparisonTests, GT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 {
 
-    const fgm::Vec2 vec(1.2f, 4.5f);
-    const fgm::Vec2 infVec(INF, -INF);
-    const fgm::Vec2 expected(False<float>, True<float>);
+    const flcn::Vec2 vec(1.2f, 4.5f);
+    const flcn::Vec2 infVec(INF, -INF);
+    const flcn::Vec2 expected(False<float>, True<float>);
     const auto mask = vec.gt(infVec);
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -91,9 +91,9 @@ TEST(Vec2ComparisonTests, GT_InfinityVector_ReturnsBooleanVectorWithCorrectValue
 
 TEST(Vec2ComparisonTests, GT_NaNVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec2 vec(1.2f, 4.5f);
-    const fgm::Vec2 infVec(NAN_F, NAN_F);
-    const fgm::Vec2 expected(False<float>, False<float>);
+    const flcn::Vec2 vec(1.2f, 4.5f);
+    const flcn::Vec2 infVec(NAN_F, NAN_F);
+    const flcn::Vec2 expected(False<float>, False<float>);
     const auto mask = vec.gt(infVec);
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -109,7 +109,7 @@ TYPED_TEST(Vec2ComparisonTests, GreaterThanOperator_ReturnsBooleanVectorWithElem
 
 TYPED_TEST(Vec2ComparisonTests, StaticWrapper_GT_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
-    const auto mask = fgm::Vec2<TypeParam>::gt(this->_vecA, this->_vecB);
+    const auto mask = flcn::Vec2<TypeParam>::gt(this->_vecA, this->_vecB);
     EXPECT_VEC_EQ(this->_expectedGT, mask);
 }
 
@@ -128,9 +128,9 @@ TYPED_TEST(Vec2ComparisonTests, GTE_ReturnsBooleanVectorWithElementsGreaterThanO
 
 TEST(Vec2ComparisonTests, GTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec2 vec(1.2f, 6.8f);
-    const fgm::Vec2 infVec(INF, -INF);
-    const fgm::Vec2 expected(False<float>, True<float>);
+    const flcn::Vec2 vec(1.2f, 6.8f);
+    const flcn::Vec2 infVec(INF, -INF);
+    const flcn::Vec2 expected(False<float>, True<float>);
 
     const auto mask = vec.gte(infVec);
     EXPECT_VEC_EQ(expected, mask);
@@ -139,9 +139,9 @@ TEST(Vec2ComparisonTests, GTE_InfinityVector_ReturnsBooleanVectorWithCorrectValu
 
 TEST(Vec2ComparisonTests, GTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec2 vec(1.2f, 6.8f);
-    const fgm::Vec2 infVec(NAN_F, -5.9f);
-    const fgm::Vec2 expected(False<float>, True<float>);
+    const flcn::Vec2 vec(1.2f, 6.8f);
+    const flcn::Vec2 infVec(NAN_F, -5.9f);
+    const flcn::Vec2 expected(False<float>, True<float>);
 
     const auto mask = vec.gte(infVec);
     EXPECT_VEC_EQ(expected, mask);
@@ -157,7 +157,7 @@ TYPED_TEST(Vec2ComparisonTests, GreaterThanOrEqualsOperator_ReturnsBooleanVector
 
 TYPED_TEST(Vec2ComparisonTests, StaticWrapper_GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
-    const auto mask = fgm::Vec2<TypeParam>::gte(this->_vecA, this->_vecB);
+    const auto mask = flcn::Vec2<TypeParam>::gte(this->_vecA, this->_vecB);
     EXPECT_VEC_EQ(this->_expectedGTE, mask);
 }
 
@@ -177,9 +177,9 @@ TYPED_TEST(Vec2ComparisonTests, LT_ReturnsBooleanVectorWithElementsLessThanAsTru
 
 TEST(Vec2ComparisonTests, LT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec2 vec(1.2f, 6.8f);
-    const fgm::Vec2 infVec(INF, -INF);
-    const fgm::Vec2 expected(True<float>, False<float>);
+    const flcn::Vec2 vec(1.2f, 6.8f);
+    const flcn::Vec2 infVec(INF, -INF);
+    const flcn::Vec2 expected(True<float>, False<float>);
 
     const auto mask = vec.lt(infVec);
 
@@ -189,9 +189,9 @@ TEST(Vec2ComparisonTests, LT_InfinityVector_ReturnsBooleanVectorWithCorrectValue
 
 TEST(Vec2ComparisonTests, LT_NanVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec2 vec(1.2f, 6.8f);
-    const fgm::Vec2 nanVec(NAN_F, -5.9f);
-    const fgm::Vec2 expected(False<float>, False<float>);
+    const flcn::Vec2 vec(1.2f, 6.8f);
+    const flcn::Vec2 nanVec(NAN_F, -5.9f);
+    const flcn::Vec2 expected(False<float>, False<float>);
 
 #if defined(_MSC_VER) && !defined(__clang__)
     // MSVC constant evaluator incorrectly returns True<float> for NAN_F comparisons.
@@ -217,7 +217,7 @@ TYPED_TEST(Vec2ComparisonTests, LessThanOperator_ReturnsBooleanVectorWithElement
 
 TYPED_TEST(Vec2ComparisonTests, StaticWrapper_LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
-    const auto mask = fgm::Vec2<TypeParam>::lt(this->_vecA, this->_vecB);
+    const auto mask = flcn::Vec2<TypeParam>::lt(this->_vecA, this->_vecB);
     EXPECT_VEC_EQ(this->_expectedLT, mask);
 }
 
@@ -235,9 +235,9 @@ TYPED_TEST(Vec2ComparisonTests, LTE_ReturnsBooleanVectorWithElementsLessThanOrEq
 
 TEST(Vec2ComparisonTests, LTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec2 vec(1.2f, 6.8f);
-    const fgm::Vec2 infVec(INF, -INF);
-    const fgm::Vec2 expected(True<float>, False<float>);
+    const flcn::Vec2 vec(1.2f, 6.8f);
+    const flcn::Vec2 infVec(INF, -INF);
+    const flcn::Vec2 expected(True<float>, False<float>);
 
     const auto mask = vec.lte(infVec);
 
@@ -247,9 +247,9 @@ TEST(Vec2ComparisonTests, LTE_InfinityVector_ReturnsBooleanVectorWithCorrectValu
 
 TEST(Vec2ComparisonTests, LTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec2 vec(1.2f, 6.8f);
-    const fgm::Vec2 nanVec(NAN_F, -5.9f);
-    const fgm::Vec2 expected(False<float>, False<float>);
+    const flcn::Vec2 vec(1.2f, 6.8f);
+    const flcn::Vec2 nanVec(NAN_F, -5.9f);
+    const flcn::Vec2 expected(False<float>, False<float>);
 
     #if defined(_MSC_VER) && !defined(__clang__)
     // MSVC constant evaluator incorrectly returns True<float> for NAN_F comparisons.
@@ -275,7 +275,7 @@ TYPED_TEST(Vec2ComparisonTests, LessThanOrEqualOperator_ReturnsBooleanVectorWith
 
 TYPED_TEST(Vec2ComparisonTests, StaticWrapper_LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {
-    const auto mask = fgm::Vec2<TypeParam>::lte(this->_vecA, this->_vecB);
+    const auto mask = flcn::Vec2<TypeParam>::lte(this->_vecA, this->_vecB);
     EXPECT_VEC_EQ(this->_expectedLTE, mask);
 }
 

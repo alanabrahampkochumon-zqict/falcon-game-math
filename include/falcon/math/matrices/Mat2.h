@@ -32,7 +32,7 @@
 #include <type_traits>
 
 
-namespace fgm
+namespace flcn
 {
     template <Arithmetic T>
     struct Mat2
@@ -65,7 +65,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::Mat2<T>::zero() to guarantee a zeroed matrix.
+         *       @ref flcn::Mat2<T>::zero() to guarantee a zeroed matrix.
          */
         Mat2() = default;
 
@@ -697,7 +697,7 @@ namespace fgm
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
-         * @return A new @ref fgm::Mat2 with negated elements.
+         * @return A new @ref flcn::Mat2 with negated elements.
          */
         [[nodiscard]] constexpr Mat2 operator-() const noexcept
             requires SignedStrictArithmetic<T>;
@@ -1150,7 +1150,7 @@ namespace fgm
         /**
          * @brief Construct a 2D reflection matrix across coordinate axis.
          *
-         * @tparam On The axis to reflect across. For more details @ref fgm::reflect for more details.
+         * @tparam On The axis to reflect across. For more details @ref flcn::reflect for more details.
          *
          * @return A new @ref Mat2 representing the reflection across coordinate axis, or the origin.
          */
@@ -1203,7 +1203,7 @@ namespace fgm
          * @note Constrained to @ref StrictArithmetic types.
          */
         static constexpr Mat2 identity()
-            requires fgm::StrictArithmetic<T>
+            requires flcn::StrictArithmetic<T>
         { return Mat2{ T(1), T(0), T(0), T(1) }; }
 
 
@@ -1213,7 +1213,7 @@ namespace fgm
          * @note Constrained to @ref StrictArithmetic types.
          */
         static constexpr Mat2 zero()
-            requires fgm::StrictArithmetic<T>
+            requires flcn::StrictArithmetic<T>
         { return Mat2{ T(0), T(0), T(0), T(0) }; }
 
 
@@ -1364,7 +1364,7 @@ namespace fgm
 
 
 
-} // namespace fgm
+} // namespace flcn
 
 
 #include "Mat2.tpp"

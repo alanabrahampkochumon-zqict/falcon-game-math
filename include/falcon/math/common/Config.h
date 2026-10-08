@@ -16,7 +16,7 @@
 #include <concepts>
 #include <falcon/core/Preprocessors.h>
 
-namespace fgm
+namespace flcn
 {
 
     /**
@@ -75,4 +75,4 @@ namespace fgm
     /** @} */
 
 
-} // namespace fgm
+} // namespace flcn

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Mat3 accessors and mutators.
+ * @brief Verify @ref flcn::Mat3 accessors and mutators.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,10 +26,10 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat3 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9);
-        constexpr fgm::Vec3 VEC0(1, 4, 7);
-        constexpr fgm::Vec3 VEC1(2, 5, 8);
-        constexpr fgm::Vec3 VEC2(3, 6, 9);
+        constexpr flcn::Mat3 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        constexpr flcn::Vec3 VEC0(1, 4, 7);
+        constexpr flcn::Vec3 VEC1(2, 5, 8);
+        constexpr flcn::Vec3 VEC2(3, 6, 9);
 
         /// @test Verify that matrix elements are accessible as (row, column) during compile time.
         static_assert(MAT(0, 0) == 1);
@@ -65,7 +65,7 @@ namespace
 /** @test Verify that the matrix elements are accessible via subscript indexing for reads. */
 TEST(Mat3AccessTests, AccessibleAsElements)
 {
-    constexpr fgm::Mat3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
+    constexpr flcn::Mat3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
 
     EXPECT_FLOAT_EQ(1.0f, mat(0, 0));
     EXPECT_FLOAT_EQ(2.0f, mat(0, 1));
@@ -82,11 +82,11 @@ TEST(Mat3AccessTests, AccessibleAsElements)
 /** @test Verify that the matrix columns are accessible as vectors for reads. */
 TEST(Mat3AccessTests, AccessibleAsColumnVectors)
 {
-    constexpr fgm::Mat3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
+    constexpr flcn::Mat3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f);
 
-    EXPECT_VEC_EQ(fgm::Vec3(1.0f, 4.0f, 7.0f), mat[0]);
-    EXPECT_VEC_EQ(fgm::Vec3(2.0f, 5.0f, 8.0f), mat[1]);
-    EXPECT_VEC_EQ(fgm::Vec3(3.0f, 6.0f, 9.0f), mat[2]);
+    EXPECT_VEC_EQ(flcn::Vec3(1.0f, 4.0f, 7.0f), mat[0]);
+    EXPECT_VEC_EQ(flcn::Vec3(2.0f, 5.0f, 8.0f), mat[1]);
+    EXPECT_VEC_EQ(flcn::Vec3(3.0f, 6.0f, 9.0f), mat[2]);
 }
 
 
@@ -98,7 +98,7 @@ TEST(Mat3AccessTests, AccessibleAsColumnVectors)
 /** @test Verify that the matrix elements are accessible via subscript indexing for writes. */
 TEST(Mat3MutationTests, ElementsCanBeMutatedUsingIndex)
 {
-    fgm::Mat3<float> mat;
+    flcn::Mat3<float> mat;
 
     mat(0, 0) = 1.0f;
     mat(0, 1) = 2.0f;
@@ -126,10 +126,10 @@ TEST(Mat3MutationTests, ElementsCanBeMutatedUsingIndex)
 /** @test Verify that the matrix columns are accessible as vectors for writes. */
 TEST(Mat3MutationTests, ColumnsCanBeMutatedUsingIndex)
 {
-    const fgm::Vec3 col0 = { 1.0f, 4.0f, 7.0f };
-    const fgm::Vec3 col1 = { 2.0f, 5.0f, 8.0f };
-    const fgm::Vec3 col2 = { 3.0f, 6.0f, 9.0f };
-    fgm::Mat3<float> mat;
+    const flcn::Vec3 col0 = { 1.0f, 4.0f, 7.0f };
+    const flcn::Vec3 col1 = { 2.0f, 5.0f, 8.0f };
+    const flcn::Vec3 col2 = { 3.0f, 6.0f, 9.0f };
+    flcn::Mat3<float> mat;
 
     mat[0] = col0;
     mat[1] = col1;

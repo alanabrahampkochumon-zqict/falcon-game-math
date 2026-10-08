@@ -28,7 +28,7 @@
 #include <type_traits>
 
 
-namespace fgm
+namespace flcn
 {
     template <Arithmetic T>
     struct Mat2x4
@@ -61,7 +61,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::Mat2x4<T>::zero() to guarantee a zeroed matrix.
+         *       @ref flcn::Mat2x4<T>::zero() to guarantee a zeroed matrix.
          */
         Mat2x4() = default;
 
@@ -570,7 +570,7 @@ namespace fgm
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
-         * @return A new @ref fgm::Mat2x4 with negated elements.
+         * @return A new @ref flcn::Mat2x4 with negated elements.
          */
         [[nodiscard]] constexpr Mat2x4 operator-() const noexcept
             requires SignedStrictArithmetic<T>;
@@ -700,7 +700,7 @@ namespace fgm
          * @note Constrained to @ref StrictArithmetic types.
          */
         static constexpr Mat2x4 one()
-            requires fgm::StrictArithmetic<T>
+            requires flcn::StrictArithmetic<T>
         { return Mat2x4{ T(1), T(1), T(1), T(1), T(1), T(1), T(1), T(1) }; }
 
 
@@ -710,7 +710,7 @@ namespace fgm
          * @note Constrained to @ref StrictArithmetic types.
          */
         static constexpr Mat2x4 zero()
-            requires fgm::StrictArithmetic<T>
+            requires flcn::StrictArithmetic<T>
         { return Mat2x4{ T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0) }; }
 
         /** @} */
@@ -813,7 +813,7 @@ namespace fgm
 
 
 
-} // namespace fgm
+} // namespace flcn
 
 
 #include "Mat2x4.tpp"

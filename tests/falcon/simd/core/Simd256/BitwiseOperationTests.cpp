@@ -75,7 +75,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, BitwiseNot_ReturnsAValidResult)
         }
     }
 
-    falcon::Simd256_t<Type, Lane> reg;
+    flcn::Simd256_t<Type, Lane> reg;
     reg.loadAligned(data.data());
 
     auto regRes = ~reg;
@@ -115,7 +115,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, BitwiseAnd_ReturnsAValidResult)
         }
     }
 
-    falcon::Simd256_t<Type, Lane> regA{}, regB{};
+    flcn::Simd256_t<Type, Lane> regA{}, regB{};
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -156,7 +156,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, BitwiseOr_ReturnsAValidResult)
         }
     }
 
-    falcon::Simd256_t<Type, Lane> regA{}, regB{};
+    flcn::Simd256_t<Type, Lane> regA{}, regB{};
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -198,7 +198,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, BitwiseXor_ReturnsAValidResult)
         }
     }
 
-    falcon::Simd256_t<Type, Lane> regA{}, regB{};
+    flcn::Simd256_t<Type, Lane> regA{}, regB{};
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -240,7 +240,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, BitwiseAndNot_ReturnsAValidResult)
         }
     }
 
-    falcon::Simd256_t<Type, Lane> regA{}, regB{};
+    flcn::Simd256_t<Type, Lane> regA{}, regB{};
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -284,7 +284,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, HorizontalOR_ReturnsAValidScalar)
         }
     }
 
-    falcon::Simd256_t<Type, Lane> reg(data);
+    flcn::Simd256_t<Type, Lane> reg(data);
 
     auto result = reg.horizontalOr();
     EXPECT_ANY_EQ(expected, result);
@@ -321,7 +321,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, HorizontalAND_ReturnsAValidScalar)
         }
     }
 
-    falcon::Simd256_t<Type, Lane> reg(data);
+    flcn::Simd256_t<Type, Lane> reg(data);
 
     auto result = reg.horizontalAnd();
     EXPECT_ANY_EQ(expected, result);
@@ -371,7 +371,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, HorizontalAND_ReturnsAValidScalar)
                 }                                                                                                      \
             }                                                                                                          \
                                                                                                                        \
-            falcon::Simd256_t<Type, Lane> reg{ data };                                                                 \
+            flcn::Simd256_t<Type, Lane> reg{ data };                                                                 \
                                                                                                                        \
             auto regRes = reg << ShiftAmount;                                                                          \
             regRes.storeAligned(result.data());                                                                        \
@@ -421,7 +421,7 @@ TEST_SIMD256_SHIFT_LEFT_WITH_DIFFERENT_SHIFT_SIZES(31)
                 }                                                                                                      \
             }                                                                                                          \
                                                                                                                        \
-            falcon::Simd256_t<Type, Lane> reg{ data };                                                                 \
+            flcn::Simd256_t<Type, Lane> reg{ data };                                                                 \
                                                                                                                        \
             reg <<= ShiftAmount;                                                                                       \
             reg.storeAligned(result.data());                                                                           \
@@ -470,7 +470,7 @@ TEST_SIMD256_SHIFT_LEFT_EQUALS_WITH_DIFFERENT_SHIFT_SIZES(31)
                 }                                                                                                      \
             }                                                                                                          \
                                                                                                                        \
-            falcon::Simd256_t<Type, Lane> reg{ data };                                                                 \
+            flcn::Simd256_t<Type, Lane> reg{ data };                                                                 \
                                                                                                                        \
             auto regRes = reg >> ShiftAmount;                                                                          \
             regRes.storeAligned(result.data());                                                                        \
@@ -524,7 +524,7 @@ TEST_SIMD256_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(31)
                 }                                                                                                      \
             }                                                                                                          \
                                                                                                                        \
-            falcon::Simd256_t<Type, Lane> reg{ data };                                                                 \
+            flcn::Simd256_t<Type, Lane> reg{ data };                                                                 \
                                                                                                                        \
             reg >>= ShiftAmount;                                                                                       \
             reg.storeAligned(result.data());                                                                           \
@@ -580,7 +580,7 @@ TEST_SIMD256_SHIFT_RIGHT_EQUALS_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(31)
                 }                                                                                                      \
             }                                                                                                          \
                                                                                                                        \
-            falcon::Simd256_t<Type, Lane> reg{ data };                                                                 \
+            flcn::Simd256_t<Type, Lane> reg{ data };                                                                 \
                                                                                                                        \
             auto resultReg = reg.shiftRightLogical(ShiftAmount);                                                       \
             resultReg.storeAligned(result.data());                                                                     \
@@ -631,7 +631,7 @@ TEST_SIMD256_SHIFT_RIGHT_LOGICAL_WITH_DIFFERENT_SHIFT_SIZES(31)
                 }                                                                                                      \
             }                                                                                                          \
                                                                                                                        \
-            falcon::Simd256_t<Type, Lane> reg{ data };                                                                 \
+            flcn::Simd256_t<Type, Lane> reg{ data };                                                                 \
                                                                                                                        \
             auto regRes = reg.template shiftLeft<ShiftAmount>();                                                       \
             regRes.storeAligned(result.data());                                                                        \
@@ -681,7 +681,7 @@ TEST_SIMD256_CONST_SHIFT_LEFT_WITH_DIFFERENT_SHIFT_SIZES(31)
                 }                                                                                                      \
             }                                                                                                          \
                                                                                                                        \
-            falcon::Simd256_t<Type, Lane> reg{ data };                                                                 \
+            flcn::Simd256_t<Type, Lane> reg{ data };                                                                 \
                                                                                                                        \
             auto regRes = reg.template shiftRightArithmetic<ShiftAmount>();                                            \
             regRes.storeAligned(result.data());                                                                        \
@@ -736,7 +736,7 @@ TEST_SIMD256_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(31)
                 }                                                                                                      \
             }                                                                                                          \
                                                                                                                        \
-            falcon::Simd256_t<Type, Lane> reg{ data };                                                                 \
+            flcn::Simd256_t<Type, Lane> reg{ data };                                                                 \
                                                                                                                        \
             auto resultReg = reg.template shiftRightLogical<ShiftAmount>();                                            \
             resultReg.storeAligned(result.data());                                                                     \

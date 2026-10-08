@@ -18,7 +18,7 @@
  *  @{
  */
 
-namespace falcon::types
+namespace flcn::types
 {
     /// Return whether a given type is 32-bit floating point number.
     template <typename T>
@@ -87,11 +87,11 @@ namespace falcon::types
         using type = uint8_t;
     };
 
-    /// @brief Variable template helper for @ref fgm::UInt<T>::type.
+    /// @brief Variable template helper for @ref flcn::UInt<T>::type.
     template <typename T>
     using UInt_t = UInt<T>::type;
 
 
-} // namespace falcon::types
+} // namespace flcn::types
 
 /** @} */

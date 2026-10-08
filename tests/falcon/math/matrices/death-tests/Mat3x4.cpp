@@ -26,7 +26,7 @@
 
 namespace
 {
-    fgm::Mat3x4 mat(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    flcn::Mat3x4 mat(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
 
 
     /**************************************
@@ -34,7 +34,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x4 invalid (row, column) indices.
+     * @brief Test fixture for @ref flcn::Mat3x4 invalid (row, column) indices.
      */
     class Mat3x4IndexingTests: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
     {};
@@ -45,7 +45,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x4 invalid column indices.
+     * @brief Test fixture for @ref flcn::Mat3x4 invalid column indices.
      */
     class Mat3x4ColumnIndexingTests: public testing::TestWithParam<std::size_t>
     {};
@@ -54,7 +54,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x4 Division.
+     * @brief Test fixture for @ref flcn::Mat3x4 Division.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -62,18 +62,18 @@ namespace
     class Mat3x4DivisionTests: public testing::Test
     {
     protected:
-        fgm::Mat3x4<T> _matrix;
+        flcn::Mat3x4<T> _matrix;
         T _scalar;
-        fgm::Mat3x4<T> _expectedMatrix;
+        flcn::Mat3x4<T> _expectedMatrix;
 
         void SetUp() override
         {
-            _matrix = { fgm::Vec3{ T(7), T(3), T(0) }, fgm::Vec3{ T(1), T(6), T(6) }, fgm::Vec3{ T(0), T(6), T(9) },
-                        fgm::Vec3{ T(27), T(24), T(30) } };
+            _matrix = { flcn::Vec3{ T(7), T(3), T(0) }, flcn::Vec3{ T(1), T(6), T(6) }, flcn::Vec3{ T(0), T(6), T(9) },
+                        flcn::Vec3{ T(27), T(24), T(30) } };
             _scalar = T(3);
-            _expectedMatrix = { fgm::Vec3{ T(2.333333333333333), T(1), T(0) },
-                                fgm::Vec3{ T(0.3333333333333333), T(2), T(2) }, fgm::Vec3{ T(0), T(2), T(3) },
-                                fgm::Vec3{ T(9), T(8), T(10) } };
+            _expectedMatrix = { flcn::Vec3{ T(2.333333333333333), T(1), T(0) },
+                                flcn::Vec3{ T(0.3333333333333333), T(2), T(2) }, flcn::Vec3{ T(0), T(2), T(3) },
+                                flcn::Vec3{ T(9), T(8), T(10) } };
         }
     };
     TYPED_TEST_SUITE(Mat3x4DivisionTests, SupportedArithmeticTypes);
@@ -81,40 +81,40 @@ namespace
 
     // TODO: Add after adding assertions
     // /**
-    //  * @brief Test fixture for @ref fgm::Mat3x4 Division with NaN elements.
+    //  * @brief Test fixture for @ref flcn::Mat3x4 Division with NaN elements.
     //  */
-    // class NaNMat3x4Division: public testing::TestWithParam<fgm::Mat3x4<float>>
+    // class NaNMat3x4Division: public testing::TestWithParam<flcn::Mat3x4<float>>
     // {};
     // INSTANTIATE_TEST_SUITE_P(
     //     Mat3x4DivisionTestSuite, NaNMat3x4Division,
     //     ::testing::Values(
-    //         fgm::Mat3x4<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN, 3.0f),
-    //         fgm::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
-    //         fgm::constants::NaN), fgm::Mat3x4<float>(fgm ::constants::NaN, fgm::constants::NaN, fgm ::constants::NaN,
-    //         fgm ::constants::NaN,
-    //                            fgm::constants::NaN, fgm::constants::NaN, fgm ::constants::NaN, fgm::constants::NaN,
-    //                            fgm ::constants::NaN, fgm ::constants::NaN, fgm::constants::NaN,
-    //                            fgm::constants::NaN)));
+    //         flcn::Mat3x4<float>(flcn::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
+    //         flcn::Mat3x4<float>(3.0f,
+    //         flcn::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
+    //         flcn::Mat3x4<float>(3.0f, 3.0f,
+    //         flcn::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
+    //         flcn::Mat3x4<float>(3.0f, 3.0f, 3.0f,
+    //         flcn::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
+    //         flcn::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f,
+    //         flcn::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
+    //         flcn::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
+    //         flcn::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
+    //         flcn::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
+    //         flcn::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f),
+    //         flcn::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
+    //         flcn::constants::NaN, 3.0f, 3.0f, 3.0f, 3.0f),
+    //         flcn::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
+    //         flcn::constants::NaN, 3.0f, 3.0f, 3.0f),
+    //         flcn::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
+    //         flcn::constants::NaN, 3.0f, 3.0f),
+    //         flcn::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
+    //         flcn::constants::NaN, 3.0f),
+    //         flcn::Mat3x4<float>(3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f, 3.0f,
+    //         flcn::constants::NaN), flcn::Mat3x4<float>(flcn::constants::NaN, flcn::constants::NaN, flcn::constants::NaN,
+    //         flcn::constants::NaN,
+    //                            flcn::constants::NaN, flcn::constants::NaN, flcn::constants::NaN, flcn::constants::NaN,
+    //                            flcn::constants::NaN, flcn::constants::NaN, flcn::constants::NaN,
+    //                            flcn::constants::NaN)));
 
 
 } // namespace
@@ -142,7 +142,7 @@ TEST_P(Mat3x4IndexingTests, OutOfBoundAccess_TriggersAssertInDebugMode)
 TEST_P(Mat3x4ColumnIndexingTests, OutOfBoundMutation_TriggersAssertInDebugMode)
 {
     const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vec3<int>::zero()), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = flcn::Vec3<int>::zero()), "");
 }
 
 

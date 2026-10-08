@@ -14,7 +14,7 @@
 
 #include <cmath>
 
-namespace fgm::utils
+namespace flcn::utils
 {
 
     template <Arithmetic T, Arithmetic U>
@@ -36,7 +36,7 @@ namespace fgm::utils
         }
         else
         {
-            return fgm::abs(a - b) <= std::numeric_limits<T>::epsilon() * std::max(fgm::abs(a), fgm::abs(b));
+            return flcn::abs(a - b) <= std::numeric_limits<T>::epsilon() * std::max(flcn::abs(a), flcn::abs(b));
         }
     }
 
@@ -64,4 +64,4 @@ namespace fgm::utils
     //    }
     //}
 
-} // namespace fgm::utils
+} // namespace flcn::utils

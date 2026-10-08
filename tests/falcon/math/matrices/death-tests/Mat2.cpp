@@ -25,14 +25,14 @@
 
 namespace
 {
-    fgm::Mat2 mat(1, 2);
+    flcn::Mat2 mat(1, 2);
 
     /**************************************
      *            TEST SETUP              *
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 invalid (row, column) indices.
+     * @brief Test fixture for @ref flcn::Mat2 invalid (row, column) indices.
      */
     class Mat2IndexingTests: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
     {};
@@ -42,7 +42,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 invalid column indexing.
+     * @brief Test fixture for @ref flcn::Mat2 invalid column indexing.
      */
     class Mat2ColumnIndexingTests: public testing::TestWithParam<std::size_t>
     {};
@@ -51,7 +51,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Division.
+     * @brief Test fixture for @ref flcn::Mat2 Division.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -59,15 +59,15 @@ namespace
     class Mat2DivisionTests: public testing::Test
     {
     protected:
-        fgm::Mat2<T> _matrix;
+        flcn::Mat2<T> _matrix;
         T _scalar;
-        fgm::Mat2<T> _expectedMatrix;
+        flcn::Mat2<T> _expectedMatrix;
 
         void SetUp() override
         {
-            _matrix         = { fgm::CVec2<T>{ 7, 3 }, fgm::CVec2<T>{ 1, 6 } };
+            _matrix         = { flcn::CVec2<T>{ 7, 3 }, flcn::CVec2<T>{ 1, 6 } };
             _scalar         = T(3);
-            _expectedMatrix = { fgm::CVec2{ T(2.333333333333333), T(1) }, fgm::CVec2{ T(0.3333333333333333), T(2) } };
+            _expectedMatrix = { flcn::CVec2{ T(2.333333333333333), T(1) }, flcn::CVec2{ T(0.3333333333333333), T(2) } };
         }
     };
     TYPED_TEST_SUITE(Mat2DivisionTests, SupportedArithmeticTypes);
@@ -75,28 +75,28 @@ namespace
 
 
 
-    /** @brief Test fixture for calculating @ref fgm::Mat2 inverse with singular matrices. */
-    class Mat2InverseSingularTests: public testing::TestWithParam<fgm::Mat2<float>>
+    /** @brief Test fixture for calculating @ref flcn::Mat2 inverse with singular matrices. */
+    class Mat2InverseSingularTests: public testing::TestWithParam<flcn::Mat2<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(Mat2SingularMatrixInverse, Mat2InverseSingularTests,
-                             ::testing::Values(fgm::Mat2{ fgm::CVec2{ 1.0f, 2.0f }, fgm::CVec2{ 1.0f, 2.0f } },
-                                               fgm::Mat2{ fgm::CVec2{ 2.0f, 2.0f }, fgm::CVec2{ 2.0f, 2.0f } },
-                                               fgm::Mat2{ fgm::CVec2{ 3.0f, 2.0f }, fgm::CVec2{ 6.0f, 4.0f } },
-                                               fgm::Mat2{ fgm::CVec2{ 0.0f, 0.0f }, fgm::CVec2{ 4.0f, 5.0f } },
-                                               fgm::Mat2{ fgm::CVec2{ 0.0f, 3.0f }, fgm::CVec2{ 0.0f, 5.0f } }));
+                             ::testing::Values(flcn::Mat2{ flcn::CVec2{ 1.0f, 2.0f }, flcn::CVec2{ 1.0f, 2.0f } },
+                                               flcn::Mat2{ flcn::CVec2{ 2.0f, 2.0f }, flcn::CVec2{ 2.0f, 2.0f } },
+                                               flcn::Mat2{ flcn::CVec2{ 3.0f, 2.0f }, flcn::CVec2{ 6.0f, 4.0f } },
+                                               flcn::Mat2{ flcn::CVec2{ 0.0f, 0.0f }, flcn::CVec2{ 4.0f, 5.0f } },
+                                               flcn::Mat2{ flcn::CVec2{ 0.0f, 3.0f }, flcn::CVec2{ 0.0f, 5.0f } }));
 
 
 
-    /** @brief Test fixture for @ref fgm::Mat2 inverse with NaN elements. */
-    class Mat2InverseNaNTests: public testing::TestWithParam<fgm::Mat2<float>>
+    /** @brief Test fixture for @ref flcn::Mat2 inverse with NaN elements. */
+    class Mat2InverseNaNTests: public testing::TestWithParam<flcn::Mat2<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(Mat2NaNMatrixInverse, Mat2InverseNaNTests,
-                             ::testing::Values(fgm::Mat2<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
-                                               fgm::Mat2<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
-                                               fgm::Mat2<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
-                                               fgm::Mat2<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
-                                               fgm::Mat2<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                                fgm ::constants::NaN, fgm ::constants::NaN)));
+                             ::testing::Values(flcn::Mat2<float>(flcn::constants::NaN, 3.0f, 3.0f, 3.0f),
+                                               flcn::Mat2<float>(3.0f, flcn::constants::NaN, 3.0f, 3.0f),
+                                               flcn::Mat2<float>(3.0f, 3.0f, flcn::constants::NaN, 3.0f),
+                                               flcn::Mat2<float>(3.0f, 3.0f, 3.0f, flcn::constants::NaN),
+                                               flcn::Mat2<float>(flcn::constants::NaN, flcn::constants::NaN,
+                                                                flcn::constants::NaN, flcn::constants::NaN)));
 } // namespace
 
 
@@ -122,7 +122,7 @@ TEST_P(Mat2IndexingTests, OutOfBoundAccess_TriggersAssertInDebugMode)
 TEST_P(Mat2ColumnIndexingTests, OutOfBoundMutation_TriggersAssertInDebugMode)
 {
     const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::CVec2<int>::zero()), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = flcn::CVec2<int>::zero()), "");
 }
 
 TEST_P(Mat2IndexingTests, OutOfBoundMutationTriggersAssertInDebugMode)
@@ -152,7 +152,7 @@ TEST_P(Mat2InverseSingularTests, StaticWrapper_Inverse_TriggersAssertionInDebugM
 {
     const auto& matrix = GetParam();
     // Static cast is placed to suppress the no-discard warning
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Mat2<float>::inverse(matrix)), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(flcn::Mat2<float>::inverse(matrix)), "");
 }
 
 TEST_P(Mat2InverseNaNTests, Inverse_TriggersAssertionInDebugMode)
@@ -166,7 +166,7 @@ TEST_P(Mat2InverseNaNTests, StaticWrapper_Inverse_TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();
     // Static cast is placed to suppress the no-discard warning
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Mat2<float>::inverse(matrix)), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(flcn::Mat2<float>::inverse(matrix)), "");
 }
 
 /** @} */

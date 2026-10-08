@@ -23,7 +23,7 @@
 
 #include <type_traits>
 
-namespace falcon
+namespace flcn
 {
     /**
      * @brief Backends Supported by Falcon SIMD.
@@ -77,7 +77,7 @@ namespace falcon
                 return "Unsupported SIMD Instruction set";
         }
     }
-} // namespace falcon
+} // namespace flcn
 
 
 /// Switch Alignment and Backend Variable based on highest supported backend.
@@ -87,63 +87,63 @@ namespace falcon
 
 inline constexpr size_t ALIGNMENT          = 16;
 inline constexpr size_t SIMD_LANE_WIDTH    = 128;
-inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_SSE2;
+inline constexpr auto CURRENT_SIMD_BACKEND = flcn::SimdBackend::ARCH_SSE2;
     #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_SSE4)
 
 inline constexpr size_t ALIGNMENT          = 16;
 inline constexpr size_t SIMD_LANE_WIDTH    = 128;
-inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_SSE4;
+inline constexpr auto CURRENT_SIMD_BACKEND = flcn::SimdBackend::ARCH_SSE4;
     #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_AVX)
 
 inline constexpr size_t ALIGNMENT          = 32;
 inline constexpr size_t SIMD_LANE_WIDTH    = 256;
-inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX;
+inline constexpr auto CURRENT_SIMD_BACKEND = flcn::SimdBackend::ARCH_AVX;
     #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_AVX2)
 
 inline constexpr size_t ALIGNMENT          = 32;
 inline constexpr size_t SIMD_LANE_WIDTH    = 256;
-inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX2;
+inline constexpr auto CURRENT_SIMD_BACKEND = flcn::SimdBackend::ARCH_AVX2;
     #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_AVX512F)
 
 inline constexpr size_t ALIGNMENT          = 64;
 inline constexpr size_t SIMD_LANE_WIDTH    = 512;
-inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX512F;
+inline constexpr auto CURRENT_SIMD_BACKEND = flcn::SimdBackend::ARCH_AVX512F;
     #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_AVX512EX)
 
 inline constexpr size_t ALIGNMENT          = 64;
 inline constexpr size_t SIMD_LANE_WIDTH    = 512;
-inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX512EX;
+inline constexpr auto CURRENT_SIMD_BACKEND = flcn::SimdBackend::ARCH_AVX512EX;
     #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_AVX10)
 
 inline constexpr size_t ALIGNMENT          = 32;  // TODO: TBD
 inline constexpr size_t SIMD_LANE_WIDTH    = 256; // TODO: TBD
-inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_AVX10;
+inline constexpr auto CURRENT_SIMD_BACKEND = flcn::SimdBackend::ARCH_AVX10;
     #define FALCON_PLATFORM_X86
 
 #elif defined(FALCON_ENABLE_NEON)
 
 inline constexpr size_t ALIGNMENT          = 16;
 inline constexpr size_t SIMD_LANE_WIDTH    = 128;
-inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_NEON;
+inline constexpr auto CURRENT_SIMD_BACKEND = flcn::SimdBackend::ARCH_NEON;
     #define FALCON_PLATFORM_NEON
 
 #else
 
 inline constexpr size_t ALIGNMENT          = 16;
 inline constexpr size_t SIMD_LANE_WIDTH    = 64; // GP Register Width on 64-bit machines
-inline constexpr auto CURRENT_SIMD_BACKEND = falcon::SimdBackend::ARCH_UNKNOWN;
+inline constexpr auto CURRENT_SIMD_BACKEND = flcn::SimdBackend::ARCH_UNKNOWN;
 
 #endif
 

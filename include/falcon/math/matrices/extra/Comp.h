@@ -27,7 +27,7 @@
 // 4x4 * 4x2
 // 4x4 * 4x3
 
-namespace fgm
+namespace flcn
 {
 
     /**
@@ -510,7 +510,7 @@ namespace fgm
 
     /** @} */
 
-} // namespace fgm
+} // namespace flcn
 
 
 #include "Comp.tpp"

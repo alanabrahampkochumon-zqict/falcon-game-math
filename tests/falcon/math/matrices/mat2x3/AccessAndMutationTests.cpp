@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 17, 2026
  *
- * @brief Verify @ref fgm::Mat2x3 accessors and mutators.
+ * @brief Verify @ref flcn::Mat2x3 accessors and mutators.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -25,10 +25,10 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat2x3 MAT(1, 2, 3, 4, 5, 6);
-        constexpr fgm::CVec2 VEC0(1, 4);
-        constexpr fgm::CVec2 VEC1(2, 5);
-        constexpr fgm::CVec2 VEC2(3, 6);
+        constexpr flcn::Mat2x3 MAT(1, 2, 3, 4, 5, 6);
+        constexpr flcn::CVec2 VEC0(1, 4);
+        constexpr flcn::CVec2 VEC1(2, 5);
+        constexpr flcn::CVec2 VEC2(3, 6);
 
         /// @test Verify that matrix elements are accessible as (row, column) during compile time.
         static_assert(MAT(0, 0) == 1);
@@ -57,7 +57,7 @@ namespace
 
 TEST(Mat2x3AccessTests, AccessibleAsElements)
 {
-    constexpr fgm::Mat2x3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f);
+    constexpr flcn::Mat2x3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f);
 
     EXPECT_FLOAT_EQ(1.0f, mat(0, 0));
     EXPECT_FLOAT_EQ(2.0f, mat(0, 1));
@@ -70,11 +70,11 @@ TEST(Mat2x3AccessTests, AccessibleAsElements)
 
 TEST(Mat2x3AccessTests, AccessibleAsColumnVectors)
 {
-    constexpr fgm::Mat2x3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f);
+    constexpr flcn::Mat2x3 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f);
 
-    EXPECT_VEC_EQ(fgm::CVec2(1.0f, 4.0f), mat[0]);
-    EXPECT_VEC_EQ(fgm::CVec2(2.0f, 5.0f), mat[1]);
-    EXPECT_VEC_EQ(fgm::CVec2(3.0f, 6.0f), mat[2]);
+    EXPECT_VEC_EQ(flcn::CVec2(1.0f, 4.0f), mat[0]);
+    EXPECT_VEC_EQ(flcn::CVec2(2.0f, 5.0f), mat[1]);
+    EXPECT_VEC_EQ(flcn::CVec2(3.0f, 6.0f), mat[2]);
 }
 
 
@@ -85,7 +85,7 @@ TEST(Mat2x3AccessTests, AccessibleAsColumnVectors)
 
 TEST(Mat2x3MutationTests, ElementsCanBeMutatedUsingIndex)
 {
-    fgm::Mat2x3<float> mat;
+    flcn::Mat2x3<float> mat;
 
     mat(0, 0) = 1.0f;
     mat(0, 1) = 2.0f;
@@ -105,10 +105,10 @@ TEST(Mat2x3MutationTests, ElementsCanBeMutatedUsingIndex)
 
 TEST(Mat2x3MutationTests, ColumnsCanBeMutatedUsingIndex)
 {
-    const fgm::CVec2 col0 = { 1.0f, 4.0f };
-    const fgm::CVec2 col1 = { 2.0f, 5.0f };
-    const fgm::CVec2 col2 = { 3.0f, 6.0f };
-    fgm::Mat2x3<float> mat;
+    const flcn::CVec2 col0 = { 1.0f, 4.0f };
+    const flcn::CVec2 col1 = { 2.0f, 5.0f };
+    const flcn::CVec2 col2 = { 3.0f, 6.0f };
+    flcn::Mat2x3<float> mat;
 
     mat[0] = col0;
     mat[1] = col1;

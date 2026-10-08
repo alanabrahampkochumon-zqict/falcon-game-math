@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: August 10, 2026
  *
- * @brief Verifies @ref fgm::Vec2 assertions in Debug Mode.
+ * @brief Verifies @ref flcn::Vec2 assertions in Debug Mode.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -37,9 +37,9 @@ namespace
     class Vec2ScalarDivisionTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vec;
+        flcn::Vec2<T> _vec;
         T _scalar;
-        fgm::Vec2<T> _expectedScaledVec;
+        flcn::Vec2<T> _expectedScaledVec;
 
         void SetUp() override
         {
@@ -58,11 +58,11 @@ namespace
     template <typename T>
     class Vec2NormalizationTests: public testing::Test
     {
-        using R = fgm::Magnitude<T>;
+        using R = flcn::Magnitude<T>;
 
     protected:
-        fgm::Vec2<T> _vec;
-        fgm::Vec2<R> _expectedUnitVec;
+        flcn::Vec2<T> _vec;
+        flcn::Vec2<R> _expectedUnitVec;
 
         void SetUp() override
         {
@@ -75,7 +75,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Vec2 projection.
+     * @brief Test fixture for @ref flcn::Vec2 projection.
      *
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
@@ -83,10 +83,10 @@ namespace
     class Vec2ProjectionTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vec;
-        fgm::Vec2<T> _perpendicularVec;
-        fgm::Vec2<T> _ontoVec;
-        fgm::Vec2<T> _expectedProjection;
+        flcn::Vec2<T> _vec;
+        flcn::Vec2<T> _perpendicularVec;
+        flcn::Vec2<T> _ontoVec;
+        flcn::Vec2<T> _expectedProjection;
 
         void SetUp() override
         {
@@ -101,7 +101,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Vec2 rejection.
+     * @brief Test fixture for @ref flcn::Vec2 rejection.
      *
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
@@ -109,10 +109,10 @@ namespace
     class Vec2RejectionTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vec;
-        fgm::Vec2<T> _parallelVec;
-        fgm::Vec2<T> _fromVec;
-        fgm::Vec2<T> _expectedRejection;
+        flcn::Vec2<T> _vec;
+        flcn::Vec2<T> _parallelVec;
+        flcn::Vec2<T> _fromVec;
+        flcn::Vec2<T> _expectedRejection;
 
         void SetUp() override
         {
@@ -130,7 +130,7 @@ namespace
 
 TEST_P(Vec2IndexingTests, OutOfBoundAccess_TriggersAssertInDebugMode)
 {
-    const fgm::Vec2 vec(1, 2);
+    const flcn::Vec2 vec(1, 2);
     const auto index = GetParam();
     EXPECT_DEBUG_DEATH(vec[index], "");
 }
@@ -138,7 +138,7 @@ TEST_P(Vec2IndexingTests, OutOfBoundAccess_TriggersAssertInDebugMode)
 
 TEST_P(Vec2IndexingTests, OutOfBoundMutationTriggers_AssertInDebugMode)
 {
-    fgm::Vec2 vec(1, 2);
+    flcn::Vec2 vec(1, 2);
     const auto index = GetParam();
     EXPECT_DEBUG_DEATH(vec[index] = 2, "");
 }
@@ -150,49 +150,49 @@ TYPED_TEST(Vec2ScalarDivisionTests, DivideOperator_ByZeroTriggersAssertInDebugMo
 
 TYPED_TEST(Vec2ScalarDivisionTests, DivideEqualsOperator_ByZeroTriggersAssertInDebugMode)
 {
-    [[maybe_unused]] fgm::Vec2 newVec = this->_vec;
+    [[maybe_unused]] flcn::Vec2 newVec = this->_vec;
     EXPECT_DEBUG_DEATH(static_cast<void>(newVec /= 0), "");
 }
 
 
 TYPED_TEST(Vec2NormalizationTests, ZeroMagnitudeTriggersAssertInDebugMode)
 {
-    const fgm::Vec2<TypeParam> zVec(0, 0);
+    const flcn::Vec2<TypeParam> zVec(0, 0);
     EXPECT_DEBUG_DEATH(static_cast<void>(zVec.normalize()), "");
 }
 
 
 TYPED_TEST(Vec2NormalizationTests, StaticWrapper_ZeroMagnitudeTriggersAssertInDebugMode)
 {
-    const fgm::Vec2<TypeParam> zVec(0, 0);
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vec2<TypeParam>::normalize(zVec)), "");
+    const flcn::Vec2<TypeParam> zVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(flcn::Vec2<TypeParam>::normalize(zVec)), "");
 }
 
 
 TYPED_TEST(Vec2ProjectionTests, ProjectionOntoZeroVectorTriggersAssertionInCallback)
 {
-    const fgm::Vec2<TypeParam> zeroVec(0, 0);
+    const flcn::Vec2<TypeParam> zeroVec(0, 0);
     EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.project(zeroVec)), "");
 }
 
 
 TYPED_TEST(Vec2ProjectionTests, StaticWrapper_ProjectionOntoZeroVectorTriggersAssertionInCallback)
 {
-    const fgm::Vec2<TypeParam> zeroVec(0, 0);
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vec2<TypeParam>::project(this->_vec, zeroVec)), "");
+    const flcn::Vec2<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(flcn::Vec2<TypeParam>::project(this->_vec, zeroVec)), "");
 }
 
 TYPED_TEST(Vec2RejectionTests, FromZeroVectorTriggersAssertionInCallback)
 {
-    const fgm::Vec2<TypeParam> zeroVec(0, 0);
+    const flcn::Vec2<TypeParam> zeroVec(0, 0);
     EXPECT_DEBUG_DEATH(static_cast<void>(this->_vec.reject(zeroVec)), "");
 }
 
 
 TYPED_TEST(Vec2RejectionTests, StaticWrapper_FromZeroVectorTriggersAssertionInCallback)
 {
-    const fgm::Vec2<TypeParam> zeroVec(0, 0);
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Vec2<TypeParam>::reject(this->_vec, zeroVec)), "");
+    const flcn::Vec2<TypeParam> zeroVec(0, 0);
+    EXPECT_DEBUG_DEATH(static_cast<void>(flcn::Vec2<TypeParam>::reject(this->_vec, zeroVec)), "");
 }
 
 #endif

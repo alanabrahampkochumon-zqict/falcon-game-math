@@ -47,7 +47,7 @@
 
 
 
-namespace fgm::internal
+namespace flcn::internal
 {
     /**
      * @brief An internal function used for triggering compile time error with assertions.
@@ -57,7 +57,7 @@ namespace fgm::internal
      */
     inline void compileTimeErrorTrap() {}
 
-} // namespace fgm::internal
+} // namespace flcn::internal
 
 
 /**
@@ -96,7 +96,7 @@ inline void logAssertion(const char* condition, const char* message, const char*
             if (std::is_constant_evaluated())                                                                          \
             {                                                                                                          \
                 if (!(condition))                                                                                      \
-                    fgm::internal::compileTimeErrorTrap();                                                             \
+                    flcn::internal::compileTimeErrorTrap();                                                             \
             }                                                                                                          \
             else                                                                                                       \
             {                                                                                                          \
@@ -129,7 +129,7 @@ inline void logAssertion(const char* condition, const char* message, const char*
             if (std::is_constant_evaluated())                                                                          \
             {                                                                                                          \
                 if (!(condition))                                                                                      \
-                    fgm::internal::compileTimeErrorTrap();                                                             \
+                    flcn::internal::compileTimeErrorTrap();                                                             \
             }                                                                                                          \
             else                                                                                                       \
             {                                                                                                          \

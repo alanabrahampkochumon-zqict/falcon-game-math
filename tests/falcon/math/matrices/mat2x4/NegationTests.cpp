@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 21, 2026
  *
- * @brief Verify @ref fgm::Mat2x4 negation logic.
+ * @brief Verify @ref flcn::Mat2x4 negation logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -22,7 +22,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2x4 Negation(-Mat).
+     * @brief Test fixture for @ref flcn::Mat2x4 Negation(-Mat).
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -30,15 +30,15 @@ namespace
     class Mat2x4NegationTests: public ::testing::Test
     {
     protected:
-        fgm::Mat2x4<T> _matA, _expectedMat;
+        flcn::Mat2x4<T> _matA, _expectedMat;
 
         void SetUp() override
         {
-            _matA        = { fgm::CVec2<T>(-1, 2), fgm::CVec2<T>(5, 6), fgm::CVec2<T>(0, 15), fgm::CVec2<T>(1, 3) };
-            _expectedMat = { fgm::CVec2<T>(1, -2), fgm::CVec2<T>(-5, -6), fgm::CVec2<T>(0, -15), fgm::CVec2<T>(-1, -3) };
+            _matA        = { flcn::CVec2<T>(-1, 2), flcn::CVec2<T>(5, 6), flcn::CVec2<T>(0, 15), flcn::CVec2<T>(1, 3) };
+            _expectedMat = { flcn::CVec2<T>(1, -2), flcn::CVec2<T>(-5, -6), flcn::CVec2<T>(0, -15), flcn::CVec2<T>(-1, -3) };
         }
     };
-    /** @brief Test fixture for @ref fgm::Mat2x4 negation, parameterized by @ref SupportedSignedArithmeticTypes. */
+    /** @brief Test fixture for @ref flcn::Mat2x4 negation, parameterized by @ref SupportedSignedArithmeticTypes. */
     TYPED_TEST_SUITE(Mat2x4NegationTests, SupportedSignedArithmeticTypes);
 
 
@@ -49,8 +49,8 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat2x4 MAT(1, 2, 3, 4, 5, 6, 7, 8);
-        constexpr fgm::Mat2x4 NEG_MAT = -MAT;
+        constexpr flcn::Mat2x4 MAT(1, 2, 3, 4, 5, 6, 7, 8);
+        constexpr flcn::Mat2x4 NEG_MAT = -MAT;
 
         /** @test Verify that matrix negation returns a valid matrix at compile time. */
         static_assert(NEG_MAT(0, 0) == -MAT(0, 0));
@@ -74,7 +74,7 @@ namespace
 
 TYPED_TEST(Mat2x4NegationTests, ReturnsElementWiseNegatedMatrix)
 {
-    const fgm::Mat2x4 negMat = -this->_matA;
+    const flcn::Mat2x4 negMat = -this->_matA;
     EXPECT_MAT_EQ(this->_expectedMat, negMat);
 }
 

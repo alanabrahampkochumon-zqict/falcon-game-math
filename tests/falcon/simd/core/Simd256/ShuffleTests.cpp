@@ -281,7 +281,7 @@ TYPED_TEST(Simd256ShuffleTests, ReturnsRegisterWithCorrectValues)
     // Since we can't directly access the parameter pack
     // we need to use call it using a lambda nad integer_sequence
     auto execShuffle = [data]<uint8_t... I>(std::integer_sequence<uint8_t, I...>) {
-        falcon::Simd256_t<Type, Lanes> reg{};
+        flcn::Simd256_t<Type, Lanes> reg{};
         reg.load(const_cast<Type*>(data.data()));
         return reg.template shuffle<I...>();
     };

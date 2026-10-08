@@ -15,7 +15,7 @@
 #include <type_traits>
 
 
-namespace fgm
+namespace flcn
 {
     /**
      * @addtogroup FALCON_Concepts
@@ -125,4 +125,4 @@ namespace fgm
     using Magnitude = std::conditional_t<std::is_same_v<T, float>, float, double>;
 
     /** @} */
-} // namespace fgm
+} // namespace flcn

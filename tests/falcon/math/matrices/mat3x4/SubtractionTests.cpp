@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 18, 2026
  *
- * @brief Verify @ref fgm::Mat3x4 subtraction logic.
+ * @brief Verify @ref flcn::Mat3x4 subtraction logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,7 +26,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x4 Subtraction.
+     * @brief Test fixture for @ref flcn::Mat3x4 Subtraction.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -34,17 +34,17 @@ namespace
     class Mat3x4SubtractionTests: public ::testing::Test
     {
     protected:
-        fgm::Mat3x4<T> _matA;
-        fgm::Mat3x4<T> _matB;
-        fgm::Mat3x4<T> _expectedDifference;
+        flcn::Mat3x4<T> _matA;
+        flcn::Mat3x4<T> _matB;
+        flcn::Mat3x4<T> _expectedDifference;
 
         void SetUp() override
         {
-            _matA = { fgm::Vec3<T>(5, 6, 5), fgm::Vec3<T>(7, 8, 12), fgm::Vec3<T>(17, 81, 22),
-                      fgm::Vec3<T>(22, 32, 11) };
-            _matB = { fgm::Vec3<T>(1, 2, 5), fgm::Vec3<T>(3, 4, 11), fgm::Vec3<T>(0, 1, 19), fgm::Vec3<T>(21, 14, 11) };
-            _expectedDifference = { fgm::Vec3<T>(4, 4, 0), fgm::Vec3<T>(4, 4, 1), fgm::Vec3<T>(17, 80, 3),
-                                    fgm::Vec3<T>(1, 18, 0) };
+            _matA = { flcn::Vec3<T>(5, 6, 5), flcn::Vec3<T>(7, 8, 12), flcn::Vec3<T>(17, 81, 22),
+                      flcn::Vec3<T>(22, 32, 11) };
+            _matB = { flcn::Vec3<T>(1, 2, 5), flcn::Vec3<T>(3, 4, 11), flcn::Vec3<T>(0, 1, 19), flcn::Vec3<T>(21, 14, 11) };
+            _expectedDifference = { flcn::Vec3<T>(4, 4, 0), flcn::Vec3<T>(4, 4, 1), flcn::Vec3<T>(17, 80, 3),
+                                    flcn::Vec3<T>(1, 18, 0) };
         }
     };
     TYPED_TEST_SUITE(Mat3x4SubtractionTests, SupportedArithmeticTypes);
@@ -57,12 +57,12 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat3x4 MAT1(8, 2, 12, 4, -5, 0, -12, 5, 11, 23, 11, 5);
-        constexpr fgm::Mat3x4 MAT2(5, 6, 7, 8, -11, 5, -12, -5, 0, 2, -1, -3);
+        constexpr flcn::Mat3x4 MAT1(8, 2, 12, 4, -5, 0, -12, 5, 11, 23, 11, 5);
+        constexpr flcn::Mat3x4 MAT2(5, 6, 7, 8, -11, 5, -12, -5, 0, 2, -1, -3);
 
 
         /** @test Verify that matrix subtraction operations return a valid matrix at compile time. */
-        constexpr fgm::Mat3x4 BINARY_DIFF = MAT1 - MAT2;
+        constexpr flcn::Mat3x4 BINARY_DIFF = MAT1 - MAT2;
         static_assert(BINARY_DIFF(0, 0) == 3);
         static_assert(BINARY_DIFF(0, 1) == -4);
         static_assert(BINARY_DIFF(0, 2) == 5);
@@ -87,7 +87,7 @@ namespace
  **************************************/
 TYPED_TEST(Mat3x4SubtractionTests, MinusOperator_ReturnsMatrixDifference)
 {
-    const fgm::Mat3x4 difference = this->_matA - this->_matB;
+    const flcn::Mat3x4 difference = this->_matA - this->_matB;
 
     EXPECT_MAT_EQ(this->_expectedDifference, difference);
 }
@@ -95,10 +95,10 @@ TYPED_TEST(Mat3x4SubtractionTests, MinusOperator_ReturnsMatrixDifference)
 
 TEST(Mat3x4SubtractionTests, MinusOperator_MixedType_PromotesType)
 {
-    const fgm::Mat3x4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.2f, 2.25f, 3.0f, 15.0f, 22.0f, 1.0f);
-    const fgm::Mat3x4 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 0.5, 1.25, 22.0, 3.15, 15.0, 11.0);
+    const flcn::Mat3x4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.2f, 2.25f, 3.0f, 15.0f, 22.0f, 1.0f);
+    const flcn::Mat3x4 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 0.5, 1.25, 22.0, 3.15, 15.0, 11.0);
 
-    [[maybe_unused]] const fgm::Mat3x4 difference = mat1 - mat2;
+    [[maybe_unused]] const flcn::Mat3x4 difference = mat1 - mat2;
 
     static_assert(std::is_same_v<decltype(difference)::value_type, double>);
 }
@@ -114,8 +114,8 @@ TYPED_TEST(Mat3x4SubtractionTests, MinusEqualsOperator_ReturnsSameVectorWithDiff
 
 TEST(Mat3x4SubtractionTests, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    fgm::Mat3x4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.2f, 2.25f, 3.0f, 15.0f, 22.0f, 1.0f);
-    [[maybe_unused]] const fgm::Mat3x4 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 0.5, 1.25, 22.0, 3.15, 15.0, 11.0);
+    flcn::Mat3x4 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.2f, 2.25f, 3.0f, 15.0f, 22.0f, 1.0f);
+    [[maybe_unused]] const flcn::Mat3x4 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 0.5, 1.25, 22.0, 3.15, 15.0, 11.0);
 
     mat1 -= mat2;
 

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 31, 2026
  *
- * @brief Verify @ref fgm::Transform4 inverse logic.
+ * @brief Verify @ref flcn::Transform4 inverse logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,16 +26,16 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Transform4 inverse.
+     * @brief Test fixture for @ref flcn::Transform4 inverse.
      * @tparam T The scalar type (e.g., float, double) used for the transforms.
      */
     template <typename T>
     class Transform4InverseTests: public testing::Test
     {
     protected:
-        using Mag = fgm::Magnitude<T>;
-        fgm::Transform4<T> _transform;
-        fgm::Transform4<Mag> _expectedInverse;
+        using Mag = flcn::Magnitude<T>;
+        flcn::Transform4<T> _transform;
+        flcn::Transform4<Mag> _expectedInverse;
 
         void SetUp() override
         {
@@ -56,22 +56,22 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Transform4 TRANSFORM(1.0f, -1.0f, 0.0f, -2.0f, 2.0f, -1.0f, -2.0f, -6.0f, 0.0f, -1.0f, 3.0f,
+        constexpr flcn::Transform4 TRANSFORM(1.0f, -1.0f, 0.0f, -2.0f, 2.0f, -1.0f, -2.0f, -6.0f, 0.0f, -1.0f, 3.0f,
                                             3.0f);
 
         /// @test Verify that inverse using inverse returns a valid Transform4 at compile time.
-        constexpr fgm::Transform4 INV_TRANSFORM = TRANSFORM.inverse();
-        static_assert(INV_TRANSFORM[0] == fgm::Vec3{ -5.0f, -6.0f, -2.0f });
-        static_assert(INV_TRANSFORM[1] == fgm::Vec3{ 3.0f, 3.0f, 1.0f });
-        static_assert(INV_TRANSFORM[2] == fgm::Vec3{ 2.0f, 2.0f, 1.0f });
-        static_assert(INV_TRANSFORM[3] == fgm::Vec3{ 2.0f, 0.0f, -1.0f });
+        constexpr flcn::Transform4 INV_TRANSFORM = TRANSFORM.inverse();
+        static_assert(INV_TRANSFORM[0] == flcn::Vec3{ -5.0f, -6.0f, -2.0f });
+        static_assert(INV_TRANSFORM[1] == flcn::Vec3{ 3.0f, 3.0f, 1.0f });
+        static_assert(INV_TRANSFORM[2] == flcn::Vec3{ 2.0f, 2.0f, 1.0f });
+        static_assert(INV_TRANSFORM[3] == flcn::Vec3{ 2.0f, 0.0f, -1.0f });
 
         /// @test Verify that static variant of inverse using inverse returns a valid Transform4 at compile time.
-        constexpr fgm::Transform4 INV_TRANSFORM_STATIC = fgm::Transform4<float>::inverse(TRANSFORM);
-        static_assert(INV_TRANSFORM_STATIC[0] == fgm::Vec3{ -5.0f, -6.0f, -2.0f });
-        static_assert(INV_TRANSFORM_STATIC[1] == fgm::Vec3{ 3.0f, 3.0f, 1.0f });
-        static_assert(INV_TRANSFORM_STATIC[2] == fgm::Vec3{ 2.0f, 2.0f, 1.0f });
-        static_assert(INV_TRANSFORM_STATIC[3] == fgm::Vec3{ 2.0f, 0.0f, -1.0f });
+        constexpr flcn::Transform4 INV_TRANSFORM_STATIC = flcn::Transform4<float>::inverse(TRANSFORM);
+        static_assert(INV_TRANSFORM_STATIC[0] == flcn::Vec3{ -5.0f, -6.0f, -2.0f });
+        static_assert(INV_TRANSFORM_STATIC[1] == flcn::Vec3{ 3.0f, 3.0f, 1.0f });
+        static_assert(INV_TRANSFORM_STATIC[2] == flcn::Vec3{ 2.0f, 2.0f, 1.0f });
+        static_assert(INV_TRANSFORM_STATIC[3] == flcn::Vec3{ 2.0f, 0.0f, -1.0f });
 
     } // namespace static_tests
 
@@ -88,6 +88,6 @@ TYPED_TEST(Transform4InverseTests, ReturnsInverseMatrix)
 
 
 TYPED_TEST(Transform4InverseTests, StaticWrapper_ReturnsInverseMatrix)
-{ EXPECT_MAT_EQ(this->_expectedInverse, fgm::Transform4<TypeParam>::inverse(this->_transform)); }
+{ EXPECT_MAT_EQ(this->_expectedInverse, flcn::Transform4<TypeParam>::inverse(this->_transform)); }
 
 /** @} */

@@ -23,7 +23,7 @@
     #pragma clang diagnostic ignored "-Wbitwise-instead-of-logical"
 #endif
 
-namespace fgm
+namespace flcn
 {
 
     /*************************************
@@ -68,28 +68,28 @@ namespace fgm
     template <Arithmetic T>
     FALCON_INLINE constexpr CVec2<T>& Mat2x3<T>::operator[](const std::size_t col) noexcept
     {
-        FALCON_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS, flcn::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
     template <Arithmetic T>
     FALCON_INLINE constexpr const CVec2<T>& Mat2x3<T>::operator[](const std::size_t col) const noexcept
     {
-        FALCON_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS, flcn::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col];
     }
 
     template <Arithmetic T>
     FALCON_INLINE constexpr T& Mat2x3<T>::operator()(const std::size_t row, const std::size_t col) noexcept
     {
-        FALCON_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS && row < ROWS, flcn::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
     }
 
     template <Arithmetic T>
     FALCON_INLINE constexpr const T& Mat2x3<T>::operator()(const std::size_t row, const std::size_t col) const noexcept
     {
-        FALCON_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS && row < ROWS, flcn::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return _data[col][row];
     }
 
@@ -261,7 +261,7 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
-            FALCON_ASSERT_MSG(fgm::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
+            FALCON_ASSERT_MSG(flcn::abs(R(scalar)) > Config::EPSILON<R>, messages::assertion::MAT_DIV_BY_ZERO);
             R factor = R(1) / static_cast<R>(scalar);
             return Mat2x3<R>(_data[0] * factor, _data[1] * factor, _data[2] * factor);
         }
@@ -281,7 +281,7 @@ namespace fgm
     {
         using R = PromotedValue_t<T, S>;
 
-        FALCON_ASSERT_MSG(fgm::abs(scalar) > Config::EPSILON<S>, messages::assertion::MAT_DIV_BY_ZERO);
+        FALCON_ASSERT_MSG(flcn::abs(scalar) > Config::EPSILON<S>, messages::assertion::MAT_DIV_BY_ZERO);
 
         if constexpr (std::is_floating_point_v<R>)
         {
@@ -318,7 +318,7 @@ namespace fgm
 
         if constexpr (std::is_floating_point_v<R>)
         {
-            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon() || fgm::isnan(scalar) || hasNaN())
+            if (flcn::abs(scalar) <= std::numeric_limits<R>::epsilon() || flcn::isnan(scalar) || hasNaN())
             {
                 return static_cast<Mat2x3<R>>(fallback);
             }
@@ -353,12 +353,12 @@ namespace fgm
 
         if constexpr (std::is_floating_point_v<R>)
         { // TODO: Check || vs | with benchmarks
-            if (static_cast<int>(hasNaN()) | static_cast<int>(fgm::isnan(scalar)))
+            if (static_cast<int>(hasNaN()) | static_cast<int>(flcn::isnan(scalar)))
             {
                 status = OperationStatus::NANOPERAND;
                 return static_cast<Mat2x3<R>>(fallback);
             }
-            if (fgm::abs(scalar) <= std::numeric_limits<R>::epsilon())
+            if (flcn::abs(scalar) <= std::numeric_limits<R>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
                 return static_cast<Mat2x3<R>>(fallback);
@@ -441,7 +441,7 @@ namespace fgm
     { return matrix.hasNaN(); }
 
 
-} // namespace fgm
+} // namespace flcn
 
 
 #if defined(__clang__)

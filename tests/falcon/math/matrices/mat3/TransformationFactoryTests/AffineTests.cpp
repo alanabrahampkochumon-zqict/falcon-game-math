@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 09, 2026
  *
- * @brief Verify @ref fgm::Mat3 affine transformation factory logic.
+ * @brief Verify @ref flcn::Mat3 affine transformation factory logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -27,7 +27,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 Affine Transformation Factory.
+     * @brief Test fixture for @ref flcn::Mat3 Affine Transformation Factory.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -35,19 +35,19 @@ namespace
     class Mat3AffineTests: public testing::Test
     {
     protected:
-        fgm::Mat2<T> _linearTransform;
-        fgm::CVec2<T> _translation;
-        fgm::Mat3<T> _expectedMat;
+        flcn::Mat2<T> _linearTransform;
+        flcn::CVec2<T> _translation;
+        flcn::Mat3<T> _expectedMat;
 
         void SetUp() override
         {
-            _linearTransform = { fgm::CVec2{ T(1.2341234), T(2.31419123) },
-                                 fgm::CVec2{ T(15.123949182), T(0.93819231) } };
+            _linearTransform = { flcn::CVec2{ T(1.2341234), T(2.31419123) },
+                                 flcn::CVec2{ T(15.123949182), T(0.93819231) } };
             _translation     = { T(1.2398412349), T(12.1234892134) };
 
-            _expectedMat = { fgm::Vec3{ T(1.2341234), T(2.31419123), T(0) },
-                             fgm::Vec3{ T(15.123949182), T(0.93819231), T(0) },
-                             fgm::Vec3{ T(1.2398412349), T(12.1234892134), T(1) } };
+            _expectedMat = { flcn::Vec3{ T(1.2341234), T(2.31419123), T(0) },
+                             flcn::Vec3{ T(15.123949182), T(0.93819231), T(0) },
+                             flcn::Vec3{ T(1.2398412349), T(12.1234892134), T(1) } };
         }
     };
     TYPED_TEST_SUITE(Mat3AffineTests, SupportedArithmeticTypes);
@@ -60,11 +60,11 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat2 LIN_TRANSFORM{ 1, 2, 3, 4 };
-        constexpr fgm::CVec2 TRANSLATION3D{ 11, 12 };
+        constexpr flcn::Mat2 LIN_TRANSFORM{ 1, 2, 3, 4 };
+        constexpr flcn::CVec2 TRANSLATION3D{ 11, 12 };
 
-        /// @test Verify that fgm::Mat3::makeAffine returns a valid matrix at compile time.
-        constexpr auto AFFINE3D = fgm::Mat3<int>::makeAffine(LIN_TRANSFORM, TRANSLATION3D);
+        /// @test Verify that flcn::Mat3::makeAffine returns a valid matrix at compile time.
+        constexpr auto AFFINE3D = flcn::Mat3<int>::makeAffine(LIN_TRANSFORM, TRANSLATION3D);
         static_assert(AFFINE3D(0, 0) == 1);
         static_assert(AFFINE3D(0, 1) == 2);
         static_assert(AFFINE3D(0, 2) == 11);
@@ -85,6 +85,6 @@ namespace
  **************************************/
 
 TYPED_TEST(Mat3AffineTests, ReturnsCombinedLinearTransformAndTranslation)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat3<TypeParam>::makeAffine(this->_linearTransform, this->_translation)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, flcn::Mat3<TypeParam>::makeAffine(this->_linearTransform, this->_translation)); }
 
 /** @} */

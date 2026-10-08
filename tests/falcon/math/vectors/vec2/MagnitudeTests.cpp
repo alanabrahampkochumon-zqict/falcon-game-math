@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: September 23, 2026
  *
- * @brief Verify @ref fgm::Vec2 magnitude logic.
+ * @brief Verify @ref flcn::Vec2 magnitude logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -32,7 +32,7 @@ namespace
     class Vec2MagnitudeTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vec;
+        flcn::Vec2<T> _vec;
         T _expectedMagnitude;
         T _expectedMagnitudeSquare;
 
@@ -54,7 +54,7 @@ namespace
     class Vec2UncleanMagnitudeTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vec;
+        flcn::Vec2<T> _vec;
         T _expectedMagnitude;
 
         void SetUp() override
@@ -75,14 +75,14 @@ namespace
 
 TEST(Vec2MagnitudeTests, ZeroVectorReturnsZero)
 {
-    const fgm::Vec2 vec(0.0f, 0.0f);
+    const flcn::Vec2 vec(0.0f, 0.0f);
     EXPECT_FLOAT_EQ(0.0f, vec.mag());
 }
 
 
 TEST(Vec2MagnitudeTests, OneComponentVectorReturnsNonUnitScalar)
 {
-    const fgm::Vec2 vec(1.0f, 1.0f);
+    const flcn::Vec2 vec(1.0f, 1.0f);
     EXPECT_NE(1.0f, vec.mag());
 }
 
@@ -96,7 +96,7 @@ TYPED_TEST(Vec2MagnitudeTests, NonUnitVectorReturnsCorrectMagnitude)
 
 TYPED_TEST(Vec2MagnitudeTests, StaticWrapper_Mag_NonUnitVectorReturnsCorrectMagnitude)
 {
-    const auto magnitude = fgm::Vec2<TypeParam>::mag(this->_vec);
+    const auto magnitude = flcn::Vec2<TypeParam>::mag(this->_vec);
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
@@ -110,7 +110,7 @@ TYPED_TEST(Vec2UncleanMagnitudeTests, Mag_NonUnitVectorReturnsCorrectMagnitudeWi
 
 TYPED_TEST(Vec2UncleanMagnitudeTests, StaticWrapper_Mag_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
 {
-    const auto magnitude = fgm::Vec2<TypeParam>::mag(this->_vec);
+    const auto magnitude = flcn::Vec2<TypeParam>::mag(this->_vec);
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
@@ -129,7 +129,7 @@ TYPED_TEST(Vec2MagnitudeTests, MagSq_ReturnsSquaredMagnitude)
 
 TYPED_TEST(Vec2MagnitudeTests, StaticWrapper_MagSq_ReturnsSquaredMagnitude)
 {
-    const auto magnitude = fgm::Vec2<TypeParam>::magSq(this->_vec);
+    const auto magnitude = flcn::Vec2<TypeParam>::magSq(this->_vec);
     EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }
 

@@ -92,7 +92,7 @@ TYPED_TEST(Simd256UtilsTests, HasNaN_ReturnsValidMask)
     {
         data[i] = this->nanVec[i];
     }
-    falcon::Simd256_t<Type, Lane> regA{ data };
+    flcn::Simd256_t<Type, Lane> regA{ data };
 
     auto regRes = regA.hasNan();
 
@@ -115,7 +115,7 @@ TYPED_TEST(Simd256UtilsTests, HasInf_ReturnsValidMask)
     {
         data[i] = this->infVec[i];
     }
-    falcon::Simd256_t<Type, Lane> regA{ data };
+    flcn::Simd256_t<Type, Lane> regA{ data };
 
     auto regRes = regA.hasInf();
 
@@ -135,7 +135,7 @@ using namespace simd::testing;
     #define SIMD256_HAS_NAN_TESTS_FP(TestName, Type, Lane, Data, Expected)                                             \
         TEST(HasNaNTests, ReturnsValidMaskGiven_##TestName)                                                            \
         {                                                                                                              \
-            falcon::Simd256_t<Type, Lane> regA{ Data };                                                                \
+            flcn::Simd256_t<Type, Lane> regA{ Data };                                                                \
                                                                                                                        \
             alignas(16) std::array<Type, Lane> resultMask{};                                                           \
             auto regRes = regA.hasNan();                                                                               \
@@ -180,7 +180,7 @@ SIMD256_HAS_NAN_TESTS_FP(FP64_4Lanes_AlternatingNaN, FP64, 4, DATA_FP64_4LANES_M
     #define SIMD256_HAS_INF_TESTS_FP(TestName, Type, Lane, Data, Expected)                                             \
         TEST(HasInfTests, ReturnsValidMaskGiven_##TestName)                                                            \
         {                                                                                                              \
-            falcon::Simd256_t<Type, Lane> regA{ Data };                                                                \
+            flcn::Simd256_t<Type, Lane> regA{ Data };                                                                \
                                                                                                                        \
             alignas(16) std::array<Type, Lane> resultMask{};                                                           \
             auto regRes = regA.hasInf();                                                                               \
@@ -226,7 +226,7 @@ SIMD256_HAS_INF_TESTS_FP(FP64_4Lanes_AlternatingInf, FP64, 4, DATA_FP64_4LANES_M
     #define SIMD256_MAKE_BLEND_MASK_TESTS(TestSuffix, DataType, ExpectedMask, RegCount, ...)                           \
         TEST(Simd256_MakeBlendMaskTests, ReturnsValidMask_For##TestSuffix)                                             \
         {                                                                                                              \
-            const falcon::Simd256_t<DataType, RegCount> reg{ DataType(0) };                                            \
+            const flcn::Simd256_t<DataType, RegCount> reg{ DataType(0) };                                            \
             EXPECT_EQ(ExpectedMask, (reg.makeBlendMask<__VA_ARGS__>()));                                               \
         }
 

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 21, 2026
  *
- * @brief Verify @ref fgm::Mat2 negation logic.
+ * @brief Verify @ref flcn::Mat2 negation logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -25,7 +25,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Negation(-Mat).
+     * @brief Test fixture for @ref flcn::Mat2 Negation(-Mat).
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -33,12 +33,12 @@ namespace
     class Mat2NegationTests: public testing::Test
     {
     protected:
-        fgm::Mat2<T> _mat, _expectedMat;
+        flcn::Mat2<T> _mat, _expectedMat;
 
         void SetUp() override
         {
-            _mat         = { fgm::CVec2<T>(-1, 2), fgm::CVec2<T>(5, 6) };
-            _expectedMat = { fgm::CVec2<T>(1, -2), fgm::CVec2<T>(-5, -6) };
+            _mat         = { flcn::CVec2<T>(-1, 2), flcn::CVec2<T>(5, 6) };
+            _expectedMat = { flcn::CVec2<T>(1, -2), flcn::CVec2<T>(-5, -6) };
         }
     };
     TYPED_TEST_SUITE(Mat2NegationTests, SupportedSignedArithmeticTypes);
@@ -51,8 +51,8 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat2 MAT(1, 2, 3, 4);
-        constexpr fgm::Mat2 NEG_MAT = -MAT;
+        constexpr flcn::Mat2 MAT(1, 2, 3, 4);
+        constexpr flcn::Mat2 NEG_MAT = -MAT;
 
         /** @test Verify that matrix negation returns a valid matrix at compile time. */
         static_assert(NEG_MAT(0, 0) == -MAT(0, 0));
@@ -72,7 +72,7 @@ namespace
 
 TYPED_TEST(Mat2NegationTests, ReturnsElementWiseNegatedMatrix)
 {
-    const fgm::Mat2 negMat = -this->_mat;
+    const flcn::Mat2 negMat = -this->_mat;
     EXPECT_MAT_EQ(this->_expectedMat, negMat);
 }
 

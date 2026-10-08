@@ -23,7 +23,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::CVec2 ptr.
+     * @brief Test fixture for @ref flcn::CVec2 ptr.
      *
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
@@ -31,7 +31,7 @@ namespace
     class CVec2StoragePtrTests: public testing::Test
     {
     protected:
-        fgm::CVec2<T> _vec;
+        flcn::CVec2<T> _vec;
 
         void SetUp() override { _vec = { T(7), T(12) }; }
     };
@@ -49,7 +49,7 @@ TYPED_TEST(CVec2StoragePtrTests, Ptr_ReturnsAPointerToTheInternalData)
 
 TYPED_TEST(CVec2StoragePtrTests, StaticWrapper_Ptr_ReturnsAPointerToTheInternalData)
 {
-    TypeParam* data = fgm::CVec2<TypeParam>::ptr(this->_vec);
+    TypeParam* data = flcn::CVec2<TypeParam>::ptr(this->_vec);
     EXPECT_EQ(this->_vec[0], data[0]);
     EXPECT_EQ(this->_vec[1], data[1]);
 }
@@ -57,7 +57,7 @@ TYPED_TEST(CVec2StoragePtrTests, StaticWrapper_Ptr_ReturnsAPointerToTheInternalD
 
 TYPED_TEST(CVec2StoragePtrTests, Ptr_OnConstVec_ReturnsAConstPointerToTheInternalData)
 {
-    const fgm::CVec2 vec(this->_vec.x(), this->_vec.y());
+    const flcn::CVec2 vec(this->_vec.x(), this->_vec.y());
     const TypeParam* data = vec.ptr();
     EXPECT_EQ(vec[0], data[0]);
     EXPECT_EQ(vec[1], data[1]);
@@ -66,8 +66,8 @@ TYPED_TEST(CVec2StoragePtrTests, Ptr_OnConstVec_ReturnsAConstPointerToTheInterna
 
 TYPED_TEST(CVec2StoragePtrTests, StaticWrapper_Ptr_OnConstVec_ReturnsAConstPointerToTheInternalData)
 {
-    const fgm::CVec2 vec(this->_vec.x(), this->_vec.y());
-    const TypeParam* data = fgm::CVec2<TypeParam>::ptr(vec);
+    const flcn::CVec2 vec(this->_vec.x(), this->_vec.y());
+    const TypeParam* data = flcn::CVec2<TypeParam>::ptr(vec);
     EXPECT_EQ(vec[0], data[0]);
     EXPECT_EQ(vec[1], data[1]);
 }
@@ -83,7 +83,7 @@ TYPED_TEST(CVec2StoragePtrTests, UnaryOperatorTimes_ReturnsAPointerToTheInternal
 
 TYPED_TEST(CVec2StoragePtrTests, UnaryOperatorTimes_OnConstVec_ReturnsAConstPointerToTheInternalData)
 {
-    const fgm::CVec2 vec(this->_vec.x(), this->_vec.y());
+    const flcn::CVec2 vec(this->_vec.x(), this->_vec.y());
     const TypeParam* data = *vec;
     EXPECT_EQ(vec[0], data[0]);
     EXPECT_EQ(vec[1], data[1]);

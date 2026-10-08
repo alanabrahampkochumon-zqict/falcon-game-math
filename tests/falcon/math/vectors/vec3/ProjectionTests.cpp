@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 03, 2026
  *
- * @brief Verify @ref fgm::Vec3 projection logic.
+ * @brief Verify @ref flcn::Vec3 projection logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -24,7 +24,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Vec3 projection.
+     * @brief Test fixture for @ref flcn::Vec3 projection.
      *
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
@@ -32,10 +32,10 @@ namespace
     class Vec3ProjectionTests: public ::testing::Test
     {
     protected:
-        fgm::Vec3<T> _vec;
-        fgm::Vec3<T> _perpendicularVec;
-        fgm::Vec3<T> _ontoVec;
-        fgm::Vec3<T> _expectedProjection;
+        flcn::Vec3<T> _vec;
+        flcn::Vec3<T> _perpendicularVec;
+        flcn::Vec3<T> _ontoVec;
+        flcn::Vec3<T> _expectedProjection;
 
         void SetUp() override
         {
@@ -50,16 +50,16 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Vec3 projection with NaN vectors.
+     * @brief Test fixture for @ref flcn::Vec3 projection with NaN vectors.
      */
-    class Vec3ProjectionNaNTests: public testing::TestWithParam<fgm::Vec3<float>>
+    class Vec3ProjectionNaNTests: public testing::TestWithParam<flcn::Vec3<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(Vec3ProjectionNanVectors, Vec3ProjectionNaNTests,
-                             ::testing::Values(fgm::Vec3<float>(fgm::constants::NaN, 1.0f, 1.0f),
-                                               fgm::Vec3<float>(1.0f, fgm::constants::NaN, 1.0f),
-                                               fgm::Vec3<float>(1.0f, 1.0f, fgm::constants::NaN),
-                                               fgm::Vec3<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                                fgm ::constants::NaN)));
+                             ::testing::Values(flcn::Vec3<float>(flcn::constants::NaN, 1.0f, 1.0f),
+                                               flcn::Vec3<float>(1.0f, flcn::constants::NaN, 1.0f),
+                                               flcn::Vec3<float>(1.0f, 1.0f, flcn::constants::NaN),
+                                               flcn::Vec3<float>(flcn::constants::NaN, flcn::constants::NaN,
+                                                                flcn::constants::NaN)));
 
 
 
@@ -69,8 +69,8 @@ namespace
      **************************************/
     namespace static_tests
     {
-        constexpr fgm::Vec3 VEC_A(1, 2, 3);
-        constexpr fgm::Vec3 VEC_B(1, 0, 0);
+        constexpr flcn::Vec3 VEC_A(1, 2, 3);
+        constexpr flcn::Vec3 VEC_B(1, 0, 0);
 
         /// @test Verify that vector projection(project) returns a valid vector at compile time.
         constexpr auto PROJ_VEC = VEC_A.project(VEC_B);
@@ -79,7 +79,7 @@ namespace
         static_assert(PROJ_VEC.z() == 0);
 
         /// @test Verify that vector projection(project-static wrapper) returns a valid vector at compile time.
-        constexpr auto PROJ_VEC_STATIC = fgm::Vec3<int>::project(VEC_A, VEC_B);
+        constexpr auto PROJ_VEC_STATIC = flcn::Vec3<int>::project(VEC_A, VEC_B);
         static_assert(PROJ_VEC_STATIC.x() == 1);
         static_assert(PROJ_VEC_STATIC.y() == 0);
         static_assert(PROJ_VEC_STATIC.z() == 0);
@@ -92,7 +92,7 @@ namespace
 
         /// @test Verify that vector projection(project normalized-static wrapper) returns a valid vector at compile
         /// time.
-        constexpr auto PROJ_NORM_VEC_STATIC = fgm::Vec3<int>::projectNorm(VEC_A, VEC_B);
+        constexpr auto PROJ_NORM_VEC_STATIC = flcn::Vec3<int>::projectNorm(VEC_A, VEC_B);
         static_assert(PROJ_NORM_VEC_STATIC.x() == 1);
         static_assert(PROJ_NORM_VEC_STATIC.y() == 0);
         static_assert(PROJ_NORM_VEC_STATIC.z() == 0);
@@ -104,7 +104,7 @@ namespace
         static_assert(SAFE_PROJ_VEC.z() == 0);
 
         /// @test Verify that vector projection(safe project-static wrapper) returns a valid vector at compile time.
-        constexpr auto SAFE_PROJ_VEC_STATIC = fgm::Vec3<int>::safeProject(VEC_A, VEC_B);
+        constexpr auto SAFE_PROJ_VEC_STATIC = flcn::Vec3<int>::safeProject(VEC_A, VEC_B);
         static_assert(SAFE_PROJ_VEC_STATIC.x() == 1);
         static_assert(SAFE_PROJ_VEC_STATIC.y() == 0);
         static_assert(SAFE_PROJ_VEC_STATIC.z() == 0);
@@ -117,7 +117,7 @@ namespace
 
         /// @test Verify that vector projection(safe project normalized-static wrapper) returns a valid vector at
         /// compile time.
-        constexpr auto SAFE_PROJ_NORM_VEC_STATIC = fgm::Vec3<int>::safeProjectNorm(VEC_A, VEC_B);
+        constexpr auto SAFE_PROJ_NORM_VEC_STATIC = flcn::Vec3<int>::safeProjectNorm(VEC_A, VEC_B);
         static_assert(SAFE_PROJ_NORM_VEC_STATIC.x() == 1);
         static_assert(SAFE_PROJ_NORM_VEC_STATIC.y() == 0);
         static_assert(SAFE_PROJ_NORM_VEC_STATIC.z() == 0);
@@ -131,28 +131,28 @@ namespace
  *          PROJECTION TESTS          *
  **************************************/
 
-/** @test Verify that projecting onto an orthogonal vector using @ref fgm::Vec3::project returns a zero vector. */
+/** @test Verify that projecting onto an orthogonal vector using @ref flcn::Vec3::project returns a zero vector. */
 TYPED_TEST(Vec3ProjectionTests, OrthogonalVectorsReturnsZeroVector)
 {
-    const fgm::Vec3 actualProjection = this->_perpendicularVec.project(this->_ontoVec);
+    const flcn::Vec3 actualProjection = this->_perpendicularVec.project(this->_ontoVec);
 
     EXPECT_VEC_ZERO(actualProjection);
 }
 
 
 /**
- * @test Verify that projecting onto a vector parallel to x-axis using @ref fgm::Vec3::project
+ * @test Verify that projecting onto a vector parallel to x-axis using @ref flcn::Vec3::project
  *       returns a vector containing only an x-component.
  */
 TEST(Vec3ProjectionTests, Project_XAxis_ReturnVectorWithNonZeroXComponent)
 {
     // Given an arbitrary vector
-    const fgm::Vec3 a(10.0f, 20.0f, 30.0f);
-    const fgm::Vec3 xAxis(1.0f, 0.0f, 0.0f);
-    const fgm::Vec3 expectedProjection(10.0f, 0.0f, 0.0f);
+    const flcn::Vec3 a(10.0f, 20.0f, 30.0f);
+    const flcn::Vec3 xAxis(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 expectedProjection(10.0f, 0.0f, 0.0f);
 
     // When projected onto x-axis
-    const fgm::Vec3 actualProjection = a.project(xAxis);
+    const flcn::Vec3 actualProjection = a.project(xAxis);
 
     // Then, the resultant vector only has x-component as non-zero
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -160,18 +160,18 @@ TEST(Vec3ProjectionTests, Project_XAxis_ReturnVectorWithNonZeroXComponent)
 
 
 /**
- * @test Verify that projecting onto a vector parallel to y-axis using @ref fgm::Vec3::project
+ * @test Verify that projecting onto a vector parallel to y-axis using @ref flcn::Vec3::project
  *       returns a vector containing only a y-component.
  */
 TEST(Vec3ProjectionTests, Project_YAxis_ReturnVectorWithNonZeroYComponent)
 {
     // Given an arbitrary vector
-    const fgm::Vec3 a(10.0f, 20.0f, 30.0f);
-    const fgm::Vec3 yAxis(0.0f, 1.0f, 0.0f);
-    const fgm::Vec3 expectedProjection(0.0f, 20.0f, 0.0f);
+    const flcn::Vec3 a(10.0f, 20.0f, 30.0f);
+    const flcn::Vec3 yAxis(0.0f, 1.0f, 0.0f);
+    const flcn::Vec3 expectedProjection(0.0f, 20.0f, 0.0f);
 
     // When projected onto y-axis
-    const fgm::Vec3 actualProjection = a.project(yAxis);
+    const flcn::Vec3 actualProjection = a.project(yAxis);
 
     // Then, the resultant vector only has y-component as non-zero
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -179,18 +179,18 @@ TEST(Vec3ProjectionTests, Project_YAxis_ReturnVectorWithNonZeroYComponent)
 
 
 /**
- * @test Verify that projecting onto a vector parallel to z-axis using @ref fgm::Vec3::project
+ * @test Verify that projecting onto a vector parallel to z-axis using @ref flcn::Vec3::project
  *       returns a vector containing only a z-component.
  */
 TEST(Vec3ProjectionTests, Project_ZAxis_ReturnVectorWithNonZeroZComponent)
 {
     // Given an arbitrary vector
-    const fgm::Vec3 a(10.0f, 20.0f, 30.0f);
-    const fgm::Vec3 zAxis(0.0f, 0.0f, 1.0f);
-    const fgm::Vec3 expectedProjection(0.0f, 0.0f, 30.0f);
+    const flcn::Vec3 a(10.0f, 20.0f, 30.0f);
+    const flcn::Vec3 zAxis(0.0f, 0.0f, 1.0f);
+    const flcn::Vec3 expectedProjection(0.0f, 0.0f, 30.0f);
 
     // When projected onto z-axis
-    const fgm::Vec3 actualProjection = a.project(zAxis);
+    const flcn::Vec3 actualProjection = a.project(zAxis);
 
     // Then, the resultant vector only has z-component as non-zero
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -198,42 +198,42 @@ TEST(Vec3ProjectionTests, Project_ZAxis_ReturnVectorWithNonZeroZComponent)
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector using @ref fgm::Vec3::project
+ * @test Verify that projecting onto a non-orthogonal vector using @ref flcn::Vec3::project
  *       returns a non-zero vector.
  */
 TYPED_TEST(Vec3ProjectionTests, Project_NonOrthogonalVectors_ReturnsNonZeroVector)
 {
-    const fgm::Vec3 actualProjection = this->_vec.project(this->_ontoVec);
+    const flcn::Vec3 actualProjection = this->_vec.project(this->_ontoVec);
 
     EXPECT_VEC_EQ(this->_expectedProjection, actualProjection);
 }
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vec3::project
+ * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref flcn::Vec3::project
  *       returns a non-zero vector.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_Project_NonOrthogonalVectors_ReturnsNonZeroVector)
 {
-    const fgm::Vec3 actualProjection = fgm::Vec3<TypeParam>::project(this->_vec, this->_ontoVec);
+    const flcn::Vec3 actualProjection = flcn::Vec3<TypeParam>::project(this->_vec, this->_ontoVec);
 
     EXPECT_VEC_EQ(this->_expectedProjection, actualProjection);
 }
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vec3::projectNorm
+ * @test Verify that projecting onto a non-orthogonal unit vector using @ref flcn::Vec3::projectNorm
  *       returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    const fgm::Vec3 a(1.0f, 2.0f, 3.0f);
-    const fgm::Vec3 b(1.0f, 0.0f, 0.0f);
-    const fgm::Vec3 expectedProjection(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 a(1.0f, 2.0f, 3.0f);
+    const flcn::Vec3 b(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 expectedProjection(1.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vec3 actualProjection = a.projectNorm(b);
+    const flcn::Vec3 actualProjection = a.projectNorm(b);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -242,17 +242,17 @@ TEST(Vec3ProjectionTests, ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 
 /**
  * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
- *       using @ref fgm::Vec3::project returns a non-zero vector.
+ *       using @ref flcn::Vec3::project returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, ProjectionOntoVectorInOppositeDirectionReturnsNonZeroVectorInSameDirection)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    const fgm::Vec3 a(4.0f, 4.0f, 4.0f);
-    const fgm::Vec3 negativeZAxis(0.0f, 0.0f, -1.0f);
-    const fgm::Vec3 expectedProjection(0.0f, 0.0f, 4.0f);
+    const flcn::Vec3 a(4.0f, 4.0f, 4.0f);
+    const flcn::Vec3 negativeZAxis(0.0f, 0.0f, -1.0f);
+    const flcn::Vec3 expectedProjection(0.0f, 0.0f, 4.0f);
 
     // When projected
-    const fgm::Vec3<float> actualProjection = a.project(negativeZAxis);
+    const flcn::Vec3<float> actualProjection = a.project(negativeZAxis);
 
     // Then, the resultant vector is non-zero and in the same direction
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -261,17 +261,17 @@ TEST(Vec3ProjectionTests, ProjectionOntoVectorInOppositeDirectionReturnsNonZeroV
 
 /**
  * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
- *       using @ref fgm::Vec3::project returns a type-promoted vector.
+ *       using @ref flcn::Vec3::project returns a type-promoted vector.
  */
 TEST(Vec3ProjectionTests, MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
-    const fgm::Vec3 vec(7, 13, 29);
-    const fgm::Vec3 onto(2.0, 4.0, 4.0);
-    const fgm::Vec3 expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
+    const flcn::Vec3 vec(7, 13, 29);
+    const flcn::Vec3 onto(2.0, 4.0, 4.0);
+    const flcn::Vec3 expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
 
     // When projected onto another
-    const fgm::Vec3 actualProjection = vec.project(onto);
+    const flcn::Vec3 actualProjection = vec.project(onto);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
@@ -282,38 +282,38 @@ TEST(Vec3ProjectionTests, MixedTypeProjectionPromotesType)
 
 /**
  * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
- *       @ref fgm::Vec3::projectNorm returns a non-zero vector.
+ *       @ref flcn::Vec3::projectNorm returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    const fgm::Vec3 a(1.0f, 2.0f, 3.0f);
-    const fgm::Vec3 b(1.0f, 0.0f, 0.0f);
-    const fgm::Vec3 expectedProjection(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 a(1.0f, 2.0f, 3.0f);
+    const flcn::Vec3 b(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 expectedProjection(1.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vec3 actualProjection = fgm::Vec3<float>::projectNorm(a, b);
+    const flcn::Vec3 actualProjection = flcn::Vec3<float>::projectNorm(a, b);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
 }
 
 
-/** @test Verify that projection using @ref fgm::Vec3::project always return floating-point vector. */
+/** @test Verify that projection using @ref flcn::Vec3::project always return floating-point vector. */
 TYPED_TEST(Vec3ProjectionTests, Project_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vec3 projection = this->_vec.project(this->_ontoVec);
+    [[maybe_unused]] const flcn::Vec3 projection = this->_vec.project(this->_ontoVec);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 
 
 /**
- * @test Verify that projection using static variant of @ref fgm::Vec3::project
+ * @test Verify that projection using static variant of @ref flcn::Vec3::project
  *       always return floating-point vector.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_Project_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vec3 projection = fgm::Vec3<TypeParam>::project(this->_vec, this->_ontoVec);
+    [[maybe_unused]] const flcn::Vec3 projection = flcn::Vec3<TypeParam>::project(this->_vec, this->_ontoVec);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 
@@ -324,30 +324,30 @@ TYPED_TEST(Vec3ProjectionTests, StaticWrapper_Project_AlwaysReturnFloatingPointV
  **************************************/
 
 /**
- * @test Verify that projecting onto an orthogonal vector using @ref fgm::Vec3::safeProject
+ * @test Verify that projecting onto an orthogonal vector using @ref flcn::Vec3::safeProject
  *       returns a zero vector.
  */
 TYPED_TEST(Vec3ProjectionTests, SafeProject_Project_NonOrthogonalVectors_ReturnsNonZeroVector)
 {
-    const fgm::Vec3 actualProjection = this->_vec.safeProject(this->_ontoVec);
+    const flcn::Vec3 actualProjection = this->_vec.safeProject(this->_ontoVec);
 
     EXPECT_VEC_EQ(this->_expectedProjection, actualProjection);
 }
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vec3::safeProjectNorm
+ * @test Verify that projecting onto a non-orthogonal unit vector using @ref flcn::Vec3::safeProjectNorm
  *       returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    const fgm::Vec3 a(1.0f, 2.0f, 3.0f);
-    const fgm::Vec3 b(1.0f, 0.0f, 0.0f);
-    const fgm::Vec3 expectedProjection(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 a(1.0f, 2.0f, 3.0f);
+    const flcn::Vec3 b(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 expectedProjection(1.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vec3 actualProjection = a.safeProject(b);
+    const flcn::Vec3 actualProjection = a.safeProject(b);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -356,16 +356,16 @@ TEST(Vec3ProjectionTests, SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsN
 
 /**
  * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
- * fgm::Vec3::safeProjectNorm returns a zero vector.
+ * flcn::Vec3::safeProjectNorm returns a zero vector.
  */
 TEST(Vec3ProjectionTests, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 {
     // Given a NaN vector and a normalized vector
-    const fgm::Vec3 a(1.0f, 2.0f, fgm::constants::NaN);
-    const fgm::Vec3 b(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 a(1.0f, 2.0f, flcn::constants::NaN);
+    const flcn::Vec3 b(1.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vec3 actualProjection = a.safeProjectNorm(b);
+    const flcn::Vec3 actualProjection = a.safeProjectNorm(b);
 
     // Then, the resultant vector is a zero vector
     EXPECT_VEC_ZERO(actualProjection);
@@ -374,16 +374,16 @@ TEST(Vec3ProjectionTests, SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 
 /**
  * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref
- * fgm::Vec3::safeProjectNorm returns a zero vector.
+ * flcn::Vec3::safeProjectNorm returns a zero vector.
  */
 TEST(Vec3ProjectionTests, SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    const fgm::Vec3 a(1.0f, 2.0f, 3.0f);
-    const fgm::Vec3 b(1.0f, 1.0f, fgm::constants::NaN);
+    const flcn::Vec3 a(1.0f, 2.0f, 3.0f);
+    const flcn::Vec3 b(1.0f, 1.0f, flcn::constants::NaN);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vec3 actualProjection = a.safeProjectNorm(b);
+    const flcn::Vec3 actualProjection = a.safeProjectNorm(b);
 
     // Then, the resultant vector is a zero vector
     EXPECT_VEC_ZERO(actualProjection);
@@ -392,17 +392,17 @@ TEST(Vec3ProjectionTests, SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
 
 /**
  * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
- *       using @ref fgm::Vec3::safeProject returns a non-zero vector.
+ *       using @ref flcn::Vec3::safeProject returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    const fgm::Vec3 a(4.0f, 4.0f, 4.0f);
-    const fgm::Vec3 negativeZAxis(0.0f, 0.0f, -1.0f);
-    const fgm::Vec3 expectedProjection(0.0f, 0.0f, 4.0f);
+    const flcn::Vec3 a(4.0f, 4.0f, 4.0f);
+    const flcn::Vec3 negativeZAxis(0.0f, 0.0f, -1.0f);
+    const flcn::Vec3 expectedProjection(0.0f, 0.0f, 4.0f);
 
     // When projected
-    const fgm::Vec3<float> actualProjection = a.safeProject(negativeZAxis);
+    const flcn::Vec3<float> actualProjection = a.safeProject(negativeZAxis);
 
     // Then, the resultant vector is non-zero and in the same direction
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -411,17 +411,17 @@ TEST(Vec3ProjectionTests, SafeProject_OntoVectorInOppositeDirectionReturnsVector
 
 /**
  * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
- *       using @ref fgm::Vec3::safeProject returns a type-promoted vector.
+ *       using @ref flcn::Vec3::safeProject returns a type-promoted vector.
  */
 TEST(Vec3ProjectionTests, SafeProject_MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
-    const fgm::Vec3 vec(7, 13, 29);
-    const fgm::Vec3 onto(2.0, 4.0, 4.0);
-    const fgm::Vec3 expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
+    const flcn::Vec3 vec(7, 13, 29);
+    const flcn::Vec3 onto(2.0, 4.0, 4.0);
+    const flcn::Vec3 expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
 
     // When projected onto another
-    const fgm::Vec3 actualProjection = vec.safeProject(onto);
+    const flcn::Vec3 actualProjection = vec.safeProject(onto);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
@@ -431,25 +431,25 @@ TEST(Vec3ProjectionTests, SafeProject_MixedTypeProjectionPromotesType)
 
 
 /**
- * @test Verify that projecting onto a zero length vector using @ref fgm::Vec3::safeProject
+ * @test Verify that projecting onto a zero length vector using @ref flcn::Vec3::safeProject
  *       returns a zero vector.
  */
 TYPED_TEST(Vec3ProjectionTests, SafeProject_OntoZeroReturnsZeroVector)
 {
-    const fgm::Vec3 zeroVec = fgm::Vec3<TypeParam>::zero();
+    const flcn::Vec3 zeroVec = flcn::Vec3<TypeParam>::zero();
 
-    const fgm::Vec3 actualProjection = this->_vec.safeProject(zeroVec);
+    const flcn::Vec3 actualProjection = this->_vec.safeProject(zeroVec);
 
     EXPECT_VEC_ZERO(actualProjection);
 }
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vec3::safeProject
+ * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref flcn::Vec3::safeProject
  *       returns a non-zero vector.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_Project_NonOrthogonalVectors_ReturnsNonZeroVector)
 {
-    const fgm::Vec3 actualProjection = fgm::Vec3<TypeParam>::safeProject(this->_vec, this->_ontoVec);
+    const flcn::Vec3 actualProjection = flcn::Vec3<TypeParam>::safeProject(this->_vec, this->_ontoVec);
 
     EXPECT_VEC_EQ(this->_expectedProjection, actualProjection);
 }
@@ -457,17 +457,17 @@ TYPED_TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_Project_NonOrthogonalV
 
 /**
  * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
- *       @ref fgm::Vec3::safeProjectNorm returns a non-zero vector.
+ *       @ref flcn::Vec3::safeProjectNorm returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_SafeProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    const fgm::Vec3 a(1.0f, 2.0f, 3.0f);
-    const fgm::Vec3 b(1.0f, 0.0f, 0.0f);
-    const fgm::Vec3 expectedProjection(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 a(1.0f, 2.0f, 3.0f);
+    const flcn::Vec3 b(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 expectedProjection(1.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vec3 actualProjection = fgm::Vec3<float>::safeProjectNorm(a, b);
+    const flcn::Vec3 actualProjection = flcn::Vec3<float>::safeProjectNorm(a, b);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -477,16 +477,16 @@ TEST(Vec3ProjectionTests, StaticWrapper_SafeProjectNorm_ProjectionOntoNormalized
 
 /**
  * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of
- *       @ref fgm::Vec3::safeProjectNorm returns a zero vector.
+ *       @ref flcn::Vec3::safeProjectNorm returns a zero vector.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_SafeProjectNorm_NaNVectorReturnsNonZeroVector)
 {
     // Given a NaN vector and a normalized vector
-    const fgm::Vec3 a(1.0f, 2.0f, fgm::constants::NaN);
-    const fgm::Vec3 b(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 a(1.0f, 2.0f, flcn::constants::NaN);
+    const flcn::Vec3 b(1.0f, 0.0f, 0.0f);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vec3 actualProjection = fgm::Vec3<float>::safeProjectNorm(a, b);
+    const flcn::Vec3 actualProjection = flcn::Vec3<float>::safeProjectNorm(a, b);
 
     // Then, the resultant vector is a zero vector
     EXPECT_VEC_ZERO(actualProjection);
@@ -495,16 +495,16 @@ TEST(Vec3ProjectionTests, StaticWrapper_SafeProjectNorm_NaNVectorReturnsNonZeroV
 
 /**
  * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of
- *       @ref fgm::Vec3::safeProjectNorm returns a zero vector.
+ *       @ref flcn::Vec3::safeProjectNorm returns a zero vector.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_SafeProjectNorm_OntoNaNVectorReturnsNonZeroVector)
 {
     // Given an arbitrary vector and a normalized vector
-    const fgm::Vec3 a(1.0f, 2.0f, 3.0f);
-    const fgm::Vec3 b(1.0f, 1.0f, fgm::constants::NaN);
+    const flcn::Vec3 a(1.0f, 2.0f, 3.0f);
+    const flcn::Vec3 b(1.0f, 1.0f, flcn::constants::NaN);
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vec3 actualProjection = fgm::Vec3<float>::safeProjectNorm(a, b);
+    const flcn::Vec3 actualProjection = flcn::Vec3<float>::safeProjectNorm(a, b);
 
     // Then, the resultant vector is a zero vector
     EXPECT_VEC_ZERO(actualProjection);
@@ -512,17 +512,17 @@ TEST(Vec3ProjectionTests, StaticWrapper_SafeProjectNorm_OntoNaNVectorReturnsNonZ
 
 /**
  * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
- *       using static variant of @ref fgm::Vec3::safeProject returns a non-zero vector.
+ *       using static variant of @ref flcn::Vec3::safeProject returns a non-zero vector.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirection)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    const fgm::Vec3 a(4.0f, 4.0f, 4.0f);
-    const fgm::Vec3 negativeZAxis(0.0f, 0.0f, -1.0f);
-    const fgm::Vec3 expectedProjection(0.0f, 0.0f, 4.0f);
+    const flcn::Vec3 a(4.0f, 4.0f, 4.0f);
+    const flcn::Vec3 negativeZAxis(0.0f, 0.0f, -1.0f);
+    const flcn::Vec3 expectedProjection(0.0f, 0.0f, 4.0f);
 
     // When projected
-    const fgm::Vec3<float> actualProjection = fgm::Vec3<float>::safeProject(a, negativeZAxis);
+    const flcn::Vec3<float> actualProjection = flcn::Vec3<float>::safeProject(a, negativeZAxis);
 
     // Then, the resultant vector is non-zero and in the same direction
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
@@ -531,17 +531,17 @@ TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_OntoVectorInOppositeDirectio
 
 /**
  * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
- *       using static variant of @ref fgm::Vec3::safeProject returns a type-promoted vector.
+ *       using static variant of @ref flcn::Vec3::safeProject returns a type-promoted vector.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
-    const fgm::Vec3 vec(7, 13, 29);
-    const fgm::Vec3 onto(2.0, 4.0, 4.0);
-    const fgm::Vec3 expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
+    const flcn::Vec3 vec(7, 13, 29);
+    const flcn::Vec3 onto(2.0, 4.0, 4.0);
+    const flcn::Vec3 expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
 
     // When projected onto another
-    const fgm::Vec3 actualProjection = fgm::Vec3<int>::safeProject(vec, onto);
+    const flcn::Vec3 actualProjection = flcn::Vec3<int>::safeProject(vec, onto);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
@@ -551,58 +551,58 @@ TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_MixedTypeProjectionPromotesT
 
 
 /**
- * @test Verify that projecting onto a zero length vector using static variant of @ref fgm::Vec3::safeProject
+ * @test Verify that projecting onto a zero length vector using static variant of @ref flcn::Vec3::safeProject
  *       returns a type-promoted vector.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_OntoZeroVectorReturnsZeroVector)
 {
-    const fgm::Vec3 zeroVec = fgm::Vec3<TypeParam>::zero();
+    const flcn::Vec3 zeroVec = flcn::Vec3<TypeParam>::zero();
 
-    const fgm::Vec3 actualProjection = fgm::Vec3<TypeParam>::safeProject(this->_vec, zeroVec);
+    const flcn::Vec3 actualProjection = flcn::Vec3<TypeParam>::safeProject(this->_vec, zeroVec);
 
     EXPECT_VEC_ZERO(actualProjection);
 }
 
 
-/** @test Verify that projection using @ref fgm::Vec3::safeProject always return floating-point vector. */
+/** @test Verify that projection using @ref flcn::Vec3::safeProject always return floating-point vector. */
 TYPED_TEST(Vec3ProjectionTests, SafeProject_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vec3 projection = this->_vec.safeProject(this->_ontoVec);
+    [[maybe_unused]] const flcn::Vec3 projection = this->_vec.safeProject(this->_ontoVec);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 
 
 /**
- * @test Verify that projection using static variant of @ref fgm::Vec3::safeProject
+ * @test Verify that projection using static variant of @ref flcn::Vec3::safeProject
  *       always return floating-point vector.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_SafeProject_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] const fgm::Vec3 projection = fgm::Vec3<TypeParam>::safeProject(this->_vec, this->_ontoVec);
+    [[maybe_unused]] const flcn::Vec3 projection = flcn::Vec3<TypeParam>::safeProject(this->_vec, this->_ontoVec);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 
 
 /**
- * @test Verify that projection of NaN vector using @ref fgm::Vec3::safeProject
- *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that projection of NaN vector using @ref flcn::Vec3::safeProject
+ *       returns zero vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec3ProjectionNaNTests, SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::Vec3<float>::one();
+    const auto& ontoVec = flcn::Vec3<float>::one();
 
     EXPECT_VEC_ZERO(nanVec.safeProject(ontoVec));
 }
 
 
 /**
- * @test Verify that projection onto NaN vector using @ref fgm::Vec3::safeProject
- *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that projection onto NaN vector using @ref flcn::Vec3::safeProject
+ *       returns zero vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec3ProjectionNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::Vec3<float>::one();
+    const auto& oneVec     = flcn::Vec3<float>::one();
     const auto& ontoNaNVec = GetParam();
 
     EXPECT_VEC_ZERO(oneVec.safeProject(ontoNaNVec));
@@ -610,28 +610,28 @@ TEST_P(Vec3ProjectionNaNTests, SafeProject_OntoNaNVectorReturnsZeroVectorAndSets
 
 
 /**
- * @test Verify that projection of NaN vector using static variant of @ref fgm::Vec3::safeProject
+ * @test Verify that projection of NaN vector using static variant of @ref flcn::Vec3::safeProject
  *       returns zero vector.
  */
 TEST_P(Vec3ProjectionNaNTests, StaticWrapper_SafeProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::Vec3<float>::one();
+    const auto& ontoVec = flcn::Vec3<float>::one();
 
-    EXPECT_VEC_ZERO(fgm::Vec3<float>::safeProject(nanVec, ontoVec));
+    EXPECT_VEC_ZERO(flcn::Vec3<float>::safeProject(nanVec, ontoVec));
 }
 
 
 /**
- * @test Verify that projection onto NaN vector using static variant of @ref fgm::Vec3::safeProject
+ * @test Verify that projection onto NaN vector using static variant of @ref flcn::Vec3::safeProject
  *       returns zero vector.
  */
 TEST_P(Vec3ProjectionNaNTests, StaticWrapper_SafeProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::Vec3<float>::one();
+    const auto& oneVec     = flcn::Vec3<float>::one();
     const auto& ontoNaNVec = GetParam();
 
-    EXPECT_VEC_ZERO(fgm::Vec3<float>::safeProject(oneVec, ontoNaNVec));
+    EXPECT_VEC_ZERO(flcn::Vec3<float>::safeProject(oneVec, ontoNaNVec));
 }
 
 
@@ -640,368 +640,368 @@ TEST_P(Vec3ProjectionNaNTests, StaticWrapper_SafeProject_OntoNaNVectorReturnsZer
  **************************************/
 
 /**
- * @test Verify that projecting onto an orthogonal vector using @ref fgm::Vec3::tryProject
- *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ * @test Verify that projecting onto an orthogonal vector using @ref flcn::Vec3::tryProject
+ *       returns a zero vector and sets the flag to @ref flcn::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vec3ProjectionTests, TryProject_Project_NonOrthogonalVectors_ReturnsNonZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    const fgm::Vec3 actualProjection = this->_vec.tryProject(this->_ontoVec, flag);
+    flcn::OperationStatus flag;
+    const flcn::Vec3 actualProjection = this->_vec.tryProject(this->_ontoVec, flag);
 
     EXPECT_VEC_EQ(this->_expectedProjection, actualProjection);
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(flcn::OperationStatus::SUCCESS, flag);
 }
 /**
- * @test Verify that projecting onto a non-orthogonal unit vector using @ref fgm::Vec3::tryProject
- *       returns a non-zero vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ * @test Verify that projecting onto a non-orthogonal unit vector using @ref flcn::Vec3::tryProject
+ *       returns a non-zero vector and sets the flag to @ref flcn::OperationStatus::SUCCESS.
  */
 TEST(Vec3ProjectionTests, TryProjectNorm_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a normalized vector
-    const fgm::Vec3 a(1.0f, 2.0f, 3.0f);
-    const fgm::Vec3 b(1.0f, 0.0f, 0.0f);
-    const fgm::Vec3 expectedProjection(1.0f, 0.0f, 0.0f);
-    fgm::OperationStatus flag;
+    const flcn::Vec3 a(1.0f, 2.0f, 3.0f);
+    const flcn::Vec3 b(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 expectedProjection(1.0f, 0.0f, 0.0f);
+    flcn::OperationStatus flag;
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vec3 actualProjection = a.tryProjectNorm(b, flag);
+    const flcn::Vec3 actualProjection = a.tryProjectNorm(b, flag);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
     // And sets the flag to SUCCESS
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(flcn::OperationStatus::SUCCESS, flag);
 }
 
 
 /**
- * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref fgm::Vec3::tryProjectNorm
- *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using @ref flcn::Vec3::tryProjectNorm
+ *       returns a zero vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST(Vec3ProjectionTests, TryProjectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a normalized vector
-    const fgm::Vec3 a(fgm::constants::NaN, 2.0f, 3.0f);
-    const fgm::Vec3 b(1.0f, 0.0f, 0.0f);
-    fgm::OperationStatus flag;
+    const flcn::Vec3 a(flcn::constants::NaN, 2.0f, 3.0f);
+    const flcn::Vec3 b(1.0f, 0.0f, 0.0f);
+    flcn::OperationStatus flag;
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vec3 actualProjection = a.tryProjectNorm(b, flag);
+    const flcn::Vec3 actualProjection = a.tryProjectNorm(b, flag);
 
     // Then, the resultant vector is a zero vector.
     EXPECT_VEC_ZERO(actualProjection);
     // And sets the flag to NANOPERAND
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 /**
- * @test Verify that projecting a vector onto a NaN vector using @ref fgm::Vec3::tryProjectNorm
- *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that projecting a vector onto a NaN vector using @ref flcn::Vec3::tryProjectNorm
+ *       returns a zero vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST(Vec3ProjectionTests, TryProjectNorm_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a normalized vector
-    const fgm::Vec3 a(1.0f, 2.0f, 3.0f);
-    const fgm::Vec3 b(1.0f, fgm::constants::NaN, 0.0f);
-    fgm::OperationStatus flag;
+    const flcn::Vec3 a(1.0f, 2.0f, 3.0f);
+    const flcn::Vec3 b(1.0f, flcn::constants::NaN, 0.0f);
+    flcn::OperationStatus flag;
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vec3 actualProjection = a.tryProjectNorm(b, flag);
+    const flcn::Vec3 actualProjection = a.tryProjectNorm(b, flag);
 
     // Then, the resultant vector is a zero vector.
     EXPECT_VEC_ZERO(actualProjection);
     // And sets the flag to NANOPERAND
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
  * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
- *       using @ref fgm::Vec3::tryProject returns a non-zero vector
- *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ *       using @ref flcn::Vec3::tryProject returns a non-zero vector
+ *       and sets the flag to @ref flcn::OperationStatus::SUCCESS.
  */
 TEST(Vec3ProjectionTests, TryProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirectionAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    const fgm::Vec3 a(4.0f, 4.0f, 4.0f);
-    const fgm::Vec3 negativeZAxis(0.0f, 0.0f, -1.0f);
-    const fgm::Vec3 expectedProjection(0.0f, 0.0f, 4.0f);
-    fgm::OperationStatus flag;
+    const flcn::Vec3 a(4.0f, 4.0f, 4.0f);
+    const flcn::Vec3 negativeZAxis(0.0f, 0.0f, -1.0f);
+    const flcn::Vec3 expectedProjection(0.0f, 0.0f, 4.0f);
+    flcn::OperationStatus flag;
 
     // When projected
-    const fgm::Vec3<float> actualProjection = a.tryProject(negativeZAxis, flag);
+    const flcn::Vec3<float> actualProjection = a.tryProject(negativeZAxis, flag);
 
     // Then, the resultant vector is non-zero and in the same direction
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
     // And sets the flag to SUCCESS
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(flcn::OperationStatus::SUCCESS, flag);
 }
 
 
 /**
  * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
- *       using @ref fgm::Vec3::tryProject returns a type-promoted vector
- *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ *       using @ref flcn::Vec3::tryProject returns a type-promoted vector
+ *       and sets the flag to @ref flcn::OperationStatus::SUCCESS.
  */
 TEST(Vec3ProjectionTests, TryProject_MixedTypeProjectionPromotesType)
 {
     // Given two arbitrary vectors
-    const fgm::Vec3 vec(7, 13, 29);
-    const fgm::Vec3 onto(2.0, 4.0, 4.0);
-    const fgm::Vec3 expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
-    fgm::OperationStatus flag;
+    const flcn::Vec3 vec(7, 13, 29);
+    const flcn::Vec3 onto(2.0, 4.0, 4.0);
+    const flcn::Vec3 expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
+    flcn::OperationStatus flag;
 
     // When projected onto another
-    const fgm::Vec3 actualProjection = vec.tryProject(onto, flag);
+    const flcn::Vec3 actualProjection = vec.tryProject(onto, flag);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
     // and is the projection
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
     // And sets the flag to SUCCESS
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(flcn::OperationStatus::SUCCESS, flag);
 }
 
 
 /**
- * @test Verify that projecting onto a zero length vector using @ref fgm::Vec3::tryProject
- *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ * @test Verify that projecting onto a zero length vector using @ref flcn::Vec3::tryProject
+ *       returns a zero vector and sets the flag to @ref flcn::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec3ProjectionTests, TryProject_OntoZeroReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const fgm::Vec3 zeroVec = fgm::Vec3<TypeParam>::zero();
-    fgm::OperationStatus flag;
+    const flcn::Vec3 zeroVec = flcn::Vec3<TypeParam>::zero();
+    flcn::OperationStatus flag;
 
 
-    const fgm::Vec3 actualProjection = this->_vec.tryProject(zeroVec, flag);
+    const flcn::Vec3 actualProjection = this->_vec.tryProject(zeroVec, flag);
 
     EXPECT_VEC_ZERO(actualProjection);
-    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+    EXPECT_EQ(flcn::OperationStatus::DIVISIONBYZERO, flag);
 }
 
 
 /**
- * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref fgm::Vec3::tryProject
- *       returns a non-zero vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ * @test Verify that projecting onto a non-orthogonal vector using static variant of @ref flcn::Vec3::tryProject
+ *       returns a non-zero vector and sets the flag to @ref flcn::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vec3ProjectionTests,
            StaticWrapper_TryProject_Project_NonOrthogonalVectors_ReturnsNonZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    const fgm::Vec3 actualProjection = fgm::Vec3<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
+    flcn::OperationStatus flag;
+    const flcn::Vec3 actualProjection = flcn::Vec3<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
 
     EXPECT_VEC_EQ(this->_expectedProjection, actualProjection);
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(flcn::OperationStatus::SUCCESS, flag);
 }
 
 
 /**
  * @test Verify that projecting onto a non-orthogonal unit vector using static variant of
- *       @ref fgm::Vec3::tryProject returns a non-zero vector and sets the flag to
- *       @ref fgm::OperationStatus::SUCCESS.
+ *       @ref flcn::Vec3::tryProject returns a non-zero vector and sets the flag to
+ *       @ref flcn::OperationStatus::SUCCESS.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_TryProject_ProjectionOntoNormalizedVectorReturnsNonZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a normalized vector
-    const fgm::Vec3 a(1.0f, 2.0f, 3.0f);
-    const fgm::Vec3 b(1.0f, 0.0f, 0.0f);
-    const fgm::Vec3 expectedProjection(1.0f, 0.0f, 0.0f);
-    fgm::OperationStatus flag;
+    const flcn::Vec3 a(1.0f, 2.0f, 3.0f);
+    const flcn::Vec3 b(1.0f, 0.0f, 0.0f);
+    const flcn::Vec3 expectedProjection(1.0f, 0.0f, 0.0f);
+    flcn::OperationStatus flag;
 
     // When the vector is projected onto the normalized vector
-    const fgm::Vec3 actualProjection = fgm::Vec3<float>::tryProject(a, b, flag);
+    const flcn::Vec3 actualProjection = flcn::Vec3<float>::tryProject(a, b, flag);
 
     // Then, the resultant vector has components that is parallel to the projected vector
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
     // And sets the flag to SUCCESS
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(flcn::OperationStatus::SUCCESS, flag);
 }
 
 
 
 /**
  * @test Verify that projecting a NaN vector onto a non-orthogonal unit vector using static variant of @ref
- * fgm::Vec3::tryProjectNorm returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * flcn::Vec3::tryProjectNorm returns a zero vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_TryProjectNorm_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a NaN vector
-    const fgm::Vec3 a(fgm::constants::NaN, 2.0f, 3.0f);
-    const fgm::Vec3 b(1.0f, 0.0f, 0.0f);
-    fgm::OperationStatus flag;
+    const flcn::Vec3 a(flcn::constants::NaN, 2.0f, 3.0f);
+    const flcn::Vec3 b(1.0f, 0.0f, 0.0f);
+    flcn::OperationStatus flag;
 
     // When the vector is projected onto the NaN vector
-    const fgm::Vec3 actualProjection = fgm::Vec3<float>::tryProjectNorm(a, b, flag);
+    const flcn::Vec3 actualProjection = flcn::Vec3<float>::tryProjectNorm(a, b, flag);
 
     // Then, the resultant vector is a zero vector.
     EXPECT_VEC_ZERO(actualProjection);
     // And sets the flag to NANOPERAND
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 /**
- * @test Verify that projecting a vector onto a NaN vector using static variant of @ref fgm::Vec3::tryProjectNorm
- *       returns a zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that projecting a vector onto a NaN vector using static variant of @ref flcn::Vec3::tryProjectNorm
+ *       returns a zero vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_TryProjectNorm_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a NaN vector
-    const fgm::Vec3 a(1.0f, 2.0f, 3.0f);
-    const fgm::Vec3 b(1.0f, fgm::constants::NaN, 0.0f);
-    fgm::OperationStatus flag;
+    const flcn::Vec3 a(1.0f, 2.0f, 3.0f);
+    const flcn::Vec3 b(1.0f, flcn::constants::NaN, 0.0f);
+    flcn::OperationStatus flag;
 
     // When the vector is projected onto the NaN vector
-    const fgm::Vec3 actualProjection = fgm::Vec3<float>::tryProjectNorm(a, b, flag);
+    const flcn::Vec3 actualProjection = flcn::Vec3<float>::tryProjectNorm(a, b, flag);
 
     // Then, the resultant vector is a zero vector.
     EXPECT_VEC_ZERO(actualProjection);
     // And sets the flag to NANOPERAND
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 
 /**
  * @test Verify that projecting onto a non-orthogonal vector pointing in the opposite direction
- *       using static variant of @ref fgm::Vec3::tryProject returns a non-zero vector
- *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ *       using static variant of @ref flcn::Vec3::tryProject returns a non-zero vector
+ *       and sets the flag to @ref flcn::OperationStatus::SUCCESS.
  */
 TEST(Vec3ProjectionTests,
      StaticWrapper_TryProject_OntoVectorInOppositeDirectionReturnsVectorInSameDirectionAndSetsCorrectFlag)
 {
     // Given an arbitrary vector and a vector in the opposite Direction
-    const fgm::Vec3 a(4.0f, 4.0f, 4.0f);
-    const fgm::Vec3 negativeZAxis(0.0f, 0.0f, -1.0f);
-    const fgm::Vec3 expectedProjection(0.0f, 0.0f, 4.0f);
-    fgm::OperationStatus flag;
+    const flcn::Vec3 a(4.0f, 4.0f, 4.0f);
+    const flcn::Vec3 negativeZAxis(0.0f, 0.0f, -1.0f);
+    const flcn::Vec3 expectedProjection(0.0f, 0.0f, 4.0f);
+    flcn::OperationStatus flag;
 
     // When projected
-    const fgm::Vec3<float> actualProjection = fgm::Vec3<float>::tryProject(a, negativeZAxis, flag);
+    const flcn::Vec3<float> actualProjection = flcn::Vec3<float>::tryProject(a, negativeZAxis, flag);
 
     // Then, the resultant vector is non-zero and in the same direction
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
     // And sets the flag to SUCCESS
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(flcn::OperationStatus::SUCCESS, flag);
 }
 
 
 /**
  * @test Verify that projecting onto a non-orthogonal vector of a different numeric type
- *       using static variant of @ref fgm::Vec3::tryProject returns a type-promoted vector
- *       and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ *       using static variant of @ref flcn::Vec3::tryProject returns a type-promoted vector
+ *       and sets the flag to @ref flcn::OperationStatus::SUCCESS.
  */
 TEST(Vec3ProjectionTests, StaticWrapper_TryProject_MixedTypeProjectionPromotesTypeAndSetsCorrectFlag)
 {
     // Given two arbitrary vectors
-    const fgm::Vec3 vec(7, 13, 29);
-    const fgm::Vec3 onto(2.0, 4.0, 4.0);
-    const fgm::Vec3 expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
-    fgm::OperationStatus flag;
+    const flcn::Vec3 vec(7, 13, 29);
+    const flcn::Vec3 onto(2.0, 4.0, 4.0);
+    const flcn::Vec3 expectedProjection(10.111111111111111, 20.222222222222222, 20.222222222222222);
+    flcn::OperationStatus flag;
 
     // When projected onto another
-    const fgm::Vec3 actualProjection = fgm::Vec3<int>::tryProject(vec, onto, flag);
+    const flcn::Vec3 actualProjection = flcn::Vec3<int>::tryProject(vec, onto, flag);
 
     // Then, the resultant vector is type promoted
     static_assert(std::is_same_v<decltype(actualProjection)::value_type, double>);
     // and is the projection
     EXPECT_VEC_EQ(expectedProjection, actualProjection);
     // And sets the flag to SUCCESS
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(flcn::OperationStatus::SUCCESS, flag);
 }
 
 
 /**
- * @test Verify that projecting onto a zero length vector using static variant of @ref fgm::Vec3::tryProject
- *       returns a type-promoted vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ * @test Verify that projecting onto a zero length vector using static variant of @ref flcn::Vec3::tryProject
+ *       returns a type-promoted vector and sets the flag to @ref flcn::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_TryProject_OntoZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const fgm::Vec3 zeroVec = fgm::Vec3<TypeParam>::zero();
-    fgm::OperationStatus flag;
+    const flcn::Vec3 zeroVec = flcn::Vec3<TypeParam>::zero();
+    flcn::OperationStatus flag;
 
-    const fgm::Vec3 actualProjection = fgm::Vec3<TypeParam>::tryProject(this->_vec, zeroVec, flag);
+    const flcn::Vec3 actualProjection = flcn::Vec3<TypeParam>::tryProject(this->_vec, zeroVec, flag);
 
     EXPECT_VEC_ZERO(actualProjection);
-    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+    EXPECT_EQ(flcn::OperationStatus::DIVISIONBYZERO, flag);
 }
 
 
-/** @test Verify that projection using @ref fgm::Vec3::tryProject always return floating-point vector. */
+/** @test Verify that projection using @ref flcn::Vec3::tryProject always return floating-point vector. */
 TYPED_TEST(Vec3ProjectionTests, TryProject_AlwaysReturnFloatingPointVectorAndSetsCorrectFlag)
 {
-    [[maybe_unused]] fgm::OperationStatus flag;
-    [[maybe_unused]] const fgm::Vec3 projection = this->_vec.tryProject(this->_ontoVec, flag);
+    [[maybe_unused]] flcn::OperationStatus flag;
+    [[maybe_unused]] const flcn::Vec3 projection = this->_vec.tryProject(this->_ontoVec, flag);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 
 
 /**
- * @test Verify that projection using static variant of @ref fgm::Vec3::tryProject
+ * @test Verify that projection using static variant of @ref flcn::Vec3::tryProject
  *       always return floating-point vector.
  */
 TYPED_TEST(Vec3ProjectionTests, StaticWrapper_TryProject_AlwaysReturnFloatingPointVector)
 {
-    [[maybe_unused]] fgm::OperationStatus flag;
-    [[maybe_unused]] const fgm::Vec3 projection = fgm::Vec3<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
+    [[maybe_unused]] flcn::OperationStatus flag;
+    [[maybe_unused]] const flcn::Vec3 projection = flcn::Vec3<TypeParam>::tryProject(this->_vec, this->_ontoVec, flag);
     static_assert(std::is_floating_point_v<typename decltype(projection)::value_type>);
 }
 
 
 /**
- * @test Verify that projection of NaN vector using @ref fgm::Vec3::tryProject
- *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that projection of NaN vector using @ref flcn::Vec3::tryProject
+ *       returns zero vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec3ProjectionNaNTests, TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::Vec3<float>::one();
-    fgm::OperationStatus flag;
+    const auto& ontoVec = flcn::Vec3<float>::one();
+    flcn::OperationStatus flag;
 
     EXPECT_VEC_ZERO(nanVec.tryProject(ontoVec, flag));
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that projection onto NaN vector using @ref fgm::Vec3::tryProject
- *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that projection onto NaN vector using @ref flcn::Vec3::tryProject
+ *       returns zero vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec3ProjectionNaNTests, TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::Vec3<float>::one();
+    const auto& oneVec     = flcn::Vec3<float>::one();
     const auto& ontoNaNVec = GetParam();
-    fgm::OperationStatus flag;
+    flcn::OperationStatus flag;
 
     EXPECT_VEC_ZERO(oneVec.tryProject(ontoNaNVec, flag));
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that projection of NaN vector using static variant of @ref fgm::Vec3::tryProject
- *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that projection of NaN vector using static variant of @ref flcn::Vec3::tryProject
+ *       returns zero vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec3ProjectionNaNTests, StaticWrapper_TryProject_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
     const auto& nanVec  = GetParam();
-    const auto& ontoVec = fgm::Vec3<float>::one();
-    fgm::OperationStatus flag;
+    const auto& ontoVec = flcn::Vec3<float>::one();
+    flcn::OperationStatus flag;
 
-    EXPECT_VEC_ZERO(fgm::Vec3<float>::tryProject(nanVec, ontoVec, flag));
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_VEC_ZERO(flcn::Vec3<float>::tryProject(nanVec, ontoVec, flag));
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that projection onto NaN vector using static variant of @ref fgm::Vec3::tryProject
- *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that projection onto NaN vector using static variant of @ref flcn::Vec3::tryProject
+ *       returns zero vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST_P(Vec3ProjectionNaNTests, StaticWrapper_TryProject_OntoNaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    const auto& oneVec     = fgm::Vec3<float>::one();
+    const auto& oneVec     = flcn::Vec3<float>::one();
     const auto& ontoNaNVec = GetParam();
-    fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::Vec3<float>::tryProject(oneVec, ontoNaNVec, flag));
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    flcn::OperationStatus flag;
+    EXPECT_VEC_ZERO(flcn::Vec3<float>::tryProject(oneVec, ontoNaNVec, flag));
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 /** @} */

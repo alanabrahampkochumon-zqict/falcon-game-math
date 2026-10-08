@@ -33,7 +33,7 @@
 
 
 
-namespace fgm
+namespace flcn
 {
 
     template <Arithmetic T>
@@ -65,7 +65,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::Mat4<T>::zero() to guarantee a zeroed matrix.
+         *       @ref flcn::Mat4<T>::zero() to guarantee a zeroed matrix.
          */
         Mat4() = default;
 
@@ -727,7 +727,7 @@ namespace fgm
          *
          * @note Operation is restricted to numeric types via @ref StrictArithmetic.
          *
-         * @return A new @ref fgm::Mat4 with negated elements.
+         * @return A new @ref flcn::Mat4 with negated elements.
          */
         [[nodiscard]] constexpr Mat4 operator-() const noexcept
             requires SignedStrictArithmetic<T>;
@@ -1612,7 +1612,7 @@ namespace fgm
          *
          * @note Factory is constrained to matrices of signed types.
          *
-         * @tparam On The plane or axis to reflect across. For more details @ref fgm::reflect for more details.
+         * @tparam On The plane or axis to reflect across. For more details @ref flcn::reflect for more details.
          *
          * @return A new @ref Mat4 representing the reflection across coordinate axis, plane or the origin.
          *
@@ -1721,10 +1721,10 @@ namespace fgm
          * @param[in] normal     The unit vector orthogonal to shear direction.
          *
          * @code
-         *      const fgm::Vec3 xAxis(1.0f, 0.0f, 0.0f);
-         *      const fgm::Vec3 zAxis(0.0f, 0.0f, 1.0f);
+         *      const flcn::Vec3 xAxis(1.0f, 0.0f, 0.0f);
+         *      const flcn::Vec3 zAxis(0.0f, 0.0f, 1.0f);
          *      const auto shearAngle = 3.1415f / 4.0f;
-         *      const auto shearMat = fgm::Mat4<float>::makeShearByAngle(shearAngle, xAxis, zAxis);
+         *      const auto shearMat = flcn::Mat4<float>::makeShearByAngle(shearAngle, xAxis, zAxis);
          * @endcode
          *
          * @return A new @ref Mat4 representing the affine shear transform.
@@ -1751,11 +1751,11 @@ namespace fgm
          * @param[in] normal     The unit vector orthogonal to shear direction.
          *
          * @code
-         *      const fgm::Vec3 xAxis(1.0f, 0.0f, 0.0f);
-         *      const fgm::Vec3 zAxis(0.0f, 0.0f, 1.0f);
+         *      const flcn::Vec3 xAxis(1.0f, 0.0f, 0.0f);
+         *      const flcn::Vec3 zAxis(0.0f, 0.0f, 1.0f);
          *      const auto shearAngle = 3.1415f / 4.0f;
          *      const auto shearValue = std::tan(shearAngle);
-         *      const auto shearMat = fgm::Mat4<float>makeShear(shearValue, xAxis, zAxis);
+         *      const auto shearMat = flcn::Mat4<float>makeShear(shearValue, xAxis, zAxis);
          * @endcode
          *
          * @return A new @ref Mat4 representing the affine shear transform.
@@ -1803,7 +1803,7 @@ namespace fgm
          * @note Constrained to @ref StrictArithmetic types.
          */
         static constexpr Mat4 identity()
-            requires fgm::StrictArithmetic<T>
+            requires flcn::StrictArithmetic<T>
         {
             return Mat4{
                 T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1)
@@ -1817,7 +1817,7 @@ namespace fgm
          * @note Constrained to @ref StrictArithmetic types.
          */
         static constexpr Mat4 zero()
-            requires fgm::StrictArithmetic<T>
+            requires flcn::StrictArithmetic<T>
         {
             return Mat4{
                 T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0), T(0)
@@ -1969,6 +1969,6 @@ namespace fgm
         requires(std::is_same_v<T, Args> && ...) && (sizeof...(Args) == 15)
     Mat4(T, Args...) -> Mat4<T>;
 
-} // namespace fgm
+} // namespace flcn
 
 #include "Mat4.tpp"

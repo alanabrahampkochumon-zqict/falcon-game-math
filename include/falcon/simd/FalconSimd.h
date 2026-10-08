@@ -10,8 +10,8 @@
  */
 
 /// Library Includes
-#include "core/RegisterTraits.h"
-#include "core/Simd128.h"
-#include "utils/SIMDUtils.h"
-#include "utils/SimdTraits.h"
-#include "utils/TypeTraits.h"
+#include "falcon/simd/core/RegisterTraits.h"
+#include "falcon/simd/core/Simd128.h"
+#include "falcon/simd/utils/SIMDUtils.h"
+#include "falcon/simd/utils/SimdTraits.h"
+#include "falcon/simd/utils/TypeTraits.h"

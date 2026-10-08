@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::CVec2 normalization logic.
+ * @brief Verify @ref flcn::CVec2 normalization logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -31,11 +31,11 @@ namespace
     template <typename T>
     class CVec2NormalizationTests: public testing::Test
     {
-        using R = fgm::Magnitude<T>;
+        using R = flcn::Magnitude<T>;
 
     protected:
-        fgm::CVec2<T> _vec;
-        fgm::CVec2<R> _expectedUnitVec;
+        flcn::CVec2<T> _vec;
+        flcn::CVec2<R> _expectedUnitVec;
 
         void SetUp() override
         {
@@ -55,7 +55,7 @@ namespace
     class CVec2NormalizationZeroTests: public testing::Test
     {
     protected:
-        fgm::CVec2<T> _vec;
+        flcn::CVec2<T> _vec;
 
         void SetUp() override { _vec = { T(0), T(0) }; }
     };
@@ -67,12 +67,12 @@ namespace
     /**
      * @brief Test fixture for @ref CVec2 normalization with NaN vectors.
      */
-    class CVec2NormalizationNaNTests: public testing::TestWithParam<fgm::CVec2<float>>
+    class CVec2NormalizationNaNTests: public testing::TestWithParam<flcn::CVec2<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(CVec2NormalizationNaNVectors, CVec2NormalizationNaNTests,
-                             ::testing::Values(fgm::CVec2<float>(fgm::constants::NaN, 1.0f),
-                                               fgm::CVec2<float>(1.0f, fgm::constants::NaN),
-                                               fgm::CVec2<float>(fgm ::constants::NaN, fgm::constants::NaN)));
+                             ::testing::Values(flcn::CVec2<float>(flcn::constants::NaN, 1.0f),
+                                               flcn::CVec2<float>(1.0f, flcn::constants::NaN),
+                                               flcn::CVec2<float>(flcn::constants::NaN, flcn::constants::NaN)));
 
 
 
@@ -83,7 +83,7 @@ namespace
     namespace static_tests
     {
         // TODO: Add static tests after making sqrt constexpr
-        // constexpr fgm::CVec2 Vec(14, 27);
+        // constexpr flcn::CVec2 Vec(14, 27);
         // constexpr auto norm = Vec.normalize();
     }
 } // namespace
@@ -96,14 +96,14 @@ namespace
 
 TYPED_TEST(CVec2NormalizationTests, Normalize_NonZeroVectorReturnsUnitVector)
 {
-    const fgm::CVec2 normalized = this->_vec.normalize();
+    const flcn::CVec2 normalized = this->_vec.normalize();
     EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
 }
 
 
 TYPED_TEST(CVec2NormalizationTests, StaticWrapper_Normalize_NonZeroVectorReturnsUnitVector)
 {
-    const fgm::CVec2 normalized = fgm::CVec2<TypeParam>::normalize(this->_vec);
+    const flcn::CVec2 normalized = flcn::CVec2<TypeParam>::normalize(this->_vec);
     EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
 }
 
@@ -125,17 +125,17 @@ TYPED_TEST(CVec2NormalizationTests, NormalizedVectorIsAlwaysTypedPromotedToFloat
 
 TYPED_TEST(CVec2NormalizationTests, SafeNormalize_NonZeroVectorReturnsUnitVector)
 {
-    const fgm::CVec2 normalized = this->_vec.safeNormalize();
+    const flcn::CVec2 normalized = this->_vec.safeNormalize();
     EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
 }
 
 
 TYPED_TEST(CVec2NormalizationTests, SafeNormalize_ZeroVectorReturnsZeroVector)
-{ EXPECT_VEC_ZERO(fgm::CVec2<TypeParam>::zero().safeNormalize()); }
+{ EXPECT_VEC_ZERO(flcn::CVec2<TypeParam>::zero().safeNormalize()); }
 
 
 TEST(CVec2NormalizationTests, SafeNormalize_NaNVectorReturnsZeroVector)
-{ EXPECT_VEC_ZERO(fgm::CVec2<float>::qnan().safeNormalize()); }
+{ EXPECT_VEC_ZERO(flcn::CVec2<float>::qnan().safeNormalize()); }
 
 
 TYPED_TEST(CVec2NormalizationTests, SafeNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
@@ -147,22 +147,22 @@ TYPED_TEST(CVec2NormalizationTests, SafeNormalize_NormalizedVectorIsAlwaysTypedP
 
 TYPED_TEST(CVec2NormalizationTests, StaticWrapper_SafeNormalize_NonZeroVectorReturnsUnitVector)
 {
-    const fgm::CVec2 normalized = fgm::CVec2<TypeParam>::safeNormalize(this->_vec);
+    const flcn::CVec2 normalized = flcn::CVec2<TypeParam>::safeNormalize(this->_vec);
     EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
 }
 
 
 TYPED_TEST(CVec2NormalizationTests, StaticWrapper_SafeNormalize_ZeroVectorReturnsZeroVector)
-{ EXPECT_VEC_ZERO(fgm::CVec2<TypeParam>::safeNormalize(fgm::CVec2<TypeParam>::zero())); }
+{ EXPECT_VEC_ZERO(flcn::CVec2<TypeParam>::safeNormalize(flcn::CVec2<TypeParam>::zero())); }
 
 
 TEST(CVec2NormalizationTests, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
-{ EXPECT_VEC_ZERO(fgm::CVec2<float>::safeNormalize(fgm::CVec2<float>::qnan())); }
+{ EXPECT_VEC_ZERO(flcn::CVec2<float>::safeNormalize(flcn::CVec2<float>::qnan())); }
 
 
 TYPED_TEST(CVec2NormalizationTests, StaticWrapper_SafeNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
 {
-    [[maybe_unused]] const auto normalized = fgm::CVec2<TypeParam>::safeNormalize(this->_vec);
+    [[maybe_unused]] const auto normalized = flcn::CVec2<TypeParam>::safeNormalize(this->_vec);
     static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
 }
 
@@ -173,102 +173,102 @@ TYPED_TEST(CVec2NormalizationTests, StaticWrapper_SafeNormalize_NormalizedVector
  **************************************/
 
 /**
- * @test Verify that normalizing a vector using @ref fgm::CVec2::tryNormalize
- *       returns a unit vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ * @test Verify that normalizing a vector using @ref flcn::CVec2::tryNormalize
+ *       returns a unit vector and sets the flag to @ref flcn::OperationStatus::SUCCESS.
  */
 TYPED_TEST(CVec2NormalizationTests, TryNormalize_NonZeroVectorReturnsUnitVector)
 {
-    fgm::OperationStatus flag;
-    const fgm::CVec2 normalized = this->_vec.tryNormalize(flag);
+    flcn::OperationStatus flag;
+    const flcn::CVec2 normalized = this->_vec.tryNormalize(flag);
 
     EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(flcn::OperationStatus::SUCCESS, flag);
 }
 
 
 /**
- * @test Verify that attempting to normalize a zero-magnitude vector using @ref fgm::CVec2::tryNormalize
- *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ * @test Verify that attempting to normalize a zero-magnitude vector using @ref flcn::CVec2::tryNormalize
+ *       returns a zero-vector and sets the flag to @ref flcn::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(CVec2NormalizationTests, TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::CVec2<TypeParam>::zero().tryNormalize(flag));
-    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+    flcn::OperationStatus flag;
+    EXPECT_VEC_ZERO(flcn::CVec2<TypeParam>::zero().tryNormalize(flag));
+    EXPECT_EQ(flcn::OperationStatus::DIVISIONBYZERO, flag);
 }
 
 
 /**
- * @test Verify that attempting to normalize a NaN vector using @ref fgm::CVec2::tryNormalize
- *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that attempting to normalize a NaN vector using @ref flcn::CVec2::tryNormalize
+ *       returns a zero-vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST(CVec2NormalizationTests, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::CVec2<float>::qnan().tryNormalize(flag));
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    flcn::OperationStatus flag;
+    EXPECT_VEC_ZERO(flcn::CVec2<float>::qnan().tryNormalize(flag));
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that normalizing a vector using @ref fgm::CVec2::tryNormalize always
+ * @test Verify that normalizing a vector using @ref flcn::CVec2::tryNormalize always
  *       return a floating-point vector.
  */
 TYPED_TEST(CVec2NormalizationTests, TryNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
 {
-    [[maybe_unused]] fgm::OperationStatus flag;
+    [[maybe_unused]] flcn::OperationStatus flag;
     [[maybe_unused]] const auto normalized = this->_vec.tryNormalize(flag);
     static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
 }
 
 
 /**
- * @test Verify that normalizing a 2D vector using static variant of @ref fgm::CVec2::tryNormalize
- *       returns a unit vector and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ * @test Verify that normalizing a 2D vector using static variant of @ref flcn::CVec2::tryNormalize
+ *       returns a unit vector and sets the flag to @ref flcn::OperationStatus::SUCCESS.
  */
 TYPED_TEST(CVec2NormalizationTests, StaticWrapper_TryNormalize_NonZeroVectorReturnsUnitVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    const fgm::CVec2 normalized = fgm::CVec2<TypeParam>::tryNormalize(this->_vec, flag);
+    flcn::OperationStatus flag;
+    const flcn::CVec2 normalized = flcn::CVec2<TypeParam>::tryNormalize(this->_vec, flag);
 
     EXPECT_VEC_EQ(this->_expectedUnitVec, normalized);
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(flcn::OperationStatus::SUCCESS, flag);
 }
 
 
 /**
  * @test Verify that attempting to normalize a zero-magnitude vector using static variant of
- *       @ref fgm::CVec2::tryNormalize returns a zero-vector and
- *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ *       @ref flcn::CVec2::tryNormalize returns a zero-vector and
+ *       sets the flag to @ref flcn::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(CVec2NormalizationTests, StaticWrapper_TryNormalize_ZeroVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::CVec2<TypeParam>::zero().tryNormalize(flag));
-    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+    flcn::OperationStatus flag;
+    EXPECT_VEC_ZERO(flcn::CVec2<TypeParam>::zero().tryNormalize(flag));
+    EXPECT_EQ(flcn::OperationStatus::DIVISIONBYZERO, flag);
 }
 
 
 /**
- * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::CVec2::tryNormalize
- *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref flcn::CVec2::tryNormalize
+ *       returns a zero-vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST(CVec2NormalizationTests, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::CVec2<float>::tryNormalize(fgm::CVec2<float>::qnan(), flag));
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    flcn::OperationStatus flag;
+    EXPECT_VEC_ZERO(flcn::CVec2<float>::tryNormalize(flcn::CVec2<float>::qnan(), flag));
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that the normalizing a 2D vector using static variant of @ref fgm::CVec2::tryNormalize
+ * @test Verify that the normalizing a 2D vector using static variant of @ref flcn::CVec2::tryNormalize
  *       always return a floating-point vector.
  */
 TYPED_TEST(CVec2NormalizationTests, StaticWrapper_TryNormalize_NormalizedVectorIsAlwaysTypedPromotedToFloatingPointType)
 {
-    [[maybe_unused]] fgm::OperationStatus flag;
-    [[maybe_unused]] const auto normalized = fgm::CVec2<TypeParam>::tryNormalize(this->_vec, flag);
+    [[maybe_unused]] flcn::OperationStatus flag;
+    [[maybe_unused]] const auto normalized = flcn::CVec2<TypeParam>::tryNormalize(this->_vec, flag);
     static_assert(std::is_floating_point_v<typename decltype(normalized)::value_type>);
 }
 
@@ -280,7 +280,7 @@ TYPED_TEST(CVec2NormalizationTests, StaticWrapper_TryNormalize_NormalizedVectorI
  **************************************/
 
 /**
- * @test Verify that attempting to normalize a NaN vector of @ref fgm::CVec2::safeNormalize
+ * @test Verify that attempting to normalize a NaN vector of @ref flcn::CVec2::safeNormalize
  *       returns a zero-vector.
  */
 TEST_P(CVec2NormalizationNaNTests, SafeNormalize_NaNVectorReturnsZeroVector)
@@ -292,42 +292,42 @@ TEST_P(CVec2NormalizationNaNTests, SafeNormalize_NaNVectorReturnsZeroVector)
 
 
 /**
- * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::CVec2::safeNormalize
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref flcn::CVec2::safeNormalize
  *       returns a zero-vector.
  */
 TEST_P(CVec2NormalizationNaNTests, StaticWrapper_SafeNormalize_NaNVectorReturnsZeroVector)
 {
     const auto& vec = GetParam();
 
-    EXPECT_VEC_ZERO(fgm::CVec2<ParamType::value_type>::safeNormalize(vec));
+    EXPECT_VEC_ZERO(flcn::CVec2<ParamType::value_type>::safeNormalize(vec));
 }
 
 
 /**
- * @test Verify that attempting to normalize a NaN vector of @ref fgm::CVec2::tryNormalize
- *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that attempting to normalize a NaN vector of @ref flcn::CVec2::tryNormalize
+ *       returns a zero-vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST_P(CVec2NormalizationNaNTests, TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
+    flcn::OperationStatus flag;
     const auto& vec = GetParam();
 
     EXPECT_VEC_ZERO(vec.tryNormalize(flag));
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that attempting to normalize a NaN vector using static variant of @ref fgm::CVec2::tryNormalize
- *       returns a zero-vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that attempting to normalize a NaN vector using static variant of @ref flcn::CVec2::tryNormalize
+ *       returns a zero-vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST_P(CVec2NormalizationNaNTests, StaticWrapper_TryNormalize_NaNVectorReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
+    flcn::OperationStatus flag;
     const auto& vec = GetParam();
 
-    EXPECT_VEC_ZERO(fgm::CVec2<ParamType::value_type>::tryNormalize(vec, flag));
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_VEC_ZERO(flcn::CVec2<ParamType::value_type>::tryNormalize(vec, flag));
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 /** @} */

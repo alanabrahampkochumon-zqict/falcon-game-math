@@ -26,10 +26,10 @@
 
 namespace
 {
-    fgm::Mat4 mat(1, 2, 3, 4);
+    flcn::Mat4 mat(1, 2, 3, 4);
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4 invalid (row, column) indices.
+     * @brief Test fixture for @ref flcn::Mat4 invalid (row, column) indices.
      */
     class Mat4IndexingTests: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
     {};
@@ -39,7 +39,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4 invalid column indices.
+     * @brief Test fixture for @ref flcn::Mat4 invalid column indices.
      */
     class Mat4ColumnIndexingTests: public testing::TestWithParam<std::size_t>
     {};
@@ -48,7 +48,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4 Division.
+     * @brief Test fixture for @ref flcn::Mat4 Division.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -56,9 +56,9 @@ namespace
     class Mat4DivisionTests: public testing::Test
     {
     protected:
-        fgm::Mat4<T> _matrix;
+        flcn::Mat4<T> _matrix;
         T _scalar;
-        fgm::Mat4<T> _expectedMatrix;
+        flcn::Mat4<T> _expectedMatrix;
 
 
         void SetUp() override
@@ -81,48 +81,48 @@ namespace
 
     // TODO: Add tests
     /**
-     * @brief Test fixture for @ref fgm::Mat4 Division with NaN elements.
+     * @brief Test fixture for @ref flcn::Mat4 Division with NaN elements.
      */
-    // class NaNMat4DivisionTests: public testing::TestWithParam<fgm::Mat4<float>>
+    // class NaNMat4DivisionTests: public testing::TestWithParam<flcn::Mat4<float>>
     // {};
     // INSTANTIATE_TEST_SUITE_P(Mat4InvalidDivision, NaNMat4DivisionTests,
-    //                          ::testing::Values(fgm::Mat4<float>{ fgm::constants::NaN, 3.0f, 3.0f, 3.0f },
-    //                                            fgm::Mat4<float>{ 3.0f, fgm::constants::NaN, 3.0f, 3.0f },
-    //                                            fgm::Mat4<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
-    //                                            fgm::Mat4<float>{ 3.0f, 3.0f, 3.0f, fgm::constants::NaN },
-    //                                            fgm::Mat4<float>{ fgm ::constants::NaN, fgm::constants::NaN,
-    //                                                              fgm ::constants::NaN, fgm ::constants::NaN }));
+    //                          ::testing::Values(flcn::Mat4<float>{ flcn::constants::NaN, 3.0f, 3.0f, 3.0f },
+    //                                            flcn::Mat4<float>{ 3.0f, flcn::constants::NaN, 3.0f, 3.0f },
+    //                                            flcn::Mat4<float>{ 3.0f, 3.0f, flcn::constants::NaN, 3.0f },
+    //                                            flcn::Mat4<float>{ 3.0f, 3.0f, 3.0f, flcn::constants::NaN },
+    //                                            flcn::Mat4<float>{ flcn::constants::NaN, flcn::constants::NaN,
+    //                                                              flcn::constants::NaN, flcn::constants::NaN }));
 
-    /** @brief Test fixture for calculating @ref fgm::Mat4 inverse with singular matrices. */
-    class Mat4InverseSingularTests: public testing::TestWithParam<fgm::Mat4<float>>
+    /** @brief Test fixture for calculating @ref flcn::Mat4 inverse with singular matrices. */
+    class Mat4InverseSingularTests: public testing::TestWithParam<flcn::Mat4<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
         Mat4SingularMatrixInverse, Mat4InverseSingularTests,
-        ::testing::Values(fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f },
-                                     fgm::Vec4{ 7.0f, 8.0f, 9.0f, 12.0f }, fgm::Vec4{ 1.0f, 85.0f, 19.0f, 12.0f } },
-                          fgm::Mat4{ fgm::Vec4{ 1.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
-                                     fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-                          fgm::Mat4{ fgm::Vec4{ 0.0f, 0.0f, 0.0f, 0.0f }, fgm::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
-                                     fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-                          fgm::Mat4{ fgm::Vec4{ 0.0f, 1.0f, 3.0f, 4.0f }, fgm::Vec4{ 0.0f, 2.0f, 3.0f, 4.0f },
-                                     fgm::Vec4{ 0.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 0.0f, 4.0f, 31.6f, 2.0f } },
-                          fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 6.0f, 8.0f },
-                                     fgm::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
-                          fgm::Mat4{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, fgm::Vec4{ 2.0f, 4.0f, 5.0f, 10.0f },
-                                     fgm::Vec4{ 3.0f, 6.0f, 9.0f, 12.0f }, fgm::Vec4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
+        ::testing::Values(flcn::Mat4{ flcn::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, flcn::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f },
+                                     flcn::Vec4{ 7.0f, 8.0f, 9.0f, 12.0f }, flcn::Vec4{ 1.0f, 85.0f, 19.0f, 12.0f } },
+                          flcn::Mat4{ flcn::Vec4{ 1.0f, 1.0f, 3.0f, 4.0f }, flcn::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
+                                     flcn::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, flcn::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                          flcn::Mat4{ flcn::Vec4{ 0.0f, 0.0f, 0.0f, 0.0f }, flcn::Vec4{ 2.0f, 2.0f, 3.0f, 4.0f },
+                                     flcn::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, flcn::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                          flcn::Mat4{ flcn::Vec4{ 0.0f, 1.0f, 3.0f, 4.0f }, flcn::Vec4{ 0.0f, 2.0f, 3.0f, 4.0f },
+                                     flcn::Vec4{ 0.0f, 3.0f, 9.0f, 12.0f }, flcn::Vec4{ 0.0f, 4.0f, 31.6f, 2.0f } },
+                          flcn::Mat4{ flcn::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, flcn::Vec4{ 2.0f, 4.0f, 6.0f, 8.0f },
+                                     flcn::Vec4{ 3.0f, 3.0f, 9.0f, 12.0f }, flcn::Vec4{ 4.0f, 4.0f, 31.6f, 2.0f } },
+                          flcn::Mat4{ flcn::Vec4{ 1.0f, 2.0f, 3.0f, 4.0f }, flcn::Vec4{ 2.0f, 4.0f, 5.0f, 10.0f },
+                                     flcn::Vec4{ 3.0f, 6.0f, 9.0f, 12.0f }, flcn::Vec4{ 4.0f, 8.0f, 31.6f, 2.0f } }));
 
 
     // TODO: Add
-    // /** @brief Test fixture for @ref fgm::Mat4 inverse with NaN elements. */
-    // class Mat4InverseNaNTests: public testing::TestWithParam<fgm::Mat4<float>>
+    // /** @brief Test fixture for @ref flcn::Mat4 inverse with NaN elements. */
+    // class Mat4InverseNaNTests: public testing::TestWithParam<flcn::Mat4<float>>
     // {};
     // INSTANTIATE_TEST_SUITE_P(Mat4NaNMatrixInverse, Mat4InverseNaNTests,
-    //                          ::testing::Values(fgm::Mat4<float>{ fgm::constants::NaN, 3.0f, 3.0f, 3.0f },
-    //                                            fgm::Mat4<float>{ 3.0f, fgm::constants::NaN, 3.0f, 3.0f },
-    //                                            fgm::Mat4<float>{ 3.0f, 3.0f, fgm::constants::NaN, 3.0f },
-    //                                            fgm::Mat4<float>{ 3.0f, 3.0f, 3.0f, fgm::constants::NaN },
-    //                                            fgm::Mat4<float>{ fgm ::constants::NaN, fgm::constants::NaN,
-    //                                                              fgm ::constants::NaN, fgm ::constants::NaN }));
+    //                          ::testing::Values(flcn::Mat4<float>{ flcn::constants::NaN, 3.0f, 3.0f, 3.0f },
+    //                                            flcn::Mat4<float>{ 3.0f, flcn::constants::NaN, 3.0f, 3.0f },
+    //                                            flcn::Mat4<float>{ 3.0f, 3.0f, flcn::constants::NaN, 3.0f },
+    //                                            flcn::Mat4<float>{ 3.0f, 3.0f, 3.0f, flcn::constants::NaN },
+    //                                            flcn::Mat4<float>{ flcn::constants::NaN, flcn::constants::NaN,
+    //                                                              flcn::constants::NaN, flcn::constants::NaN }));
 
 } // namespace
 
@@ -149,7 +149,7 @@ TEST_P(Mat4IndexingTests, OutOfBoundAccessTriggers_AssertInDebugMode)
 TEST_P(Mat4ColumnIndexingTests, OutOfBoundMutation_TriggersAssertInDebugMode)
 {
     const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vec4<int>::zero()), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = flcn::Vec4<int>::zero()), "");
 }
 
 
@@ -182,7 +182,7 @@ TEST_P(Mat4InverseSingularTests, StaticWrapper_TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();
     // Static cast is placed to suppress the no-discard warning
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Mat4<float>::inverse(matrix)), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(flcn::Mat4<float>::inverse(matrix)), "");
 }
 
 /** @} */

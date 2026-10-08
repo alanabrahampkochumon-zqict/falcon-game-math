@@ -25,25 +25,25 @@
 #define EXPECT_QUAT_EQ(q1, q2)                                                                                         \
     do                                                                                                                 \
     {                                                                                                                  \
-        fgm::testutils::expectQuaternionEq(q1, q2);                                                                    \
+        flcn::testutils::expectQuaternionEq(q1, q2);                                                                    \
     } while (0)
 
 
 #define EXPECT_QUAT_CONTAINS(quat, x, y, z, w)                                                                         \
     do                                                                                                                 \
     {                                                                                                                  \
-        fgm::testutils::expectQuaternionContains(quat, x, y, z, w);                                                    \
+        flcn::testutils::expectQuaternionContains(quat, x, y, z, w);                                                    \
     } while (0)
 
 
 #define EXPECT_QUAT_INF(quat)                                                                                          \
     do                                                                                                                 \
     {                                                                                                                  \
-        fgm::testutils::expectQuatInf(quat);                                                                           \
+        flcn::testutils::expectQuatInf(quat);                                                                           \
     } while (0)
 
 
-namespace fgm::testutils
+namespace flcn::testutils
 {
     /**
      * @brief Perform a component-wise equality between two quaternions.
@@ -86,7 +86,7 @@ namespace fgm::testutils
 
 
     /**
-     * @brief Performs a strict component-wise validation of a @ref fgm::Quaternion against discrete scalar values.
+     * @brief Performs a strict component-wise validation of a @ref flcn::Quaternion against discrete scalar values.
      *
      * @tparam T Numeric type of the quaternion's vector and scalar components.
      *
@@ -145,4 +145,4 @@ namespace fgm::testutils
         }
     }
 
-} // namespace fgm::testutils
+} // namespace flcn::testutils

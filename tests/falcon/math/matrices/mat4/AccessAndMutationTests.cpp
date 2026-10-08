@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 01, 2026
  *
- * @brief Verify @ref fgm::Mat4 accessors and mutators.
+ * @brief Verify @ref flcn::Mat4 accessors and mutators.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -24,11 +24,11 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat4 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-        constexpr fgm::Vec4 VEC0(1, 5, 9, 13);
-        constexpr fgm::Vec4 VEC1(2, 6, 10, 14);
-        constexpr fgm::Vec4 VEC2(3, 7, 11, 15);
-        constexpr fgm::Vec4 VEC3(4, 8, 12, 16);
+        constexpr flcn::Mat4 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+        constexpr flcn::Vec4 VEC0(1, 5, 9, 13);
+        constexpr flcn::Vec4 VEC1(2, 6, 10, 14);
+        constexpr flcn::Vec4 VEC2(3, 7, 11, 15);
+        constexpr flcn::Vec4 VEC3(4, 8, 12, 16);
 
         /// @test Verify that matrix elements are accessible as (row, column) during compile time.
         static_assert(MAT(0, 0) == 1);
@@ -79,7 +79,7 @@ namespace
 /** @test Verify that the matrix elements are accessible via subscript indexing for reads. */
 TEST(Mat4AccessTests, AccessibleAsElements)
 {
-    constexpr fgm::Mat4 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
+    constexpr flcn::Mat4 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
                             15.0f, 16.0f);
 
     EXPECT_FLOAT_EQ(1.0f, mat(0, 0));
@@ -104,13 +104,13 @@ TEST(Mat4AccessTests, AccessibleAsElements)
 /** @test Verify that the matrix columns are accessible as vectors for reads. */
 TEST(Mat4AccessTests, AccessibleAsColumnVectors)
 {
-    constexpr fgm::Mat4 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
+    constexpr flcn::Mat4 mat(1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f,
                             15.0f, 16.0f);
 
-    EXPECT_VEC_EQ(fgm::Vec4(1.0f, 5.0f, 9.0f, 13.0f), mat[0]);
-    EXPECT_VEC_EQ(fgm::Vec4(2.0f, 6.0f, 10.0f, 14.0f), mat[1]);
-    EXPECT_VEC_EQ(fgm::Vec4(3.0f, 7.0f, 11.0f, 15.0f), mat[2]);
-    EXPECT_VEC_EQ(fgm::Vec4(4.0f, 8.0f, 12.0f, 16.0f), mat[3]);
+    EXPECT_VEC_EQ(flcn::Vec4(1.0f, 5.0f, 9.0f, 13.0f), mat[0]);
+    EXPECT_VEC_EQ(flcn::Vec4(2.0f, 6.0f, 10.0f, 14.0f), mat[1]);
+    EXPECT_VEC_EQ(flcn::Vec4(3.0f, 7.0f, 11.0f, 15.0f), mat[2]);
+    EXPECT_VEC_EQ(flcn::Vec4(4.0f, 8.0f, 12.0f, 16.0f), mat[3]);
 }
 
 
@@ -122,7 +122,7 @@ TEST(Mat4AccessTests, AccessibleAsColumnVectors)
 /** @test Verify that the matrix elements are accessible via subscript indexing for writes. */
 TEST(Mat4MutationTests, ElementsCanBeMutatedUsingIndex)
 {
-    fgm::Mat4<float> mat;
+    flcn::Mat4<float> mat;
 
     mat(0, 0) = 1.0f;
     mat(0, 1) = 2.0f;
@@ -164,11 +164,11 @@ TEST(Mat4MutationTests, ElementsCanBeMutatedUsingIndex)
 /** @test Verify that the matrix columns are accessible as vectors for writes. */
 TEST(Mat4MutationTests, ColumnsCanBeMutatedUsingIndex)
 {
-    constexpr fgm::Vec4 col0 = { 1.0f, 5.0f, 9.0f, 13.0f };
-    constexpr fgm::Vec4 col1 = { 2.0f, 6.0f, 10.0f, 14.0f };
-    constexpr fgm::Vec4 col2 = { 3.0f, 7.0f, 11.0f, 15.0f };
-    constexpr fgm::Vec4 col3 = { 4.0f, 8.0f, 12.0f, 16.0f };
-    fgm::Mat4<float> mat;
+    constexpr flcn::Vec4 col0 = { 1.0f, 5.0f, 9.0f, 13.0f };
+    constexpr flcn::Vec4 col1 = { 2.0f, 6.0f, 10.0f, 14.0f };
+    constexpr flcn::Vec4 col2 = { 3.0f, 7.0f, 11.0f, 15.0f };
+    constexpr flcn::Vec4 col3 = { 4.0f, 8.0f, 12.0f, 16.0f };
+    flcn::Mat4<float> mat;
 
     mat[0] = col0;
     mat[1] = col1;

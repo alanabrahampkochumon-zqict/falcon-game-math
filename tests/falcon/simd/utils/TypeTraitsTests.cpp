@@ -15,9 +15,9 @@ namespace
 {
     namespace static_tests
     {
-        using namespace falcon;
+        using namespace flcn;
 
-        /// @test Verify that @ref falcon::SimdSafeConvertible return appropriate values depending on type narrow.
+        /// @test Verify that @ref flcn::SimdSafeConvertible return appropriate values depending on type narrow.
         // uint8_t
         static_assert(SimdSafeConvertible<uint8_t, uint8_t>);
         static_assert(SimdSafeConvertible<uint8_t, uint16_t>);

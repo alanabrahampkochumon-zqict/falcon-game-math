@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 28, 2026
  *
- * @brief Verify @ref fgm::utils function's logic.
+ * @brief Verify @ref flcn::utils function's logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -29,7 +29,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::utils::diffAbs.
+     * @brief Test fixture for @ref flcn::utils::diffAbs.
      */
     template <typename>
     class FALCONDiffAbsTests: public testing::Test
@@ -46,7 +46,7 @@ namespace
     };
 
     /**
-     * @brief Test fixture for validating @ref fgm::utils::compareEq across different types.
+     * @brief Test fixture for validating @ref flcn::utils::compareEq across different types.
      */
     template <typename T>
     class CompareEqTests: public testing::Test
@@ -72,24 +72,24 @@ namespace
 
     namespace static_tests
     {
-        /** @test Verify that @ref fgm::utils::diffAbs returns the correct value at compile time. */
-        static_assert(fgm::utils::diffAbs(1000, 100) == 900);
-        static_assert(fgm::utils::diffAbs(100, 1000) == 900);
+        /** @test Verify that @ref flcn::utils::diffAbs returns the correct value at compile time. */
+        static_assert(flcn::utils::diffAbs(1000, 100) == 900);
+        static_assert(flcn::utils::diffAbs(100, 1000) == 900);
 
 
-        /// @test Verify that @ref fgm::utils::compareEq returns the correct boolean at compile time. */
-        static_assert(fgm::utils::compareEq(9.1111, 9.1112) == false);
-        static_assert(fgm::utils::compareEq(9.1112, 9.1111) == false);
-        static_assert(fgm::utils::compareEq(9.1112, 9.1112) == true);
+        /// @test Verify that @ref flcn::utils::compareEq returns the correct boolean at compile time. */
+        static_assert(flcn::utils::compareEq(9.1111, 9.1112) == false);
+        static_assert(flcn::utils::compareEq(9.1112, 9.1111) == false);
+        static_assert(flcn::utils::compareEq(9.1112, 9.1112) == true);
 
         /// TODO: Add sqrt tests
-        //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-        //     static_assert(fgm::utils::sqrt(2.0) - 1.41421356237 <= fgm::Config::DOUBLE_EPSILON);
-        //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-        //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-        //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-        //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
-        //     static_assert(fgm::utils::sqrt(4) - 2.0f <= fgm::Config::FLOAT_EPSILON);
+        //     static_assert(flcn::utils::sqrt(4) - 2.0f <= flcn::Config::FLOAT_EPSILON);
+        //     static_assert(flcn::utils::sqrt(2.0) - 1.41421356237 <= flcn::Config::DOUBLE_EPSILON);
+        //     static_assert(flcn::utils::sqrt(4) - 2.0f <= flcn::Config::FLOAT_EPSILON);
+        //     static_assert(flcn::utils::sqrt(4) - 2.0f <= flcn::Config::FLOAT_EPSILON);
+        //     static_assert(flcn::utils::sqrt(4) - 2.0f <= flcn::Config::FLOAT_EPSILON);
+        //     static_assert(flcn::utils::sqrt(4) - 2.0f <= flcn::Config::FLOAT_EPSILON);
+        //     static_assert(flcn::utils::sqrt(4) - 2.0f <= flcn::Config::FLOAT_EPSILON);
     } // namespace static_tests
 
 
@@ -107,7 +107,7 @@ TYPED_TEST(FALCONDiffAbsTests, ReturnsAbsoluteValueWithUnderflow_WhenAGreaterTha
     const auto a      = TypeParam(12);
     const auto b      = TypeParam(7);
     const auto result = TypeParam(5);
-    testutils::EXPECT_MAG_EQ(result, fgm::utils::diffAbs(a, b));
+    testutils::EXPECT_MAG_EQ(result, flcn::utils::diffAbs(a, b));
 }
 
 
@@ -116,7 +116,7 @@ TYPED_TEST(FALCONDiffAbsTests, ReturnsAbsoluteValueWithUnderflow_WhenBGreaterTha
     const auto a      = TypeParam(7);
     const auto b      = TypeParam(12);
     const auto result = TypeParam(5);
-    testutils::EXPECT_MAG_EQ(result, fgm::utils::diffAbs(a, b));
+    testutils::EXPECT_MAG_EQ(result, flcn::utils::diffAbs(a, b));
 }
 
 
@@ -125,7 +125,7 @@ TYPED_TEST(FALCONDiffAbsTests, ReturnsAbsoluteValueWithUnderflow_WhenAEqualsB)
     const auto a      = TypeParam(12);
     const auto b      = TypeParam(12);
     const auto result = TypeParam(0);
-    testutils::EXPECT_MAG_EQ(result, fgm::utils::diffAbs(a, b));
+    testutils::EXPECT_MAG_EQ(result, flcn::utils::diffAbs(a, b));
 }
 
 
@@ -135,15 +135,15 @@ TYPED_TEST(FALCONDiffAbsTests, ReturnsAbsoluteValueWithUnderflow_WhenAEqualsB)
  **************************************/
 
 TYPED_TEST(CompareEqTests, EqualValues_ReturnTrue)
-{ EXPECT_TRUE(fgm::utils::compareEq(this->_equalValueA, this->_equalValueB)); }
+{ EXPECT_TRUE(flcn::utils::compareEq(this->_equalValueA, this->_equalValueB)); }
 
 
 TYPED_TEST(CompareEqTests, UnequalValues_ReturnFalse)
-{ EXPECT_FALSE(fgm::utils::compareEq(this->_equalValueA, this->_unequalValue)); }
+{ EXPECT_FALSE(flcn::utils::compareEq(this->_equalValueA, this->_unequalValue)); }
 
 
 /// @test Verify that compareEq works with relative precision when compared IEEE 754 floating point types.
 TEST(CompareEqTests, MaintainsARelativePrecision)
-{ EXPECT_FALSE(fgm::utils::compareEq(316.810892301231, 316.810892301222)); }
+{ EXPECT_FALSE(flcn::utils::compareEq(316.810892301231, 316.810892301222)); }
 
 /** @} */

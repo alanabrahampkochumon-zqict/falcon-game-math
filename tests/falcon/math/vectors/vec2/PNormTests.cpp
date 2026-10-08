@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: September 24, 2026
  *
- * @brief Verify the @ref fgm::Vec2 p-Norm length logic.
+ * @brief Verify the @ref flcn::Vec2 p-Norm length logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -31,7 +31,7 @@ namespace
     class Vec2ManhattanNormTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vec;
+        flcn::Vec2<T> _vec;
         T _norm;
 
         void SetUp() override
@@ -52,7 +52,7 @@ namespace
     class Vec2ChebyshevNormTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vec;
+        flcn::Vec2<T> _vec;
         T _norm;
 
         void SetUp() override
@@ -80,11 +80,11 @@ TYPED_TEST(Vec2ManhattanNormTests, ReturnsSumOfAbsoluteValueOfComponents)
 
 /**
  * @test Verify that taking the manhattan norm of a non-unit vector using static variant of
- *        @ref fgm::Vec2::manhattanNorm returns non-unit scalar.
+ *        @ref flcn::Vec2::manhattanNorm returns non-unit scalar.
  */
 TYPED_TEST(Vec2ManhattanNormTests, StaticWrapper_ReturnsSumOfAbsoluteValueOfComponents)
 {
-    const auto magnitude = fgm::Vec2<TypeParam>::manhattanNorm(this->_vec);
+    const auto magnitude = flcn::Vec2<TypeParam>::manhattanNorm(this->_vec);
     EXPECT_MAG_EQ(this->_norm, magnitude);
 }
 
@@ -104,11 +104,11 @@ TYPED_TEST(Vec2ChebyshevNormTests, ReturnsLongestAbsoluteComponent)
 
 /**
  * @test Verify that taking the chebyshev norm of a non-unit vector using static variant of
- *        @ref fgm::Vec2::chebyshevNorm returns non-unit scalar.
+ *        @ref flcn::Vec2::chebyshevNorm returns non-unit scalar.
  */
 TYPED_TEST(Vec2ChebyshevNormTests, StaticWrapper_ReturnsLongestAbsoluteComponent)
 {
-    const auto magnitude = fgm::Vec2<TypeParam>::chebyshevNorm(this->_vec);
+    const auto magnitude = flcn::Vec2<TypeParam>::chebyshevNorm(this->_vec);
     EXPECT_MAG_EQ(this->_norm, magnitude);
 }
 

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 02, 2026
  *
- * @brief Verify @ref fgm::Vec3 bitwise operator(&, |, !) logic.
+ * @brief Verify @ref flcn::Vec3 bitwise operator(&, |, !) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -25,16 +25,16 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Vec3 boolean bitwise operations.
+     * @brief Test fixture for @ref flcn::Vec3 boolean bitwise operations.
      */
     class BooleanVec3BitOperationsTests: public testing::Test
     {
     protected:
-        fgm::Vec3<bool> _vecA;
-        fgm::Vec3<bool> _vecB;
-        fgm::Vec3<bool> _expectedConjunctionVector;
-        fgm::Vec3<bool> _expectedDisjunctionVec;
-        fgm::Vec3<bool> _expectedInvertedVec;
+        flcn::Vec3<bool> _vecA;
+        flcn::Vec3<bool> _vecB;
+        flcn::Vec3<bool> _expectedConjunctionVector;
+        flcn::Vec3<bool> _expectedDisjunctionVec;
+        flcn::Vec3<bool> _expectedInvertedVec;
 
         void SetUp() override
         {
@@ -54,8 +54,8 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Vec3 VEC_A(true, false, true);
-        constexpr fgm::Vec3 VEC_B(false, false, true);
+        constexpr flcn::Vec3 VEC_A(true, false, true);
+        constexpr flcn::Vec3 VEC_B(false, false, true);
 
         /// @test Verify that vector AND returns a valid vector at compile time.
         constexpr auto AND_VEC = VEC_A & VEC_B;

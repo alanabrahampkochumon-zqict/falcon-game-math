@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: August 06, 2026
  *
- * @brief Verify @ref fgm::Quaternion quaternion algebra assertions(Inverse,...).
+ * @brief Verify @ref flcn::Quaternion quaternion algebra assertions(Inverse,...).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -21,7 +21,7 @@
 
 TEST(QuaternionInverseTests, ZeroQuaternionTriggersAssertInDebugMode)
 {
-    const auto zeroQuat = fgm::Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+    const auto zeroQuat = flcn::Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
     EXPECT_DEATH(static_cast<void>(zeroQuat.inverse()), "");
 }
 

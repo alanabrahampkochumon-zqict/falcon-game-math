@@ -43,7 +43,7 @@ namespace testutils
      *       if the vectors are not equal.
      * @note Triggers an assertion failure if vector dimensions are mismatched.
      */
-    template <fgm::Vector T, fgm::Vector U>
+    template <flcn::Vector T, flcn::Vector U>
     void EXPECT_VEC_EQ(const T& expected, const U& actual)
     {
         using ValueType = T::value_type;
@@ -56,11 +56,11 @@ namespace testutils
         {
             if constexpr (std::is_same_v<ValueType, double>)
             {
-                EXPECT_NEAR(expected[i], static_cast<ValueType>(actual[i]), fgm::Config::DOUBLE_EPSILON);
+                EXPECT_NEAR(expected[i], static_cast<ValueType>(actual[i]), flcn::Config::DOUBLE_EPSILON);
             }
             else if constexpr (std::is_floating_point_v<ValueType>)
             {
-                EXPECT_NEAR(expected[i], static_cast<ValueType>(actual[i]), fgm::Config::FLOAT_EPSILON);
+                EXPECT_NEAR(expected[i], static_cast<ValueType>(actual[i]), flcn::Config::FLOAT_EPSILON);
             }
             else
             {
@@ -71,7 +71,7 @@ namespace testutils
 
 
     /**
-     * @brief Performs a strict component-wise validation of a @ref fgm::CVec2 against discrete scalar values.
+     * @brief Performs a strict component-wise validation of a @ref flcn::CVec2 against discrete scalar values.
      *
      * @tparam T Numeric type of the vector and scalar components.
      *
@@ -82,8 +82,8 @@ namespace testutils
      * @note Uses GoogleTest macros. Triggers a non-fatal test failure if the vector's
      *       internal state does not match the provided scalars.
      */
-    template <fgm::Arithmetic T>
-    void EXPECT_VEC_CONTAINS(const fgm::CVec2<T>& vector, T x, T y)
+    template <flcn::Arithmetic T>
+    void EXPECT_VEC_CONTAINS(const flcn::CVec2<T>& vector, T x, T y)
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -103,7 +103,7 @@ namespace testutils
     }
 
     /**
-     * @brief Performs a strict component-wise validation of a @ref fgm::Vec2 against discrete scalar values.
+     * @brief Performs a strict component-wise validation of a @ref flcn::Vec2 against discrete scalar values.
      *
      * @tparam T Numeric type of the vector and scalar components.
      *
@@ -114,8 +114,8 @@ namespace testutils
      * @note Uses GoogleTest macros. Triggers a non-fatal test failure if the vector's
      *       internal state does not match the provided scalars.
      */
-    template <fgm::Arithmetic T>
-    void EXPECT_VEC_CONTAINS(const fgm::Vec2<T>& vector, T x, T y)
+    template <flcn::Arithmetic T>
+    void EXPECT_VEC_CONTAINS(const flcn::Vec2<T>& vector, T x, T y)
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -136,7 +136,7 @@ namespace testutils
 
 
     /**
-     * @brief Performs a strict component-wise validation of a @ref fgm::Vec3 against discrete scalar values.
+     * @brief Performs a strict component-wise validation of a @ref flcn::Vec3 against discrete scalar values.
      *
      * @tparam T Numeric type of the vector and scalar components.
      *
@@ -148,8 +148,8 @@ namespace testutils
      * @note Uses GoogleTest macros. Triggers a non-fatal test failure if the vector's
      *       internal state does not match the provided scalars.
      */
-    template <fgm::Arithmetic T>
-    void EXPECT_VEC_CONTAINS(const fgm::Vec3<T>& vector, T x, T y, T z)
+    template <flcn::Arithmetic T>
+    void EXPECT_VEC_CONTAINS(const flcn::Vec3<T>& vector, T x, T y, T z)
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -173,7 +173,7 @@ namespace testutils
 
 
     /**
-     * @brief Performs a strict component-wise validation of a @ref fgm::Vec4 against discrete scalar values.
+     * @brief Performs a strict component-wise validation of a @ref flcn::Vec4 against discrete scalar values.
      *
      * @tparam T Numeric type of the vector and scalar components.
      *
@@ -186,8 +186,8 @@ namespace testutils
      * @note Uses GoogleTest macros. Triggers a non-fatal test failure if the vector's
      *       internal state does not match the provided scalars.
      */
-    template <fgm::Arithmetic T>
-    void EXPECT_VEC_CONTAINS(const fgm::Vec4<T>& vector, T x, T y, T z, T w)
+    template <flcn::Arithmetic T>
+    void EXPECT_VEC_CONTAINS(const flcn::Vec4<T>& vector, T x, T y, T z, T w)
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -223,7 +223,7 @@ namespace testutils
      * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
      *       if any of the vectors components are not unit.
      */
-    template <fgm::Vector T>
+    template <flcn::Vector T>
     void EXPECT_VEC_ONE(const T& vector)
     {
         using ValueType    = T::value_type;
@@ -259,7 +259,7 @@ namespace testutils
      * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
      *       if any of the vectors components are not zero.
      */
-    template <fgm::Vector T>
+    template <flcn::Vector T>
     void EXPECT_VEC_ZERO(const T& vector)
     {
         using ValueType = T::value_type;
@@ -294,7 +294,7 @@ namespace testutils
      * @note Uses GoogleTest macros for validation. This function will trigger a non-fatal test failure
      *       if any of the vectors components are not @ref `INFINITY` or `-INFINITY`.
      */
-    template <fgm::Vector T>
+    template <flcn::Vector T>
     void EXPECT_VEC_INF(const T& vector)
     {
         constexpr std::size_t elementCount = T::DIMENSION;
@@ -319,7 +319,7 @@ namespace testutils
      * @note Uses GoogleTest macros. Triggers a non-fatal failure if the absolute difference
      *       between expected and actual exceeds the library's standard epsilon.
      */
-    template <fgm::StrictArithmetic T>
+    template <flcn::StrictArithmetic T>
     void EXPECT_MAG_EQ(T expected, T actual)
     {
         if constexpr (std::is_same_v<T, float>)
@@ -340,7 +340,7 @@ namespace testutils
 
     // clang-format off
     /**
-     * @brief Validates that a @ref fgm::Vec4 components are positive `INFINITY`.
+     * @brief Validates that a @ref flcn::Vec4 components are positive `INFINITY`.
      *
      * @param Vec The vector to evaluate.
      */
@@ -352,7 +352,7 @@ namespace testutils
 
 
     /**
-     * @brief Validates that a @ref fgm::Vec4 components are negative `INFINITY`.
+     * @brief Validates that a @ref flcn::Vec4 components are negative `INFINITY`.
      *
      * @param Vec The vector to evaluate.
      */
@@ -364,7 +364,7 @@ namespace testutils
 
 
     /**
-     * @brief Validates that a @ref fgm::Vec3 components are positive `INFINITY`.
+     * @brief Validates that a @ref flcn::Vec3 components are positive `INFINITY`.
      *
      * @param Vec The vector to evaluate.
      */
@@ -375,7 +375,7 @@ namespace testutils
 
 
     /**
-     * @brief Validates that a @ref fgm::Vec3 components are negative `INFINITY`.
+     * @brief Validates that a @ref flcn::Vec3 components are negative `INFINITY`.
      *
      * @param Vec The vector to evaluate.
      */
@@ -386,7 +386,7 @@ namespace testutils
 
 
     /**
-     * @brief Validates that a @ref fgm::CVec2 components are positive `INFINITY`.
+     * @brief Validates that a @ref flcn::CVec2 components are positive `INFINITY`.
      *
      * @param Vec The vector to evaluate.
      */
@@ -396,7 +396,7 @@ namespace testutils
 
 
     /**
-     * @brief Validates that a @ref fgm::CVec2 components are negative `INFINITY`.
+     * @brief Validates that a @ref flcn::CVec2 components are negative `INFINITY`.
      *
      * @param Vec The vector to evaluate.
      */

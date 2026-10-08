@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 07, 2026
  *
- * @brief Verify @ref fgm::Mat4 trace operation logic.
+ * @brief Verify @ref flcn::Mat4 trace operation logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -25,7 +25,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4 Trace (Sum along diagonals).
+     * @brief Test fixture for @ref flcn::Mat4 Trace (Sum along diagonals).
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -33,7 +33,7 @@ namespace
     class Mat4TraceTests: public testing::Test
     {
     protected:
-        fgm::Mat4<T> _mat;
+        flcn::Mat4<T> _mat;
         T _expectedSum;
 
         void SetUp() override
@@ -57,13 +57,13 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat4 MAT(3, 2, 5, 7, 5, 12, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19);
+        constexpr flcn::Mat4 MAT(3, 2, 5, 7, 5, 12, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19);
 
         /// @test Verify that the Mat4 trace returns valid scalar at compile time.
         static_assert(MAT.trace() == 48);
 
         /// @test Verify that the Mat4 trace (static wrapper) returns valid scalar at compile time.
-        static_assert(fgm::Mat4<int>::trace(MAT) == 48);
+        static_assert(flcn::Mat4<int>::trace(MAT) == 48);
 
     } // namespace static_tests
 } // namespace
@@ -78,6 +78,6 @@ TYPED_TEST(Mat4TraceTests, ReturnsSumOfDiagonalElements) { EXPECT_MAG_EQ(this->_
 
 
 TYPED_TEST(Mat4TraceTests, StaticWrapper_ReturnsSumOfDiagonalElements)
-{ EXPECT_MAG_EQ(this->_expectedSum, fgm::Mat4<TypeParam>::trace(this->_mat)); }
+{ EXPECT_MAG_EQ(this->_expectedSum, flcn::Mat4<TypeParam>::trace(this->_mat)); }
 
 /** @} */

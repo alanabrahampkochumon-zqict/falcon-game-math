@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 18, 2026
  *
- * @brief Verify @ref fgm::Mat3x2 initialization.
+ * @brief Verify @ref flcn::Mat3x2 initialization.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -25,7 +25,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x2 initialization.
+     * @brief Test fixture for @ref flcn::Mat3x2 initialization.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -35,7 +35,7 @@ class Mat3x2InitializationTests: public testing::Test
 {
 protected:
     std::vector<T> _elements;
-    fgm::Vec3<T> _col0, _col1;
+    flcn::Vec3<T> _col0, _col1;
 
     void SetUp() override
     {
@@ -55,7 +55,7 @@ TYPED_TEST_SUITE(Mat3x2InitializationTests, SupportedTypes);
     namespace static_tests
     {
         /// @test Verify that the matrix can be initialized at compile time using scalar values.
-    constexpr fgm::Mat3x2 MAT1(1, 2, 3, 4, 5, 6);
+    constexpr flcn::Mat3x2 MAT1(1, 2, 3, 4, 5, 6);
     static_assert(MAT1(0, 0) == 1);
     static_assert(MAT1(0, 1) == 2);
     static_assert(MAT1(1, 0) == 3);
@@ -65,7 +65,7 @@ TYPED_TEST_SUITE(Mat3x2InitializationTests, SupportedTypes);
 
 
     /// @test Verify that the matrix can be initialized at compile time using column vectors.
-    constexpr fgm::Mat3x2 MAT2(fgm::Vec3(1, 3, 5), fgm::Vec3(2, 4, 6));
+    constexpr flcn::Mat3x2 MAT2(flcn::Vec3(1, 3, 5), flcn::Vec3(2, 4, 6));
     static_assert(MAT2(0, 0) == 1);
     static_assert(MAT2(0, 1) == 2);
     static_assert(MAT2(1, 0) == 3);
@@ -75,7 +75,7 @@ TYPED_TEST_SUITE(Mat3x2InitializationTests, SupportedTypes);
 
 
     /// @test Verify that the matrix can be initialized at compile time using value initialization.
-    constexpr fgm::Mat3x2<int> MAT4{};
+    constexpr flcn::Mat3x2<int> MAT4{};
     static_assert(MAT4(0, 0) == 0);
     static_assert(MAT4(0, 1) == 0);
     static_assert(MAT4(1, 0) == 0);
@@ -94,14 +94,14 @@ TYPED_TEST_SUITE(Mat3x2InitializationTests, SupportedTypes);
 
 TYPED_TEST(Mat3x2InitializationTests, EmptyCtor_ReturnsIdentityMatrix)
 {
-    constexpr fgm::Mat3x2<TypeParam> matrix{};
+    constexpr flcn::Mat3x2<TypeParam> matrix{};
     EXPECT_MAT_ZERO(matrix);
 }
 
 
 TYPED_TEST(Mat3x2InitializationTests, ParameterizedCtor_InitializesMatrixWithElements)
 {
-    const fgm::Mat3x2<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
+    const flcn::Mat3x2<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
                                         this->_elements[4], this->_elements[5]);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
@@ -109,7 +109,7 @@ TYPED_TEST(Mat3x2InitializationTests, ParameterizedCtor_InitializesMatrixWithEle
 
 TYPED_TEST(Mat3x2InitializationTests, ParameterizedCtor_InitializesMatrixWithVectors)
 {
-    const fgm::Mat3x2<TypeParam> matrix(this->_col0, this->_col1);
+    const flcn::Mat3x2<TypeParam> matrix(this->_col0, this->_col1);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 
@@ -117,7 +117,7 @@ TYPED_TEST(Mat3x2InitializationTests, ParameterizedCtor_InitializesMatrixWithVec
 
 TYPED_TEST(Mat3x2InitializationTests, CanBeConstructedWithBracedInitialization)
 {
-    const fgm::Mat3x2<TypeParam> matrix = {
+    const flcn::Mat3x2<TypeParam> matrix = {
         { TypeParam(1), TypeParam(3), TypeParam(5) },
         { TypeParam(2), TypeParam(4), TypeParam(6) },
     };

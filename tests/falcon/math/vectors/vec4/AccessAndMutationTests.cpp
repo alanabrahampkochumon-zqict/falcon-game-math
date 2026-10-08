@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Verify @ref fgm::Vec4 accessors and mutators.
+ * @brief Verify @ref flcn::Vec4 accessors and mutators.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,7 +26,7 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Vec4 VEC(1, 2, 3, 4);
+        constexpr flcn::Vec4 VEC(1, 2, 3, 4);
 
         /// @test Verify that vector is accessible as <x, y, z, w> at compile time.
         static_assert(VEC.x() == 1);
@@ -57,7 +57,7 @@ namespace
 /** @test Verify that the components are accessible via named spatial aliases (x, y, z, w). */
 TEST(Vec4AccessTests, AccessibleAsXYZW)
 {
-    const fgm::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const flcn::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.x());
     EXPECT_FLOAT_EQ(1.0f, vec.y());
@@ -69,7 +69,7 @@ TEST(Vec4AccessTests, AccessibleAsXYZW)
 /** @test Verify that the components are accessible via named spatial aliases (s, t, p, q). */
 TEST(Vec4AccessTests, AccessibleAsSTPQ)
 {
-    const fgm::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const flcn::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.s());
     EXPECT_FLOAT_EQ(1.0f, vec.t());
@@ -81,7 +81,7 @@ TEST(Vec4AccessTests, AccessibleAsSTPQ)
 /** @test Verify that the components are accessible via named spatial aliases (r, g, b, a). */
 TEST(Vec4AccessTests, AccessibleAsRGBA)
 {
-    const fgm::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const flcn::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec.r());
     EXPECT_FLOAT_EQ(1.0f, vec.g());
@@ -93,7 +93,7 @@ TEST(Vec4AccessTests, AccessibleAsRGBA)
 /** @test Verify that the components are accessible via subscript indexing for reads. */
 TEST(Vec4AccessTests, AccessibleAsArray)
 {
-    const fgm::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const flcn::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
     EXPECT_FLOAT_EQ(3.0f, vec[0]);
     EXPECT_FLOAT_EQ(1.0f, vec[1]);
@@ -111,7 +111,7 @@ TEST(Vec4AccessTests, AccessibleAsArray)
 /** @test Verify that the components can be mutated via named spatial aliases (x, y, z, w). */
 TEST(Vec4MutationTests, ElementsCanBeMutatedUsingXYZW)
 {
-    fgm::Vec4<float> vec;
+    flcn::Vec4<float> vec;
 
     vec.x() = 3.0f;
     vec.y() = 1.0f;
@@ -128,7 +128,7 @@ TEST(Vec4MutationTests, ElementsCanBeMutatedUsingXYZW)
 /** @test Verify that the components can be mutated via named spatial aliases (s, t, p, q). */
 TEST(Vec4MutationTests, ElementsCanBeMutatedUsingSTPQ)
 {
-    fgm::Vec4<float> vec;
+    flcn::Vec4<float> vec;
 
     vec.s() = 3.0f;
     vec.t() = 1.0f;
@@ -145,7 +145,7 @@ TEST(Vec4MutationTests, ElementsCanBeMutatedUsingSTPQ)
 /** @test Verify that the components can be mutated via named spatial aliases (r, g, b, a). */
 TEST(Vec4MutationTests, ElementsCanBeMutatedUsingRGBA)
 {
-    fgm::Vec4<float> vec;
+    flcn::Vec4<float> vec;
 
     vec.r() = 3.0f;
     vec.g() = 1.0f;
@@ -162,7 +162,7 @@ TEST(Vec4MutationTests, ElementsCanBeMutatedUsingRGBA)
 /** @test Verify that the components are accessible via subscript indexing for writing. */
 TEST(Vec4MutationTests, ElementsCanBeMutatedUsingIndex)
 {
-    fgm::Vec4<float> vec;
+    flcn::Vec4<float> vec;
 
     vec[0] = 3.0f;
     vec[1] = 1.0f;

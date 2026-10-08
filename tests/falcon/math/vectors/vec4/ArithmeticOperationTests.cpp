@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Verify @ref fgm::Vec4 arithmetic operator(+, -, *, /) logic.
+ * @brief Verify @ref flcn::Vec4 arithmetic operator(+, -, *, /) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -33,9 +33,9 @@ namespace
     class Vec4AdditionTests: public testing::Test
     {
     protected:
-        fgm::Vec4<T> _vecA;
-        fgm::Vec4<T> _vecB;
-        fgm::Vec4<T> _expectedSum;
+        flcn::Vec4<T> _vecA;
+        flcn::Vec4<T> _vecB;
+        flcn::Vec4<T> _expectedSum;
 
         void SetUp() override
         {
@@ -56,9 +56,9 @@ namespace
     class Vec4SubtractionTests: public testing::Test
     {
     protected:
-        fgm::Vec4<T> _vecA;
-        fgm::Vec4<T> _vecB;
-        fgm::Vec4<T> _expectedDifference;
+        flcn::Vec4<T> _vecA;
+        flcn::Vec4<T> _vecB;
+        flcn::Vec4<T> _expectedDifference;
 
         void SetUp() override
         {
@@ -79,10 +79,10 @@ namespace
     class Vec4ScalarMultiplicationTests: public testing::Test
     {
     protected:
-        fgm::Vec4<T> _vec;
+        flcn::Vec4<T> _vec;
         T _scalar;
-        fgm::Vec4<T> _expectedFloatingVec;
-        fgm::Vec4<T> _expectedIntegralVec;
+        flcn::Vec4<T> _expectedFloatingVec;
+        flcn::Vec4<T> _expectedIntegralVec;
 
         void SetUp() override
         {
@@ -105,9 +105,9 @@ namespace
     class Vec4ScalarDivisionTests: public testing::Test
     {
     protected:
-        fgm::Vec4<T> _vec;
+        flcn::Vec4<T> _vec;
         T _scalar;
-        fgm::Vec4<T> _expectedScaledVec;
+        flcn::Vec4<T> _expectedScaledVec;
 
         void SetUp() override
         {
@@ -129,8 +129,8 @@ namespace
     class Vec4NegationTests: public testing::Test
     {
     protected:
-        fgm::Vec4<T> _vec;
-        fgm::Vec4<T> _expectedInvertedVec;
+        flcn::Vec4<T> _vec;
+        flcn::Vec4<T> _expectedInvertedVec;
 
         void SetUp() override
         {
@@ -142,16 +142,16 @@ namespace
 
 
 
-    /// @brief Test fixture for @ref fgm::Vec4 division with NaN vectors.
-    class Vec4DivisionNaNTests: public testing::TestWithParam<fgm::Vec4<float>>
+    /// @brief Test fixture for @ref flcn::Vec4 division with NaN vectors.
+    class Vec4DivisionNaNTests: public testing::TestWithParam<flcn::Vec4<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(Vec4InvalidDivision, Vec4DivisionNaNTests,
-                             ::testing::Values(fgm::Vec4<float>(fgm::constants::NaN, 3.0f, 3.0f, 3.0f),
-                                               fgm::Vec4<float>(3.0f, fgm::constants::NaN, 3.0f, 3.0f),
-                                               fgm::Vec4<float>(3.0f, 3.0f, fgm::constants::NaN, 3.0f),
-                                               fgm::Vec4<float>(3.0f, 3.0f, 3.0f, fgm::constants::NaN),
-                                               fgm::Vec4<float>(fgm ::constants::NaN, fgm::constants::NaN,
-                                                                fgm ::constants::NaN, fgm ::constants::NaN)));
+                             ::testing::Values(flcn::Vec4<float>(flcn::constants::NaN, 3.0f, 3.0f, 3.0f),
+                                               flcn::Vec4<float>(3.0f, flcn::constants::NaN, 3.0f, 3.0f),
+                                               flcn::Vec4<float>(3.0f, 3.0f, flcn::constants::NaN, 3.0f),
+                                               flcn::Vec4<float>(3.0f, 3.0f, 3.0f, flcn::constants::NaN),
+                                               flcn::Vec4<float>(flcn::constants::NaN, flcn::constants::NaN,
+                                                                flcn::constants::NaN, flcn::constants::NaN)));
 
 
 
@@ -161,8 +161,8 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Vec4 VEC_A(1, 2, 3, 4);
-        constexpr fgm::Vec4 VEC_B(3, 5, 6, 7);
+        constexpr flcn::Vec4 VEC_A(1, 2, 3, 4);
+        constexpr flcn::Vec4 VEC_B(3, 5, 6, 7);
 
         /// @test Verify that vector sum returns a valid vector at compile time.
         constexpr auto VEC_SUM = VEC_A + VEC_B;
@@ -213,7 +213,7 @@ namespace
 
 
         /// @test Verify that vector scalar division(safeDiv-static wrapper) returns a valid vector at compile time.
-        constexpr auto SAFE_DIV_VEC_STATIC = fgm::Vec4<int>::safeDiv(VEC_B, 2);
+        constexpr auto SAFE_DIV_VEC_STATIC = flcn::Vec4<int>::safeDiv(VEC_B, 2);
         static_assert(SAFE_DIV_VEC_STATIC.x() == 1);
         static_assert(SAFE_DIV_VEC_STATIC.y() == 2);
         static_assert(SAFE_DIV_VEC_STATIC.z() == 3);
@@ -242,7 +242,7 @@ namespace
  */
 TYPED_TEST(Vec4AdditionTests, PlusOperator_ReturnsVectorSum)
 {
-    const fgm::Vec4 result = this->_vecA + this->_vecB;
+    const flcn::Vec4 result = this->_vecA + this->_vecB;
     EXPECT_VEC_EQ(this->_expectedSum, result);
 }
 
@@ -264,10 +264,10 @@ TYPED_TEST(Vec4AdditionTests, PlusEqualsOperator_ReturnsSameVectorWithSum)
  */
 TEST(Vec4Addition, PlusOperator_MixedType_PromotesType)
 {
-    const fgm::Vec4 vec1(3.0f, 0.0f, -1.0f, 2.0f);
-    const fgm::Vec4 vec2(9.0, -5.0, 10.0, 3.0);
+    const flcn::Vec4 vec1(3.0f, 0.0f, -1.0f, 2.0f);
+    const flcn::Vec4 vec2(9.0, -5.0, 10.0, 3.0);
 
-    [[maybe_unused]] const fgm::Vec4 result = vec1 + vec2;
+    [[maybe_unused]] const flcn::Vec4 result = vec1 + vec2;
     static_assert(std::is_same_v<decltype(result)::value_type, double>);
 }
 
@@ -278,8 +278,8 @@ TEST(Vec4Addition, PlusOperator_MixedType_PromotesType)
  */
 TEST(Vec4Addition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    fgm::Vec4 vec1(3.0f, 0.0f, -1.0f, 2.0f);
-    [[maybe_unused]] const fgm::Vec4 vec2(9.0, -5.0, 10.0, 3.0);
+    flcn::Vec4 vec1(3.0f, 0.0f, -1.0f, 2.0f);
+    [[maybe_unused]] const flcn::Vec4 vec2(9.0, -5.0, 10.0, 3.0);
 
     static_cast<void>(vec1 += vec2);
     static_assert(std::is_same_v<decltype(vec1)::value_type, float>);
@@ -297,7 +297,7 @@ TEST(Vec4Addition, PlusEqualsOperator_MixedType_DoesNotPromoteType)
  */
 TYPED_TEST(Vec4SubtractionTests, MinusOperator_ReturnsMatrixDifference)
 {
-    const fgm::Vec4 result = this->_vecA - this->_vecB;
+    const flcn::Vec4 result = this->_vecA - this->_vecB;
 
     EXPECT_VEC_EQ(this->_expectedDifference, result);
 }
@@ -321,10 +321,10 @@ TYPED_TEST(Vec4SubtractionTests, MinusEqualsOperator_ReturnsSameVectorWithDiffer
  */
 TEST(Vec4Subtraction, MinusOperator_MixedType_PromotesType)
 {
-    const fgm::Vec4 vec1(3.0f, 0.0f, -1.0f, 2.0f);
-    const fgm::Vec4 vec2(9.0, -5.0, 10.0, 3.0);
+    const flcn::Vec4 vec1(3.0f, 0.0f, -1.0f, 2.0f);
+    const flcn::Vec4 vec2(9.0, -5.0, 10.0, 3.0);
 
-    [[maybe_unused]] const fgm::Vec4 result = vec1 - vec2;
+    [[maybe_unused]] const flcn::Vec4 result = vec1 - vec2;
 
     static_assert(std::is_same_v<decltype(result)::value_type, double>);
 }
@@ -336,8 +336,8 @@ TEST(Vec4Subtraction, MinusOperator_MixedType_PromotesType)
  */
 TEST(Vec4Subtraction, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    fgm::Vec4 vec1(3.0f, 0.0f, -1.0f, 2.0f);
-    [[maybe_unused]] const fgm::Vec4 vec2(9.0, -5.0, 10.0, 3.0);
+    flcn::Vec4 vec1(3.0f, 0.0f, -1.0f, 2.0f);
+    [[maybe_unused]] const flcn::Vec4 vec2(9.0, -5.0, 10.0, 3.0);
 
     static_cast<void>(vec1 -= vec2);
 
@@ -353,9 +353,9 @@ TEST(Vec4Subtraction, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 /** @test Verify that scalar multiplication by zero returns a zero vector. */
 TEST(Vec4ScalarMultiplication, MultiplicationByZeroReturnsZeroVector)
 {
-    const fgm::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const flcn::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
-    const fgm::Vec4 result = vec * 0;
+    const flcn::Vec4 result = vec * 0;
 
     EXPECT_VEC_ZERO(result);
 }
@@ -364,9 +364,9 @@ TEST(Vec4ScalarMultiplication, MultiplicationByZeroReturnsZeroVector)
 /** @test Verify that scalar multiplication by one returns original vector. */
 TEST(Vec4ScalarMultiplication, MultiplicationByOneReturnsOriginalVector)
 {
-    const fgm::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
+    const flcn::Vec4 vec(3.0f, 1.0f, 6.0f, 2.0f);
 
-    const fgm::Vec4 result = vec * 1;
+    const flcn::Vec4 result = vec * 1;
 
     EXPECT_VEC_EQ(vec, result);
 }
@@ -378,7 +378,7 @@ TEST(Vec4ScalarMultiplication, MultiplicationByOneReturnsOriginalVector)
  */
 TYPED_TEST(Vec4ScalarMultiplicationTests, VectorTimesScalarReturnsScaledVector)
 {
-    const fgm::Vec4 result = this->_vec * this->_scalar;
+    const flcn::Vec4 result = this->_vec * this->_scalar;
 
     if (std::is_floating_point_v<TypeParam>)
     {
@@ -397,7 +397,7 @@ TYPED_TEST(Vec4ScalarMultiplicationTests, VectorTimesScalarReturnsScaledVector)
  */
 TYPED_TEST(Vec4ScalarMultiplicationTests, ScalarTimesAVectorReturnsScaledVector)
 {
-    const fgm::Vec4 result = this->_scalar * this->_vec;
+    const flcn::Vec4 result = this->_scalar * this->_vec;
 
     if (std::is_floating_point_v<TypeParam>)
     {
@@ -437,7 +437,7 @@ TYPED_TEST(Vec4ScalarMultiplicationTests, MixedTypeScalarMultiplicationPromotesT
 {
     const double scalar = 2.123456789123456;
 
-    [[maybe_unused]] const fgm::Vec4 result = this->_vec * scalar;
+    [[maybe_unused]] const flcn::Vec4 result = this->_vec * scalar;
 
     static_assert(std::is_same_v<typename decltype(result)::value_type, double>);
 }
@@ -449,7 +449,7 @@ TYPED_TEST(Vec4ScalarMultiplicationTests, MixedTypeScalarMultiplicationPromotesT
  */
 TEST(Vec4ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPromoteType)
 {
-    fgm::Vec4 vec(3.0f, 0.0f, -1.0f, 2.0f);
+    flcn::Vec4 vec(3.0f, 0.0f, -1.0f, 2.0f);
     const double scalar = 5.0;
     vec *= scalar;
 
@@ -463,9 +463,9 @@ TEST(Vec4ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentDoesNotPro
  */
 TEST(Vec4ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMinimalPrecisionLoss)
 {
-    fgm::Vec4 vec(3, 0, -1, 8);
+    flcn::Vec4 vec(3, 0, -1, 8);
     const double scalar = 2.5;
-    const fgm::Vec4 expected(7, 0, -2, 20);
+    const flcn::Vec4 expected(7, 0, -2, 20);
 
     vec *= scalar;
 
@@ -481,7 +481,7 @@ TEST(Vec4ScalarMultiplication, MixedTypeScalarMultiplicationAssignmentEnsuresMin
 /** @test Verify that dividing a vector by one returns the original vector. */
 TYPED_TEST(Vec4ScalarDivisionTests, DivisionByOneReturnsOriginalVector)
 {
-    const fgm::Vec4 result = this->_vec / 1;
+    const flcn::Vec4 result = this->_vec / 1;
 
     EXPECT_VEC_EQ(result, this->_vec);
 }
@@ -493,7 +493,7 @@ TYPED_TEST(Vec4ScalarDivisionTests, DivisionByOneReturnsOriginalVector)
  */
 TYPED_TEST(Vec4ScalarDivisionTests, ScalarDivision_ReturnsVectorWithDividedComponents)
 {
-    const fgm::Vec4 result = this->_vec / this->_scalar;
+    const flcn::Vec4 result = this->_vec / this->_scalar;
 
     EXPECT_VEC_EQ(this->_expectedScaledVec, result);
 }
@@ -517,10 +517,10 @@ TYPED_TEST(Vec4ScalarDivisionTests, DivideEqualsOperator_ReturnsSameVectorWithDi
  */
 TEST(Vec4ScalarDivision, MixedType_ScalarDivision_PromotesType)
 {
-    const fgm::Vec4 vec(15.0, 0.0, -5.0, 10.0);
+    const flcn::Vec4 vec(15.0, 0.0, -5.0, 10.0);
     const double scalar = 5.0;
 
-    [[maybe_unused]] const fgm::Vec4 result = vec / scalar;
+    [[maybe_unused]] const flcn::Vec4 result = vec / scalar;
 
     static_assert(std::is_same_v<decltype(result)::value_type, double>);
 }
@@ -532,7 +532,7 @@ TEST(Vec4ScalarDivision, MixedType_ScalarDivision_PromotesType)
  */
 TEST(Vec4ScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
 {
-    fgm::Vec4 vec(15.0f, 0.0f, -5.0f, 10.0f);
+    flcn::Vec4 vec(15.0f, 0.0f, -5.0f, 10.0f);
     const double scalar = 5.0;
 
     vec /= scalar;
@@ -544,9 +544,9 @@ TEST(Vec4ScalarDivision, MixedType_ScalarDivisionAssignment_DoesNotPromoteType)
 /** @test Verify that the compound division operator for mixed types ensures minimal precision loss. */
 TEST(Vec4ScalarDivision, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLoss)
 {
-    fgm::Vec4 vec(10, 25, -30, 2);
+    flcn::Vec4 vec(10, 25, -30, 2);
     const double scalar = 2.5;
-    const fgm::Vec4 expected(4, 10, -12, 0);
+    const flcn::Vec4 expected(4, 10, -12, 0);
 
     vec /= scalar;
 
@@ -561,7 +561,7 @@ TEST(Vec4ScalarDivision, TimesEqualsOperator_MixedType_EnsuresMinimalPrecisionLo
  */
 TEST(Vec4ScalarDivision, FloatVectorDivisionByZeroReturnsInfinityVector)
 {
-    const fgm::Vec4 vec(1.0f, 2.0f, 3.0f, 4.0f);
+    const flcn::Vec4 vec(1.0f, 2.0f, 3.0f, 4.0f);
     EXPECT_VEC_INF(vec / 0);
 }
 
@@ -572,7 +572,7 @@ TEST(Vec4ScalarDivision, FloatVectorDivisionByZeroReturnsInfinityVector)
  */
 TEST(Vec4ScalarDivision, DoubleVectorDivisionByZeroReturnsInfinityVector)
 {
-    const fgm::Vec4 vec(1.0, 2.0, 3.0, 4.0);
+    const flcn::Vec4 vec(1.0, 2.0, 3.0, 4.0);
     EXPECT_VEC_INF(vec / 0);
 }
 
@@ -585,7 +585,7 @@ TEST(Vec4ScalarDivision, DoubleVectorDivisionByZeroReturnsInfinityVector)
  **************************************/
 
 /**
- * @test Verify that dividing a vector using @ref fgm::Vec4::safeDiv perform a component-wise divide and
+ * @test Verify that dividing a vector using @ref flcn::Vec4::safeDiv perform a component-wise divide and
  *       returns a new vector instance.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, SafeDiv_ReturnsVectorWithDividedComponents)
@@ -597,7 +597,7 @@ TYPED_TEST(Vec4ScalarDivisionTests, SafeDiv_ReturnsVectorWithDividedComponents)
 
 
 /**
- * @test Verify that dividing a vector by integral zero using @ref fgm::Vec4::safeDiv
+ * @test Verify that dividing a vector by integral zero using @ref flcn::Vec4::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, SafeDiv_ByIntegralZero_ReturnsZeroVector)
@@ -608,7 +608,7 @@ TYPED_TEST(Vec4ScalarDivisionTests, SafeDiv_ByIntegralZero_ReturnsZeroVector)
 
 
 /**
- * @test Verify that dividing a vector by floating point zero using @ref fgm::Vec4::safeDiv
+ * @test Verify that dividing a vector by floating point zero using @ref flcn::Vec4::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, SafeDiv_ByFloatZero_ReturnsZeroVector)
@@ -619,56 +619,56 @@ TYPED_TEST(Vec4ScalarDivisionTests, SafeDiv_ByFloatZero_ReturnsZeroVector)
 
 
 /**
- * @test Verify that dividing a vector using static variant of @ref fgm::Vec4::safeDiv
+ * @test Verify that dividing a vector using static variant of @ref flcn::Vec4::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, StaticWrapper_SafeDiv_ReturnsVectorWithDividedComponents)
 {
-    const auto result = fgm::Vec4<TypeParam>::safeDiv(this->_vec, this->_scalar);
+    const auto result = flcn::Vec4<TypeParam>::safeDiv(this->_vec, this->_scalar);
     EXPECT_VEC_EQ(this->_expectedScaledVec, result);
 }
 
 
 /**
- * @test Verify that dividing a vector by integral zero using static variant of @ref fgm::Vec4::safeDiv
+ * @test Verify that dividing a vector by integral zero using static variant of @ref flcn::Vec4::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
 TEST(Vec4ScalarDivision, StaticWrapper_SafeDiv_ByIntergralZero_ReturnsZeroVector)
 {
-    const fgm::Vec4 vec(1, 2, 3, 4);
-    EXPECT_VEC_ZERO(fgm::Vec4<int>::safeDiv(vec, 0));
+    const flcn::Vec4 vec(1, 2, 3, 4);
+    EXPECT_VEC_ZERO(flcn::Vec4<int>::safeDiv(vec, 0));
 }
 
 
 /**
- * @test Verify that dividing a vector by floating point zero using static variant @ref fgm::Vec4::safeDiv
+ * @test Verify that dividing a vector by floating point zero using static variant @ref flcn::Vec4::safeDiv
  *       perform a component-wise divide and returns a new vector instance.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, StaticWrapper_SafeDiv_ByFloatZero_ReturnsZeroVector)
 {
-    const auto result = fgm::Vec4<TypeParam>::safeDiv(this->_vec, 0.0f);
+    const auto result = flcn::Vec4<TypeParam>::safeDiv(this->_vec, 0.0f);
     EXPECT_VEC_ZERO(result);
 }
 
 
 /**
- * @test Verify that dividing a vector by NaN using @ref fgm::Vec4::safeDiv
+ * @test Verify that dividing a vector by NaN using @ref flcn::Vec4::safeDiv
  *       returns a zero vector.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, SafeDiv_ByNaN_ReturnsZeroVector)
 {
-    const auto result = this->_vec.safeDiv(fgm::constants::NaN);
+    const auto result = this->_vec.safeDiv(flcn::constants::NaN);
     EXPECT_VEC_ZERO(result);
 }
 
 
 /**
- * @test Verify that dividing a vector by NaN using static variant of @ref fgm::Vec4::safeDiv
+ * @test Verify that dividing a vector by NaN using static variant of @ref flcn::Vec4::safeDiv
  *       returns a zero vector.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, StaticWrapper_SafeDiv_ByNaN_ReturnsZeroVector)
 {
-    const auto result = fgm::Vec4<TypeParam>::safeDiv(this->_vec, fgm::constants::INFINITY_F);
+    const auto result = flcn::Vec4<TypeParam>::safeDiv(this->_vec, flcn::constants::INFINITY_F);
     EXPECT_VEC_ZERO(result);
 }
 
@@ -679,141 +679,141 @@ TYPED_TEST(Vec4ScalarDivisionTests, StaticWrapper_SafeDiv_ByNaN_ReturnsZeroVecto
  **************************************/
 
 /**
- * @test Verify that dividing a vector using @ref fgm::Vec4::tryDiv perform a component-wise divide and
- *       returns a new vector instance and sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ * @test Verify that dividing a vector using @ref flcn::Vec4::tryDiv perform a component-wise divide and
+ *       returns a new vector instance and sets the flag to @ref flcn::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, TryDivide_ReturnsVectorWithDividedComponentsAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
+    flcn::OperationStatus flag;
     const auto result = this->_vec.tryDiv(this->_scalar, flag);
 
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(flcn::OperationStatus::SUCCESS, flag);
     EXPECT_VEC_EQ(this->_expectedScaledVec, result);
 }
 
 
 /**
- * @test Verify that dividing a vector by integral zero using @ref fgm::Vec4::tryDiv returns zero vector and
- *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ * @test Verify that dividing a vector by integral zero using @ref flcn::Vec4::tryDiv returns zero vector and
+ *       sets the flag to @ref flcn::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
+    flcn::OperationStatus flag;
     const auto result = this->_vec.tryDiv(0, flag);
 
     EXPECT_VEC_ZERO(result);
-    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+    EXPECT_EQ(flcn::OperationStatus::DIVISIONBYZERO, flag);
 }
 
 
 /**
- * @test Verify that dividing a vector by floating point zero using @ref fgm::Vec4::tryDiv returns zero vector and
- *       sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ * @test Verify that dividing a vector by floating point zero using @ref flcn::Vec4::tryDiv returns zero vector and
+ *       sets the flag to @ref flcn::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
+    flcn::OperationStatus flag;
     const auto result = this->_vec.tryDiv(0.0, flag);
 
     EXPECT_VEC_ZERO(result);
-    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+    EXPECT_EQ(flcn::OperationStatus::DIVISIONBYZERO, flag);
 }
 
 
 /**
- * @test Verify that dividing a NaN vector by zero using @ref fgm::Vec4::tryDiv
- *       @ref fgm::OperationStatus::NANOPERAND takes precedence over @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that dividing a NaN vector by zero using @ref flcn::Vec4::tryDiv
+ *       @ref flcn::OperationStatus::NANOPERAND takes precedence over @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST(Vec4ScalarDivision, TryDivideNaNVectorByZero_NaNOperandStatusTakesPrecedence)
 {
-    fgm::OperationStatus flag;
-    [[maybe_unused]] const auto result = fgm::Vec4<double>::qnan().tryDiv(0, flag);
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    flcn::OperationStatus flag;
+    [[maybe_unused]] const auto result = flcn::Vec4<double>::qnan().tryDiv(0, flag);
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that dividing a vector by NaN using @ref fgm::Vec4::tryDiv returns a zero vector and
- *       sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that dividing a vector by NaN using @ref flcn::Vec4::tryDiv returns a zero vector and
+ *       sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    const auto result = this->_vec.tryDiv(fgm::constants::NaN, flag);
+    flcn::OperationStatus flag;
+    const auto result = this->_vec.tryDiv(flcn::constants::NaN, flag);
 
     EXPECT_VEC_ZERO(result);
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that dividing a vector using static variant of @ref fgm::Vec4::tryDiv
+ * @test Verify that dividing a vector using static variant of @ref flcn::Vec4::tryDiv
  *       perform a component-wise divide and returns a new vector instance and
- *       sets the flag to @ref fgm::OperationStatus::SUCCESS.
+ *       sets the flag to @ref flcn::OperationStatus::SUCCESS.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, StaticWrapper_TryDivide_ReturnsVectorWithDividedComponentsAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    const auto result = fgm::Vec4<TypeParam>::tryDiv(this->_vec, this->_scalar, flag);
+    flcn::OperationStatus flag;
+    const auto result = flcn::Vec4<TypeParam>::tryDiv(this->_vec, this->_scalar, flag);
 
     EXPECT_VEC_EQ(this->_expectedScaledVec, result);
-    EXPECT_EQ(fgm::OperationStatus::SUCCESS, flag);
+    EXPECT_EQ(flcn::OperationStatus::SUCCESS, flag);
 }
 
 
 /**
- * @test Verify that dividing a vector by integral zero using static variant of @ref fgm::Vec4::tryDiv
- *       returns zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ * @test Verify that dividing a vector by integral zero using static variant of @ref flcn::Vec4::tryDiv
+ *       returns zero vector and sets the flag to @ref flcn::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, StaticWrapper_TryDivideByIntegralZero_ReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    const auto result = fgm::Vec4<TypeParam>::tryDiv(this->_vec, 0, flag);
+    flcn::OperationStatus flag;
+    const auto result = flcn::Vec4<TypeParam>::tryDiv(this->_vec, 0, flag);
 
     EXPECT_VEC_ZERO(result);
-    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+    EXPECT_EQ(flcn::OperationStatus::DIVISIONBYZERO, flag);
 }
 
 
 /**
- * @test Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vec4::tryDiv
- *       returns zero vector and sets the flag to @ref fgm::OperationStatus::DIVISIONBYZERO.
+ * @test Verify that dividing a vector by floating point zero using static variant of @ref flcn::Vec4::tryDiv
+ *       returns zero vector and sets the flag to @ref flcn::OperationStatus::DIVISIONBYZERO.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, StaticWrapper_TryDivideByFloatZero_ReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    const auto result = fgm::Vec4<TypeParam>::tryDiv(this->_vec, 0.0, flag);
+    flcn::OperationStatus flag;
+    const auto result = flcn::Vec4<TypeParam>::tryDiv(this->_vec, 0.0, flag);
 
     EXPECT_VEC_ZERO(result);
-    EXPECT_EQ(fgm::OperationStatus::DIVISIONBYZERO, flag);
+    EXPECT_EQ(flcn::OperationStatus::DIVISIONBYZERO, flag);
 }
 
 
 /**
- * @test Verify that dividing a vector by floating point zero using static variant of @ref fgm::Vec4::tryDiv
- *       returns zero vector and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that dividing a vector by floating point zero using static variant of @ref flcn::Vec4::tryDiv
+ *       returns zero vector and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TEST(Vec4ScalarDivision, StaticWrapper_TryDivideNaNVector_ReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    const auto result = fgm::Vec4<double>::tryDiv(fgm::Vec4<double>::qnan(), 3, flag);
+    flcn::OperationStatus flag;
+    const auto result = flcn::Vec4<double>::tryDiv(flcn::Vec4<double>::qnan(), 3, flag);
 
     EXPECT_VEC_ZERO(result);
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that dividing a vector by NaN using static variant of @ref fgm::Vec4::tryDiv returns zero vector
- * and sets the flag to @ref fgm::OperationStatus::NANOPERAND.
+ * @test Verify that dividing a vector by NaN using static variant of @ref flcn::Vec4::tryDiv returns zero vector
+ * and sets the flag to @ref flcn::OperationStatus::NANOPERAND.
  */
 TYPED_TEST(Vec4ScalarDivisionTests, StaticWrapper_TryDivideByNaN_ReturnsZeroVectorAndSetsCorrectFlag)
 {
-    fgm::OperationStatus flag;
-    const auto result = fgm::Vec4<TypeParam>::tryDiv(this->_vec, fgm::constants::NaN, flag);
+    flcn::OperationStatus flag;
+    const auto result = flcn::Vec4<TypeParam>::tryDiv(this->_vec, flcn::constants::NaN, flag);
 
     EXPECT_VEC_ZERO(result);
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
@@ -823,7 +823,7 @@ TYPED_TEST(Vec4ScalarDivisionTests, StaticWrapper_TryDivideByNaN_ReturnsZeroVect
  **************************************/
 
 /**
- * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vec4::safeDiv
+ * @test Verify that dividing a nan vector by a scalar using @ref flcn::Vec4::safeDiv
  *       returns vector with NaN-components as zero.
  */
 TEST_P(Vec4DivisionNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
@@ -833,49 +833,49 @@ TEST_P(Vec4DivisionNaNTests, SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
 }
 
 /**
- * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vec4::safeDiv
+ * @test Verify that dividing a nan vector by a scalar using static variant of @ref flcn::Vec4::safeDiv
  *       returns zero vector.
  */
 TEST_P(Vec4DivisionNaNTests, StaticWrapper_SafeDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
     const auto& vec = GetParam();
-    EXPECT_VEC_ZERO(fgm::Vec4<float>::safeDiv(vec, 3));
+    EXPECT_VEC_ZERO(flcn::Vec4<float>::safeDiv(vec, 3));
 }
 
 
 /**
- * @test Verify that dividing a nan vector by a scalar using @ref fgm::Vec4::tryDiv
+ * @test Verify that dividing a nan vector by a scalar using @ref flcn::Vec4::tryDiv
  *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
  */
 TEST_P(Vec4DivisionNaNTests, TryDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
     const auto& vec = GetParam();
-    fgm::OperationStatus flag;
+    flcn::OperationStatus flag;
     EXPECT_VEC_ZERO(vec.tryDiv(3, flag));
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that dividing a nan vector by a scalar using static variant of @ref fgm::Vec4::tryDiv
+ * @test Verify that dividing a nan vector by a scalar using static variant of @ref flcn::Vec4::tryDiv
  *       returns zero vector and sets flag to OperationStatus::NANOPERAND.
  */
 TEST_P(Vec4DivisionNaNTests, StaticWrapper_TryDiv_ReturnsVectorWithNaNComponentsAsZero)
 {
     const auto& vec = GetParam();
-    fgm::OperationStatus flag;
-    EXPECT_VEC_ZERO(fgm::Vec4<float>::tryDiv(vec, 3, flag));
-    EXPECT_EQ(fgm::OperationStatus::NANOPERAND, flag);
+    flcn::OperationStatus flag;
+    EXPECT_VEC_ZERO(flcn::Vec4<float>::tryDiv(vec, 3, flag));
+    EXPECT_EQ(flcn::OperationStatus::NANOPERAND, flag);
 }
 
 
 /**
- * @test Verify that  @ref fgm::Vec4 unary minus operator inverts each component and
+ * @test Verify that  @ref flcn::Vec4 unary minus operator inverts each component and
  *       returns a new vector.
  */
 TYPED_TEST(Vec4NegationTests, InvertsTheSignOfEachComponents)
 {
-    const fgm::Vec4 inverted = -this->_vec;
+    const flcn::Vec4 inverted = -this->_vec;
     EXPECT_VEC_EQ(this->_expectedInvertedVec, inverted);
 }
 
@@ -885,39 +885,39 @@ TYPED_TEST(Vec4NegationTests, InvertsTheSignOfEachComponents)
  *              NEGATION              *
  **************************************/
 
-/** @test Verify that @ref fgm::Vec4 unary minus operator inverts each component of an infinity vector. */
+/** @test Verify that @ref flcn::Vec4 unary minus operator inverts each component of an infinity vector. */
 TEST(Vec4Negation, InvertsSignOfInfinity)
 {
-    const fgm::Vec4 infVec = {
-        fgm::constants::INFINITY_F,
-        -fgm::constants::INFINITY_F,
-        fgm::constants::INFINITY_F,
-        -fgm::constants::INFINITY_F,
+    const flcn::Vec4 infVec = {
+        flcn::constants::INFINITY_F,
+        -flcn::constants::INFINITY_F,
+        flcn::constants::INFINITY_F,
+        -flcn::constants::INFINITY_F,
     };
-    const fgm::Vec4 expected = {
-        -fgm::constants::INFINITY_F,
-        fgm::constants::INFINITY_F,
-        -fgm::constants::INFINITY_F,
-        fgm::constants::INFINITY_F,
+    const flcn::Vec4 expected = {
+        -flcn::constants::INFINITY_F,
+        flcn::constants::INFINITY_F,
+        -flcn::constants::INFINITY_F,
+        flcn::constants::INFINITY_F,
     };
 
-    const fgm::Vec4<float> inverted = -infVec;
+    const flcn::Vec4<float> inverted = -infVec;
 
     EXPECT_VEC_EQ(expected, inverted);
 }
 
 
-/** @test Verify that @ref fgm::Vec4 unary minus follows IEEE 754 rules for NaN. */
+/** @test Verify that @ref flcn::Vec4 unary minus follows IEEE 754 rules for NaN. */
 TEST(Vec4Negation, NoOpOnNaNVectors)
 {
-    const fgm::Vec4 nanVec = {
-        fgm::constants::NaN,
-        fgm::constants::NaN,
-        fgm::constants::NaN,
-        fgm::constants::NaN,
+    const flcn::Vec4 nanVec = {
+        flcn::constants::NaN,
+        flcn::constants::NaN,
+        flcn::constants::NaN,
+        flcn::constants::NaN,
     };
 
-    const fgm::Vec4<float> inverted = -nanVec;
+    const flcn::Vec4<float> inverted = -nanVec;
 
     EXPECT_TRUE(std::isnan(inverted.x()));
     EXPECT_TRUE(std::isnan(inverted.y()));

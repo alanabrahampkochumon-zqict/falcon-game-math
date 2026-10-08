@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: September 23, 2026
  *
- * @brief Verify @ref fgm::Vec2 dot and cross product logic.
+ * @brief Verify @ref flcn::Vec2 dot and cross product logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -27,7 +27,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Vec2 dot product.
+     * @brief Test fixture for @ref flcn::Vec2 dot product.
      *
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
@@ -35,11 +35,11 @@ namespace
     class Vec2DotProductTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vecA;
-        fgm::Vec2<T> _vecB;
+        flcn::Vec2<T> _vecA;
+        flcn::Vec2<T> _vecB;
 
-        fgm::Vec2<T> _vecAOrthogonal;
-        fgm::Vec2<T> _vecBOrthogonal;
+        flcn::Vec2<T> _vecAOrthogonal;
+        flcn::Vec2<T> _vecBOrthogonal;
 
         T _expectedDotProduct;
 
@@ -60,7 +60,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Vec2 cross product.
+     * @brief Test fixture for @ref flcn::Vec2 cross product.
      *
      * @tparam T The scalar type (e.g., float, double) used for the vectors.
      */
@@ -68,8 +68,8 @@ namespace
     class Vec2CrossProductTests: public testing::Test
     {
     protected:
-        fgm::Vec2<T> _vecA;
-        fgm::Vec2<T> _vecB;
+        flcn::Vec2<T> _vecA;
+        flcn::Vec2<T> _vecB;
         T _expectedCrossProduct;
 
         void SetUp() override
@@ -83,7 +83,7 @@ namespace
 
 
     // /**
-    //  * @brief Test fixture for @ref fgm::Vec2 tensor product.
+    //  * @brief Test fixture for @ref flcn::Vec2 tensor product.
     //  *
     //  * @tparam T The scalar type (e.g., float, double) used for the vectors.
     //  */
@@ -91,17 +91,17 @@ namespace
     // class Vec2TensorProductTests: public testing::Test
     // {
     // protected:
-    //     fgm::Vec2<T> _vecA;
-    //     fgm::Vec2<T> _vecB;
-    //     fgm::Mat2<T> _expectedTensorProductInt, _expectedTensorProductFP;
+    //     flcn::Vec2<T> _vecA;
+    //     flcn::Vec2<T> _vecB;
+    //     flcn::Mat2<T> _expectedTensorProductInt, _expectedTensorProductFP;
     //
     //     void SetUp() override
     //     {
-    //         _vecA                     = fgm::Vec2{ T(1.23412341000000003), T(2.21341324399999984) };
+    //         _vecA                     = flcn::Vec2{ T(1.23412341000000003), T(2.21341324399999984) };
     //         _vecB                     = { T(1.23412341000000003), T(2.21341324399999984) };
-    //         _expectedTensorProductFP  = { fgm::Vec2{ T(1.52306059111002812), T(2.73162510042444184) },
-    //                                       fgm::Vec2{ T(2.73162510042444184), T(4.89919818871460322) } };
-    //         _expectedTensorProductInt = { fgm::Vec2{ T(1), T(2) }, fgm::Vec2{ T(2), T(4) } };
+    //         _expectedTensorProductFP  = { flcn::Vec2{ T(1.52306059111002812), T(2.73162510042444184) },
+    //                                       flcn::Vec2{ T(2.73162510042444184), T(4.89919818871460322) } };
+    //         _expectedTensorProductInt = { flcn::Vec2{ T(1), T(2) }, flcn::Vec2{ T(2), T(4) } };
     //     }
     // };
     // TYPED_TEST_SUITE(Vec2TensorProductTests, SupportedSignedArithmeticTypes);
@@ -174,7 +174,7 @@ TYPED_TEST(Vec2DotProductTests, Dot_NonOrthogonalVectorsReturnNonZeroScalar)
 
 TYPED_TEST(Vec2DotProductTests, StaticWrapper_Dot_NonOrthogonalVectorsReturnNonZeroScalar)
 {
-    const TypeParam dotProduct = fgm::Vec2<TypeParam>::dot(this->_vecA, this->_vecB);
+    const TypeParam dotProduct = flcn::Vec2<TypeParam>::dot(this->_vecA, this->_vecB);
 
     if constexpr (std::is_same_v<TypeParam, double>)
     {
@@ -194,8 +194,8 @@ TYPED_TEST(Vec2DotProductTests, StaticWrapper_Dot_NonOrthogonalVectorsReturnNonZ
 TEST(Vec2DotProduct, Dot_AntiParallelVectorsReturnsNegativeScalar)
 {
     // Given two opposite vectors
-    const fgm::Vec2 vecA(-1.0, 0.0);
-    const fgm::Vec2 vecB(1.0, 0.0);
+    const flcn::Vec2 vecA(-1.0, 0.0);
+    const flcn::Vec2 vecB(1.0, 0.0);
 
     // When dot with each other
     const double dotProduct = vecA.dot(vecB);
@@ -211,7 +211,7 @@ TEST(Vec2DotProduct, Dot_AntiParallelVectorsReturnsNegativeScalar)
 
 TEST(Vec2CrossProduct, Cross_WithItself_ReturnsZeroVector)
 {
-    const fgm::Vec2 vec(2.0f, 1.0f);
+    const flcn::Vec2 vec(2.0f, 1.0f);
 
     const float crossProduct = vec.cross(vec);
 
@@ -240,7 +240,7 @@ TYPED_TEST(Vec2CrossProductTests, Cross_TwoNonParallelVectorsReturnsNewProduct)
 
 TYPED_TEST(Vec2CrossProductTests, StaticWrapper_Cross_TwoNonParallelVectorsReturnsNewProduct)
 {
-    const TypeParam crossProduct = fgm::Vec2<TypeParam>::cross(this->_vecA, this->_vecB);
+    const TypeParam crossProduct = flcn::Vec2<TypeParam>::cross(this->_vecA, this->_vecB);
     if constexpr (std::is_same_v<TypeParam, double>)
     {
         EXPECT_DOUBLE_EQ(this->_expectedCrossProduct, crossProduct);
@@ -277,17 +277,17 @@ TYPED_TEST(Vec2CrossProductTests, StaticWrapper_Cross_TwoNonParallelVectorsRetur
 //
 // TEST(Vec2TensorProduct, TensorProduct_MixedTypes_PromotesType)
 // {
-//     const fgm::Vec2 vecA(2.0f, 3.0f);
-//     const fgm::Vec2 vecB(5.0, 6.0);
+//     const flcn::Vec2 vecA(2.0f, 3.0f);
+//     const flcn::Vec2 vecB(5.0, 6.0);
 //
 //     [[maybe_unused]] const auto crossProduct = vecA.tensorProduct(vecB);
-//     static_assert(std::is_same_v<decltype(crossProduct), const fgm::Mat2<double>>);
+//     static_assert(std::is_same_v<decltype(crossProduct), const flcn::Mat2<double>>);
 // }
 //
 //
 // TYPED_TEST(Vec2TensorProductTests, StaticWrapper_TensorProduct_BetweenTwoVectorsReturnsAValid2DMatrix)
 // {
-//     const auto tensorProduct = fgm::Vec2<TypeParam>::tensorProduct(this->_vecA, this->_vecB);
+//     const auto tensorProduct = flcn::Vec2<TypeParam>::tensorProduct(this->_vecA, this->_vecB);
 //     if constexpr (std::is_floating_point_v<TypeParam>)
 //     {
 //         EXPECT_MAT_EQ(this->_expectedTensorProductFP, tensorProduct);
@@ -301,11 +301,11 @@ TYPED_TEST(Vec2CrossProductTests, StaticWrapper_Cross_TwoNonParallelVectorsRetur
 //
 // TEST(Vec2TensorProduct, StaticWrapper_TensorProduct_MixedTypes_PromotesType)
 // {
-//     const fgm::Vec2 vecA(2.0f, 3.0f);
-//     const fgm::Vec2 vecB(5.0, 6.0);
+//     const flcn::Vec2 vecA(2.0f, 3.0f);
+//     const flcn::Vec2 vecB(5.0, 6.0);
 //
-//     [[maybe_unused]] const auto crossProduct = fgm::Vec2<float>::tensorProduct(vecA, vecB);
-//     static_assert(std::is_same_v<decltype(crossProduct), const fgm::Mat2<double>>);
+//     [[maybe_unused]] const auto crossProduct = flcn::Vec2<float>::tensorProduct(vecA, vecB);
+//     static_assert(std::is_same_v<decltype(crossProduct), const flcn::Mat2<double>>);
 // }
 
 /** @} */

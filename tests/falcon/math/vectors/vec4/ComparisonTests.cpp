@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Verify @ref fgm::Vec4<bool> comparison operator (>, >=, <, <=) and their functional counterpart's (gt,
+ * @brief Verify @ref flcn::Vec4<bool> comparison operator (>, >=, <, <=) and their functional counterpart's (gt,
  * gte, lt, lte) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -24,8 +24,8 @@
 namespace
 {
 
-    constexpr auto NAN_F = fgm::constants::NaN;
-    constexpr auto INF   = fgm::constants::INFINITY_F;
+    constexpr auto NAN_F = flcn::constants::NaN;
+    constexpr auto INF   = flcn::constants::INFINITY_F;
 
 
     /**************************************
@@ -40,9 +40,9 @@ namespace
     class Vec4ComparisonTests: public ::testing::Test
     {
     protected:
-        fgm::Vec4<T> _vecA;
-        fgm::Vec4<T> _vecB;
-        fgm::Vec4B _expectedGT, _expectedGTE, _expectedLT,
+        flcn::Vec4<T> _vecA;
+        flcn::Vec4<T> _vecB;
+        flcn::Vec4B _expectedGT, _expectedGTE, _expectedLT,
             _expectedLTE; // GT-> Greater Than, GTE-> Greater Than or Equal, LT -> Less than, LTE -> Less than or equal
 
         void SetUp() override
@@ -65,8 +65,8 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Vec4 VEC_A(1, 2, 5, 2);
-        constexpr fgm::Vec4 VEC_B(1, 3, 4, 0);
+        constexpr flcn::Vec4 VEC_A(1, 2, 5, 2);
+        constexpr flcn::Vec4 VEC_B(1, 3, 4, 0);
         /// @test Verify that greater than operator (operator>) returns a valid mask at compile time.
         constexpr auto GT_OP_MASK_VEC = VEC_A > VEC_B;
         static_assert(GT_OP_MASK_VEC.x() == false);
@@ -82,7 +82,7 @@ namespace
         static_assert(GT_MASK_VEC.w() == true);
 
         /// @test Verify that greater than operator (gt-static wrapper) returns a valid mask at compile time.
-        constexpr auto GT_MASK_VEC_STATIC = fgm::Vec4<int>::gt(VEC_A, VEC_B);
+        constexpr auto GT_MASK_VEC_STATIC = flcn::Vec4<int>::gt(VEC_A, VEC_B);
         static_assert(GT_MASK_VEC_STATIC.x() == false);
         static_assert(GT_MASK_VEC_STATIC.y() == false);
         static_assert(GT_MASK_VEC_STATIC.z() == true);
@@ -104,7 +104,7 @@ namespace
         static_assert(GTE_MASK_VEC.w() == true);
 
         /// @test Verify that greater than or equals operator (gte-static wrapper) returns a valid mask at compile time.
-        constexpr auto GTE_MASK_VEC_STATIC = fgm::Vec4<int>::gte(VEC_A, VEC_B);
+        constexpr auto GTE_MASK_VEC_STATIC = flcn::Vec4<int>::gte(VEC_A, VEC_B);
         static_assert(GTE_MASK_VEC_STATIC.x() == true);
         static_assert(GTE_MASK_VEC_STATIC.y() == false);
         static_assert(GTE_MASK_VEC_STATIC.z() == true);
@@ -126,7 +126,7 @@ namespace
         static_assert(LT_MASK_VEC.w() == false);
 
         /// @test Verify that less than operator (lt-static wrapper) returns a valid mask at compile time.
-        constexpr auto LT_MASK_VEC_STATIC = fgm::Vec4<int>::lt(VEC_A, VEC_B);
+        constexpr auto LT_MASK_VEC_STATIC = flcn::Vec4<int>::lt(VEC_A, VEC_B);
         static_assert(LT_MASK_VEC_STATIC.x() == false);
         static_assert(LT_MASK_VEC_STATIC.y() == true);
         static_assert(LT_MASK_VEC_STATIC.z() == false);
@@ -148,7 +148,7 @@ namespace
         static_assert(LTE_MASK_VEC.w() == false);
 
         /// @test Verify that less than or equals operator (lte-static wrapper) returns a valid mask at compile time.
-        constexpr auto LTE_MASK_VEC_STATIC = fgm::Vec4<int>::lte(VEC_A, VEC_B);
+        constexpr auto LTE_MASK_VEC_STATIC = flcn::Vec4<int>::lte(VEC_A, VEC_B);
         static_assert(LTE_MASK_VEC_STATIC.x() == true);
         static_assert(LTE_MASK_VEC_STATIC.y() == true);
         static_assert(LTE_MASK_VEC_STATIC.z() == false);
@@ -170,7 +170,7 @@ namespace
  */
 TYPED_TEST(Vec4ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
-    const fgm::Vec4<bool> mask = this->_vecA.gt(this->_vecB);
+    const flcn::Vec4<bool> mask = this->_vecA.gt(this->_vecB);
 
     EXPECT_VEC_EQ(this->_expectedGT, mask);
 }
@@ -182,7 +182,7 @@ TYPED_TEST(Vec4ComparisonTests, GT_ReturnsBooleanVectorWithElementsGreaterThanAs
  */
 TYPED_TEST(Vec4ComparisonTests, GreaterThanOperator_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
-    const fgm::Vec4<bool> mask = this->_vecA > this->_vecB;
+    const flcn::Vec4<bool> mask = this->_vecA > this->_vecB;
 
     EXPECT_VEC_EQ(this->_expectedGT, mask);
 }
@@ -194,7 +194,7 @@ TYPED_TEST(Vec4ComparisonTests, GreaterThanOperator_ReturnsBooleanVectorWithElem
  */
 TYPED_TEST(Vec4ComparisonTests, StaticWrapper_GT_ReturnsBooleanVectorWithElementsGreaterThanAsTrue)
 {
-    const fgm::Vec4<bool> mask = fgm::Vec4<TypeParam>::gt(this->_vecA, this->_vecB);
+    const flcn::Vec4<bool> mask = flcn::Vec4<TypeParam>::gt(this->_vecA, this->_vecB);
 
     EXPECT_VEC_EQ(this->_expectedGT, mask);
 }
@@ -206,11 +206,11 @@ TYPED_TEST(Vec4ComparisonTests, StaticWrapper_GT_ReturnsBooleanVectorWithElement
  */
 TEST(Vec4Comparison, GT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec4 vec(1.2, 4.5, 6.8, 9.5);
-    const fgm::Vec4 infVec(INF, INF, -INF, -INF);
-    const fgm::Vec4 expected(false, false, true, true);
+    const flcn::Vec4 vec(1.2, 4.5, 6.8, 9.5);
+    const flcn::Vec4 infVec(INF, INF, -INF, -INF);
+    const flcn::Vec4 expected(false, false, true, true);
 
-    const fgm::Vec4<bool> mask = vec.gt(infVec);
+    const flcn::Vec4<bool> mask = vec.gt(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -222,11 +222,11 @@ TEST(Vec4Comparison, GT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
  */
 TEST(Vec4Comparison, GT_NaNVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec4 vec(1.2f, 4.5f, 6.8f, 9.5f);
-    const fgm::Vec4 infVec(NAN_F, NAN_F, -5.9f, NAN_F);
-    const fgm::Vec4 expected(false, false, true, false);
+    const flcn::Vec4 vec(1.2f, 4.5f, 6.8f, 9.5f);
+    const flcn::Vec4 infVec(NAN_F, NAN_F, -5.9f, NAN_F);
+    const flcn::Vec4 expected(false, false, true, false);
 
-    const fgm::Vec4<bool> mask = vec.gt(infVec);
+    const flcn::Vec4<bool> mask = vec.gt(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -239,12 +239,12 @@ TEST(Vec4Comparison, GT_NaNVector_ReturnsBooleanVectorWithCorrectValues)
 TEST(Vec4Comparison, MixedType_GT_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    const fgm::Vec4 vecA(1.2, 4.5, 7.5, 9.5);
-    const fgm::Vec4 vecB(5, 6, 7, 8);
-    const fgm::Vec4 expected(false, false, true, true);
+    const flcn::Vec4 vecA(1.2, 4.5, 7.5, 9.5);
+    const flcn::Vec4 vecB(5, 6, 7, 8);
+    const flcn::Vec4 expected(false, false, true, true);
 
     // When compared with greater than or equal
-    const fgm::Vec4<bool> mask = vecA.gt(vecB);
+    const flcn::Vec4<bool> mask = vecA.gt(vecB);
 
     // Then, the resulting elements are as expected
     EXPECT_VEC_EQ(expected, mask);
@@ -262,7 +262,7 @@ TEST(Vec4Comparison, MixedType_GT_ReturnsBooleanVectorWithCorrectValues)
  */
 TYPED_TEST(Vec4ComparisonTests, GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
-    const fgm::Vec4<bool> mask = this->_vecA.gte(this->_vecB);
+    const flcn::Vec4<bool> mask = this->_vecA.gte(this->_vecB);
 
     EXPECT_VEC_EQ(this->_expectedGTE, mask);
 }
@@ -274,7 +274,7 @@ TYPED_TEST(Vec4ComparisonTests, GTE_ReturnsBooleanVectorWithElementsGreaterThanO
  */
 TYPED_TEST(Vec4ComparisonTests, GreaterThanOrEqualsOperator_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
-    const fgm::Vec4<bool> mask = this->_vecA >= this->_vecB;
+    const flcn::Vec4<bool> mask = this->_vecA >= this->_vecB;
 
     EXPECT_VEC_EQ(this->_expectedGTE, mask);
 }
@@ -286,7 +286,7 @@ TYPED_TEST(Vec4ComparisonTests, GreaterThanOrEqualsOperator_ReturnsBooleanVector
  */
 TYPED_TEST(Vec4ComparisonTests, StaticWrapper_GTE_ReturnsBooleanVectorWithElementsGreaterThanOrEqualAsTrue)
 {
-    const fgm::Vec4<bool> mask = fgm::Vec4<TypeParam>::gte(this->_vecA, this->_vecB);
+    const flcn::Vec4<bool> mask = flcn::Vec4<TypeParam>::gte(this->_vecA, this->_vecB);
 
     EXPECT_VEC_EQ(this->_expectedGTE, mask);
 }
@@ -298,11 +298,11 @@ TYPED_TEST(Vec4ComparisonTests, StaticWrapper_GTE_ReturnsBooleanVectorWithElemen
  */
 TEST(Vec4Comparison, GTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec4 vec(1.2f, 4.5f, 6.8f, 9.5f);
-    const fgm::Vec4 infVec(INF, INF, -INF, -INF);
-    const fgm::Vec4 expected(false, false, true, true);
+    const flcn::Vec4 vec(1.2f, 4.5f, 6.8f, 9.5f);
+    const flcn::Vec4 infVec(INF, INF, -INF, -INF);
+    const flcn::Vec4 expected(false, false, true, true);
 
-    const fgm::Vec4<bool> mask = vec.gte(infVec);
+    const flcn::Vec4<bool> mask = vec.gte(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -314,11 +314,11 @@ TEST(Vec4Comparison, GTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
  */
 TEST(Vec4Comparison, GTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec4 vec(1.2, 4.5, 6.8, 9.5);
-    const fgm::Vec4 infVec(NAN_F, NAN_F, -5.9f, NAN_F);
-    const fgm::Vec4 expected(false, false, true, false);
+    const flcn::Vec4 vec(1.2, 4.5, 6.8, 9.5);
+    const flcn::Vec4 infVec(NAN_F, NAN_F, -5.9f, NAN_F);
+    const flcn::Vec4 expected(false, false, true, false);
 
-    const fgm::Vec4<bool> mask = vec.gte(infVec);
+    const flcn::Vec4<bool> mask = vec.gte(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -331,12 +331,12 @@ TEST(Vec4Comparison, GTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
 TEST(Vec4Comparison, GTE_MixedType_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    const fgm::Vec4 vecA(1.2, 4.5, 7.5, 9.5);
-    const fgm::Vec4 vecB(5, 6, 7, 8);
-    const fgm::Vec4 expected(false, false, true, true);
+    const flcn::Vec4 vecA(1.2, 4.5, 7.5, 9.5);
+    const flcn::Vec4 vecB(5, 6, 7, 8);
+    const flcn::Vec4 expected(false, false, true, true);
 
     // When compared with greater or equal than
-    const fgm::Vec4<bool> mask = vecA.gte(vecB);
+    const flcn::Vec4<bool> mask = vecA.gte(vecB);
 
     // Then, the resulting elements are as expected
     EXPECT_VEC_EQ(expected, mask);
@@ -354,7 +354,7 @@ TEST(Vec4Comparison, GTE_MixedType_ReturnsBooleanVectorWithCorrectValues)
  */
 TYPED_TEST(Vec4ComparisonTests, LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
-    const fgm::Vec4<bool> mask = this->_vecA.lt(this->_vecB);
+    const flcn::Vec4<bool> mask = this->_vecA.lt(this->_vecB);
 
     EXPECT_VEC_EQ(this->_expectedLT, mask);
 }
@@ -366,7 +366,7 @@ TYPED_TEST(Vec4ComparisonTests, LT_ReturnsBooleanVectorWithElementsLessThanAsTru
  */
 TYPED_TEST(Vec4ComparisonTests, LessThanOperator_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
-    const fgm::Vec4<bool> mask = this->_vecA < this->_vecB;
+    const flcn::Vec4<bool> mask = this->_vecA < this->_vecB;
 
     EXPECT_VEC_EQ(this->_expectedLT, mask);
 }
@@ -378,7 +378,7 @@ TYPED_TEST(Vec4ComparisonTests, LessThanOperator_ReturnsBooleanVectorWithElement
  */
 TYPED_TEST(Vec4ComparisonTests, StaticWrapper_LT_ReturnsBooleanVectorWithElementsLessThanAsTrue)
 {
-    const fgm::Vec4<bool> mask = fgm::Vec4<TypeParam>::lt(this->_vecA, this->_vecB);
+    const flcn::Vec4<bool> mask = flcn::Vec4<TypeParam>::lt(this->_vecA, this->_vecB);
 
     EXPECT_VEC_EQ(this->_expectedLT, mask);
 }
@@ -390,11 +390,11 @@ TYPED_TEST(Vec4ComparisonTests, StaticWrapper_LT_ReturnsBooleanVectorWithElement
  */
 TEST(Vec4Comparison, LT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec4 vec(1.2, 4.5, 6.8, 9.5);
-    const fgm::Vec4 infVec(INF, INF, -INF, -INF);
-    const fgm::Vec4 expected(true, true, false, false);
+    const flcn::Vec4 vec(1.2, 4.5, 6.8, 9.5);
+    const flcn::Vec4 infVec(INF, INF, -INF, -INF);
+    const flcn::Vec4 expected(true, true, false, false);
 
-    const fgm::Vec4<bool> mask = vec.lt(infVec);
+    const flcn::Vec4<bool> mask = vec.lt(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -406,19 +406,19 @@ TEST(Vec4Comparison, LT_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
  */
 TEST(Vec4Comparison, LT_NanVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec4 vec(1.2f, 4.5f, 6.8f, 9.5f);
-    const fgm::Vec4 nanVec(NAN_F, NAN_F, -5.9f, NAN_F);
-    const fgm::Vec4 expected(false, false, false, false);
+    const flcn::Vec4 vec(1.2f, 4.5f, 6.8f, 9.5f);
+    const flcn::Vec4 nanVec(NAN_F, NAN_F, -5.9f, NAN_F);
+    const flcn::Vec4 expected(false, false, false, false);
 
 #if defined(_MSC_VER) && !defined(__clang__)
     // MSVC constant evaluator incorrectly returns true for NAN_F comparisons.
     // We fallback to 'const' (runtime) to verify the hardware/logic is correct.
     // Resharper disable all
-    const fgm::Vec4<bool> mask = vec.lt(nanVec);
+    const flcn::Vec4<bool> mask = vec.lt(nanVec);
     // Resharper restore all
 #else
     // Clang and GCC follow IEEE 754 strictly at compile-time.
-    const fgm::Vec4<bool> mask = vec.lt(nanVec);
+    const flcn::Vec4<bool> mask = vec.lt(nanVec);
 #endif
 
     EXPECT_VEC_EQ(expected, mask);
@@ -432,12 +432,12 @@ TEST(Vec4Comparison, LT_NanVector_ReturnsBooleanVectorWithCorrectValues)
 TEST(Vec4Comparison, LT_MixedType_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    const fgm::Vec4 vecA(1.2, 4.5, 7.5, 9.5);
-    const fgm::Vec4 vecB(5, 6, 7, 8);
-    const fgm::Vec4 expected(true, true, false, false);
+    const flcn::Vec4 vecA(1.2, 4.5, 7.5, 9.5);
+    const flcn::Vec4 vecB(5, 6, 7, 8);
+    const flcn::Vec4 expected(true, true, false, false);
 
     // When compared with less than or equal
-    const fgm::Vec4<bool> mask = vecA.lt(vecB);
+    const flcn::Vec4<bool> mask = vecA.lt(vecB);
 
     // Then, the resulting elements are as expected
     EXPECT_VEC_EQ(expected, mask);
@@ -455,7 +455,7 @@ TEST(Vec4Comparison, LT_MixedType_ReturnsBooleanVectorWithCorrectValues)
  */
 TYPED_TEST(Vec4ComparisonTests, LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {
-    const fgm::Vec4<bool> mask = this->_vecA.lte(this->_vecB);
+    const flcn::Vec4<bool> mask = this->_vecA.lte(this->_vecB);
 
     EXPECT_VEC_EQ(this->_expectedLTE, mask);
 }
@@ -467,7 +467,7 @@ TYPED_TEST(Vec4ComparisonTests, LTE_ReturnsBooleanVectorWithElementsLessThanOrEq
  */
 TYPED_TEST(Vec4ComparisonTests, LessThanOrEqualOperator_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {
-    const fgm::Vec4<bool> mask = this->_vecA <= this->_vecB;
+    const flcn::Vec4<bool> mask = this->_vecA <= this->_vecB;
 
     EXPECT_VEC_EQ(this->_expectedLTE, mask);
 }
@@ -479,7 +479,7 @@ TYPED_TEST(Vec4ComparisonTests, LessThanOrEqualOperator_ReturnsBooleanVectorWith
  */
 TYPED_TEST(Vec4ComparisonTests, StaticWrapper_LTE_ReturnsBooleanVectorWithElementsLessThanOrEqualAsTrue)
 {
-    const fgm::Vec4<bool> mask = fgm::Vec4<TypeParam>::lte(this->_vecA, this->_vecB);
+    const flcn::Vec4<bool> mask = flcn::Vec4<TypeParam>::lte(this->_vecA, this->_vecB);
 
     EXPECT_VEC_EQ(this->_expectedLTE, mask);
 }
@@ -491,11 +491,11 @@ TYPED_TEST(Vec4ComparisonTests, StaticWrapper_LTE_ReturnsBooleanVectorWithElemen
  */
 TEST(Vec4Comparison, LTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec4 vec(1.2, 4.5, 6.8, 9.5);
-    const fgm::Vec4 infVec(INF, INF, -INF, -INF);
-    const fgm::Vec4 expected(true, true, false, false);
+    const flcn::Vec4 vec(1.2, 4.5, 6.8, 9.5);
+    const flcn::Vec4 infVec(INF, INF, -INF, -INF);
+    const flcn::Vec4 expected(true, true, false, false);
 
-    const fgm::Vec4<bool> mask = vec.lte(infVec);
+    const flcn::Vec4<bool> mask = vec.lte(infVec);
 
     EXPECT_VEC_EQ(expected, mask);
 }
@@ -507,19 +507,19 @@ TEST(Vec4Comparison, LTE_InfinityVector_ReturnsBooleanVectorWithCorrectValues)
  */
 TEST(Vec4Comparison, LTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
 {
-    const fgm::Vec4 vec(1.2f, 4.5f, 6.8f, 9.5f);
-    const fgm::Vec4 nanVec(NAN_F, NAN_F, -5.9f, NAN_F);
-    const fgm::Vec4 expected(false, false, false, false);
+    const flcn::Vec4 vec(1.2f, 4.5f, 6.8f, 9.5f);
+    const flcn::Vec4 nanVec(NAN_F, NAN_F, -5.9f, NAN_F);
+    const flcn::Vec4 expected(false, false, false, false);
 
 #if defined(_MSC_VER) && !defined(__clang__)
     // MSVC constant evaluator incorrectly returns true for NAN_F comparisons.
     // We fallback to 'const' (runtime) to verify the hardware/logic is correct.
     // Resharper disable all
-    const fgm::Vec4<bool> mask = vec.lte(nanVec);
+    const flcn::Vec4<bool> mask = vec.lte(nanVec);
     // Resharper restore all
 #else
     // Clang and GCC follow IEEE 754 strictly at compile-time.
-    const fgm::Vec4<bool> mask = vec.lte(nanVec);
+    const flcn::Vec4<bool> mask = vec.lte(nanVec);
 #endif
 
     EXPECT_VEC_EQ(expected, mask);
@@ -533,12 +533,12 @@ TEST(Vec4Comparison, LTE_NanVector_ReturnsBooleanVectorWithCorrectValues)
 TEST(Vec4Comparison, LTE_MixedType_LTE_ReturnsBooleanVectorWithCorrectValues)
 {
     // Given two arbitrary vectors of different types
-    const fgm::Vec4 vecA(1.2, 4.5, 7.5, 9.5);
-    const fgm::Vec4 vecB(5, 6, 7, 8);
-    const fgm::Vec4 expected(true, true, false, false);
+    const flcn::Vec4 vecA(1.2, 4.5, 7.5, 9.5);
+    const flcn::Vec4 vecB(5, 6, 7, 8);
+    const flcn::Vec4 expected(true, true, false, false);
 
     // When compared with less than or equal
-    const fgm::Vec4<bool> mask = vecA.lte(vecB);
+    const flcn::Vec4<bool> mask = vecA.lte(vecB);
 
     // Then, the resulting elements are as expected
     EXPECT_VEC_EQ(expected, mask);

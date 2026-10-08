@@ -15,7 +15,7 @@
 #include "falcon/math/vectors/Point3.h"
 
 
-namespace fgm
+namespace flcn
 {
     template <StrictArithmetic T>
     struct Transform4: Mat4<T>
@@ -420,7 +420,7 @@ namespace fgm
     template <StrictArithmetic T>
     Transform4(Vec3<T>, Vec3<T>, Vec3<T>, Point3<T>) -> Transform4<T>;
 
-} // namespace fgm
+} // namespace flcn
 
 
 #include "Transform4.tpp"

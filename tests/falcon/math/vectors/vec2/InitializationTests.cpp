@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 03, 2026
  *
- * @brief Verify @ref fgm::Vec2 initialization logic.
+ * @brief Verify @ref flcn::Vec2 initialization logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -40,7 +40,7 @@ namespace
 
 TYPED_TEST(Vec2InitializationTests, EmptyCtor_InitializesZeroVector)
 {
-    const fgm::Vec2<TypeParam> vec{};
+    const flcn::Vec2<TypeParam> vec{};
     EXPECT_VEC_ZERO(vec);
 }
 
@@ -50,7 +50,7 @@ TYPED_TEST(Vec2InitializationTests, Ctor_ParametersInitializesVector)
     const TypeParam a = static_cast<TypeParam>(3);
     const TypeParam b = static_cast<TypeParam>(1);
 
-    const fgm::Vec2<TypeParam> vec(a, b);
+    const flcn::Vec2<TypeParam> vec(a, b);
     EXPECT_VEC_CONTAINS(vec, a, b);
 }
 
@@ -58,7 +58,7 @@ TYPED_TEST(Vec2InitializationTests, Ctor_ParametersInitializesVector)
 TYPED_TEST(Vec2InitializationTests, Ctor_SingleParameterInitializesVector)
 {
     const auto a = static_cast<TypeParam>(3);
-    const fgm::Vec2<TypeParam> vec(a);
+    const flcn::Vec2<TypeParam> vec(a);
     EXPECT_VEC_CONTAINS(vec, a, a);
 }
 

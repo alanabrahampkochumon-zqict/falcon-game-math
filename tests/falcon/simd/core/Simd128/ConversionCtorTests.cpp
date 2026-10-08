@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: August 18, 2026
  *
- * @brief Verify @ref falcon::Simd128 conversion constructors.
+ * @brief Verify @ref flcn::Simd128 conversion constructors.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -40,8 +40,8 @@ TYPED_TEST(Simd128ConversionCtorTests, PromotesRegisterType)
     constexpr size_t Lane = TypeParam::VALUE;
     using PromotedType    = double;
 
-    falcon::Simd128_t<Type, Lane> regA{};
-    [[maybe_unused]] falcon::Simd128_t<PromotedType, Lane> regB(regA);
+    flcn::Simd128_t<Type, Lane> regA{};
+    [[maybe_unused]] flcn::Simd128_t<PromotedType, Lane> regB(regA);
 
     #if defined(__GNUC__) || defined(__clang__)
         #pragma GCC diagnostic push
@@ -49,9 +49,9 @@ TYPED_TEST(Simd128ConversionCtorTests, PromotesRegisterType)
     #endif
 
     // Compile time check -> Immediate feedback
-    static_assert(std::is_same_v<decltype(regB.naive()), falcon::simd::internal::SSERegister_t<PromotedType>>);
+    static_assert(std::is_same_v<decltype(regB.naive()), flcn::simd::internal::SSERegister_t<PromotedType>>);
     // Runtime check
-    const bool result = std::is_same_v<decltype(regB.naive()), falcon::simd::internal::SSERegister_t<PromotedType>>;
+    const bool result = std::is_same_v<decltype(regB.naive()), flcn::simd::internal::SSERegister_t<PromotedType>>;
     EXPECT_TRUE(result);
 
     #if defined(__GNUC__) || defined(__clang__)
@@ -66,8 +66,8 @@ TYPED_TEST(Simd128ConversionCtorTests, DemotesRegisterType)
     constexpr size_t Lane = TypeParam::VALUE;
     using PromotedType    = uint8_t;
 
-    falcon::Simd128_t<Type, Lane> regA{};
-    [[maybe_unused]] falcon::Simd128_t<PromotedType, Lane> regB(regA);
+    flcn::Simd128_t<Type, Lane> regA{};
+    [[maybe_unused]] flcn::Simd128_t<PromotedType, Lane> regB(regA);
 
     #if defined(__GNUC__) || defined(__clang__)
         #pragma GCC diagnostic push
@@ -75,9 +75,9 @@ TYPED_TEST(Simd128ConversionCtorTests, DemotesRegisterType)
     #endif
 
     // Compile time check -> Immediate feedback
-    static_assert(std::is_same_v<decltype(regB.naive()), falcon::simd::internal::SSERegister_t<PromotedType>>);
+    static_assert(std::is_same_v<decltype(regB.naive()), flcn::simd::internal::SSERegister_t<PromotedType>>);
     // Runtime check
-    const bool result = std::is_same_v<decltype(regB.naive()), falcon::simd::internal::SSERegister_t<PromotedType>>;
+    const bool result = std::is_same_v<decltype(regB.naive()), flcn::simd::internal::SSERegister_t<PromotedType>>;
     EXPECT_TRUE(result);
 
     #if defined(__GNUC__) || defined(__clang__)

@@ -14,7 +14,7 @@
 #include "falcon/math/common/Types.h"
 
 
-namespace fgm
+namespace flcn
 {
     template <StrictArithmetic T>
     struct Point2: CVec2<T>
@@ -25,7 +25,7 @@ namespace fgm
          * @{
          */
 
-        /// @brief @ref fgm::CVec2 CTORs
+        /// @brief @ref flcn::CVec2 CTORs
         using CVec2<T>::CVec2;
 
         /** @} */
@@ -104,7 +104,7 @@ namespace fgm
         requires StrictArithmetic<T>
     Point2(T) -> Point2<T>;
 
-} // namespace fgm
+} // namespace flcn
 
 
 #include "Point2.tpp"

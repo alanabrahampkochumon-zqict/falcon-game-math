@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 25, 2026
  *
- * @brief Verify @ref fgm::Mat3x2 vector and matrix GeometricOps logic.
+ * @brief Verify @ref flcn::Mat3x2 vector and matrix GeometricOps logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -33,7 +33,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x2 matrix geometric operations (Matrix-Vector Multiplication).
+     * @brief Test fixture for @ref flcn::Mat3x2 matrix geometric operations (Matrix-Vector Multiplication).
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices and vectors.
      */
@@ -42,25 +42,25 @@ namespace
     {
 
     protected:
-        fgm::CVec2<T> _vec2, _expectedFPCVec2, _expectedIntCVec2;
-        fgm::Vec3<T> _vec3, _expectedFPVec3, _expectedIntVec3;
+        flcn::CVec2<T> _vec2, _expectedFPCVec2, _expectedIntCVec2;
+        flcn::Vec3<T> _vec3, _expectedFPVec3, _expectedIntVec3;
 
-        fgm::Mat3x2<T> _mat3x2;
+        flcn::Mat3x2<T> _mat3x2;
 
 
         void SetUp() override
         {
-            _vec2            = fgm::CVec2{ T(1.23412341000000003), T(2.21341324399999984) };
-            _expectedFPCVec2  = fgm::CVec2{ T(23.57800617829743928), T(29.49140573069764315) };
-            _expectedIntCVec2 = fgm::CVec2{ T(22), T(28) };
+            _vec2            = flcn::CVec2{ T(1.23412341000000003), T(2.21341324399999984) };
+            _expectedFPCVec2  = flcn::CVec2{ T(23.57800617829743928), T(29.49140573069764315) };
+            _expectedIntCVec2 = flcn::CVec2{ T(22), T(28) };
 
-            _vec3            = fgm::Vec3{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988) };
-            _expectedFPVec3  = fgm::Vec3{ T(6.33060730095153090), T(12.61075992189763717), T(19.60486191482313600) };
-            _expectedIntVec3 = fgm::Vec3{ T(5), T(11), T(17) };
+            _vec3            = flcn::Vec3{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988) };
+            _expectedFPVec3  = flcn::Vec3{ T(6.33060730095153090), T(12.61075992189763717), T(19.60486191482313600) };
+            _expectedIntVec3 = flcn::Vec3{ T(5), T(11), T(17) };
 
 
-            _mat3x2 = { fgm::Vec3{ T(1.32194213899999991), T(3.02134123399999988), T(5.10238399999999981) },
-                        fgm::Vec3{ T(2.12304122299999998), T(4.01283041000000029), T(6.01238399999999995) } };
+            _mat3x2 = { flcn::Vec3{ T(1.32194213899999991), T(3.02134123399999988), T(5.10238399999999981) },
+                        flcn::Vec3{ T(2.12304122299999998), T(4.01283041000000029), T(6.01238399999999995) } };
         }
     };
     TYPED_TEST_SUITE(Mat3x2GeometricOpsTests, SupportedArithmeticTypes);
@@ -73,10 +73,10 @@ namespace
     namespace static_tests
     {
         // STATIC TEST SETUP
-        constexpr fgm::CVec2 VEC2(1, 2);
-        constexpr fgm::Vec3 ROW_VEC3(1, 2, 3);
+        constexpr flcn::CVec2 VEC2(1, 2);
+        constexpr flcn::Vec3 ROW_VEC3(1, 2, 3);
 
-        constexpr fgm::Mat3x2 MAT3X2(1, 2, 3, 4, 5, 6);
+        constexpr flcn::Mat3x2 MAT3X2(1, 2, 3, 4, 5, 6);
 
 
         /// @test Verify that 3x2 matrix times a 2D column vector yields a 3D column vector at compile time.

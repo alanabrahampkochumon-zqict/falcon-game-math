@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 22, 2026
  *
- * @brief Verify the @ref fgm::Vec4 p-Norm length logic.
+ * @brief Verify the @ref flcn::Vec4 p-Norm length logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -30,7 +30,7 @@ namespace
     class Vec4ManhattanNormTests: public testing::Test
     {
     protected:
-        fgm::Vec4<T> _vec;
+        flcn::Vec4<T> _vec;
         T _norm;
 
         void SetUp() override
@@ -50,7 +50,7 @@ namespace
     class Vec4ChebyshevNormTests: public testing::Test
     {
     protected:
-        fgm::Vec4<T> _vec;
+        flcn::Vec4<T> _vec;
         T _norm;
 
         void SetUp() override
@@ -69,18 +69,18 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Vec4 VEC(1, -2, 3, -4);
+        constexpr flcn::Vec4 VEC(1, -2, 3, -4);
 
         /// @test Verify that Vec4 Manhattan Norm returns a valid scalar.
         static_assert(VEC.manhattanNorm() == 10);
         /// @test Verify that Vec4 Manhattan Norm (static wrapper) returns a valid scalar.
-        static_assert(fgm::Vec4<int>::manhattanNorm(VEC) == 10);
+        static_assert(flcn::Vec4<int>::manhattanNorm(VEC) == 10);
 
 
         /// @test Verify that Vec4 Chebyshev Norm returns a valid scalar.
         static_assert(VEC.chebyshevNorm() == 4);
         /// @test Verify that Vec4 Chebyshev Norm (static wrapper) returns a valid scalar.
-        static_assert(fgm::Vec4<int>::chebyshevNorm(VEC) == 4);
+        static_assert(flcn::Vec4<int>::chebyshevNorm(VEC) == 4);
 
     } // namespace static_tests
 
@@ -102,11 +102,11 @@ TYPED_TEST(Vec4ManhattanNormTests, ReturnsSumOfAbsoluteValueOfComponents)
 
 /**
  * @test Verify that taking the manhattan norm of a non-unit vector using static variant of
- *        @ref fgm::Vec4::manhattanNorm returns non-unit scalar.
+ *        @ref flcn::Vec4::manhattanNorm returns non-unit scalar.
  */
 TYPED_TEST(Vec4ManhattanNormTests, StaticWrapper_ReturnsSumOfAbsoluteValueOfComponents)
 {
-    const auto magnitude = fgm::Vec4<TypeParam>::manhattanNorm(this->_vec);
+    const auto magnitude = flcn::Vec4<TypeParam>::manhattanNorm(this->_vec);
     EXPECT_MAG_EQ(this->_norm, magnitude);
 }
 
@@ -126,11 +126,11 @@ TYPED_TEST(Vec4ChebyshevNormTests, ReturnsLongestAbsoluteComponent)
 
 /**
  * @test Verify that taking the chebyshev norm of a non-unit vector using static variant of
- *        @ref fgm::Vec4::chebyshevNorm returns non-unit scalar.
+ *        @ref flcn::Vec4::chebyshevNorm returns non-unit scalar.
  */
 TYPED_TEST(Vec4ChebyshevNormTests, StaticWrapper_ReturnsLongestAbsoluteComponent)
 {
-    const auto magnitude = fgm::Vec4<TypeParam>::chebyshevNorm(this->_vec);
+    const auto magnitude = flcn::Vec4<TypeParam>::chebyshevNorm(this->_vec);
     EXPECT_MAG_EQ(this->_norm, magnitude);
 }
 

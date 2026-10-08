@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 21, 2026
  *
- * @brief Verify @ref fgm::Mat4x3 subtraction logic.
+ * @brief Verify @ref flcn::Mat4x3 subtraction logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,7 +26,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4x3 Subtraction.
+     * @brief Test fixture for @ref flcn::Mat4x3 Subtraction.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -34,15 +34,15 @@ namespace
     class Mat4x3SubtractionTests: public testing::Test
     {
     protected:
-        fgm::Mat4x3<T> _matA;
-        fgm::Mat4x3<T> _matB;
-        fgm::Mat4x3<T> _expectedDifference;
+        flcn::Mat4x3<T> _matA;
+        flcn::Mat4x3<T> _matB;
+        flcn::Mat4x3<T> _expectedDifference;
 
         void SetUp() override
         {
-            _matA               = { fgm::Vec4<T>(5, 6, 5, 7), fgm::Vec4<T>(7, 8, 12, 21), fgm::Vec4<T>(3, 4, 11, 12) };
-            _matB               = { fgm::Vec4<T>(1, 2, 5, 5), fgm::Vec4<T>(3, 4, 11, 12), fgm::Vec4<T>(3, 1, 2, 5) };
-            _expectedDifference = { fgm::Vec4<T>(4, 4, 0, 2), fgm::Vec4<T>(4, 4, 1, 9), fgm::Vec4<T>(0, 3, 9, 7) };
+            _matA               = { flcn::Vec4<T>(5, 6, 5, 7), flcn::Vec4<T>(7, 8, 12, 21), flcn::Vec4<T>(3, 4, 11, 12) };
+            _matB               = { flcn::Vec4<T>(1, 2, 5, 5), flcn::Vec4<T>(3, 4, 11, 12), flcn::Vec4<T>(3, 1, 2, 5) };
+            _expectedDifference = { flcn::Vec4<T>(4, 4, 0, 2), flcn::Vec4<T>(4, 4, 1, 9), flcn::Vec4<T>(0, 3, 9, 7) };
         }
     };
     TYPED_TEST_SUITE(Mat4x3SubtractionTests, SupportedArithmeticTypes);
@@ -55,9 +55,9 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat4x3 MAT1(8, 2, 12, 4, -5, 0, -1, 0, 1, 5, 2, 3);
-        constexpr fgm::Mat4x3 MAT2(5, 6, 7, 8, -11, 5, 5, -32, -1, 5, 2, -5);
-        constexpr fgm::Mat4x3 BINARY_DIFF = MAT1 - MAT2;
+        constexpr flcn::Mat4x3 MAT1(8, 2, 12, 4, -5, 0, -1, 0, 1, 5, 2, 3);
+        constexpr flcn::Mat4x3 MAT2(5, 6, 7, 8, -11, 5, 5, -32, -1, 5, 2, -5);
+        constexpr flcn::Mat4x3 BINARY_DIFF = MAT1 - MAT2;
 
         /** @test Verify that matrix subtraction operations return a valid matrix at compile time. */
         static_assert(BINARY_DIFF(0, 0) == 3);
@@ -85,7 +85,7 @@ namespace
 
 TYPED_TEST(Mat4x3SubtractionTests, MinusOperator_ReturnsMatrixDifference)
 {
-    const fgm::Mat4x3 difference = this->_matA - this->_matB;
+    const flcn::Mat4x3 difference = this->_matA - this->_matB;
 
     EXPECT_MAT_EQ(this->_expectedDifference, difference);
 }
@@ -93,10 +93,10 @@ TYPED_TEST(Mat4x3SubtractionTests, MinusOperator_ReturnsMatrixDifference)
 
 TEST(Mat4x3SubtractionTests, MinusOperator_MixedType_PromotesType)
 {
-    const fgm::Mat4x3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.5f, 2.0f, 5.0f, 3.0f, 1.5f, 2.0f);
-    const fgm::Mat4x3 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 1.0, 2.25, 0.1, 2.5, 1.0, 2.25);
+    const flcn::Mat4x3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.5f, 2.0f, 5.0f, 3.0f, 1.5f, 2.0f);
+    const flcn::Mat4x3 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 1.0, 2.25, 0.1, 2.5, 1.0, 2.25);
 
-    [[maybe_unused]] const fgm::Mat4x3 difference = mat1 - mat2;
+    [[maybe_unused]] const flcn::Mat4x3 difference = mat1 - mat2;
 
     static_assert(std::is_same_v<decltype(difference)::value_type, double>);
 }
@@ -112,8 +112,8 @@ TYPED_TEST(Mat4x3SubtractionTests, MinusEqualsOperator_ReturnsSameVectorWithDiff
 
 TEST(Mat4x3SubtractionTests, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    fgm::Mat4x3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.5f, 2.0f, 5.0f, 3.0f, 1.5f, 2.0f);
-    [[maybe_unused]] const fgm::Mat4x3 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 1.0, 2.25, 0.1, 2.5, 1.0, 2.25);
+    flcn::Mat4x3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f, 1.5f, 2.0f, 5.0f, 3.0f, 1.5f, 2.0f);
+    [[maybe_unused]] const flcn::Mat4x3 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5, 1.0, 2.25, 0.1, 2.5, 1.0, 2.25);
 
     mat1 -= mat2;
 

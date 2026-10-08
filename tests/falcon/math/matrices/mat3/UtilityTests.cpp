@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 23, 2026
  *
- * @brief Verify @ref fgm::Mat3 utility functions.
+ * @brief Verify @ref flcn::Mat3 utility functions.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -28,65 +28,65 @@ namespace
         requires std::floating_point<T>
     struct Mat3UtilityParams
     {
-        fgm::Mat3<T> mat;
+        flcn::Mat3<T> mat;
         bool expected;
     };
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 Infinity Checking.
+     * @brief Test fixture for @ref flcn::Mat3 Infinity Checking.
      */
     class Mat3InfCheckerTests: public testing::TestWithParam<Mat3UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
         Mat3UtilsInfMatrices, Mat3InfCheckerTests,
         ::testing::Values(
-            Mat3UtilityParams{ fgm::Mat3(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+            Mat3UtilityParams{ flcn::Mat3(flcn::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
                                true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+            Mat3UtilityParams{ flcn::Mat3(1.0f, flcn::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
                                true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, flcn::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
                                true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f, flcn::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f),
                                true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f),
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::INFINITY_F, 1.0f, 1.0f, 1.0f, 1.0f),
                                true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f),
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::INFINITY_F, 1.0f, 1.0f, 1.0f),
                                true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f),
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::INFINITY_F, 1.0f, 1.0f),
                                true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f),
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::INFINITY_F, 1.0f),
                                true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F),
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::INFINITY_F),
                                true },
             Mat3UtilityParams{
-                fgm::Mat3(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F), true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f), false }));
+                flcn::Mat3(flcn::constants::INFINITY_F, flcn::constants::INFINITY_F, flcn::constants::INFINITY_F), true },
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f), false }));
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 NaN Checking.
+     * @brief Test fixture for @ref flcn::Mat3 NaN Checking.
      */
     class Mat3NaNCheckerTests: public testing::TestWithParam<Mat3UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
         Mat3UtilsNaNMatrices, Mat3NaNCheckerTests,
         ::testing::Values(
-            Mat3UtilityParams{ fgm::Mat3(fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f), true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-            Mat3UtilityParams{ fgm::Mat3(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN), true },
-            Mat3UtilityParams{ fgm::Mat3(1.0f, 1.0f, 1.0f), false }));
+            Mat3UtilityParams{ flcn::Mat3(flcn::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+            Mat3UtilityParams{ flcn::Mat3(1.0f, flcn::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, flcn::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f, flcn::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f), true },
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::NaN, 1.0f, 1.0f, 1.0f, 1.0f), true },
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::NaN, 1.0f, 1.0f, 1.0f), true },
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::NaN, 1.0f, 1.0f), true },
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::NaN, 1.0f), true },
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, flcn::constants::NaN), true },
+            Mat3UtilityParams{ flcn::Mat3(flcn::constants::NaN, flcn::constants::NaN, flcn::constants::NaN), true },
+            Mat3UtilityParams{ flcn::Mat3(1.0f, 1.0f, 1.0f), false }));
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 utilities, verifying across various integral types.
+     * @brief Test fixture for @ref flcn::Mat3 utilities, verifying across various integral types.
      */
     template <typename>
     class Mat3UtilsIntTests: public testing::Test
@@ -101,9 +101,9 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat3 INF_MAT(fgm::constants::INFINITY_F, 1.0f, 1.0f);
-        constexpr fgm::Mat3 NAN_MAT(fgm::constants::NaN, 1.0f, 1.0f);
-        constexpr fgm::Mat3 MAT(1.0f, 1.0f, 1.0f);
+        constexpr flcn::Mat3 INF_MAT(flcn::constants::INFINITY_F, 1.0f, 1.0f);
+        constexpr flcn::Mat3 NAN_MAT(flcn::constants::NaN, 1.0f, 1.0f);
+        constexpr flcn::Mat3 MAT(1.0f, 1.0f, 1.0f);
 
 
         /** @test Verify that the Mat3 hasNaN return correct boolean at compile time. */
@@ -111,8 +111,8 @@ namespace
         static_assert(NAN_MAT.hasNaN() == true);
 
         /** @test Verify that the Mat3 hasNaN (static wrapper) return correct boolean at compile time. */
-        static_assert(fgm::Mat3<float>::hasNaN(MAT) == false);
-        static_assert(fgm::Mat3<float>::hasNaN(NAN_MAT) == true);
+        static_assert(flcn::Mat3<float>::hasNaN(MAT) == false);
+        static_assert(flcn::Mat3<float>::hasNaN(NAN_MAT) == true);
 
 
         /** @test Verify that the Mat3 hasInf return correct boolean at compile time. */
@@ -121,8 +121,8 @@ namespace
 
 
         /** @test Verify that the Mat3 hasInf (static wrapper) return correct boolean at compile time. */
-        static_assert(fgm::Mat3<float>::hasInf(INF_MAT) == true);
-        static_assert(fgm::Mat3<float>::hasInf(MAT) == false);
+        static_assert(flcn::Mat3<float>::hasInf(INF_MAT) == true);
+        static_assert(flcn::Mat3<float>::hasInf(MAT) == false);
 
     } // namespace static_tests
 
@@ -145,21 +145,21 @@ TEST_P(Mat3InfCheckerTests, ReturnTrueIfAnyElementIsInfinity)
 TYPED_TEST(Mat3UtilsIntTests, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Mat3(value, value, value).hasInf());
+    EXPECT_FALSE(flcn::Mat3(value, value, value).hasInf());
 }
 
 
 TEST_P(Mat3InfCheckerTests, StaticWrapper_ReturnTrueIfAnyElementIsInfinity)
 {
     const auto& [mat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Mat3<float>::hasInf(mat));
+    EXPECT_EQ(expected, flcn::Mat3<float>::hasInf(mat));
 }
 
 
 TYPED_TEST(Mat3UtilsIntTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Mat3<TypeParam>::hasInf(fgm::Mat3(value, value, value)));
+    EXPECT_FALSE(flcn::Mat3<TypeParam>::hasInf(flcn::Mat3(value, value, value)));
 }
 
 
@@ -178,21 +178,21 @@ TEST_P(Mat3NaNCheckerTests, ReturnTrueIfAnyElementIsNaN)
 TYPED_TEST(Mat3UtilsIntTests, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Mat3(value, value, value).hasNaN());
+    EXPECT_FALSE(flcn::Mat3(value, value, value).hasNaN());
 }
 
 
 TEST_P(Mat3NaNCheckerTests, StaticWrapper_ReturnTrueIfAnyElementIsNaN)
 {
     const auto& [mat, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Mat3<float>::hasNaN(mat));
+    EXPECT_EQ(expected, flcn::Mat3<float>::hasNaN(mat));
 }
 
 
 TYPED_TEST(Mat3UtilsIntTests, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Mat3<TypeParam>::hasNaN(fgm::Mat3(value, value, value)));
+    EXPECT_FALSE(flcn::Mat3<TypeParam>::hasNaN(flcn::Mat3(value, value, value)));
 }
 
 /** @} */

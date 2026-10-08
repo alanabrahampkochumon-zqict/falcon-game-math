@@ -37,23 +37,23 @@ namespace
     class PackedSizeCalculatorTests: public testing::TestWithParam<TestPackingParams>
     {};
 
-    /// @brief Test fixture for @ref falcon::expandFourFolds.
-    class ExpandFourFoldTests: public testing::TestWithParam<std::pair<falcon::BlendMask32_t, falcon::uint128_t>>
+    /// @brief Test fixture for @ref flcn::expandFourFolds.
+    class ExpandFourFoldTests: public testing::TestWithParam<std::pair<flcn::BlendMask32_t, flcn::uint128_t>>
     {};
 
     INSTANTIATE_TEST_SUITE_P(
         ExpandFourFoldTests, ExpandFourFoldTests,
         testing::Values(
-            std::make_pair(0x0000FFFF, falcon::uint128_t{ .upper = 0x0000000000000000, .lower = 0xFFFFFFFFFFFFFFFF }),
-            std::make_pair(0xFFFFFFFF, falcon::uint128_t{ .upper = 0xFFFFFFFFFFFFFFFF, .lower = 0xFFFFFFFFFFFFFFFF }),
-            std::make_pair(0x00000000, falcon::uint128_t{ .upper = 0x0000000000000000, .lower = 0x0000000000000000 }),
-            std::make_pair(0xFFFF0000, falcon::uint128_t{ .upper = 0xFFFFFFFFFFFFFFFF, .lower = 0x0000000000000000 }),
-            std::make_pair(0x0F0F0F0F, falcon::uint128_t{ .upper = 0x0000FFFF0000FFFF, .lower = 0x0000FFFF0000FFFF }),
-            std::make_pair(0xF0F0F0F0, falcon::uint128_t{ .upper = 0xFFFF0000FFFF0000, .lower = 0xFFFF0000FFFF0000 }),
-            std::make_pair(0x79151FEE, falcon::uint128_t{ .upper = 0x0FFFF00F000F0F0F, .lower = 0x000FFFFFFFF0FFF0 }),
-            std::make_pair(0x2AC1FC11, falcon::uint128_t{ .upper = 0x00F0F0F0FF00000F, .lower = 0xFFFFFF00000F000F }),
-            std::make_pair(0xB8A6A044, falcon::uint128_t{ .upper = 0xF0FFF000F0F00FF0, .lower = 0xF0F000000F000F00 }),
-            std::make_pair(0xFE8D8D40, falcon::uint128_t{ .upper = 0xFFFFFFF0F000FF0F, .lower = 0xF000FF0F0F000000 })));
+            std::make_pair(0x0000FFFF, flcn::uint128_t{ .upper = 0x0000000000000000, .lower = 0xFFFFFFFFFFFFFFFF }),
+            std::make_pair(0xFFFFFFFF, flcn::uint128_t{ .upper = 0xFFFFFFFFFFFFFFFF, .lower = 0xFFFFFFFFFFFFFFFF }),
+            std::make_pair(0x00000000, flcn::uint128_t{ .upper = 0x0000000000000000, .lower = 0x0000000000000000 }),
+            std::make_pair(0xFFFF0000, flcn::uint128_t{ .upper = 0xFFFFFFFFFFFFFFFF, .lower = 0x0000000000000000 }),
+            std::make_pair(0x0F0F0F0F, flcn::uint128_t{ .upper = 0x0000FFFF0000FFFF, .lower = 0x0000FFFF0000FFFF }),
+            std::make_pair(0xF0F0F0F0, flcn::uint128_t{ .upper = 0xFFFF0000FFFF0000, .lower = 0xFFFF0000FFFF0000 }),
+            std::make_pair(0x79151FEE, flcn::uint128_t{ .upper = 0x0FFFF00F000F0F0F, .lower = 0x000FFFFFFFF0FFF0 }),
+            std::make_pair(0x2AC1FC11, flcn::uint128_t{ .upper = 0x00F0F0F0FF00000F, .lower = 0xFFFFFF00000F000F }),
+            std::make_pair(0xB8A6A044, flcn::uint128_t{ .upper = 0xF0FFF000F0F00FF0, .lower = 0xF0F000000F000F00 }),
+            std::make_pair(0xFE8D8D40, flcn::uint128_t{ .upper = 0xFFFFFFF0F000FF0F, .lower = 0xF000FF0F0F000000 })));
 
     template <typename>
     class GetAllOnesTests: public testing::Test
@@ -67,35 +67,35 @@ namespace
 
     namespace static_tests
     {
-        using namespace falcon::simd;
+        using namespace flcn::simd;
         constexpr bool T = true;
         constexpr bool F = false;
 
-        /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 2 booleans
+        /// @test Verify that @ref flcn::simd::makeBlendMask32 returns a correct mask for 2 booleans
         static_assert(makeBlendMask32<2, T, F>() == 0x0000FFFF);
         static_assert(makeBlendMask32<2, F, T>() == 0xFFFF0000);
 
-        /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 4 booleans
+        /// @test Verify that @ref flcn::simd::makeBlendMask32 returns a correct mask for 4 booleans
         static_assert(makeBlendMask32<4, T, F, T, F>() == 0x00FF00FF);
         static_assert(makeBlendMask32<4, F, T, F, T>() == 0xFF00FF00);
 
-        /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 8 booleans
+        /// @test Verify that @ref flcn::simd::makeBlendMask32 returns a correct mask for 8 booleans
         static_assert(makeBlendMask32<8, T, F, T, F, T, F, T, F>() == 0x0F0F0F0F);
         static_assert(makeBlendMask32<8, F, T, F, T, F, T, F, T>() == 0xF0F0F0F0);
 
 
-        /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 16 booleans
+        /// @test Verify that @ref flcn::simd::makeBlendMask32 returns a correct mask for 16 booleans
         static_assert(makeBlendMask32<16, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F>() == 0x33333333);
         static_assert(makeBlendMask32<16, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T>() == 0xCCCCCCCC);
 
-        /// @test Verify that @ref falcon::simd::makeBlendMask32 returns a correct mask for 32 booleans
+        /// @test Verify that @ref flcn::simd::makeBlendMask32 returns a correct mask for 32 booleans
         static_assert(makeBlendMask32<32, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F,
                                       T, F, T, F, T, F>() == 0x55555555);
         static_assert(makeBlendMask32<32, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T,
                                       F, T, F, T, F, T>() == 0xAAAAAAAA);
 
 
-        /// @test Verify that @ref falcon::simd::expandFourFold returns a valid value expanded four fold
+        /// @test Verify that @ref flcn::simd::expandFourFold returns a valid value expanded four fold
         static_assert(expandFourFold(0x79151FEE).upper == 0x0FFFF00F000F0F0F);
         static_assert(expandFourFold(0x79151FEE).lower == 0x000FFFFFFFF0FFF0);
         static_assert(expandFourFold(0x0000FFFF).upper == 0x0000000000000000);
@@ -120,7 +120,7 @@ TEST_P(PackedSizeCalculatorTests, CalculatesCorrectSize)
 
     // When packed size is calculated
     const auto [alignedByteSize, padding, packedRegisterWidth, registerCount] =
-        falcon::simd::calculatePackedSize(totalByteSize, alignAs);
+        flcn::simd::calculatePackedSize(totalByteSize, alignAs);
 
     // It gives the nearest packed size and padding
     EXPECT_EQ(expectedByteSize, alignedByteSize);
@@ -170,7 +170,7 @@ INSTANTIATE_TEST_SUITE_P(
 
 TYPED_TEST(GetAllOnesTests, ReturnsValueWithOneInAllBits)
 {
-    const auto value = falcon::simd::getAllOnes<TypeParam>();
+    const auto value = flcn::simd::getAllOnes<TypeParam>();
     if constexpr (std::same_as<double, TypeParam>)
     {
         EXPECT_EQ(0xFFFFFFFFFFFFFFFF, std::bit_cast<uint64_t>(value));
@@ -189,7 +189,7 @@ TYPED_TEST(GetAllOnesTests, ReturnsValueWithOneInAllBits)
 TEST_P(ExpandFourFoldTests, ExpandsEachBitBy4TimesAndReturnsAValidPair)
 {
     const auto [blendMask, expectedValue] = GetParam();
-    const auto value                      = falcon::simd::expandFourFold(blendMask);
+    const auto value                      = flcn::simd::expandFourFold(blendMask);
     EXPECT_EQ(expectedValue.upper, value.upper);
     EXPECT_EQ(expectedValue.lower, value.lower);
 }
@@ -201,7 +201,7 @@ TEST_P(ExpandFourFoldTests, ExpandsEachBitBy4TimesAndReturnsAValidPair)
 /// @test Verify that makeBlendMask32 returns a correct mask given all mask combinations.
 #define TEST_SIMD_UTILS_MAKE_BLEND_MASK(TestSuffix, ExpectedMask, RegCount, ...)                                       \
     TEST(MakeBlendMask32Tests, ReturnsValidMask_For##TestSuffix)                                                       \
-    { EXPECT_EQ(ExpectedMask, (falcon::simd::makeBlendMask32<RegCount, __VA_ARGS__>())); }
+    { EXPECT_EQ(ExpectedMask, (flcn::simd::makeBlendMask32<RegCount, __VA_ARGS__>())); }
 
 // Aliasing to make testing easier.
 constexpr bool T = true;
@@ -305,7 +305,7 @@ TEST_SIMD_UTILS_MAKE_BLEND_MASK(ThirtyTwo_ThirtyTwoBoolsWithAllFalse, 0x00000000
 #define TEST_SIMD_UTILS_PACK_TO_N_BITS(TestSuffix, BitCount, InputMask, ExpectedValue)                                 \
     TEST(PackToNBitsTests, ReturnsValidMask_WhenCompressedTo##TestSuffix)                                              \
     {                                                                                                                  \
-        const auto packed = falcon::simd::packToNBits<BitCount>(InputMask);                                            \
+        const auto packed = flcn::simd::packToNBits<BitCount>(InputMask);                                            \
         EXPECT_EQ(ExpectedValue, packed);                                                                              \
     }
 

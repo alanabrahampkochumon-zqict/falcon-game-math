@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 21, 2026
  *
- * @brief Verify @ref fgm::Mat3x4 negation logic.
+ * @brief Verify @ref flcn::Mat3x4 negation logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -23,7 +23,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x4 Negation(-Mat).
+     * @brief Test fixture for @ref flcn::Mat3x4 Negation(-Mat).
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -31,13 +31,13 @@ namespace
     class Mat3x4NegationTests: public testing::Test
     {
     protected:
-        fgm::Mat3x4<T> _matA, _expectedMat;
+        flcn::Mat3x4<T> _matA, _expectedMat;
 
         void SetUp() override
         {
-            _matA = { fgm::Vec3<T>(-1, 2, 3), fgm::Vec3<T>(5, 6, 7), fgm::Vec3<T>(0, 15, -12), fgm::Vec3<T>(1, 3, 1) };
-            _expectedMat = { fgm::Vec3<T>(1, -2, -3), fgm::Vec3<T>(-5, -6, -7), fgm::Vec3<T>(0, -15, 12),
-                             fgm::Vec3<T>(-1, -3, -1) };
+            _matA = { flcn::Vec3<T>(-1, 2, 3), flcn::Vec3<T>(5, 6, 7), flcn::Vec3<T>(0, 15, -12), flcn::Vec3<T>(1, 3, 1) };
+            _expectedMat = { flcn::Vec3<T>(1, -2, -3), flcn::Vec3<T>(-5, -6, -7), flcn::Vec3<T>(0, -15, 12),
+                             flcn::Vec3<T>(-1, -3, -1) };
         }
     };
     TYPED_TEST_SUITE(Mat3x4NegationTests, SupportedSignedArithmeticTypes);
@@ -50,8 +50,8 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat3x4 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-        constexpr fgm::Mat3x4 NEG_MAT = -MAT;
+        constexpr flcn::Mat3x4 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+        constexpr flcn::Mat3x4 NEG_MAT = -MAT;
 
 
         /** @test Verify that matrix negation returns a valid matrix at compile time. */
@@ -80,7 +80,7 @@ namespace
 
 TYPED_TEST(Mat3x4NegationTests, ReturnsElementWiseNegatedMatrix)
 {
-    const fgm::Mat3x4 negMat = -this->_matA;
+    const flcn::Mat3x4 negMat = -this->_matA;
     EXPECT_MAT_EQ(this->_expectedMat, negMat);
 }
 

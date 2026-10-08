@@ -13,7 +13,7 @@
 #include <falcon/core/Preprocessors.h>
 
 
-namespace fgm
+namespace flcn
 {
 
     /**************************************
@@ -69,7 +69,7 @@ namespace fgm
     template <StrictArithmetic T>
     FALCON_INLINE constexpr Vec3<T>& Transform4<T>::operator[](std::size_t col) noexcept
     {
-        FALCON_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS, flcn::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return *reinterpret_cast<Vec3<T>*>(&(this->_data[col]));
     }
 
@@ -77,7 +77,7 @@ namespace fgm
     template <StrictArithmetic T>
     FALCON_INLINE constexpr auto Transform4<T>::operator[](std::size_t col) const noexcept
     {
-        FALCON_ASSERT_MSG(col < COLUMNS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS, flcn::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         if (std::is_constant_evaluated())
         {
             return this->_data[col].template swizzle<axis::X, axis::Y, axis::Z>();
@@ -92,7 +92,7 @@ namespace fgm
     template <StrictArithmetic T>
     FALCON_INLINE constexpr T& Transform4<T>::operator()(std::size_t row, std::size_t col) noexcept
     {
-        FALCON_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS && row < ROWS, flcn::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return this->_data[col][row];
     }
 
@@ -100,7 +100,7 @@ namespace fgm
     template <StrictArithmetic T>
     FALCON_INLINE constexpr const T& Transform4<T>::operator()(std::size_t row, std::size_t col) const noexcept
     {
-        FALCON_ASSERT_MSG(col < COLUMNS && row < ROWS, fgm::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(col < COLUMNS && row < ROWS, flcn::messages::assertion::MAT_OUT_OF_BOUNDS_ACCESS);
         return this->_data[col][row];
     }
 
@@ -221,7 +221,7 @@ namespace fgm
         auto s = a.cross(b);
         auto t = c.cross(d);
 
-        FALCON_ASSERT_MSG(fgm::abs(s.dot(c)) > Config::EPSILON<R>, messages::assertion::MAT_INV_ZERO_DETERMINANT);
+        FALCON_ASSERT_MSG(flcn::abs(s.dot(c)) > Config::EPSILON<R>, messages::assertion::MAT_INV_ZERO_DETERMINANT);
 
         R invDet = R(1) / s.dot(c);
         s *= invDet;
@@ -241,4 +241,4 @@ namespace fgm
         requires SignedStrictArithmetic<T>
     { return transform.inverse(); }
 
-} // namespace fgm
+} // namespace flcn

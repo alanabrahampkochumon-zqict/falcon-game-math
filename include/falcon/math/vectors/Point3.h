@@ -14,7 +14,7 @@
 #include "falcon/math/common/Types.h"
 
 
-namespace fgm
+namespace flcn
 {
     template <StrictArithmetic T>
     struct Point3: Vec3<T>
@@ -25,7 +25,7 @@ namespace fgm
          * @{
          */
 
-        /// @brief @ref fgm::Vec3 CTORs
+        /// @brief @ref flcn::Vec3 CTORs
         using Vec3<T>::Vec3;
 
         /** @} */
@@ -104,7 +104,7 @@ namespace fgm
         requires StrictArithmetic<T>
     Point3(T) -> Point3<T>;
 
-} // namespace fgm
+} // namespace flcn
 
 
 #include "Point3.tpp"

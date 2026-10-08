@@ -26,7 +26,7 @@
 
 namespace
 {
-    fgm::Mat3 mat(1, 2, 3);
+    flcn::Mat3 mat(1, 2, 3);
 
 
     /**************************************
@@ -34,7 +34,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 invalid (row, column) indices.
+     * @brief Test fixture for @ref flcn::Mat3 invalid (row, column) indices.
      */
     class Mat3IndexingTests: public testing::TestWithParam<std::pair<std::size_t, std::size_t>>
     {};
@@ -45,7 +45,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 invalid column indexing.
+     * @brief Test fixture for @ref flcn::Mat3 invalid column indexing.
      */
     class Mat3ColumnIndexingTests: public testing::TestWithParam<std::size_t>
     {};
@@ -53,7 +53,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 Division.
+     * @brief Test fixture for @ref flcn::Mat3 Division.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -61,15 +61,15 @@ namespace
     class Mat2DivisionTests: public testing::Test
     {
     protected:
-        fgm::Mat2<T> _matrix;
+        flcn::Mat2<T> _matrix;
         T _scalar;
-        fgm::Mat2<T> _expectedMatrix;
+        flcn::Mat2<T> _expectedMatrix;
 
         void SetUp() override
         {
-            _matrix         = { fgm::CVec2<T>{ 7, 3 }, fgm::CVec2<T>{ 1, 6 } };
+            _matrix         = { flcn::CVec2<T>{ 7, 3 }, flcn::CVec2<T>{ 1, 6 } };
             _scalar         = T(3);
-            _expectedMatrix = { fgm::CVec2{ T(2.333333333333333), T(1) }, fgm::CVec2{ T(0.3333333333333333), T(2) } };
+            _expectedMatrix = { flcn::CVec2{ T(2.333333333333333), T(1) }, flcn::CVec2{ T(0.3333333333333333), T(2) } };
         }
     };
     TYPED_TEST_SUITE(Mat2DivisionTests, SupportedArithmeticTypes);
@@ -77,7 +77,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 Division.
+     * @brief Test fixture for @ref flcn::Mat3 Division.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -85,13 +85,13 @@ namespace
     class Mat3DivisionTests: public testing::Test
     {
     protected:
-        fgm::Mat3<T> _matrix;
+        flcn::Mat3<T> _matrix;
         T _scalar;
-        fgm::Mat3<T> _expectedMatrix;
+        flcn::Mat3<T> _expectedMatrix;
 
         void SetUp() override
         {
-            _matrix         = { fgm::Vec3<T>{ 17, 13, 15 }, fgm::Vec3<T>{ 11, 16, 35 }, fgm::Vec3<T>{ 27, 44, 56 } };
+            _matrix         = { flcn::Vec3<T>{ 17, 13, 15 }, flcn::Vec3<T>{ 11, 16, 35 }, flcn::Vec3<T>{ 27, 44, 56 } };
             _scalar         = T(7);
             _expectedMatrix = { { T(2.428571428571428), T(1.857142857142857), T(2.142857142857143) },
                                 { T(1.571428571428571), T(2.285714285714286), T(5.0) },
@@ -103,44 +103,44 @@ namespace
 
     // TODO: Add tests
     // /**
-    //  * @brief Test fixture for @ref fgm::Mat2 Division with NaN elements.
+    //  * @brief Test fixture for @ref flcn::Mat2 Division with NaN elements.
     //  */
-    // class Mat3DivisionNaNTests: public testing::TestWithParam<fgm::Mat3<float>>
+    // class Mat3DivisionNaNTests: public testing::TestWithParam<flcn::Mat3<float>>
     // {};
     // INSTANTIATE_TEST_SUITE_P(Mat3InvalidDivision, Mat3DivisionNaNTests,
-    //                          ::testing::Values(fgm::Mat3<float>(fgm::constants::NaN, 3.0f, 3.0f),
-    //                                            fgm::Mat3<float>(3.0f, fgm::constants::NaN, 3.0f),
-    //                                            fgm::Mat3<float>(3.0f, 3.0f, fgm::constants::NaN),
-    //                                            fgm::Mat3<float>(fgm ::constants::NaN, fgm::constants::NaN,
-    //                                                             fgm ::constants::NaN)));
+    //                          ::testing::Values(flcn::Mat3<float>(flcn::constants::NaN, 3.0f, 3.0f),
+    //                                            flcn::Mat3<float>(3.0f, flcn::constants::NaN, 3.0f),
+    //                                            flcn::Mat3<float>(3.0f, 3.0f, flcn::constants::NaN),
+    //                                            flcn::Mat3<float>(flcn::constants::NaN, flcn::constants::NaN,
+    //                                                             flcn::constants::NaN)));
     //
 
 
-    /** @brief Test fixture for calculating @ref fgm::Mat3 inverse with singular matrices. */
-    class Mat3InverseSingularTests: public testing::TestWithParam<fgm::Mat3<float>>
+    /** @brief Test fixture for calculating @ref flcn::Mat3 inverse with singular matrices. */
+    class Mat3InverseSingularTests: public testing::TestWithParam<flcn::Mat3<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
         Mat3SingularMatrixInverse, Mat3InverseSingularTests,
         ::testing::Values(
-            fgm::Mat3{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ 7.0f, 8.0f, 9.0f } },
-            fgm::Mat3{ fgm::Vec3{ 1.0f, 1.0f, 5.0f }, fgm::Vec3{ 2.0f, 2.0f, 3.0f }, fgm::Vec3{ 3.0f, 3.0f, 9.0f } },
-            fgm::Mat3{ fgm::Vec3{ 0.0f, 0.0f, 0.0f }, fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ 1.0f, 8.0f, 9.0f } },
-            fgm::Mat3{ fgm::Vec3{ 0.0f, 5.0f, 1.0f }, fgm::Vec3{ 0.0f, 2.0f, 3.0f }, fgm::Vec3{ 0.0f, 8.0f, 9.0f } },
-            fgm::Mat3{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ 2.0f, 4.0f, 6.0f }, fgm::Vec3{ 7.0f, 8.0f, 9.0f } },
-            fgm::Mat3{ fgm::Vec3{ 1.0f, 2.0f, 1.0f }, fgm::Vec3{ 2.0f, 4.0f, 3.0f }, fgm::Vec3{ 3.0f, 6.0f, 9.0f } }));
+            flcn::Mat3{ flcn::Vec3{ 1.0f, 2.0f, 3.0f }, flcn::Vec3{ 1.0f, 2.0f, 3.0f }, flcn::Vec3{ 7.0f, 8.0f, 9.0f } },
+            flcn::Mat3{ flcn::Vec3{ 1.0f, 1.0f, 5.0f }, flcn::Vec3{ 2.0f, 2.0f, 3.0f }, flcn::Vec3{ 3.0f, 3.0f, 9.0f } },
+            flcn::Mat3{ flcn::Vec3{ 0.0f, 0.0f, 0.0f }, flcn::Vec3{ 1.0f, 2.0f, 3.0f }, flcn::Vec3{ 1.0f, 8.0f, 9.0f } },
+            flcn::Mat3{ flcn::Vec3{ 0.0f, 5.0f, 1.0f }, flcn::Vec3{ 0.0f, 2.0f, 3.0f }, flcn::Vec3{ 0.0f, 8.0f, 9.0f } },
+            flcn::Mat3{ flcn::Vec3{ 1.0f, 2.0f, 3.0f }, flcn::Vec3{ 2.0f, 4.0f, 6.0f }, flcn::Vec3{ 7.0f, 8.0f, 9.0f } },
+            flcn::Mat3{ flcn::Vec3{ 1.0f, 2.0f, 1.0f }, flcn::Vec3{ 2.0f, 4.0f, 3.0f }, flcn::Vec3{ 3.0f, 6.0f, 9.0f } }));
 
 
 
     // TODO: Add tests
-    // /** @brief Test fixture for @ref fgm::Mat3 inverse with NaN elements. */
-    // class Mat3InverseNaNTests: public testing::TestWithParam<fgm::Mat3<float>>
+    // /** @brief Test fixture for @ref flcn::Mat3 inverse with NaN elements. */
+    // class Mat3InverseNaNTests: public testing::TestWithParam<flcn::Mat3<float>>
     // {};
     // INSTANTIATE_TEST_SUITE_P(Mat3NaNMatrixInverse, Mat3InverseNaNTests,
-    //                          ::testing::Values(fgm::Mat3<float>(fgm::constants::NaN, 3.0f, 3.0f),
-    //                                            fgm::Mat3<float>(3.0f, fgm::constants::NaN, 3.0f),
-    //                                            fgm::Mat3<float>(3.0f, 3.0f, fgm::constants::NaN),
-    //                                            fgm::Mat3<float>(fgm::constants::NaN, fgm::constants::NaN,
-    //                                                             fgm::constants::NaN)));
+    //                          ::testing::Values(flcn::Mat3<float>(flcn::constants::NaN, 3.0f, 3.0f),
+    //                                            flcn::Mat3<float>(3.0f, flcn::constants::NaN, 3.0f),
+    //                                            flcn::Mat3<float>(3.0f, 3.0f, flcn::constants::NaN),
+    //                                            flcn::Mat3<float>(flcn::constants::NaN, flcn::constants::NaN,
+    //                                                             flcn::constants::NaN)));
 
 } // namespace
 
@@ -166,7 +166,7 @@ TEST_P(Mat3IndexingTests, OutOfBoundAccess_TriggersAssertInDebugMode)
 TEST_P(Mat3ColumnIndexingTests, OutOfBoundMutation_TriggersAssertInDebugMode)
 {
     const auto col = GetParam();
-    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = fgm::Vec3<int>::zero()), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(mat[col] = flcn::Vec3<int>::zero()), "");
 }
 
 
@@ -197,7 +197,7 @@ TEST_P(Mat3InverseSingularTests, StaticWrapper_TriggersAssertionInDebugMode)
 {
     const auto& matrix = GetParam();
     // Static cast is placed to suppress the no-discard warning
-    EXPECT_DEBUG_DEATH(static_cast<void>(fgm::Mat3<float>::inverse(matrix)), "");
+    EXPECT_DEBUG_DEATH(static_cast<void>(flcn::Mat3<float>::inverse(matrix)), "");
 }
 
 /** @} */

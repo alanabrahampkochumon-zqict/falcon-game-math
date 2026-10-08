@@ -22,7 +22,7 @@
 
 #include <bit>
 
-namespace falcon
+namespace flcn
 {
 
     template <typename DataType>
@@ -723,7 +723,7 @@ namespace falcon
         /**
          * @brief Selectively blend values from this register and @p other using the compile-time @p Mask.
          * @tparam Mask The mask to use for blending.
-         *              Use @ref falcon::makeBlendMask32<...>() to create the mask.
+         *              Use @ref flcn::makeBlendMask32<...>() to create the mask.
          *              `true` selects values from the other register and `false` from this register.
          * @note   Even though the mask is uint32_t, only lower 8-bit will be considered
          *
@@ -735,9 +735,9 @@ namespace falcon
          * ret   -> 0x 32 23 ed 81
          *
          * // Usage
-         * const falcon::Simd256_t<float, 8> reg1{1.0f, 2.0f, 3.0f, 4.0f, 12.0f, 13.0f, 14.0f, 15.0f};
-         * const falcon::Simd256_t<float, 8> reg2{8.0f, 9.0f, 10.0f, 11.0f, 5.0f, 6.0f, 7.0f, 8.0f};
-         * constexpr auto mask = falcon::makeBlendMask32<true, false, false, true, true, true, false, false>();
+         * const flcn::Simd256_t<float, 8> reg1{1.0f, 2.0f, 3.0f, 4.0f, 12.0f, 13.0f, 14.0f, 15.0f};
+         * const flcn::Simd256_t<float, 8> reg2{8.0f, 9.0f, 10.0f, 11.0f, 5.0f, 6.0f, 7.0f, 8.0f};
+         * constexpr auto mask = flcn::makeBlendMask32<true, false, false, true, true, true, false, false>();
          * const auto blended = reg1.template blend<mask>(reg2); // {8.0f, 2.0f, 3.0f, 11.0f, 5.0f, 6.0f, 14.0f, 15.0f}
          * @endcode
          *
@@ -851,7 +851,7 @@ namespace falcon
     };
 
 
-} // namespace falcon
+} // namespace flcn
 
 
 // --- THIS SHOULD BE INCLUDED FIRST as the .inl files use functions declared in this header.

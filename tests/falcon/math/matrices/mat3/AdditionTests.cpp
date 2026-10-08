@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 24, 2026
  *
- * @brief Verify @ref fgm::Mat3 addition logic.
+ * @brief Verify @ref flcn::Mat3 addition logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -24,7 +24,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 Addition.
+     * @brief Test fixture for @ref flcn::Mat3 Addition.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -32,15 +32,15 @@ namespace
     class Mat3AdditionTests: public ::testing::Test
     {
     protected:
-        fgm::Mat3<T> _matA;
-        fgm::Mat3<T> _matB;
-        fgm::Mat3<T> _expectedSum;
+        flcn::Mat3<T> _matA;
+        flcn::Mat3<T> _matB;
+        flcn::Mat3<T> _expectedSum;
 
         void SetUp() override
         {
-            _matA        = { fgm::Vec3<T>{ 1, 2, 3 }, fgm::Vec3<T>{ 4, 5, 6 }, fgm::Vec3<T>{ 7, 8, 9 } };
-            _matB        = { fgm::Vec3<T>{ 10, 11, 12 }, fgm::Vec3<T>{ 13, 14, 15 }, fgm::Vec3<T>{ 16, 17, 18 } };
-            _expectedSum = { fgm::Vec3<T>{ 11, 13, 15 }, fgm::Vec3<T>{ 17, 19, 21 }, fgm::Vec3<T>{ 23, 25, 27 } };
+            _matA        = { flcn::Vec3<T>{ 1, 2, 3 }, flcn::Vec3<T>{ 4, 5, 6 }, flcn::Vec3<T>{ 7, 8, 9 } };
+            _matB        = { flcn::Vec3<T>{ 10, 11, 12 }, flcn::Vec3<T>{ 13, 14, 15 }, flcn::Vec3<T>{ 16, 17, 18 } };
+            _expectedSum = { flcn::Vec3<T>{ 11, 13, 15 }, flcn::Vec3<T>{ 17, 19, 21 }, flcn::Vec3<T>{ 23, 25, 27 } };
         }
     };
     TYPED_TEST_SUITE(Mat3AdditionTests, SupportedArithmeticTypes);
@@ -53,11 +53,11 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat3 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9);
-        constexpr fgm::Mat3 MAT2(5, 6, 7, 8, 9, 10, 11, 12, 13);
+        constexpr flcn::Mat3 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        constexpr flcn::Mat3 MAT2(5, 6, 7, 8, 9, 10, 11, 12, 13);
 
         /// @test Verify that Mat3 can be added at compile time.
-        constexpr fgm::Mat3 BINARY_SUM = MAT1 + MAT2;
+        constexpr flcn::Mat3 BINARY_SUM = MAT1 + MAT2;
         static_assert(BINARY_SUM(0, 0) == 6);
         static_assert(BINARY_SUM(0, 1) == 8);
         static_assert(BINARY_SUM(0, 2) == 10);
@@ -79,18 +79,18 @@ namespace
 
 TYPED_TEST(Mat3AdditionTests, PlusOperator_ReturnsMatrixSum)
 {
-    const fgm::Mat3 sum = this->_matA + this->_matB;
+    const flcn::Mat3 sum = this->_matA + this->_matB;
     EXPECT_MAT_EQ(this->_expectedSum, sum);
 }
 
 
 TEST(Mat3AdditionTests, PlusOperator_MixedType_PromotesType)
 {
-    const fgm::Mat3 mat1{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ -3.0f, -4.0f, 10.0f },
-                          fgm::Vec3{ 4.5f, 3.25f, 3.16f } };
-    const fgm::Mat3 mat2{ fgm::Vec3{ 10.0, 2.0, -1.0 }, fgm::Vec3{ 3.0, -8.0, 12.0 }, fgm::Vec3{ 3.25, 5.1, 0.0 } };
+    const flcn::Mat3 mat1{ flcn::Vec3{ 1.0f, 2.0f, 3.0f }, flcn::Vec3{ -3.0f, -4.0f, 10.0f },
+                          flcn::Vec3{ 4.5f, 3.25f, 3.16f } };
+    const flcn::Mat3 mat2{ flcn::Vec3{ 10.0, 2.0, -1.0 }, flcn::Vec3{ 3.0, -8.0, 12.0 }, flcn::Vec3{ 3.25, 5.1, 0.0 } };
 
-    [[maybe_unused]] const fgm::Mat3 sum = mat1 + mat2;
+    [[maybe_unused]] const flcn::Mat3 sum = mat1 + mat2;
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
 }
 
@@ -104,8 +104,8 @@ TYPED_TEST(Mat3AdditionTests, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 
 TEST(Mat3AdditionTests, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    fgm::Mat3 mat1{ fgm::Vec3{ 1.0f, 2.0f, 3.0f }, fgm::Vec3{ -3.0f, -4.0f, 10.0f }, fgm::Vec3{ 4.5f, 3.25f, 3.16f } };
-    constexpr fgm::Mat3 mat2{ fgm::Vec3{ 10.0, 2.0, -1.0 }, fgm::Vec3{ 3.0, -8.0, 12.0 }, fgm::Vec3{ 3.25, 5.1, 0.0 } };
+    flcn::Mat3 mat1{ flcn::Vec3{ 1.0f, 2.0f, 3.0f }, flcn::Vec3{ -3.0f, -4.0f, 10.0f }, flcn::Vec3{ 4.5f, 3.25f, 3.16f } };
+    constexpr flcn::Mat3 mat2{ flcn::Vec3{ 10.0, 2.0, -1.0 }, flcn::Vec3{ 3.0, -8.0, 12.0 }, flcn::Vec3{ 3.25, 5.1, 0.0 } };
 
     mat1 += mat2;
     static_assert(std::is_same_v<decltype(mat1)::value_type, float>);

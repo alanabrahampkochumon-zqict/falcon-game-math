@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 21, 2026
  *
- * @brief Verify @ref fgm::Mat4x3 initialization.
+ * @brief Verify @ref flcn::Mat4x3 initialization.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -24,7 +24,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4x3 initialization.
+     * @brief Test fixture for @ref flcn::Mat4x3 initialization.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -33,7 +33,7 @@ namespace
     {
     protected:
         std::vector<T> _elements;
-        fgm::Vec4<T> _col0, _col1, _col2;
+        flcn::Vec4<T> _col0, _col1, _col2;
 
         void SetUp() override
         {
@@ -55,7 +55,7 @@ namespace
     namespace static_tests
     {
         /// @test Verify that the matrix can be initialized at compile time using scalar values.
-        constexpr fgm::Mat4x3 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+        constexpr flcn::Mat4x3 MAT1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
         static_assert(MAT1(0, 0) == 1);
         static_assert(MAT1(0, 1) == 2);
         static_assert(MAT1(0, 2) == 3);
@@ -71,7 +71,7 @@ namespace
 
 
         /// @test Verify that the matrix can be initialized at compile time using column vectors.
-        constexpr fgm::Mat4x3 MAT2(fgm::Vec4(1, 4, 7, 10), fgm::Vec4(2, 5, 8, 11), fgm::Vec4(3, 6, 9, 12));
+        constexpr flcn::Mat4x3 MAT2(flcn::Vec4(1, 4, 7, 10), flcn::Vec4(2, 5, 8, 11), flcn::Vec4(3, 6, 9, 12));
         static_assert(MAT2(0, 0) == 1);
         static_assert(MAT2(0, 1) == 2);
         static_assert(MAT2(0, 2) == 3);
@@ -88,7 +88,7 @@ namespace
 
 
         /// @test Verify that the matrix can be initialized at compile time using value initialization.
-        constexpr fgm::Mat4x3<int> MAT3{};
+        constexpr flcn::Mat4x3<int> MAT3{};
         static_assert(MAT3(0, 0) == 0);
         static_assert(MAT3(0, 1) == 0);
         static_assert(MAT3(0, 2) == 0);
@@ -114,7 +114,7 @@ namespace
 
 TYPED_TEST(Mat4x3InitializationTests, EmptyCtor_ReturnsIdentityMatrix)
 {
-    constexpr fgm::Mat4x3<TypeParam> matrix{};
+    constexpr flcn::Mat4x3<TypeParam> matrix{};
 
     EXPECT_MAT_ZERO(matrix);
 }
@@ -122,7 +122,7 @@ TYPED_TEST(Mat4x3InitializationTests, EmptyCtor_ReturnsIdentityMatrix)
 
 TYPED_TEST(Mat4x3InitializationTests, ParameterizedCtor_InitializesMatrixWithElements)
 {
-    const fgm::Mat4x3<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
+    const flcn::Mat4x3<TypeParam> matrix(this->_elements[0], this->_elements[1], this->_elements[2], this->_elements[3],
                                         this->_elements[4], this->_elements[5], this->_elements[6], this->_elements[7],
                                         this->_elements[8], this->_elements[9], this->_elements[10],
                                         this->_elements[11]);
@@ -132,14 +132,14 @@ TYPED_TEST(Mat4x3InitializationTests, ParameterizedCtor_InitializesMatrixWithEle
 
 TYPED_TEST(Mat4x3InitializationTests, ParameterizedCtor_InitializesMatrixWithVectors)
 {
-    const fgm::Mat4x3<TypeParam> matrix(this->_col0, this->_col1, this->_col2);
+    const flcn::Mat4x3<TypeParam> matrix(this->_col0, this->_col1, this->_col2);
     EXPECT_MAT_CONTAINS(this->_elements, matrix);
 }
 
 
 TYPED_TEST(Mat4x3InitializationTests, CanBeConstructedWithBracedInitialization)
 {
-    const fgm::Mat4x3<TypeParam> matrix = {
+    const flcn::Mat4x3<TypeParam> matrix = {
         { TypeParam(1), TypeParam(4), TypeParam(7), TypeParam(10) },
         { TypeParam(2), TypeParam(5), TypeParam(8), TypeParam(11) },
         { TypeParam(3), TypeParam(6), TypeParam(9), TypeParam(12) },

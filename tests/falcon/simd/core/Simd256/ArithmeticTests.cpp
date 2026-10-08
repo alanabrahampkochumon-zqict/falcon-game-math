@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: September 26, 2026
  *
- * @brief Verify @ref falcon::Simd256 arithmetics.
+ * @brief Verify @ref flcn::Simd256 arithmetics.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -66,7 +66,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinaryAddOperation_ReturnsAValidResult)
         expected[i] = static_cast<Type>((i * 3) + (i * 5));
     }
 
-    falcon::Simd256_t<Type, Lane> regA, regB;
+    flcn::Simd256_t<Type, Lane> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -88,7 +88,7 @@ TEST(Simd256ArithmeticTests, BinaryAddOperation_WorksWithMixedNumbers)
     alignas(16) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 27, 45, 19 }, rhs{ -1, 5, -5, -1, 5, -5, -1, 12 },
         expected{ 0, 10, -7, -1, 0, 22, 44, 31 }, result{};
 
-    falcon::Simd256_t<float, 8> regA, regB;
+    flcn::Simd256_t<float, 8> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -116,7 +116,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundAddOperation_ReturnsAValidResult)
         expected[i] = static_cast<Type>((i * 3) + (i * 5));
     }
 
-    falcon::Simd256_t<Type, Lane> regA, regB;
+    flcn::Simd256_t<Type, Lane> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -136,7 +136,7 @@ TEST(Simd256ArithmeticTests, CompoundAddOperation_WorksWithMixedNumbers)
     alignas(16) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 27, 45, 19 }, rhs{ -1, 5, -5, -1, 5, -5, -1, 12 },
         expected{ 0, 10, -7, -1, 0, 22, 44, 31 }, result{};
 
-    falcon::Simd256_t<float, 8> regA, regB;
+    flcn::Simd256_t<float, 8> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -164,7 +164,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinarySubtractOperation_ReturnsAValidResult)
         expected[i] = static_cast<Type>((i * 5) - (i * 3));
     }
 
-    falcon::Simd256_t<Type, Lane> regA, regB;
+    flcn::Simd256_t<Type, Lane> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -185,7 +185,7 @@ TEST(Simd256ArithmeticTests, BinarySubtractOperation_WorksWithMixedNumbers)
     alignas(16) std::array<float, 8> lhs{ 1, 5, -2, 0, 11, -12, 13, -14 }, rhs{ -1, 5, -5, -1, 1, 5, -2, 0 },
         expected{ 2, 0, 3, 1, 10, -17, 15, -14 }, result{};
 
-    falcon::Simd256_t<float, 8> regA, regB;
+    flcn::Simd256_t<float, 8> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -213,7 +213,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundSubtractOperation_ReturnsAValidResult
         expected[i] = static_cast<Type>((i * 5) - (i * 3));
     }
 
-    falcon::Simd256_t<Type, Lane> regA, regB;
+    flcn::Simd256_t<Type, Lane> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -233,7 +233,7 @@ TEST(Simd256ArithmeticTests, CompoundSubtractOperation_WorksWithMixedNumbers)
     alignas(16) std::array<float, 8> lhs{ 1, 5, -2, 0, 11, -12, 13, -14 }, rhs{ -1, 5, -5, -1, 1, 5, -2, 0 },
         expected{ 2, 0, 3, 1, 10, -17, 15, -14 }, result{};
 
-    falcon::Simd256_t<float, 8> regA, regB;
+    flcn::Simd256_t<float, 8> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -277,7 +277,7 @@ TYPED_TEST(Simd256ArithmeticTests, UnaryMinusOperator_ReturnsAValidResult)
         #pragma warning(pop)
     #endif
     }
-    falcon::Simd256_t<Type, Lane> reg{ data };
+    flcn::Simd256_t<Type, Lane> reg{ data };
     auto regRes = -reg;
     regRes.storeAligned(result.data());
 
@@ -302,7 +302,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinaryMultiplication_ReturnsAValidResult)
         expected[i] = static_cast<Type>(rhs[i] * lhs[i]);
     }
 
-    falcon::Simd256_t<Type, Lane> regA, regB;
+    flcn::Simd256_t<Type, Lane> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -321,7 +321,7 @@ TEST(Simd256ArithmeticTests, BinaryMultiplicationOperation_WorksWithMixedNumbers
     alignas(16) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 4, 1, 10 }, rhs{ -1, 5, -5, -1, 6, 5, 13, 12 }, result{};
     const std::array<float, 8> expected{ -1, 25, 10, 0, -30, 20, 13, 120 };
 
-    falcon::Simd256_t<float, 8> regA, regB;
+    flcn::Simd256_t<float, 8> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -350,7 +350,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundMultiplication_ReturnsAValidResult)
         expected[i] = static_cast<Type>(rhs[i] * lhs[i]);
     }
 
-    falcon::Simd256_t<Type, Lane> regA, regB;
+    flcn::Simd256_t<Type, Lane> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -369,7 +369,7 @@ TEST(Simd256ArithmeticTests, CompoundMultiplicationOperation_WorksWithMixedNumbe
     alignas(16) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 4, 1, 10 }, rhs{ -1, 5, -5, -1, 6, 5, 13, 12 }, result{};
     const std::array<float, 8> expected{ -1, 25, 10, 0, -30, 20, 13, 120 };
 
-    falcon::Simd256_t<float, 8> regA, regB;
+    flcn::Simd256_t<float, 8> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -396,7 +396,7 @@ TYPED_TEST(Simd256ArithmeticTests, DivReg_ReturnsAValidResult)
         expected[i] = static_cast<Type>(lhs[i] / rhs[i]);
     }
 
-    falcon::Simd256_t<Type, Lane> regA, regB;
+    flcn::Simd256_t<Type, Lane> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -433,7 +433,7 @@ TYPED_TEST(Simd256ArithmeticTests, DivReg_MaintainsPrecisionForAtUpperAndLowerLi
     expected[1] = static_cast<Type>(lhs[1] / rhs[1]);
 
 
-    falcon::Simd256_t<Type, Lane> regA, regB;
+    flcn::Simd256_t<Type, Lane> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -452,7 +452,7 @@ TEST(Simd256ArithmeticTests, DivReg_WorksWithMixedNumbers)
     alignas(16) std::array<float, 8> lhs{ 25, -51, 13, 0, 12, 15, 44, 17 }, rhs{ -5, 25, 3, 16, 2, 3, 11, 2 }, result{};
     const std::array<float, 8> expected{ -5, -2.04f, 4.333333f, 0, 6, 5, 4, 8.5 };
 
-    falcon::Simd256_t<float, 8> regA, regB;
+    flcn::Simd256_t<float, 8> regA, regB;
     regA.loadAligned(lhs.data());
     regB.loadAligned(rhs.data());
 
@@ -481,7 +481,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinaryDivideOperator_ReturnsAValidResult)
         expected[i] = static_cast<Type>(lhs[i] / divisor);
     }
 
-    falcon::Simd256_t<Type, Lane> regA;
+    flcn::Simd256_t<Type, Lane> regA;
     regA.loadAligned(lhs.data());
 
     auto regRes = regA / divisor;
@@ -519,7 +519,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinaryDivideOperator_MaintainsPrecisionForAtU
     expected[1] = static_cast<Type>(lhs[1] / divisor);
 
 
-    falcon::Simd256_t<Type, Lane> regA;
+    flcn::Simd256_t<Type, Lane> regA;
     regA.loadAligned(lhs.data());
 
     auto regRes = regA / divisor;
@@ -537,7 +537,7 @@ TEST(Simd256ArithmeticTests, BinaryDivideOperator_WorksWithMixedNumbers)
     alignas(16) std::array<float, 8> lhs{ 25, -51, 13, 0, 12, 15, 44, 17 }, result{};
     const std::array<float, 8> expected{ -6.25, 12.75, -3.25, -0.0, -3.0, -3.75, -11.0, -4.25 };
 
-    falcon::Simd256_t<float, 8> regA;
+    flcn::Simd256_t<float, 8> regA;
     regA.loadAligned(lhs.data());
 
     const auto regRes = regA / -4;
@@ -565,7 +565,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundDivideOperator_ReturnsAValidResult)
         expected[i] = static_cast<Type>(lhs[i] / divisor);
     }
 
-    falcon::Simd256_t<Type, Lane> regA;
+    flcn::Simd256_t<Type, Lane> regA;
     regA.loadAligned(lhs.data());
 
     regA /= divisor;
@@ -603,7 +603,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundDivideOperator_MaintainsPrecisionForA
     expected[1] = static_cast<Type>(lhs[1] / divisor);
 
 
-    falcon::Simd256_t<Type, Lane> regA;
+    flcn::Simd256_t<Type, Lane> regA;
     regA.loadAligned(lhs.data());
 
     regA /= divisor;
@@ -621,7 +621,7 @@ TEST(Simd256ArithmeticTests, CompoundDivideOperator_WorksWithMixedNumbers)
     alignas(16) std::array<float, 8> lhs{ 25, -51, 13, 0, 12, 15, 44, 17 }, result{};
     const std::array<float, 8> expected{ -6.25, 12.75, -3.25, -0.0, -3.0, -3.75, -11.0, -4.25 };
 
-    falcon::Simd256_t<float, 8> regA;
+    flcn::Simd256_t<float, 8> regA;
     regA.loadAligned(lhs.data());
 
     regA /= -4;
@@ -653,7 +653,7 @@ TYPED_TEST(Simd256ArithmeticTests, FMA_ReturnsAValidResult)
     }
 
 
-    falcon::Simd256_t<Type, Lane> regA{ a }, regB{ b }, regC{ c };
+    flcn::Simd256_t<Type, Lane> regA{ a }, regB{ b }, regC{ c };
 
     const auto resReg = regA.fma(regB, regC);
     resReg.storeAligned(result.data());
@@ -681,7 +681,7 @@ TYPED_TEST(Simd256ArithmeticTests, HorizontalAdd_ReturnsAValidResult)
     }
     sum = static_cast<Type>(sum);
 
-    falcon::Simd256_t<Type, Lane> regA{ a };
+    flcn::Simd256_t<Type, Lane> regA{ a };
     const auto result = regA.horizontalAdd();
     EXPECT_ANY_EQ(sum, result);
 }
@@ -708,7 +708,7 @@ TYPED_TEST(Simd256ArithmeticTests, HorizontalSub_ReturnsAValidResult)
     }
     difference = static_cast<Type>(difference);
 
-    falcon::Simd256_t<Type, Lane> regA{ a };
+    flcn::Simd256_t<Type, Lane> regA{ a };
     const auto result = regA.horizontalSub();
     EXPECT_ANY_EQ(difference, result);
 }

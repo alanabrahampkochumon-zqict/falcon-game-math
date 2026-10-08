@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: August 16, 2026
  *
- * @brief Verify @ref falcon::Simd128 register loading and storing in a platform agnostic manner.
+ * @brief Verify @ref flcn::Simd128 register loading and storing in a platform agnostic manner.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -48,7 +48,7 @@ TYPED_TEST(Simd128LoadStoreTests, LoadAligned_LoadsAndStoresDataWithoutCorruptio
         data[i] = static_cast<Type>(i + 11);
     }
 
-    falcon::Simd128_t<Type, Lane> reg;
+    flcn::Simd128_t<Type, Lane> reg;
     reg.loadAligned(data.data());
 
     alignas(16) std::array<Type, Lane> result{};
@@ -73,7 +73,7 @@ TYPED_TEST(Simd128LoadStoreTests, Load_LoadsDataFromUnalignedMemory)
         data[i] = static_cast<Type>(i + 11);
     }
 
-    falcon::Simd128_t<Type, Lane> reg;
+    flcn::Simd128_t<Type, Lane> reg;
     reg.load(data.data());
 
     alignas(16) std::array<Type, Lane> result{};
@@ -98,7 +98,7 @@ TYPED_TEST(Simd128LoadStoreTests, Store_StoresDataIntoUnalignedMemory)
         data[i] = static_cast<Type>(i + 11);
     }
 
-    falcon::Simd128_t<Type, Lane> reg;
+    flcn::Simd128_t<Type, Lane> reg;
     reg.loadAligned(data.data());
 
     alignas(8) std::array<Type, Lane> result{};
@@ -118,7 +118,7 @@ TYPED_TEST(Simd128LoadStoreTests, Broadcast_StoresASingleValueIntoTheRegister)
     constexpr size_t Lane = TypeParam::VALUE;
 
     Type data = Type(7);
-    falcon::Simd128_t<Type, Lane> reg;
+    flcn::Simd128_t<Type, Lane> reg;
     reg.broadcast(data);
 
     alignas(16) std::array<Type, Lane> result{};
@@ -136,7 +136,7 @@ TYPED_TEST(Simd128LoadStoreTests, SetZero_ZeroesOutTheRegister)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    falcon::Simd128_t<Type, Lane> reg;
+    flcn::Simd128_t<Type, Lane> reg;
     reg.setZero();
 
     alignas(16) std::array<Type, Lane> result{};

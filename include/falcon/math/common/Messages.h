@@ -18,7 +18,7 @@
  * @{
  */
 
-namespace fgm::messages
+namespace flcn::messages
 {
     namespace assertion
     {
@@ -50,6 +50,6 @@ namespace fgm::messages
 
     } // namespace opstatus
 
-} // namespace fgm::messages
+} // namespace flcn::messages
 
 /** @} */

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 25, 2026
  *
- * @brief Verify @ref fgm::Mat2x3 transpose logic.
+ * @brief Verify @ref flcn::Mat2x3 transpose logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,7 +26,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2x3 matrix transposition.
+     * @brief Test fixture for @ref flcn::Mat2x3 matrix transposition.
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices.
      */
@@ -34,13 +34,13 @@ namespace
     class Mat2x3TransposeTests: public testing::Test
     {
     protected:
-        fgm::Mat2x3<T> _matrix;
-        fgm::Mat3x2<T> _expectedTranspose;
+        flcn::Mat2x3<T> _matrix;
+        flcn::Mat3x2<T> _expectedTranspose;
 
         void SetUp() override
         {
-            _matrix            = { fgm::CVec2{ T(1), T(4) }, fgm::CVec2{ T(2), T(5) }, fgm::CVec2{ T(3), T(6) } };
-            _expectedTranspose = { fgm::Vec3{ T(1), T(2), T(3) }, fgm::Vec3{ T(4), T(5), T(6) } };
+            _matrix            = { flcn::CVec2{ T(1), T(4) }, flcn::CVec2{ T(2), T(5) }, flcn::CVec2{ T(3), T(6) } };
+            _expectedTranspose = { flcn::Vec3{ T(1), T(2), T(3) }, flcn::Vec3{ T(4), T(5), T(6) } };
         }
     };
     TYPED_TEST_SUITE(Mat2x3TransposeTests, SupportedTypes);
@@ -53,7 +53,7 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat2x3 MAT(1, 2, 3, 4, 5, 6);
+        constexpr flcn::Mat2x3 MAT(1, 2, 3, 4, 5, 6);
 
         // NOTE: The matrix takes elements in row, col order
         //       but when compared with Vec3, we are taking col, row order.
@@ -61,15 +61,15 @@ namespace
 
         /// @test Verify matrix transpose is returns a 3x2 matrix with swapped rows and
         ///       columns at compile time.
-        constexpr fgm::Mat3x2 TRANSPOSE_MAT = MAT.transpose();
-        static_assert(TRANSPOSE_MAT[0] == fgm::Vec3(1, 2, 3));
-        static_assert(TRANSPOSE_MAT[1] == fgm::Vec3(4, 5, 6));
+        constexpr flcn::Mat3x2 TRANSPOSE_MAT = MAT.transpose();
+        static_assert(TRANSPOSE_MAT[0] == flcn::Vec3(1, 2, 3));
+        static_assert(TRANSPOSE_MAT[1] == flcn::Vec3(4, 5, 6));
 
         /// @test Verify matrix transpose using static variant returns a 3x2 matrix with
         ///       swapped rows and columns at compile time.
-        constexpr auto TRANSPOSE_MAT_STATIC = fgm::Mat2x3<int>::transpose(MAT);
-        static_assert(TRANSPOSE_MAT_STATIC[0] == fgm::Vec3(1, 2, 3));
-        static_assert(TRANSPOSE_MAT_STATIC[1] == fgm::Vec3(4, 5, 6));
+        constexpr auto TRANSPOSE_MAT_STATIC = flcn::Mat2x3<int>::transpose(MAT);
+        static_assert(TRANSPOSE_MAT_STATIC[0] == flcn::Vec3(1, 2, 3));
+        static_assert(TRANSPOSE_MAT_STATIC[1] == flcn::Vec3(4, 5, 6));
 
     } // namespace static_tests
 
@@ -86,6 +86,6 @@ TYPED_TEST(Mat2x3TransposeTests, Returns3x2MatrixWithRowAndColumnElementsExchang
 
 
 TYPED_TEST(Mat2x3TransposeTests, StaticWrapper_Returns3x2MatrixWithRowAndColumnElementsExchanged)
-{ EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Mat2x3<TypeParam>::transpose(this->_matrix)); }
+{ EXPECT_MAT_EQ(this->_expectedTranspose, flcn::Mat2x3<TypeParam>::transpose(this->_matrix)); }
 
 /** @} */

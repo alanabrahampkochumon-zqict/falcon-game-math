@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: August 22, 2026
  *
- * @brief Verify @ref falcon::Simd128 comparison operators (>, <, >=, <=, ==, !=).
+ * @brief Verify @ref flcn::Simd128 comparison operators (>, <, >=, <=, ==, !=).
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -102,7 +102,7 @@ namespace
 TYPED_TEST(Simd128ComparisonTests, GreaterThanOperator_ReturnsAValidMask)
 {
     using Type = typename TypeParam::Type;
-    falcon::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
+    flcn::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());
 
@@ -121,7 +121,7 @@ TYPED_TEST(Simd128ComparisonTests, GreaterThanOperator_ReturnsAValidMask)
 TYPED_TEST(Simd128ComparisonTests, GreaterThanOrEqualsOperator_ReturnsAValidMask)
 {
     using Type = typename TypeParam::Type;
-    falcon::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
+    flcn::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());
 
@@ -140,7 +140,7 @@ TYPED_TEST(Simd128ComparisonTests, GreaterThanOrEqualsOperator_ReturnsAValidMask
 TYPED_TEST(Simd128ComparisonTests, LessThanOperator_ReturnsAValidMask)
 {
     using Type = typename TypeParam::Type;
-    falcon::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
+    flcn::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());
 
@@ -159,7 +159,7 @@ TYPED_TEST(Simd128ComparisonTests, LessThanOperator_ReturnsAValidMask)
 TYPED_TEST(Simd128ComparisonTests, LessThanOrEqualsOperator_ReturnsAValidMask)
 {
     using Type = typename TypeParam::Type;
-    falcon::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
+    flcn::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());
 
@@ -178,7 +178,7 @@ TYPED_TEST(Simd128ComparisonTests, LessThanOrEqualsOperator_ReturnsAValidMask)
 TYPED_TEST(Simd128ComparisonTests, DoubleEqualsOperator_ReturnsAValidMask)
 {
     using Type = typename TypeParam::Type;
-    falcon::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
+    flcn::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());
 
@@ -201,7 +201,7 @@ TEST(Simd128ComparisonTests, DoubleEqualsOperator_EqualValuesInTheFirstTwoLanesR
 {
     std::array<uint64_t, 2> lhsData{ 538293, 532212300123421 };
     std::array<uint64_t, 2> rhsData{ 538293, 532212300123421 };
-    falcon::Simd128_t<uint64_t, 2> a{}, b{};
+    flcn::Simd128_t<uint64_t, 2> a{}, b{};
     a.load(lhsData.data());
     b.load(rhsData.data());
 
@@ -217,7 +217,7 @@ TEST(Simd128ComparisonTests, DoubleEqualsOperator_EqualValuesInTheFirstTwoLanesR
 TYPED_TEST(Simd128ComparisonTests, NotEqualsOperator_ReturnsAValidMask)
 {
     using Type = typename TypeParam::Type;
-    falcon::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
+    flcn::Simd128_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());
 
@@ -240,7 +240,7 @@ TEST(Simd128ComparisonTests, NotEqualsOperator_EqualValuesInTheFirstTwoLanesRetu
 {
     std::array<uint64_t, 2> lhsData{ 538293, 532212300123421 };
     std::array<uint64_t, 2> rhsData{ 538293, 532212300123421 };
-    falcon::Simd128_t<uint64_t, 2> a{}, b{};
+    flcn::Simd128_t<uint64_t, 2> a{}, b{};
     a.load(lhsData.data());
     b.load(rhsData.data());
 
@@ -268,7 +268,7 @@ TEST(Simd128ComparisonTests, GreaterThanOperator_ReturnFalseForNaNComparisons)
 {
     constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
     constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };
-    falcon::Simd128_t<float, 4> a{}, b{};
+    flcn::Simd128_t<float, 4> a{}, b{};
     a.load(lhsData.data());
     b.load(rhsData.data());
 
@@ -287,7 +287,7 @@ TEST(Simd128ComparisonTests, GreaterThanOrEqualsOperator_ReturnFalseForNaNCompar
 {
     constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
     constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };
-    falcon::Simd128_t<float, 4> a{}, b{};
+    flcn::Simd128_t<float, 4> a{}, b{};
     a.load(lhsData.data());
     b.load(rhsData.data());
 
@@ -305,7 +305,7 @@ TEST(Simd128ComparisonTests, LessThanOperator_ReturnFalseForNaNComparisons)
 {
     constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
     constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };
-    falcon::Simd128_t<float, 4> a{}, b{};
+    flcn::Simd128_t<float, 4> a{}, b{};
     a.load(lhsData.data());
     b.load(rhsData.data());
 
@@ -324,7 +324,7 @@ TEST(Simd128ComparisonTests, LessThanOrEqualsOperator_ReturnFalseForNaNCompariso
 {
     constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
     constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };
-    falcon::Simd128_t<float, 4> a{}, b{};
+    flcn::Simd128_t<float, 4> a{}, b{};
     a.load(lhsData.data());
     b.load(rhsData.data());
 
@@ -343,7 +343,7 @@ TEST(Simd128ComparisonTests, NotEqualsOperator_ReturnTrueForNaNComparisons)
 {
     constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
     constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };
-    falcon::Simd128_t<float, 4> a{}, b{};
+    flcn::Simd128_t<float, 4> a{}, b{};
     a.load(lhsData.data());
     b.load(rhsData.data());
 
@@ -363,7 +363,7 @@ TEST(Simd128ComparisonTests, DoubleEqualsOperator_ReturnFalseForNaNComparisons)
 {
     constexpr std::array<float, 4> lhsData{ NaN, 1.0f, NaN, 1.0f };
     constexpr std::array<float, 4> rhsData{ 1.0f, NaN, NaN, 1.0f };
-    falcon::Simd128_t<float, 4> a{}, b{};
+    flcn::Simd128_t<float, 4> a{}, b{};
     a.load(lhsData.data());
     b.load(rhsData.data());
 

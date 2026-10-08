@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 04, 2026
  *
- * @brief Verify @ref fgm::Vec2 bitwise operator(&, |, !) logic.
+ * @brief Verify @ref flcn::Vec2 bitwise operator(&, |, !) logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -24,16 +24,16 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Vec2 boolean bitwise operations.
+     * @brief Test fixture for @ref flcn::Vec2 boolean bitwise operations.
      */
     class BooleanVec2BitOperationsTests: public testing::Test
     {
     protected:
-        fgm::Vec2<bool> _vecA;
-        fgm::Vec2<bool> _vecB;
-        fgm::Vec2<bool> _expectedConjunctionVector;
-        fgm::Vec2<bool> _expectedDisjunctionVec;
-        fgm::Vec2<bool> _expectedInvertedVec;
+        flcn::Vec2<bool> _vecA;
+        flcn::Vec2<bool> _vecB;
+        flcn::Vec2<bool> _expectedConjunctionVector;
+        flcn::Vec2<bool> _expectedDisjunctionVec;
+        flcn::Vec2<bool> _expectedInvertedVec;
 
         void SetUp() override
         {

@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 25, 2026
  *
- * @brief Verify @ref fgm::Mat3x4 vector and matrix GeometricOps logic.
+ * @brief Verify @ref flcn::Mat3x4 vector and matrix GeometricOps logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -34,7 +34,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3x4 matrix geometric operations (Matrix-Vector Multiplication).
+     * @brief Test fixture for @ref flcn::Mat3x4 matrix geometric operations (Matrix-Vector Multiplication).
      *
      * @tparam T The scalar type (e.g., float, double) used for the matrices and vectors.
      */
@@ -43,29 +43,29 @@ namespace
     {
 
     protected:
-        fgm::Vec3<T> _vec3, _expectedFPVec3, _expectedIntVec3;
-        fgm::Vec4<T> _vec4, _expectedFPVec4, _expectedIntVec4;
+        flcn::Vec3<T> _vec3, _expectedFPVec3, _expectedIntVec3;
+        flcn::Vec4<T> _vec4, _expectedFPVec4, _expectedIntVec4;
 
-        fgm::Mat3x4<T> _mat3x4;
+        flcn::Mat3x4<T> _mat3x4;
 
         void SetUp() override
         {
 
-            _vec3            = fgm::Vec3{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988) };
-            _expectedFPVec3  = { fgm::Vec3{ T(32.15467085860238683), T(24.40151006828770974),
+            _vec3            = flcn::Vec3{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988) };
+            _expectedFPVec3  = { flcn::Vec3{ T(32.15467085860238683), T(24.40151006828770974),
                                            T(16.28906864577547253) } };
-            _expectedIntVec3 = { fgm::Vec3{ T(30), T(23), T(15) } };
+            _expectedIntVec3 = { flcn::Vec3{ T(30), T(23), T(15) } };
 
-            _vec4            = { fgm::Vec4{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988),
+            _vec4            = { flcn::Vec4{ T(1.32194213899999991), T(2.12304122299999998), T(3.02134123399999988),
                                  T(4.01283041000000029) } };
-            _expectedFPVec4  = fgm::Vec4{ T(11.08456156345330790), T(4.27872517874863956), T(20.91827216587800464),
+            _expectedFPVec4  = flcn::Vec4{ T(11.08456156345330790), T(4.27872517874863956), T(20.91827216587800464),
                                          T(14.10190761507471002) };
-            _expectedIntVec4 = fgm::Vec4{ T(9), T(3), T(18), T(13) };
+            _expectedIntVec4 = flcn::Vec4{ T(9), T(3), T(18), T(13) };
 
-            _mat3x4           = { fgm::Vec3{ T(5.12390421300000032), T(2.01234000000000002), T(0.01283400000000000) },
-                                  fgm::Vec3{ T(1.01820339999999998), T(1.02384019999999998), T(0.25123420000000002) },
-                                  fgm::Vec3{ T(5.01238399999999995), T(5.01238401234000008), T(1.20830199999999999) },
-                                  fgm::Vec3{ T(2.01238399999999995), T(1.10234800000000011), T(3.01234499999999983) } };
+            _mat3x4           = { flcn::Vec3{ T(5.12390421300000032), T(2.01234000000000002), T(0.01283400000000000) },
+                                  flcn::Vec3{ T(1.01820339999999998), T(1.02384019999999998), T(0.25123420000000002) },
+                                  flcn::Vec3{ T(5.01238399999999995), T(5.01238401234000008), T(1.20830199999999999) },
+                                  flcn::Vec3{ T(2.01238399999999995), T(1.10234800000000011), T(3.01234499999999983) } };
         }
     };
     TYPED_TEST_SUITE(Mat3x4GeometricOpsTests, SupportedArithmeticTypes);
@@ -78,10 +78,10 @@ namespace
     namespace static_tests
     {
         // STATIC TEST SETUP
-        constexpr fgm::Vec3 ROW_VEC3(1, 2, 3);
-        constexpr fgm::Vec4 VEC4(1, 2, 3, 4);
+        constexpr flcn::Vec3 ROW_VEC3(1, 2, 3);
+        constexpr flcn::Vec4 VEC4(1, 2, 3, 4);
 
-        constexpr fgm::Mat3x4 MAT3X4(5, 1, 5, 2, 2, 1, 5, 1, 0, 0, 1, 3);
+        constexpr flcn::Mat3x4 MAT3X4(5, 1, 5, 2, 2, 1, 5, 1, 0, 0, 1, 3);
 
 
         /// @test Verify that 3x4 matrix times a 4D column vector yields a 3D column vector at compile time.

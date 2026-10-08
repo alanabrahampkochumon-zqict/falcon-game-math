@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: April 28, 2026
  *
- * @brief Verify @ref fgm::Mat3 transpose logic.
+ * @brief Verify @ref flcn::Mat3 transpose logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -25,7 +25,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 Transpose.
+     * @brief Test fixture for @ref flcn::Mat3 Transpose.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -33,7 +33,7 @@ namespace
     class Mat3TransposeTests: public testing::Test
     {
     protected:
-        fgm::Mat3<T> _matrix, _expectedTranspose;
+        flcn::Mat3<T> _matrix, _expectedTranspose;
 
         void SetUp() override
         {
@@ -51,10 +51,10 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat3 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        constexpr flcn::Mat3 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
         /** @test Verify that matrix transpose returns a valid matrix at compile time. */
-        constexpr fgm::Mat3 TRANSPOSE_MAT = MAT.transpose();
+        constexpr flcn::Mat3 TRANSPOSE_MAT = MAT.transpose();
         static_assert(TRANSPOSE_MAT(0, 0) == 1);
         static_assert(TRANSPOSE_MAT(0, 1) == 4);
         static_assert(TRANSPOSE_MAT(0, 2) == 7);
@@ -69,7 +69,7 @@ namespace
 
 
         /** @test Verify that matrix transpose (static wrapper) returns a valid matrix at compile time. */
-        constexpr fgm::Mat3 TRANSPOSE_MAT_S = fgm::Mat3<int>::transpose(MAT);
+        constexpr flcn::Mat3 TRANSPOSE_MAT_S = flcn::Mat3<int>::transpose(MAT);
         static_assert(TRANSPOSE_MAT_S(0, 0) == 1);
         static_assert(TRANSPOSE_MAT_S(0, 1) == 4);
         static_assert(TRANSPOSE_MAT_S(0, 2) == 7);
@@ -96,6 +96,6 @@ TYPED_TEST(Mat3TransposeTests, ReturnsMatrixWithExchangedRowsAndColumnElements)
 
 
 TYPED_TEST(Mat3TransposeTests, StaticWrapper_ReturnsMatrixWithExchangedRowsAndColumnElements)
-{ EXPECT_MAT_EQ(this->_expectedTranspose, fgm::Mat3<TypeParam>::transpose(this->_matrix)); }
+{ EXPECT_MAT_EQ(this->_expectedTranspose, flcn::Mat3<TypeParam>::transpose(this->_matrix)); }
 
 /** @} */

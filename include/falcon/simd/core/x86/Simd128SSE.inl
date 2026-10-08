@@ -14,7 +14,7 @@
 
 #include <bitset>
 
-namespace falcon
+namespace flcn
 {
 
     /**************************************
@@ -2836,7 +2836,7 @@ namespace falcon
         if constexpr (types::IsFP64<DataType>)
         {
             const auto shifted = _mm_srli_si128(_mm_castpd_si128(_register), 8);
-            const auto minReg  = *falcon::min(*this, Simd128(_mm_castsi128_pd(shifted)));
+            const auto minReg  = *flcn::min(*this, Simd128(_mm_castsi128_pd(shifted)));
             return _mm_cvtsd_f64(minReg);
         }
         else if constexpr (types::IsFP32<DataType>)
@@ -2849,7 +2849,7 @@ namespace falcon
             // _,         _, _, min(A, B, C, D)
             // But if only two lanes are filled, we can do just 1 shift return the value from lower lane.
             const auto shifted1 = _mm_srli_si128(_mm_castps_si128(_register), 4);
-            const auto minReg1  = *falcon::min(*this, Simd128(_mm_castsi128_ps(shifted1)));
+            const auto minReg1  = *flcn::min(*this, Simd128(_mm_castsi128_ps(shifted1)));
             if constexpr (LaneCount == 2)
             {
                 return _mm_cvtss_f32(minReg1);
@@ -2857,20 +2857,20 @@ namespace falcon
             else
             {
                 const auto shifted2 = _mm_srli_si128(_mm_castps_si128(minReg1), 8);
-                const auto minReg2  = *falcon::min(Simd128(minReg1), Simd128(_mm_castsi128_ps(shifted2)));
+                const auto minReg2  = *flcn::min(Simd128(minReg1), Simd128(_mm_castsi128_ps(shifted2)));
                 return _mm_cvtss_f32(minReg2);
             }
         }
         else if constexpr (sizeof(DataType) == 8)
         {
             const auto shifted = _mm_srli_si128(_register, 8);
-            const auto minReg  = *falcon::min(*this, Simd128(shifted));
+            const auto minReg  = *flcn::min(*this, Simd128(shifted));
             return _mm_cvtsi128_si64(minReg);
         }
         else if constexpr (sizeof(DataType) == 4)
         {
             const auto shifted1 = _mm_srli_si128(_register, 4);
-            const auto minReg1  = *falcon::min(*this, Simd128(shifted1));
+            const auto minReg1  = *flcn::min(*this, Simd128(shifted1));
             if constexpr (LaneCount == 2)
             {
                 return _mm_cvtsi128_si32(minReg1);
@@ -2878,14 +2878,14 @@ namespace falcon
             else
             {
                 const auto shifted2 = _mm_srli_si128(minReg1, 8);
-                const auto minReg2  = *falcon::min(Simd128(minReg1), Simd128(shifted2));
+                const auto minReg2  = *flcn::min(Simd128(minReg1), Simd128(shifted2));
                 return _mm_cvtsi128_si32(minReg2);
             }
         }
         else if constexpr (sizeof(DataType) == 2)
         {
             const auto shifted1 = _mm_srli_si128(_register, 2);
-            const auto minReg1  = *falcon::min(*this, Simd128(shifted1));
+            const auto minReg1  = *flcn::min(*this, Simd128(shifted1));
             if constexpr (LaneCount == 2)
             {
                 return static_cast<DataType>(_mm_cvtsi128_si32(minReg1));
@@ -2893,7 +2893,7 @@ namespace falcon
             else
             {
                 const auto shifted2 = _mm_srli_si128(minReg1, 4);
-                const auto minReg2  = *falcon::min(Simd128(minReg1), Simd128(shifted2));
+                const auto minReg2  = *flcn::min(Simd128(minReg1), Simd128(shifted2));
                 if constexpr (LaneCount == 4)
                 {
                     return static_cast<DataType>(_mm_cvtsi128_si32(minReg2));
@@ -2901,7 +2901,7 @@ namespace falcon
                 else
                 {
                     const auto shifted3 = _mm_srli_si128(minReg2, 8);
-                    const auto minReg3  = *falcon::min(Simd128(minReg2), Simd128(shifted3));
+                    const auto minReg3  = *flcn::min(Simd128(minReg2), Simd128(shifted3));
                     return static_cast<DataType>(_mm_cvtsi128_si32(minReg3));
                 }
             }
@@ -2909,7 +2909,7 @@ namespace falcon
         else // if constexpr (sizeof(DataType) == 1)
         {
             const auto shifted1 = _mm_srli_si128(_register, 1);
-            const auto minReg1  = *falcon::min(*this, Simd128(shifted1));
+            const auto minReg1  = *flcn::min(*this, Simd128(shifted1));
             if constexpr (LaneCount == 2)
             {
                 return static_cast<DataType>(_mm_cvtsi128_si32(minReg1));
@@ -2917,7 +2917,7 @@ namespace falcon
             else
             {
                 const auto shifted2 = _mm_srli_si128(minReg1, 2);
-                const auto minReg2  = *falcon::min(Simd128(minReg1), Simd128(shifted2));
+                const auto minReg2  = *flcn::min(Simd128(minReg1), Simd128(shifted2));
                 if constexpr (LaneCount == 4)
                 {
                     return static_cast<DataType>(_mm_cvtsi128_si32(minReg2));
@@ -2925,7 +2925,7 @@ namespace falcon
                 else
                 {
                     const auto shifted3 = _mm_srli_si128(minReg2, 4);
-                    const auto minReg3  = *falcon::min(Simd128(minReg2), Simd128(shifted3));
+                    const auto minReg3  = *flcn::min(Simd128(minReg2), Simd128(shifted3));
                     if constexpr (LaneCount == 8)
                     {
                         return static_cast<DataType>(_mm_cvtsi128_si32(minReg3));
@@ -2933,7 +2933,7 @@ namespace falcon
                     else
                     {
                         const auto shifted4 = _mm_srli_si128(minReg3, 8);
-                        const auto minReg4  = *falcon::min(Simd128(minReg3), Simd128(shifted4));
+                        const auto minReg4  = *flcn::min(Simd128(minReg3), Simd128(shifted4));
                         return static_cast<DataType>(_mm_cvtsi128_si32(minReg4));
                     }
                 }
@@ -2950,7 +2950,7 @@ namespace falcon
         if constexpr (types::IsFP64<DataType>)
         {
             const auto shifted = _mm_srli_si128(_mm_castpd_si128(_register), 8);
-            const auto maxReg  = *falcon::max(*this, Simd128(_mm_castsi128_pd(shifted)));
+            const auto maxReg  = *flcn::max(*this, Simd128(_mm_castsi128_pd(shifted)));
             return _mm_cvtsd_f64(maxReg);
         }
         else if constexpr (types::IsFP32<DataType>)
@@ -2963,7 +2963,7 @@ namespace falcon
             // _,         _, _, max(A, B, C, D)
             // But if only two lanes are filled, we can do just 1 shift return the value from lower lane.
             const auto shifted1 = _mm_srli_si128(_mm_castps_si128(_register), 4);
-            const auto maxReg1  = *falcon::max(*this, Simd128(_mm_castsi128_ps(shifted1)));
+            const auto maxReg1  = *flcn::max(*this, Simd128(_mm_castsi128_ps(shifted1)));
             if constexpr (LaneCount == 2)
             {
                 return _mm_cvtss_f32(maxReg1);
@@ -2971,20 +2971,20 @@ namespace falcon
             else
             {
                 const auto shifted2 = _mm_srli_si128(_mm_castps_si128(maxReg1), 8);
-                const auto maxReg2  = *falcon::max(Simd128(maxReg1), Simd128(_mm_castsi128_ps(shifted2)));
+                const auto maxReg2  = *flcn::max(Simd128(maxReg1), Simd128(_mm_castsi128_ps(shifted2)));
                 return _mm_cvtss_f32(maxReg2);
             }
         }
         else if constexpr (sizeof(DataType) == 8)
         {
             const auto shifted = _mm_srli_si128(_register, 8);
-            const auto maxReg  = *falcon::max(*this, Simd128(shifted));
+            const auto maxReg  = *flcn::max(*this, Simd128(shifted));
             return _mm_cvtsi128_si64(maxReg);
         }
         else if constexpr (sizeof(DataType) == 4)
         {
             const auto shifted1 = _mm_srli_si128(_register, 4);
-            const auto maxReg1  = *falcon::max(*this, Simd128(shifted1));
+            const auto maxReg1  = *flcn::max(*this, Simd128(shifted1));
             if constexpr (LaneCount == 2)
             {
                 return _mm_cvtsi128_si32(maxReg1);
@@ -2992,14 +2992,14 @@ namespace falcon
             else
             {
                 const auto shifted2 = _mm_srli_si128(maxReg1, 8);
-                const auto maxReg2  = *falcon::max(Simd128(maxReg1), Simd128(shifted2));
+                const auto maxReg2  = *flcn::max(Simd128(maxReg1), Simd128(shifted2));
                 return _mm_cvtsi128_si32(maxReg2);
             }
         }
         else if constexpr (sizeof(DataType) == 2)
         {
             const auto shifted1 = _mm_srli_si128(_register, 2);
-            const auto maxReg1  = *falcon::max(*this, Simd128(shifted1));
+            const auto maxReg1  = *flcn::max(*this, Simd128(shifted1));
             if constexpr (LaneCount == 2)
             {
                 return static_cast<DataType>(_mm_cvtsi128_si32(maxReg1));
@@ -3007,7 +3007,7 @@ namespace falcon
             else
             {
                 const auto shifted2 = _mm_srli_si128(maxReg1, 4);
-                const auto maxReg2  = *falcon::max(Simd128(maxReg1), Simd128(shifted2));
+                const auto maxReg2  = *flcn::max(Simd128(maxReg1), Simd128(shifted2));
                 if constexpr (LaneCount == 4)
                 {
                     return static_cast<DataType>(_mm_cvtsi128_si32(maxReg2));
@@ -3015,7 +3015,7 @@ namespace falcon
                 else
                 {
                     const auto shifted3 = _mm_srli_si128(maxReg2, 8);
-                    const auto maxReg3  = *falcon::max(Simd128(maxReg2), Simd128(shifted3));
+                    const auto maxReg3  = *flcn::max(Simd128(maxReg2), Simd128(shifted3));
                     return static_cast<DataType>(_mm_cvtsi128_si32(maxReg3));
                 }
             }
@@ -3023,7 +3023,7 @@ namespace falcon
         else // if constexpr (sizeof(DataType) == 1)
         {
             const auto shifted1 = _mm_srli_si128(_register, 1);
-            const auto maxReg1  = *falcon::max(*this, Simd128(shifted1));
+            const auto maxReg1  = *flcn::max(*this, Simd128(shifted1));
             if constexpr (LaneCount == 2)
             {
                 return static_cast<DataType>(_mm_cvtsi128_si32(maxReg1));
@@ -3031,7 +3031,7 @@ namespace falcon
             else
             {
                 const auto shifted2 = _mm_srli_si128(maxReg1, 2);
-                const auto maxReg2  = *falcon::max(Simd128(maxReg1), Simd128(shifted2));
+                const auto maxReg2  = *flcn::max(Simd128(maxReg1), Simd128(shifted2));
                 if constexpr (LaneCount == 4)
                 {
                     return static_cast<DataType>(_mm_cvtsi128_si32(maxReg2));
@@ -3039,7 +3039,7 @@ namespace falcon
                 else
                 {
                     const auto shifted3 = _mm_srli_si128(maxReg2, 4);
-                    const auto maxReg3  = *falcon::max(Simd128(maxReg2), Simd128(shifted3));
+                    const auto maxReg3  = *flcn::max(Simd128(maxReg2), Simd128(shifted3));
                     if constexpr (LaneCount == 8)
                     {
                         return static_cast<DataType>(_mm_cvtsi128_si32(maxReg3));
@@ -3047,7 +3047,7 @@ namespace falcon
                     else
                     {
                         const auto shifted4 = _mm_srli_si128(maxReg3, 8);
-                        const auto maxReg4  = *falcon::max(Simd128(maxReg3), Simd128(shifted4));
+                        const auto maxReg4  = *flcn::max(Simd128(maxReg3), Simd128(shifted4));
                         return static_cast<DataType>(_mm_cvtsi128_si32(maxReg4));
                     }
                 }
@@ -3650,4 +3650,4 @@ namespace falcon
         }
     }
 
-} // namespace falcon
+} // namespace flcn

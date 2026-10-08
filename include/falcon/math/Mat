@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: June 19, 2026
  *
- * @brief Alias for @ref fgm::Matrix.
+ * @brief Alias for @ref flcn::Matrix.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -13,7 +13,7 @@
 #include "matrices/Mat3.h"
 #include "matrices/Mat4.h"
 
-namespace fgm
+namespace flcn
 {
 
     /**

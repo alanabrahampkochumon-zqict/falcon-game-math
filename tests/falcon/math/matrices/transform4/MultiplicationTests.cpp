@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 31, 2026
  *
- * @brief Verify @ref fgm::Transform4 multiplication logic.
+ * @brief Verify @ref flcn::Transform4 multiplication logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,7 +26,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Transform4 transform(matrix) multiplication.
+     * @brief Test fixture for @ref flcn::Transform4 transform(matrix) multiplication.
      *
      * @tparam T The scalar type (e.g., uint32_t, int32_t, float, double) used for the values.
      */
@@ -34,7 +34,7 @@ namespace
     class Transform4TransformMultiplicationTests: public testing::Test
     {
     protected:
-        fgm::Transform4<T> _transformA, _transformB, _expectedFPTransform, _expectedIntTransform;
+        flcn::Transform4<T> _transformA, _transformB, _expectedFPTransform, _expectedIntTransform;
 
         void SetUp() override
         {
@@ -64,7 +64,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Transform4 vector multiplication.
+     * @brief Test fixture for @ref flcn::Transform4 vector multiplication.
      *
      * @tparam T The scalar type (e.g., uint32_t, int32_t, float, double) used for the values.
      */
@@ -72,9 +72,9 @@ namespace
     class Transform4VectorMultiplicationTests: public testing::Test
     {
     protected:
-        fgm::Transform4<T> _transform;
-        fgm::Vec3<T> _vec;
-        fgm::Vec3<T> _expectedFPVector, _expectedIntVector;
+        flcn::Transform4<T> _transform;
+        flcn::Vec3<T> _vec;
+        flcn::Vec3<T> _expectedFPVector, _expectedIntVector;
 
         void SetUp() override
         {
@@ -93,7 +93,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Transform4 point multiplication.
+     * @brief Test fixture for @ref flcn::Transform4 point multiplication.
      *
      * @tparam T The scalar type (e.g., uint32_t, int32_t, float, double) used for the values.
      */
@@ -101,9 +101,9 @@ namespace
     class Transform4PointMultiplicationTests: public testing::Test
     {
     protected:
-        fgm::Transform4<T> _transform;
-        fgm::Point3<T> _point;
-        fgm::Point3<T> _expectedFPPoint, _expectedIntPoint;
+        flcn::Transform4<T> _transform;
+        flcn::Point3<T> _point;
+        flcn::Point3<T> _expectedFPPoint, _expectedIntPoint;
 
         void SetUp() override
         {
@@ -128,18 +128,18 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Transform4 TRANSFORM_A(7, 5, 1, 4, 6, 4, 8, 1, 1, 2, 5, 4);
-        constexpr fgm::Transform4 TRANSFORM_B(3, 8, 7, 5, 5, 3, 4, 3, 1, 2, 4, 7);
-        constexpr fgm::Vec3 VECTOR(2, 3, 1);
-        constexpr fgm::Point3 POINT(2, 3, 1);
+        constexpr flcn::Transform4 TRANSFORM_A(7, 5, 1, 4, 6, 4, 8, 1, 1, 2, 5, 4);
+        constexpr flcn::Transform4 TRANSFORM_B(3, 8, 7, 5, 5, 3, 4, 3, 1, 2, 4, 7);
+        constexpr flcn::Vec3 VECTOR(2, 3, 1);
+        constexpr flcn::Point3 POINT(2, 3, 1);
 
 
         /// @test Verify that Transform4 * Transform4 returns a valid Transform4 at compile time.
         constexpr auto TRANSFORMED_MAT = TRANSFORM_A * TRANSFORM_B;
-        static_assert(TRANSFORMED_MAT[0] == fgm::Vec3{ 47, 46, 18 });
-        static_assert(TRANSFORMED_MAT[1] == fgm::Vec3{ 73, 76, 24 });
-        static_assert(TRANSFORMED_MAT[2] == fgm::Vec3{ 73, 90, 35 });
-        static_assert(TRANSFORMED_MAT[3] == fgm::Vec3{ 61, 99, 50 });
+        static_assert(TRANSFORMED_MAT[0] == flcn::Vec3{ 47, 46, 18 });
+        static_assert(TRANSFORMED_MAT[1] == flcn::Vec3{ 73, 76, 24 });
+        static_assert(TRANSFORMED_MAT[2] == flcn::Vec3{ 73, 90, 35 });
+        static_assert(TRANSFORMED_MAT[3] == flcn::Vec3{ 61, 99, 50 });
 
 
         /// @test Verify that Transform4 * Vec3 returns a valid Vec3 at compile time.
@@ -186,8 +186,8 @@ TYPED_TEST(Transform4VectorMultiplicationTests, MatrixTimesVectorReturnsATransfo
 
 TEST(Transform4VectorMultiplicationTests, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
-    const fgm::Transform4 mat{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };
-    const fgm::Vec3 vec{ 2, 1, 3 };
+    const flcn::Transform4 mat{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };
+    const flcn::Vec3 vec{ 2, 1, 3 };
 
     [[maybe_unused]] const auto transformedVector = mat * vec;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -214,8 +214,8 @@ TYPED_TEST(Transform4PointMultiplicationTests, MatrixTimesPointReturnsATransform
 
 TEST(Transform4PointMultiplicationTests, MatTimesVec_MixedTypeScalarMultiplicationPromotesType)
 {
-    const fgm::Transform4 mat{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };
-    const fgm::Point3 point{ 2, 1, 3 };
+    const flcn::Transform4 mat{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };
+    const flcn::Point3 point{ 2, 1, 3 };
 
     [[maybe_unused]] const auto transformedPoint = mat * point;
     static_assert(std::is_same_v<decltype(transformedPoint)::value_type, double>);
@@ -243,8 +243,8 @@ TYPED_TEST(Transform4TransformMultiplicationTests, TimesOperator_ReturnsValidTra
 
 TEST(Transform4TransformMultiplicationTests, TimesOperator_MixedTypes_PromotesToWiderType)
 {
-    const fgm::Transform4 transformA{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };
-    const fgm::Transform4 transformB{ 2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+    const flcn::Transform4 transformA{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };
+    const flcn::Transform4 transformB{ 2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 
     [[maybe_unused]] const auto transformedVector = transformA * transformB;
     static_assert(std::is_same_v<decltype(transformedVector)::value_type, double>);
@@ -267,8 +267,8 @@ TYPED_TEST(Transform4TransformMultiplicationTests, TimesEqualOperator_MutatesCur
 
 TEST(Transform4TransformMultiplicationTests, TimesEqualOperator_MixedTypes_DoesNotPromotesToWiderType)
 {
-    fgm::Transform4 transformA{ 2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-    const fgm::Transform4 transformB{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };
+    flcn::Transform4 transformA{ 2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+    const flcn::Transform4 transformB{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0 };
 
     transformA *= transformB;
     static_assert(std::is_same_v<decltype(transformA)::value_type, int>);

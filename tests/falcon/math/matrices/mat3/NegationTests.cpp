@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 21, 2026
  *
- * @brief Verify @ref fgm::Mat3 negation logic.
+ * @brief Verify @ref flcn::Mat3 negation logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -24,7 +24,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat3 Negation(-Mat).
+     * @brief Test fixture for @ref flcn::Mat3 Negation(-Mat).
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -32,12 +32,12 @@ namespace
     class Mat3NegationTests: public testing::Test
     {
     protected:
-        fgm::Mat3<T> _matA, _expectedMat;
+        flcn::Mat3<T> _matA, _expectedMat;
 
         void SetUp() override
         {
-            _matA        = { fgm::Vec3<T>(-1, 2, 3), fgm::Vec3<T>(5, 6, 7), fgm::Vec3<T>(0, 15, -12) };
-            _expectedMat = { fgm::Vec3<T>(1, -2, -3), fgm::Vec3<T>(-5, -6, -7), fgm::Vec3<T>(0, -15, 12) };
+            _matA        = { flcn::Vec3<T>(-1, 2, 3), flcn::Vec3<T>(5, 6, 7), flcn::Vec3<T>(0, 15, -12) };
+            _expectedMat = { flcn::Vec3<T>(1, -2, -3), flcn::Vec3<T>(-5, -6, -7), flcn::Vec3<T>(0, -15, 12) };
         }
     };
     TYPED_TEST_SUITE(Mat3NegationTests, SupportedSignedArithmeticTypes);
@@ -50,8 +50,8 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat3 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9);
-        constexpr fgm::Mat3 NEG_MAT = -MAT;
+        constexpr flcn::Mat3 MAT(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        constexpr flcn::Mat3 NEG_MAT = -MAT;
 
         /** @test Verify that matrix negation returns a valid matrix at compile time. */
         static_assert(NEG_MAT(0, 0) == -MAT(0, 0));
@@ -75,7 +75,7 @@ namespace
 
 TYPED_TEST(Mat3NegationTests, ReturnsElementWiseNegatedMatrix)
 {
-    const fgm::Mat3 negMat = -this->_matA;
+    const flcn::Mat3 negMat = -this->_matA;
     EXPECT_MAT_EQ(this->_expectedMat, negMat);
 }
 

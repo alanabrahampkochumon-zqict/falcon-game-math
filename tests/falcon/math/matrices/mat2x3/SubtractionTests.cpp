@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 17, 2026
  *
- * @brief Verify @ref fgm::Mat2x3 subtraction logic.
+ * @brief Verify @ref flcn::Mat2x3 subtraction logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -25,7 +25,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2x3 Subtraction.
+     * @brief Test fixture for @ref flcn::Mat2x3 Subtraction.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -33,15 +33,15 @@ namespace
     class Mat2x3SubtractionTests: public ::testing::Test
     {
     protected:
-        fgm::Mat2x3<T> _matA;
-        fgm::Mat2x3<T> _matB;
-        fgm::Mat2x3<T> _expectedDifference;
+        flcn::Mat2x3<T> _matA;
+        flcn::Mat2x3<T> _matB;
+        flcn::Mat2x3<T> _expectedDifference;
 
         void SetUp() override
         {
-            _matA               = { fgm::CVec2<T>(5, 6), fgm::CVec2<T>(7, 8), fgm::CVec2<T>(5, 12) };
-            _matB               = { fgm::CVec2<T>(1, 2), fgm::CVec2<T>(3, 4), fgm::CVec2<T>(5, 11) };
-            _expectedDifference = { fgm::CVec2<T>(4, 4), fgm::CVec2<T>(4, 4), fgm::CVec2<T>(0, 1) };
+            _matA               = { flcn::CVec2<T>(5, 6), flcn::CVec2<T>(7, 8), flcn::CVec2<T>(5, 12) };
+            _matB               = { flcn::CVec2<T>(1, 2), flcn::CVec2<T>(3, 4), flcn::CVec2<T>(5, 11) };
+            _expectedDifference = { flcn::CVec2<T>(4, 4), flcn::CVec2<T>(4, 4), flcn::CVec2<T>(0, 1) };
         }
     };
     TYPED_TEST_SUITE(Mat2x3SubtractionTests, SupportedArithmeticTypes);
@@ -53,12 +53,12 @@ namespace
      **************************************/
     namespace static_tests
     {
-        constexpr fgm::Mat2x3 MAT1(8, 2, 12, 4, -5, 0);
-        constexpr fgm::Mat2x3 MAT2(5, 6, 7, 8, -11, 5);
+        constexpr flcn::Mat2x3 MAT1(8, 2, 12, 4, -5, 0);
+        constexpr flcn::Mat2x3 MAT2(5, 6, 7, 8, -11, 5);
 
 
         /** @test Verify that matrix subtraction operations return a valid matrix at compile time. */
-        constexpr fgm::Mat2x3 BINARY_DIFF = MAT1 - MAT2;
+        constexpr flcn::Mat2x3 BINARY_DIFF = MAT1 - MAT2;
         static_assert(BINARY_DIFF(0, 0) == 3);
         static_assert(BINARY_DIFF(0, 1) == -4);
         static_assert(BINARY_DIFF(0, 2) == 5);
@@ -77,17 +77,17 @@ namespace
 
 TYPED_TEST(Mat2x3SubtractionTests, MinusOperator_ReturnsMatrixDifference)
 {
-    const fgm::Mat2x3 difference = this->_matA - this->_matB;
+    const flcn::Mat2x3 difference = this->_matA - this->_matB;
     EXPECT_MAT_EQ(this->_expectedDifference, difference);
 }
 
 
 TEST(Mat2x3SubtractionTests, MinusOperator_MixedType_PromotesType)
 {
-    const fgm::Mat2x3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
-    const fgm::Mat2x3 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);
+    const flcn::Mat2x3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
+    const flcn::Mat2x3 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);
 
-    [[maybe_unused]] const fgm::Mat2x3 difference = mat1 - mat2;
+    [[maybe_unused]] const flcn::Mat2x3 difference = mat1 - mat2;
 
     static_assert(std::is_same_v<decltype(difference)::value_type, double>);
 }
@@ -102,8 +102,8 @@ TYPED_TEST(Mat2x3SubtractionTests, MinusEqualsOperator_ReturnsSameMatrixWithDiff
 
 TEST(Mat2x3SubtractionTests, MinusEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    fgm::Mat2x3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
-    [[maybe_unused]] const fgm::Mat2x3 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);
+    flcn::Mat2x3 mat1(3.0f, -1.0f, 4.0f, -23.0f, 5.0f, 3.0f);
+    [[maybe_unused]] const flcn::Mat2x3 mat2(9.0, 10.0, 3.0, 4.0, 0.1, 2.5);
 
     mat1 -= mat2;
     static_assert(std::is_same_v<decltype(mat1)::value_type, float>);

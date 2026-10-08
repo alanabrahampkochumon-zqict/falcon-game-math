@@ -19,7 +19,7 @@
  */
 
 // TODO: Rename File to SIMD core
-namespace falcon
+namespace flcn
 {
 
     template <typename SIMDReg, typename T>
@@ -44,7 +44,7 @@ namespace falcon
     struct Emulated256;
 
     // static_assert(IsSIMDLoadable<Simd128_t<float>, float> == true);
-} // namespace falcon
+} // namespace flcn
 
 
 #if defined(FALCON_ENABLE_SSE2) || defined(FALCON_ENABLE_SSE4) || defined(FALCON_ENABLE_AVX) ||                        \
@@ -54,7 +54,7 @@ namespace falcon
 #endif
 
 
-namespace falcon
+namespace flcn
 {
 #if defined(FALCON_ENABLE_SSE2) || defined(FALCON_ENABLE_SSE4) || defined(FALCON_ENABLE_AVX) ||                        \
     defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX10)
@@ -64,6 +64,6 @@ namespace falcon
     template <typename DataType, size_t Lane>
     using Simd256_t = Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>;
 #endif
-} // namespace falcon
+} // namespace flcn
 
 /** @} */

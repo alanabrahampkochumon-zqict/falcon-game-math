@@ -27,7 +27,7 @@
 #endif
 
 
-namespace fgm
+namespace flcn
 {
     /*************************************
      *            INITIALIZERS           *
@@ -150,7 +150,7 @@ namespace fgm
     template <Arithmetic T>
     FALCON_INLINE constexpr T& CVec2<T>::operator[](const std::size_t idx) noexcept
     {
-        FALCON_ASSERT_MSG(idx < DIMENSION, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(idx < DIMENSION, flcn::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data[idx];
     }
 
@@ -158,7 +158,7 @@ namespace fgm
     template <Arithmetic T>
     FALCON_INLINE constexpr const T& CVec2<T>::operator[](const std::size_t idx) const noexcept
     {
-        FALCON_ASSERT_MSG(idx < DIMENSION, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(idx < DIMENSION, flcn::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data[idx];
     }
 
@@ -255,8 +255,8 @@ namespace fgm
                 }
             }
 #endif
-            return (_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon) &&
-                (_data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
+            return (_data[0] == rhs[0] || flcn::abs(_data[0] - rhs[0]) <= epsilon) &&
+                (_data[1] == rhs[1] || flcn::abs(_data[1] - rhs[1]) <= epsilon);
         }
     }
 
@@ -279,8 +279,8 @@ namespace fgm
         else
         {
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return (_data[0] != rhs[0] && !(fgm::abs(_data[0] - rhs[0]) <= epsilon)) ||
-                (_data[1] != rhs[1] && !(fgm::abs(_data[1] - rhs[1]) <= epsilon));
+            return (_data[0] != rhs[0] && !(flcn::abs(_data[0] - rhs[0]) <= epsilon)) ||
+                (_data[1] != rhs[1] && !(flcn::abs(_data[1] - rhs[1]) <= epsilon));
         }
     }
 
@@ -330,8 +330,8 @@ namespace fgm
         else
         {
             /** @note Direct equality check is required to handle @ref INFINITY cases, as Inf - Inf results in NAN_F. */
-            return CVec2<bool>(_data[0] == rhs[0] || fgm::abs(_data[0] - rhs[0]) <= epsilon,
-                               _data[1] == rhs[1] || fgm::abs(_data[1] - rhs[1]) <= epsilon);
+            return CVec2<bool>(_data[0] == rhs[0] || flcn::abs(_data[0] - rhs[0]) <= epsilon,
+                               _data[1] == rhs[1] || flcn::abs(_data[1] - rhs[1]) <= epsilon);
         }
     }
 
@@ -356,8 +356,8 @@ namespace fgm
         else
         {
             /** @note Identity check and inverted logic handle NAN_F and INFINITY per IEEE 754. */
-            return CVec2<bool>(_data[0] != rhs[0] && !(fgm::abs(_data[0] - rhs[0]) <= epsilon),
-                               _data[1] != rhs[1] && !(fgm::abs(_data[1] - rhs[1]) <= epsilon));
+            return CVec2<bool>(_data[0] != rhs[0] && !(flcn::abs(_data[0] - rhs[0]) <= epsilon),
+                               _data[1] != rhs[1] && !(flcn::abs(_data[1] - rhs[1]) <= epsilon));
         }
     }
 
@@ -652,14 +652,14 @@ namespace fgm
         using R = PromotedValue_t<T, S>;
         if constexpr (std::is_floating_point_v<R>)
         {
-            FALCON_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<R>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
+            FALCON_ASSERT_MSG(flcn::abs(scalar) >= flcn::Config::EPSILON<R>, flcn::messages::assertion::VEC_DIV_BY_ZERO);
 
             R factor = R(1) / static_cast<R>(scalar);
             return CVec2<R>(_data[0] * factor, _data[1] * factor);
         }
         else
         {
-            FALCON_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
+            FALCON_ASSERT_MSG(scalar != 0, flcn::messages::assertion::VEC_DIV_BY_ZERO);
             R tScalar = static_cast<R>(scalar);
             return CVec2<R>(_data[0] / tScalar, _data[1] / tScalar);
         }
@@ -673,7 +673,7 @@ namespace fgm
     {
         using R = PromotedValue_t<T, S>;
 
-        FALCON_ASSERT_MSG(fgm::abs(scalar) > fgm::Config::EPSILON<S>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
+        FALCON_ASSERT_MSG(flcn::abs(scalar) > flcn::Config::EPSILON<S>, flcn::messages::assertion::VEC_DIV_BY_ZERO);
         if constexpr (std::is_floating_point_v<R>)
         {
             R factor = R(1) / static_cast<R>(scalar);
@@ -700,7 +700,7 @@ namespace fgm
 
         if constexpr (std::is_floating_point_v<R>)
         {
-            if (hasNaN() | fgm::isnan(scalar) | (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+            if (hasNaN() | flcn::isnan(scalar) | (flcn::abs(scalar) <= std::numeric_limits<S>::epsilon()))
             {
                 return CVec2<R>::zero();
             }
@@ -733,12 +733,12 @@ namespace fgm
 
         if constexpr (std::is_floating_point_v<R>)
         {
-            if (hasNaN() | fgm::isnan(scalar))
+            if (hasNaN() | flcn::isnan(scalar))
             {
                 status = OperationStatus::NANOPERAND;
                 return CVec2<R>::zero();
             }
-            if (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon())
+            if (flcn::abs(scalar) <= std::numeric_limits<S>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
                 return CVec2<R>::zero();
@@ -902,7 +902,7 @@ namespace fgm
     template <Arithmetic T>
     FALCON_INLINE constexpr T CVec2<T>::manhattanNorm() const noexcept
         requires StrictArithmetic<T>
-    { return fgm::abs(_data[0]) + fgm::abs(_data[1]); }
+    { return flcn::abs(_data[0]) + flcn::abs(_data[1]); }
 
 
     template <Arithmetic T>
@@ -914,7 +914,7 @@ namespace fgm
     template <Arithmetic T>
     FALCON_INLINE constexpr T CVec2<T>::chebyshevNorm() const noexcept
         requires StrictArithmetic<T>
-    { return std::max(fgm::abs(_data[0]), fgm::abs(_data[1])); }
+    { return std::max(flcn::abs(_data[0]), flcn::abs(_data[1])); }
 
 
     template <Arithmetic T>
@@ -1038,8 +1038,8 @@ namespace fgm
         requires StrictArithmetic<T>
     {
         const auto magnitude = mag();
-        FALCON_ASSERT_MSG(magnitude >= fgm::Config::EPSILON<decltype(magnitude)>,
-                          fgm::messages::assertion::VEC_NORMALIZE_DIV_BY_ZERO);
+        FALCON_ASSERT_MSG(magnitude >= flcn::Config::EPSILON<decltype(magnitude)>,
+                          flcn::messages::assertion::VEC_NORMALIZE_DIV_BY_ZERO);
         return *this / magnitude;
     }
 
@@ -1056,7 +1056,7 @@ namespace fgm
     {
         using R     = Magnitude<T>;
         R magnitude = mag();
-        if (fgm::isnan(magnitude))
+        if (flcn::isnan(magnitude))
         {
             return CVec2<R>::zero();
         }
@@ -1081,7 +1081,7 @@ namespace fgm
     {
         using R     = Magnitude<T>;
         R magnitude = mag();
-        if (fgm::isnan(magnitude))
+        if (flcn::isnan(magnitude))
         {
             status = OperationStatus::NANOPERAND;
             return CVec2<R>::zero();
@@ -1120,8 +1120,8 @@ namespace fgm
         /** @note Static cast ensures integral type dots don't lose much precision */
         const auto b2 = static_cast<Magnitude<R>>(onto.dot(onto));
 
-        FALCON_ASSERT_MSG(b2 >= fgm::Config::EPSILON_SQUARE<Magnitude<R>>,
-                          fgm::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
+        FALCON_ASSERT_MSG(b2 >= flcn::Config::EPSILON_SQUARE<Magnitude<R>>,
+                          flcn::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
 
         return this->dot(onto) / b2 * onto; // a.dot(b) / b.dot(b) * b
     }
@@ -1164,7 +1164,7 @@ namespace fgm
         /** @note Static cast ensures integral type dots don't lose much precision */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
 
-        if (hasNaN() | fgm::isnan(ontoSquared))
+        if (hasNaN() | flcn::isnan(ontoSquared))
         {
             return CVec2<MagType>::zero();
         }
@@ -1226,7 +1226,7 @@ namespace fgm
         /** @note Static cast ensures integral type dots don't lose too much precision. */
         const auto ontoSquared = static_cast<MagType>(onto.dot(onto));
 
-        if (hasNaN() | fgm::isnan(ontoSquared))
+        if (hasNaN() | flcn::isnan(ontoSquared))
         {
             status = OperationStatus::NANOPERAND;
             return CVec2<MagType>::zero();
@@ -1431,7 +1431,7 @@ namespace fgm
     {
         if constexpr (std::is_floating_point_v<T>)
         {
-            return fgm::isinf(_data[0]) | fgm::isinf(_data[1]);
+            return flcn::isinf(_data[0]) | flcn::isinf(_data[1]);
         }
         else
         {
@@ -1450,7 +1450,7 @@ namespace fgm
     {
         if constexpr (std::is_floating_point_v<T>)
         {
-            return fgm::isnan(_data[0]) | fgm::isnan(_data[1]);
+            return flcn::isnan(_data[0]) | flcn::isnan(_data[1]);
         }
         else
         {
@@ -1462,7 +1462,7 @@ namespace fgm
     template <Arithmetic T>
     FALCON_INLINE constexpr bool CVec2<T>::hasNaN(const CVec2& vec) noexcept
     { return vec.hasNaN(); }
-} // namespace fgm
+} // namespace flcn
 
 #if defined(__clang__)
     #pragma clang diagnostic pop

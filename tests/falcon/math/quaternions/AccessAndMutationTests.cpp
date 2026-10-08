@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: August 01, 2026
  *
- * @brief Verify @ref fgm::Quaternion accessors and mutators.
+ * @brief Verify @ref flcn::Quaternion accessors and mutators.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -30,7 +30,7 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Quaternion QUATERNION(1, 2, 3, 4);
+        constexpr flcn::Quaternion QUATERNION(1, 2, 3, 4);
 
         /// @test Verify that quaternions can be accessed as <x, y, z, w> at compile time.
         static_assert(QUATERNION.x() == 1);
@@ -46,7 +46,7 @@ namespace
         static_assert(QUATERNION.s() == 4);
 
         /// @test Verify that quaternion's getVectorPart returns a valid 3D vector at compile time.
-        static_assert(QUATERNION.getVectorPart() == fgm::Vec3{ 1, 2, 3 });
+        static_assert(QUATERNION.getVectorPart() == flcn::Vec3{ 1, 2, 3 });
 
         /// @test Verify that quaternion's getScalarPart returns the fourth component of the vector at compile time.
         static_assert(QUATERNION.getScalarPart() == 4);
@@ -65,7 +65,7 @@ namespace
 
 TEST(QuaternionAccess, ComponentsAreAccessibleAsXYZW)
 {
-    const fgm::Quaternion quat{ 1.0f, 2.0f, 3.0f, 4.0f };
+    const flcn::Quaternion quat{ 1.0f, 2.0f, 3.0f, 4.0f };
 
     EXPECT_FLOAT_EQ(1.0f, quat.x());
     EXPECT_FLOAT_EQ(2.0f, quat.y());
@@ -76,7 +76,7 @@ TEST(QuaternionAccess, ComponentsAreAccessibleAsXYZW)
 
 TEST(QuaternionAccess, ComponentsAreAccessibleAsIJKS)
 {
-    const fgm::Quaternion quat{ 1.0f, 2.0f, 3.0f, 4.0f };
+    const flcn::Quaternion quat{ 1.0f, 2.0f, 3.0f, 4.0f };
 
     EXPECT_FLOAT_EQ(1.0f, quat.i());
     EXPECT_FLOAT_EQ(2.0f, quat.j());
@@ -87,7 +87,7 @@ TEST(QuaternionAccess, ComponentsAreAccessibleAsIJKS)
 
 TEST(QuaternionAccess, GetVectorPart_ReturnsAValid3DVector)
 {
-    const fgm::Quaternion quat{ 1.0f, 2.0f, 3.0f, 4.0f };
+    const flcn::Quaternion quat{ 1.0f, 2.0f, 3.0f, 4.0f };
     const auto vectorPart = quat.getVectorPart();
     EXPECT_FLOAT_EQ(1.0f, vectorPart.x());
     EXPECT_FLOAT_EQ(2.0f, vectorPart.y());
@@ -97,14 +97,14 @@ TEST(QuaternionAccess, GetVectorPart_ReturnsAValid3DVector)
 
 TEST(QuaternionAccess, GetScalarPart_ReturnsAScalarComponent)
 {
-    const fgm::Quaternion quat{ 1.0f, 2.0f, 3.0f, 4.0f };
+    const flcn::Quaternion quat{ 1.0f, 2.0f, 3.0f, 4.0f };
     EXPECT_FLOAT_EQ(4.0f, quat.getScalarPart());
 }
 
 
 TEST(QuaternionMutation, ComponentsCanBeMutatedUsingXYZW)
 {
-    fgm::Quaternion<float> quat{};
+    flcn::Quaternion<float> quat{};
 
     quat.x() = 1.0f;
     quat.y() = 2.0f;
@@ -120,7 +120,7 @@ TEST(QuaternionMutation, ComponentsCanBeMutatedUsingXYZW)
 
 TEST(QuaternionMutation, ComponentsCanBeMutatedUsingIJKS)
 {
-    fgm::Quaternion<float> quat;
+    flcn::Quaternion<float> quat;
 
     quat.i() = 1.0f;
     quat.j() = 2.0f;

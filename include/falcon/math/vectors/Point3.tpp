@@ -12,7 +12,7 @@
 
 #include <falcon/core/Preprocessors.h>
 
-namespace fgm
+namespace flcn
 {
 
     template <StrictArithmetic T>
@@ -48,4 +48,4 @@ namespace fgm
     }
 
 
-} // namespace fgm
+} // namespace flcn

@@ -17,7 +17,7 @@
 #include <cstddef>
 #include <type_traits>
 
-namespace falcon::simd
+namespace flcn::simd
 {
     struct PackingParams
     {
@@ -238,4 +238,4 @@ namespace falcon::simd
     }
 
 
-} // namespace falcon::simd
+} // namespace flcn::simd

@@ -30,7 +30,7 @@
 #include <array>
 
 
-namespace fgm
+namespace flcn
 {
 
     /**
@@ -358,7 +358,7 @@ namespace fgm
          *
          * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
          *
-         * @return A new @ref fgm::Quaternion with negated components.
+         * @return A new @ref flcn::Quaternion with negated components.
          */
         [[nodiscard]] constexpr Quaternion operator-() const noexcept
             requires SignedStrictArithmetic<T>;
@@ -763,7 +763,7 @@ namespace fgm
          *
          * @note Operation is restricted to signed numeric types via @ref SignedStrictArithmetic.
          *
-         * @return A new @ref fgm::Quaternion with negated vector components.
+         * @return A new @ref flcn::Quaternion with negated vector components.
          */
         [[nodiscard]] constexpr Quaternion conjugate() const noexcept
             requires SignedStrictArithmetic<T>;
@@ -775,7 +775,7 @@ namespace fgm
          *
          * @note Operation is restricted to signed numeric types via @ref SignedStrictArithmetic.
          *
-         * @return A new @ref fgm::Quaternion with negated vector components.
+         * @return A new @ref flcn::Quaternion with negated vector components.
          */
         [[nodiscard]] static constexpr Quaternion conjugate(const Quaternion& quat) noexcept
             requires SignedStrictArithmetic<T>;
@@ -822,7 +822,7 @@ namespace fgm
          *
          * @note Operation is restricted to signed numeric types via @ref SignedStrictArithmetic.
          *
-         * @return A new @ref fgm::Quaternion which satisfies q * inv(q) = [0 0 0 1].
+         * @return A new @ref flcn::Quaternion which satisfies q * inv(q) = [0 0 0 1].
          */
         [[nodiscard]] constexpr Quaternion<Magnitude<T>> inverse() const noexcept
             requires SignedStrictArithmetic<T>;
@@ -837,7 +837,7 @@ namespace fgm
          *
          * @note Operation is restricted to signed numeric types via @ref SignedStrictArithmetic.
          *
-         * @return A new @ref fgm::Quaternion which satisfies q * inv(q) = [0 0 0 1].
+         * @return A new @ref flcn::Quaternion which satisfies q * inv(q) = [0 0 0 1].
          */
         [[nodiscard]] static constexpr Quaternion<Magnitude<T>> inverse(const Quaternion& quat) noexcept
             requires SignedStrictArithmetic<T>;
@@ -1015,7 +1015,7 @@ namespace fgm
         requires Arithmetic<T>
     Quaternion(Vec3<T>, T) -> Quaternion<T>;
 
-} // namespace fgm
+} // namespace flcn
 
 
 

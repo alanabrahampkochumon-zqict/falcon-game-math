@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-namespace fgm
+namespace flcn
 {
 
     /**************************************
@@ -530,4 +530,4 @@ namespace fgm
         };
     }
 
-} // namespace fgm
+} // namespace flcn

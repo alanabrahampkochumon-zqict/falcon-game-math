@@ -13,7 +13,7 @@
 
 #include "falcon/math/common/Messages.h"
 #include "falcon/math/common/Types.h"
-#include "falcon/math/common/Utils.h"
+#include "falcon/math/common/Config.h"
 #include "falcon/math/common/Wrappers.h"
 
 #include <algorithm>
@@ -27,7 +27,7 @@
 #endif
 
 
-namespace fgm
+namespace flcn
 {
     /*************************************
      *                                   *
@@ -57,7 +57,7 @@ namespace fgm
 
 
     template <Arithmetic T>
-    FALCON_INLINE constexpr Vec2<T>::Vec2(const falcon::Simd128_t<T, DIMENSION>& reg) noexcept: _data{ reg }
+    FALCON_INLINE constexpr Vec2<T>::Vec2(const flcn::Simd128_t<T, DIMENSION>& reg) noexcept: _data{ reg }
     {}
 
     template <Arithmetic T>
@@ -165,7 +165,7 @@ namespace fgm
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<T>::IndexableProxy Vec2<T>::operator[](const size_t idx) noexcept
     {
-        FALCON_ASSERT_MSG(idx < DIMENSION, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(idx < DIMENSION, flcn::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return IndexableProxy(*this, idx);
     }
 
@@ -173,7 +173,7 @@ namespace fgm
     template <Arithmetic T>
     FALCON_INLINE constexpr T Vec2<T>::operator[](const size_t idx) const noexcept
     {
-        FALCON_ASSERT_MSG(idx < DIMENSION, fgm::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
+        FALCON_ASSERT_MSG(idx < DIMENSION, flcn::messages::assertion::VEC_OUT_OF_BOUNDS_ACCESS);
         return _data.getAt(idx);
     }
 
@@ -515,7 +515,7 @@ namespace fgm
     template <StrictArithmetic S>
     FALCON_INLINE constexpr Vec2<T> Vec2<T>::operator*(S scalar) const noexcept
         requires StrictArithmetic<T>
-    { return Vec2(_data * falcon::Simd128_t<T, DIMENSION>(static_cast<T>(scalar))); }
+    { return Vec2(_data * flcn::Simd128_t<T, DIMENSION>(static_cast<T>(scalar))); }
 
 
     template <StrictArithmetic T, StrictArithmetic S>
@@ -545,11 +545,12 @@ namespace fgm
     {
         if constexpr (std::is_floating_point_v<T>)
         {
-            FALCON_ASSERT_MSG(fgm::abs(scalar) >= fgm::Config::EPSILON<T>, fgm::messages::assertion::VEC_DIV_BY_ZERO);
+            FALCON_ASSERT_MSG(flcn::abs(scalar) >= flcn::Config::EPSILON<T>,
+                              flcn::messages::assertion::VEC_DIV_BY_ZERO);
         }
         else
         {
-            FALCON_ASSERT_MSG(scalar != 0, fgm::messages::assertion::VEC_DIV_BY_ZERO);
+            FALCON_ASSERT_MSG(scalar != 0, flcn::messages::assertion::VEC_DIV_BY_ZERO);
         }
         return Vec2(_data / static_cast<T>(scalar));
     }
@@ -572,7 +573,7 @@ namespace fgm
     {
         if constexpr (std::is_floating_point_v<T>)
         {
-            if (hasNaN() | fgm::isnan(scalar) | (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon()))
+            if (hasNaN() | flcn::isnan(scalar) | (flcn::abs(scalar) <= std::numeric_limits<S>::epsilon()))
             {
                 return Vec2<T>::zero();
             }
@@ -602,12 +603,12 @@ namespace fgm
     {
         if constexpr (std::is_floating_point_v<T>)
         {
-            if (hasNaN() | fgm::isnan(scalar))
+            if (hasNaN() | flcn::isnan(scalar))
             {
                 status = OperationStatus::NANOPERAND;
                 return Vec2<T>::zero();
             }
-            if (fgm::abs(scalar) <= std::numeric_limits<S>::epsilon())
+            if (flcn::abs(scalar) <= std::numeric_limits<S>::epsilon())
             {
                 status = OperationStatus::DIVISIONBYZERO;
                 return Vec2<T>::zero();
@@ -897,8 +898,8 @@ namespace fgm
         requires FPArithmetic<T>
     {
         const auto magnitude = mag();
-        FALCON_ASSERT_MSG(magnitude >= fgm::Config::EPSILON<decltype(magnitude)>,
-                          fgm::messages::assertion::VEC_NORMALIZE_DIV_BY_ZERO);
+        FALCON_ASSERT_MSG(magnitude >= flcn::Config::EPSILON<decltype(magnitude)>,
+                          flcn::messages::assertion::VEC_NORMALIZE_DIV_BY_ZERO);
         return *this / magnitude;
     }
 
@@ -914,7 +915,7 @@ namespace fgm
         requires FPArithmetic<T>
     {
         T magnitude = mag();
-        if (fgm::isnan(magnitude))
+        if (flcn::isnan(magnitude))
         {
             return Vec2<T>::zero();
         }
@@ -938,7 +939,7 @@ namespace fgm
         requires FPArithmetic<T>
     {
         T magnitude = mag();
-        if (fgm::isnan(magnitude))
+        if (flcn::isnan(magnitude))
         {
             status = OperationStatus::NANOPERAND;
             return Vec2<T>::zero();
@@ -970,7 +971,7 @@ namespace fgm
         requires FPArithmetic<T>
     {
         const auto b2 = onto.dot(onto);
-        FALCON_ASSERT_MSG(b2 > fgm::Config::EPSILON_SQUARE<T>, fgm::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
+        FALCON_ASSERT_MSG(b2 > flcn::Config::EPSILON_SQUARE<T>, flcn::messages::assertion::VEC_PROJECT_DIV_BY_ZERO);
 
         return this->dot(onto) / b2 * onto; // a.dot(b) / b.dot(b) * b
     }
@@ -1001,7 +1002,7 @@ namespace fgm
         requires FPArithmetic<T>
     {
         const auto ontoSquared = onto.dot(onto);
-        if (hasNaN() || fgm::isnan(ontoSquared) || ontoSquared <= Config::EPSILON_SQUARE<T>)
+        if (hasNaN() || flcn::isnan(ontoSquared) || ontoSquared <= Config::EPSILON_SQUARE<T>)
         {
             return Vec2<T>::zero();
         }
@@ -1040,7 +1041,7 @@ namespace fgm
         requires FPArithmetic<T>
     {
         const auto ontoSquared = onto.dot(onto);
-        if (hasNaN() || fgm::isnan(ontoSquared))
+        if (hasNaN() || flcn::isnan(ontoSquared))
         {
             status = OperationStatus::NANOPERAND;
             return Vec2<T>::zero();
@@ -1236,7 +1237,8 @@ namespace fgm
     template <Arithmetic T>
     FALCON_INLINE constexpr bool Vec2<T>::hasNaN(const Vec2& vec) noexcept
     { return vec.hasNaN(); }
-} // namespace fgm
+
+} // namespace flcn
 
 #if defined(__clang__)
     #pragma clang diagnostic pop

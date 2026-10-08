@@ -13,7 +13,7 @@
 
 #include "falcon/simd/utils/SIMDUtils.h"
 
-namespace falcon
+namespace flcn
 {
     template <typename DataType, size_t Lane>
     template <typename... Args>
@@ -594,4 +594,4 @@ namespace falcon
     { return Simd256(_lower.hasInf(), _upper.hasInf()); }
 
 
-} // namespace falcon
+} // namespace flcn

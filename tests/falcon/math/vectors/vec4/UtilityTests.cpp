@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 30, 2026
  *
- * @brief Verify @ref fgm::Vec4 utility functions.
+ * @brief Verify @ref flcn::Vec4 utility functions.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -28,49 +28,49 @@ namespace
         requires std::floating_point<T>
     struct Vec4UtilityParams
     {
-        fgm::Vec4<T> vec;
+        flcn::Vec4<T> vec;
         bool expected;
     };
 
     /**
-     * @brief Test fixture for @ref fgm::Vec4 Infinity Checking.
+     * @brief Test fixture for @ref flcn::Vec4 Infinity Checking.
      */
     class Vec4InfCheckerTests: public testing::TestWithParam<Vec4UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
         Vec4UtilsInfVectors, Vec4InfCheckerTests,
-        ::testing::Values(Vec4UtilityParams{ fgm::Vec4(fgm::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
-                          Vec4UtilityParams{ fgm::Vec4(1.0f, fgm::constants::INFINITY_F, 1.0f, 1.0f), true },
-                          Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-                          Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, fgm::constants::INFINITY_F, 1.0f), true },
-                          Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, 1.0f, fgm::constants::INFINITY_F), true },
-                          Vec4UtilityParams{ fgm::Vec4(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                                       fgm::constants::INFINITY_F, fgm::constants::INFINITY_F),
+        ::testing::Values(Vec4UtilityParams{ flcn::Vec4(flcn::constants::INFINITY_F, 1.0f, 1.0f, 1.0f), true },
+                          Vec4UtilityParams{ flcn::Vec4(1.0f, flcn::constants::INFINITY_F, 1.0f, 1.0f), true },
+                          Vec4UtilityParams{ flcn::Vec4(1.0f, 1.0f, flcn::constants::INFINITY_F, 1.0f), true },
+                          Vec4UtilityParams{ flcn::Vec4(1.0f, 1.0f, flcn::constants::INFINITY_F, 1.0f), true },
+                          Vec4UtilityParams{ flcn::Vec4(1.0f, 1.0f, 1.0f, flcn::constants::INFINITY_F), true },
+                          Vec4UtilityParams{ flcn::Vec4(flcn::constants::INFINITY_F, flcn::constants::INFINITY_F,
+                                                       flcn::constants::INFINITY_F, flcn::constants::INFINITY_F),
                                              true },
-                          Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, 1.0f, 1.0f), false }));
+                          Vec4UtilityParams{ flcn::Vec4(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
     /**
-     * @brief Test fixture for @ref fgm::Vec4 NaN Checking.
+     * @brief Test fixture for @ref flcn::Vec4 NaN Checking.
      */
     class Vec4NaNCheckerTests: public testing::TestWithParam<Vec4UtilityParams<float>>
     {};
     INSTANTIATE_TEST_SUITE_P(
         Vec4UtilsNaNVectors, Vec4NaNCheckerTests,
-        ::testing::Values(Vec4UtilityParams{ fgm::Vec4(fgm::constants::NaN, 1.0f, 1.0f, 1.0f), true },
-                          Vec4UtilityParams{ fgm::Vec4(1.0f, fgm::constants::NaN, 1.0f, 1.0f), true },
-                          Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-                          Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, fgm::constants::NaN, 1.0f), true },
-                          Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, 1.0f, fgm::constants::NaN), true },
-                          Vec4UtilityParams{ fgm::Vec4(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN,
-                                                       fgm::constants::NaN),
+        ::testing::Values(Vec4UtilityParams{ flcn::Vec4(flcn::constants::NaN, 1.0f, 1.0f, 1.0f), true },
+                          Vec4UtilityParams{ flcn::Vec4(1.0f, flcn::constants::NaN, 1.0f, 1.0f), true },
+                          Vec4UtilityParams{ flcn::Vec4(1.0f, 1.0f, flcn::constants::NaN, 1.0f), true },
+                          Vec4UtilityParams{ flcn::Vec4(1.0f, 1.0f, flcn::constants::NaN, 1.0f), true },
+                          Vec4UtilityParams{ flcn::Vec4(1.0f, 1.0f, 1.0f, flcn::constants::NaN), true },
+                          Vec4UtilityParams{ flcn::Vec4(flcn::constants::NaN, flcn::constants::NaN, flcn::constants::NaN,
+                                                       flcn::constants::NaN),
                                              true },
-                          Vec4UtilityParams{ fgm::Vec4(1.0f, 1.0f, 1.0f, 1.0f), false }));
+                          Vec4UtilityParams{ flcn::Vec4(1.0f, 1.0f, 1.0f, 1.0f), false }));
 
 
 
     /**
-     * @brief Test fixture for @ref fgm::Vec4 utilities, verifying across various integral types.
+     * @brief Test fixture for @ref flcn::Vec4 utilities, verifying across various integral types.
      */
     template <typename>
     class Vec4UtilsIntTests: public testing::Test
@@ -85,10 +85,10 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Vec4 NORM_VEC(1.0f, 2.0f, 3.0f, 4.0f);
-        constexpr fgm::Vec4 INF_VEC(fgm::constants::INFINITY_F, fgm::constants::INFINITY_F, fgm::constants::INFINITY_F,
-                                    fgm::constants::INFINITY_F);
-        constexpr fgm::Vec4 NAN_VEC(fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN, fgm::constants::NaN);
+        constexpr flcn::Vec4 NORM_VEC(1.0f, 2.0f, 3.0f, 4.0f);
+        constexpr flcn::Vec4 INF_VEC(flcn::constants::INFINITY_F, flcn::constants::INFINITY_F, flcn::constants::INFINITY_F,
+                                    flcn::constants::INFINITY_F);
+        constexpr flcn::Vec4 NAN_VEC(flcn::constants::NaN, flcn::constants::NaN, flcn::constants::NaN, flcn::constants::NaN);
 
         /// @test Verify that Vec4::hasInf returns a valid boolean at compile time.
         static_assert(NORM_VEC.hasInf() == false);
@@ -96,9 +96,9 @@ namespace
         static_assert(NAN_VEC.hasInf() == false);
 
         /// @test Verify that Vec4::hasInf(static wrapper) returns a valid boolean at compile time.
-        static_assert(fgm::Vec4<float>::hasInf(NORM_VEC) == false);
-        static_assert(fgm::Vec4<float>::hasInf(INF_VEC) == true);
-        static_assert(fgm::Vec4<float>::hasInf(NAN_VEC) == false);
+        static_assert(flcn::Vec4<float>::hasInf(NORM_VEC) == false);
+        static_assert(flcn::Vec4<float>::hasInf(INF_VEC) == true);
+        static_assert(flcn::Vec4<float>::hasInf(NAN_VEC) == false);
 
         /// @test Verify that Vec4::hasNaN returns a valid boolean at compile time.
         static_assert(NORM_VEC.hasNaN() == false);
@@ -106,9 +106,9 @@ namespace
         static_assert(NAN_VEC.hasNaN() == true);
 
         /// @test Verify that Vec4::hasNaN(static wrapper) returns a valid boolean at compile time.
-        static_assert(fgm::Vec4<float>::hasNaN(NORM_VEC) == false);
-        static_assert(fgm::Vec4<float>::hasNaN(INF_VEC) == false);
-        static_assert(fgm::Vec4<float>::hasNaN(NAN_VEC) == true);
+        static_assert(flcn::Vec4<float>::hasNaN(NORM_VEC) == false);
+        static_assert(flcn::Vec4<float>::hasNaN(INF_VEC) == false);
+        static_assert(flcn::Vec4<float>::hasNaN(NAN_VEC) == true);
 
     } // namespace static_tests
 } // namespace
@@ -134,7 +134,7 @@ TEST_P(Vec4InfCheckerTests, ReturnTrueIfAnyComponentIsInfinity)
 TYPED_TEST(Vec4UtilsIntTests, HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Vec4(value, value, value, value).hasInf());
+    EXPECT_FALSE(flcn::Vec4(value, value, value, value).hasInf());
 }
 
 
@@ -145,7 +145,7 @@ TYPED_TEST(Vec4UtilsIntTests, HasInf_ReturnsFalseForIntegrals)
 TEST_P(Vec4InfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
 {
     const auto& [vec, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Vec4<float>::hasInf(vec));
+    EXPECT_EQ(expected, flcn::Vec4<float>::hasInf(vec));
 }
 
 
@@ -153,7 +153,7 @@ TEST_P(Vec4InfCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsInfinity)
 TYPED_TEST(Vec4UtilsIntTests, StaticWrapper_HasInf_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Vec4<TypeParam>::hasInf(fgm::Vec4(value, value, value, value)));
+    EXPECT_FALSE(flcn::Vec4<TypeParam>::hasInf(flcn::Vec4(value, value, value, value)));
 }
 
 
@@ -177,7 +177,7 @@ TEST_P(Vec4NaNCheckerTests, ReturnTrueIfAnyComponentIsNaN)
 TYPED_TEST(Vec4UtilsIntTests, HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Vec4(value, value, value, value).hasNaN());
+    EXPECT_FALSE(flcn::Vec4(value, value, value, value).hasNaN());
 }
 
 
@@ -188,7 +188,7 @@ TYPED_TEST(Vec4UtilsIntTests, HasNaN_ReturnsFalseForIntegrals)
 TEST_P(Vec4NaNCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
 {
     const auto& [vec, expected] = GetParam();
-    EXPECT_EQ(expected, fgm::Vec4<float>::hasNaN(vec));
+    EXPECT_EQ(expected, flcn::Vec4<float>::hasNaN(vec));
 }
 
 
@@ -196,7 +196,7 @@ TEST_P(Vec4NaNCheckerTests, StaticWrapper_ReturnTrueIfAnyComponentIsNaN)
 TYPED_TEST(Vec4UtilsIntTests, StaticWrapper_HasNaN_ReturnsFalseForIntegrals)
 {
     const auto value = TypeParam(1);
-    EXPECT_FALSE(fgm::Vec4<TypeParam>::hasNaN(fgm::Vec4(value, value, value, value)));
+    EXPECT_FALSE(flcn::Vec4<TypeParam>::hasNaN(flcn::Vec4(value, value, value, value)));
 }
 
 /** @} */

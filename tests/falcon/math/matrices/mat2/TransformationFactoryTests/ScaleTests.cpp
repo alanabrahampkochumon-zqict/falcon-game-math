@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 09, 2026
  *
- * @brief Verify @ref fgm::Mat2 scale factory logic.
+ * @brief Verify @ref flcn::Mat2 scale factory logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -24,7 +24,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Uniform Scale Factory.
+     * @brief Test fixture for @ref flcn::Mat2 Uniform Scale Factory.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -32,12 +32,12 @@ namespace
     class Mat2UniformScaleFactoryTests: public testing::Test
     {
     protected:
-        fgm::Mat2<T> _expectedMat;
+        flcn::Mat2<T> _expectedMat;
         T _scale;
 
         void SetUp() override
         {
-            _expectedMat = { fgm::CVec2{ T(5.3821839321), T(0) }, fgm::CVec2{ T(0), T(5.3821839321) } };
+            _expectedMat = { flcn::CVec2{ T(5.3821839321), T(0) }, flcn::CVec2{ T(0), T(5.3821839321) } };
             _scale       = T(5.3821839321);
         }
     };
@@ -46,7 +46,7 @@ namespace
 
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2 Non-uniform Scale Factory.
+     * @brief Test fixture for @ref flcn::Mat2 Non-uniform Scale Factory.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -54,12 +54,12 @@ namespace
     class Mat2NonUniformScaleFactoryTests: public ::testing::Test
     {
     protected:
-        fgm::Mat2<T> _expectedMat;
+        flcn::Mat2<T> _expectedMat;
         T _scaleX, _scaleY;
 
         void SetUp() override
         {
-            _expectedMat = { fgm::CVec2{ T(5.3821839321), T(0) }, fgm::CVec2{ T(0), T(8.1234921348) } };
+            _expectedMat = { flcn::CVec2{ T(5.3821839321), T(0) }, flcn::CVec2{ T(0), T(8.1234921348) } };
             _scaleX      = T(5.3821839321);
             _scaleY      = T(8.1234921348);
         }
@@ -75,7 +75,7 @@ namespace
     namespace static_tests
     {
         /// @test Verify that Mat2 uniform scale factory returns a valid matrix at compile time.
-        constexpr auto U_SCALE_MAT = fgm::Mat2<int>::makeScale(2);
+        constexpr auto U_SCALE_MAT = flcn::Mat2<int>::makeScale(2);
         static_assert(U_SCALE_MAT(0, 0) == 2);
         static_assert(U_SCALE_MAT(0, 1) == 0);
         static_assert(U_SCALE_MAT(1, 0) == 0);
@@ -83,7 +83,7 @@ namespace
 
 
         /// @test Verify that Mat2 non-uniform scale factory returns a valid matrix at compile time.
-        constexpr auto SCALE_MAT = fgm::Mat2<int>::makeScale(2, 3);
+        constexpr auto SCALE_MAT = flcn::Mat2<int>::makeScale(2, 3);
         static_assert(SCALE_MAT(0, 0) == 2);
         static_assert(SCALE_MAT(0, 1) == 0);
         static_assert(SCALE_MAT(1, 0) == 0);
@@ -100,11 +100,11 @@ namespace
  **************************************/
 
 TYPED_TEST(Mat2UniformScaleFactoryTests, ReturnsValidScaleMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat2<TypeParam>::makeScale(this->_scale)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, flcn::Mat2<TypeParam>::makeScale(this->_scale)); }
 
 
 TYPED_TEST(Mat2NonUniformScaleFactoryTests, ReturnsValidScaleMatrix)
-{ EXPECT_MAT_EQ(this->_expectedMat, fgm::Mat2<TypeParam>::makeScale(this->_scaleX, this->_scaleY)); }
+{ EXPECT_MAT_EQ(this->_expectedMat, flcn::Mat2<TypeParam>::makeScale(this->_scaleX, this->_scaleY)); }
 
 
 /** @} */

@@ -32,7 +32,7 @@
 #include <span>
 #include <xmmintrin.h>
 
-namespace falcon
+namespace flcn
 {
     /**
      * @brief 128-bit Simd Register specialized for SSE2/4.1 architecture.
@@ -733,7 +733,7 @@ namespace falcon
         /**
          * @brief Selectively blend values from this register and @p other using the compile-time @p Mask.
          * @tparam Mask The mask to use for blending.
-         *              Use @ref falcon::makeBlendMask32<...>() to create the mask.
+         *              Use @ref flcn::makeBlendMask32<...>() to create the mask.
          *              `true` selects values from the other register and `false` from this register.
          * @note   Even though the mask is uint32_t, only lower 8-bit will be considered
          *
@@ -746,9 +746,9 @@ namespace falcon
          *
          *
          * // Usage
-         * const falcon::Simd128_t<float, 4> reg1{1.0f, 2.0f, 3.0f, 4.0f};
-         * const falcon::Simd128_t<float, 4> reg2{8.0f, 9.0f, 10.0f, 11.0f};
-         * constexpr auto mask = falcon::makeBlendMask32<true, false, false, true>();
+         * const flcn::Simd128_t<float, 4> reg1{1.0f, 2.0f, 3.0f, 4.0f};
+         * const flcn::Simd128_t<float, 4> reg2{8.0f, 9.0f, 10.0f, 11.0f};
+         * constexpr auto mask = flcn::makeBlendMask32<true, false, false, true>();
          * const auto blended = reg1.template blend<mask>(reg2); // {8.0f, 2.0f, 3.0f, 11.0f}
          * @endcode
          *
@@ -881,7 +881,7 @@ namespace falcon
         static constexpr __m128i _mm_unpackhi_saturated_custom(__m128i reg) noexcept;
     };
 
-} // namespace falcon
+} // namespace flcn
 
 
 // --- THIS SHOULD BE INCLUDED FIRST as the .inl files use functions declared in this header.

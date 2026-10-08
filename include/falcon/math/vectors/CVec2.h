@@ -31,7 +31,7 @@
 #include <type_traits>
 
 
-namespace fgm
+namespace flcn
 {
     template <Arithmetic T>
     struct CVec2
@@ -60,7 +60,7 @@ namespace fgm
          *          to maximize SIMD optimization and maintain triviality.
          *
          * @note Use value-initialization (`{}`) or the static helper
-         *       @ref fgm::CVec2<T>::zero() to guarantee a zeroed vector.
+         *       @ref flcn::CVec2<T>::zero() to guarantee a zeroed vector.
          */
         CVec2() = default;
 
@@ -234,7 +234,7 @@ namespace fgm
          *       overhead.
          *
          * @tparam Indices The component indices used to construct the new vector.
-         *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
+         *                 See @ref flcn::axis, @ref flcn::colors, and @ref flcn::stp for available swizzle aliases.
          *
          * @return A new vector containing the requested components or the component if @p Indices is 1.
          *         The dimension of the returned vector perfectly matches the number of indices provided.
@@ -252,7 +252,7 @@ namespace fgm
          *       overhead.
          *
          * @tparam Indices The component indices used to construct the new vector.
-         *                 See @ref fgm::axis, @ref fgm::colors, and @ref fgm::stp for available swizzle aliases.
+         *                 See @ref flcn::axis, @ref flcn::colors, and @ref flcn::stp for available swizzle aliases.
          *
          * @param vec The vector to shuffle, rearrange or isolate components.
          *
@@ -861,7 +861,7 @@ namespace fgm
          *
          * @note Operation is restricted to numeric types via @ref SignedStrictArithmetic.
          *
-         * @return A new @ref fgm::CVec2 with negated components.
+         * @return A new @ref flcn::CVec2 with negated components.
          */
         [[nodiscard]] constexpr CVec2 operator-() const noexcept
             requires SignedStrictArithmetic<T>;
@@ -941,9 +941,9 @@ namespace fgm
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
          * @note Promotes the result to the wider type using @ref PromotedCVec2<T, S>.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref flcn::StrictArithmetic.
          *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         * @tparam S Numeric type of the scalar. Must satisfy @ref flcn::StrictArithmetic.
          *
          * @param[in] scalar The value to divide the vector components by.
          *
@@ -961,9 +961,9 @@ namespace fgm
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
          * @note Promotes the result to the wider type using @ref PromotedCVec2<T, S>.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref flcn::StrictArithmetic.
          *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         * @tparam S Numeric type of the scalar. Must satisfy @ref flcn::StrictArithmetic.
          *
          * @param[in] vec The vector to divide.
          * @param[in] scalar The value to divide the vector components by.
@@ -983,11 +983,11 @@ namespace fgm
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
          * @note Promotes the result to the wider type using @ref PromotedCVec2<T, S>.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref flcn::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
          *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         * @tparam S Numeric type of the scalar. Must satisfy @ref flcn::StrictArithmetic.
          *
          * @param[in] scalar  The value to divide the vector components by.
          * @param[out] status The status flag to store the status of the current operation result.
@@ -1008,11 +1008,11 @@ namespace fgm
          * @note If @p scalar is zero (or below the epsilon threshold) or this vector contains NaN components,
          *       returns a zero vector.
          * @note Promotes the result to the wider type using @ref PromotedCVec2<T, S>.
-         * @note Operation is restricted to numeric types via @ref fgm::StrictArithmetic.
+         * @note Operation is restricted to numeric types via @ref flcn::StrictArithmetic.
          * @note In the event of multiple failure conditions, data corruption (NaN) takes precedence over mathematical
          *       invalidity (Division by Zero) when reporting status.
          *
-         * @tparam S Numeric type of the scalar. Must satisfy @ref fgm::StrictArithmetic.
+         * @tparam S Numeric type of the scalar. Must satisfy @ref flcn::StrictArithmetic.
          *
          * @param[in] vec     The vector to divide.
          * @param[in] scalar  The value to divide the vector components by.
@@ -1482,7 +1482,7 @@ namespace fgm
          *
          * @param[in] vec The vector to be normalized.
          *
-         * @return A @ref fgm::CVec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         * @return A @ref flcn::CVec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] static constexpr CVec2<Magnitude<T>> safeNormalize(const CVec2& vec) noexcept
@@ -1502,7 +1502,7 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.*
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return A @ref fgm::CVec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         * @return A @ref flcn::CVec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if this vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] constexpr CVec2<Magnitude<T>> tryNormalize(OperationStatus& status) const noexcept
@@ -1523,7 +1523,7 @@ namespace fgm
          * @param[out] status The status flag to store the status of the current operation result.*
          *                    For details on status codes see @ref OperationStatus.
          *
-         * @return A @ref fgm::CVec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
+         * @return A @ref flcn::CVec2 with a magnitude of 1.0, or a zero-vector if the original magnitude is below the
          *         epsilon threshold or if the vector has NaN(Not-a-Number) component(s).
          */
         [[nodiscard]] static constexpr CVec2<Magnitude<T>> tryNormalize(const CVec2& vec,
@@ -2371,7 +2371,7 @@ namespace fgm
         requires Arithmetic<T>
     CVec2(T, T) -> CVec2<T>;
 
-} // namespace fgm
+} // namespace flcn
 
 
 #include "CVec2.tpp"

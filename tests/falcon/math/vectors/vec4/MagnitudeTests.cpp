@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 07, 2026
  *
- * @brief Verify @ref fgm::Vec4 magnitude logic.
+ * @brief Verify @ref flcn::Vec4 magnitude logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -32,14 +32,14 @@ namespace
     class Vec4MagnitudeTests: public testing::Test
     {
     protected:
-        fgm::Vec4<T> _vec;
-        fgm::Magnitude<T> _expectedMagnitude;
+        flcn::Vec4<T> _vec;
+        flcn::Magnitude<T> _expectedMagnitude;
         T _expectedMagnitudeSquare;
 
         void SetUp() override
         {
             _vec                     = { T(1), T(2), T(2), T(4) };
-            _expectedMagnitude       = fgm::Magnitude<T>(5);
+            _expectedMagnitude       = flcn::Magnitude<T>(5);
             _expectedMagnitudeSquare = T(25);
         }
     };
@@ -55,13 +55,13 @@ namespace
     class Vec4UncleanMagnitude: public testing::Test
     {
     protected:
-        fgm::Vec4<T> _vec;
-        fgm::Magnitude<T> _expectedMagnitude;
+        flcn::Vec4<T> _vec;
+        flcn::Magnitude<T> _expectedMagnitude;
 
         void SetUp() override
         {
             _vec               = { T(1), T(2), T(3), T(4) };
-            _expectedMagnitude = fgm::Magnitude<T>(5.477225575051661);
+            _expectedMagnitude = flcn::Magnitude<T>(5.477225575051661);
         }
     };
     TYPED_TEST_SUITE(Vec4UncleanMagnitude, SupportedArithmeticTypes);
@@ -74,7 +74,7 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Vec4 VEC_A(1, 2, 3, 4);
+        constexpr flcn::Vec4 VEC_A(1, 2, 3, 4);
 
         // TODO: Add static test after making sqrt constexpr
         /// @test Verify that mag returns a valid value at compile time.
@@ -83,7 +83,7 @@ namespace
         // static_assert(MAG - 5.477225575051661 <= 1e-5);
 
         /// @test Verify that mag (static wrapper) returns a valid value at compile time.
-        // constexpr auto MAG_STATIC = fgm::Vec4<int>::mag(Vec);
+        // constexpr auto MAG_STATIC = flcn::Vec4<int>::mag(Vec);
         // static_assert(MAG_STATIC - 5.477225575051661 <= 1e-5);
 
         /// @test Verify that magSq returns a valid value at compile time.
@@ -91,7 +91,7 @@ namespace
         static_assert(MAG_SQ - 30.0 < 1e5);
 
         /// @test Verify that magSq (static wrapper) returns a valid value at compile time.
-        constexpr auto MAG_SQ_STATIC = fgm::Vec4<int>::magSq(VEC_A);
+        constexpr auto MAG_SQ_STATIC = flcn::Vec4<int>::magSq(VEC_A);
         static_assert(MAG_SQ_STATIC - 30.0 < 1e5);
 
     } // namespace static_tests
@@ -106,7 +106,7 @@ namespace
 /** @test Verify that taking the magnitude of a zero vector returns exactly zero. */
 TEST(Vec4Magnitude, ZeroVectorReturnsZero)
 {
-    const fgm::Vec4 vec(0.0f, 0.0f, 0.0f, 0.0f);
+    const flcn::Vec4 vec(0.0f, 0.0f, 0.0f, 0.0f);
     EXPECT_FLOAT_EQ(0.0f, vec.mag());
 }
 
@@ -114,7 +114,7 @@ TEST(Vec4Magnitude, ZeroVectorReturnsZero)
 /** @test Verify that taking the magnitude of a one vector returns non-unit scalar. */
 TEST(Vec4Magnitude, OneComponentVectorReturnsNonUnitScalar)
 {
-    const fgm::Vec4 vec(1.0f, 1.0f, 1.0f, 1.0f);
+    const flcn::Vec4 vec(1.0f, 1.0f, 1.0f, 1.0f);
     EXPECT_NE(1.0f, vec.mag());
 }
 
@@ -138,12 +138,12 @@ TYPED_TEST(Vec4MagnitudeTests, MagnitudeIsAlwaysTypedPromotedToFloatingPointType
 
 
 /**
- * @test Verify that taking the magnitude of a non-unit vector using static variant of @ref fgm::Vec4::mag
+ * @test Verify that taking the magnitude of a non-unit vector using static variant of @ref flcn::Vec4::mag
  *       returns non-unit scalar.
  */
 TYPED_TEST(Vec4MagnitudeTests, StaticWrapper_NonUnitVectorReturnsCorrectMagnitude)
 {
-    const auto magnitude = fgm::Vec4<TypeParam>::mag(this->_vec);
+    const auto magnitude = flcn::Vec4<TypeParam>::mag(this->_vec);
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
@@ -157,12 +157,12 @@ TYPED_TEST(Vec4UncleanMagnitude, NonUnitVectorReturnsCorrectMagnitudeWithMinimal
 
 
 /**
- * @test Verify that the magnitude calculations for non-unit vectors using static variant of @ref fgm::Vec4::mag
+ * @test Verify that the magnitude calculations for non-unit vectors using static variant of @ref flcn::Vec4::mag
  *       ensure minimal precision loss.
  */
 TYPED_TEST(Vec4UncleanMagnitude, StaticWrapper_NonUnitVectorReturnsCorrectMagnitudeWithMinimalPrecisionLoss)
 {
-    const auto magnitude = fgm::Vec4<TypeParam>::mag(this->_vec);
+    const auto magnitude = flcn::Vec4<TypeParam>::mag(this->_vec);
     EXPECT_MAG_EQ(this->_expectedMagnitude, magnitude);
 }
 
@@ -181,11 +181,11 @@ TYPED_TEST(Vec4MagnitudeTests, MagSq_ReturnsSquaredMagnitude)
 
 /**
  * @test Verify that taking the magnitude square of a non-unit vector using static variant of
- *        @ref fgm::Vec4::mag returns non-unit scalar.
+ *        @ref flcn::Vec4::mag returns non-unit scalar.
  */
 TYPED_TEST(Vec4MagnitudeTests, StaticWrapper_MagSq_ReturnsSquaredMagnitude)
 {
-    const auto magnitude = fgm::Vec4<TypeParam>::magSq(this->_vec);
+    const auto magnitude = flcn::Vec4<TypeParam>::magSq(this->_vec);
     EXPECT_MAG_EQ(this->_expectedMagnitudeSquare, magnitude);
 }
 

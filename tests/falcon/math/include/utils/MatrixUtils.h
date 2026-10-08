@@ -5,8 +5,8 @@
  * @date Created on: February 16, 2026
  *
  * @brief Diagnostic and validation utilities for Matrix types.
- *        Provides specialized testing helpers and assertion wrappers for @ref fgm::Mat2,
- *        @ref fgm::Mat3, and @ref fgm::Mat4 to ensure numerical stability and
+ *        Provides specialized testing helpers and assertion wrappers for @ref flcn::Mat2,
+ *        @ref flcn::Mat3, and @ref flcn::Mat4 to ensure numerical stability and
  *        geometric correctness across the fgm library.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -46,7 +46,7 @@ namespace testutils
      *       if the matrices are out of the @p tolerance range.
      * @note Triggers an assertion failure if matrix dimensions are mismatched.
      */
-    template <fgm::Matrix T, fgm::Matrix U>
+    template <flcn::Matrix T, flcn::Matrix U>
     void EXPECT_MAT_EQ(const T& expected, const U& actual, const double epsilon = std::is_same_v<T, double> ? 1e-14 : 1e-5)
     {
         using ValueType = T::value_type;
@@ -87,7 +87,7 @@ namespace testutils
      *       if the matrix is not a zero matrix.
      * @note Triggers an assertion failure if matrix dimension doesn't match the size of data elements.
      */
-    template <fgm::Arithmetic T, fgm::Matrix U>
+    template <flcn::Arithmetic T, flcn::Matrix U>
     void EXPECT_MAT_CONTAINS(const std::vector<T>& expectedElements, const U& actual, const double epsilon = std::is_same_v<T, double> ? 1e-14 : 1e-5)
     {
         assert(expectedElements.size() == U::ROWS * U::COLUMNS &&
@@ -122,7 +122,7 @@ namespace testutils
      *
      * @note Uses static asserts so the test should be compile time.
      */
-    template <fgm::Arithmetic T, fgm::Matrix U>
+    template <flcn::Arithmetic T, flcn::Matrix U>
     constexpr void EXPECT_MAT_CONTAINS_STATIC(const std::vector<T>& expectedElements, const U& actual)
     {
         assert(expectedElements.size() == U::ROWS * U::COLUMNS &&
@@ -152,7 +152,7 @@ namespace testutils
      *       if the matrices are out of the @p tolerance range.
      * @note Triggers an assertion failure if matrix dimensions are mismatched.
      */
-    template <fgm::Matrix T, fgm::Matrix U>
+    template <flcn::Matrix T, flcn::Matrix U>
     void EXPECT_MAT_NEAR(const T& expected, const U& actual, double tolerance = 1e-5)
     {
 
@@ -183,7 +183,7 @@ namespace testutils
      *       if the matrix is not identity.
      * @note Triggers an assertion failure if matrix dimensions are mismatched.
      */
-    template <fgm::Matrix T>
+    template <flcn::Matrix T>
     void EXPECT_MAT_IDENTITY(const T& actual, const double epsilon = std::is_same_v<T, double> ? 1e-14 : 1e-5)
     {
         using ValueType = T::value_type;
@@ -219,7 +219,7 @@ namespace testutils
      *       if the matrix is not identity.
      * @note Triggers an assertion failure if matrix dimensions are mismatched.
      */
-    template <fgm::Matrix T>
+    template <flcn::Matrix T>
     void EXPECT_MAT_ONE(const T& actual, const double epsilon = std::is_same_v<T, double> ? 1e-14 : 1e-5)
     {
         using ValueType = T::value_type;
@@ -254,7 +254,7 @@ namespace testutils
      *       if the matrix is not a zero matrix.
      * @note Triggers an assertion failure if matrix dimensions are mismatched.
      */
-    template <fgm::Matrix T>
+    template <flcn::Matrix T>
     void EXPECT_MAT_ZERO(const T& actual, const double epsilon = std::is_same_v<T, double> ? 1e-14 : 1e-5)
     {
         using ValueType = T::value_type;
@@ -287,7 +287,7 @@ namespace testutils
      *       if the matrix is not an infinity matrix.
      * @note Triggers an assertion failure if matrix dimensions are mismatched.
      */
-    template <fgm::Matrix T>
+    template <flcn::Matrix T>
     void EXPECT_MAT_INF(const T& actual)
     {
         for (std::size_t i = 0; i < T::ROWS; ++i)

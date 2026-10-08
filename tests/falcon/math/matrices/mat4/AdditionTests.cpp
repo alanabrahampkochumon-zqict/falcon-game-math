@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 04, 2026
  *
- * @brief Verify @ref fgm::Mat4 addition logic.
+ * @brief Verify @ref flcn::Mat4 addition logic.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -25,7 +25,7 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat4 Addition.
+     * @brief Test fixture for @ref flcn::Mat4 Addition.
      *
      * @tparam T The numeric type (int, float, double...) for matrix values.
      */
@@ -33,9 +33,9 @@ namespace
     class Mat4AdditionTests: public testing::Test
     {
     protected:
-        fgm::Mat4<T> _matA;
-        fgm::Mat4<T> _matB;
-        fgm::Mat4<T> _expectedSum;
+        flcn::Mat4<T> _matA;
+        flcn::Mat4<T> _matB;
+        flcn::Mat4<T> _expectedSum;
 
         void SetUp() override
         {
@@ -65,11 +65,11 @@ namespace
 
     namespace static_tests
     {
-        constexpr fgm::Mat4 MATA(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-        constexpr fgm::Mat4 MATB(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
+        constexpr flcn::Mat4 MATA(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+        constexpr flcn::Mat4 MATB(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
 
         /// @test Verify that Mat4 can be added at compile time.
-        constexpr fgm::Mat4 BINARY_SUM = MATA + MATB;
+        constexpr flcn::Mat4 BINARY_SUM = MATA + MATB;
         static_assert(BINARY_SUM(0, 0) == 6);
         static_assert(BINARY_SUM(0, 1) == 8);
         static_assert(BINARY_SUM(0, 2) == 10);
@@ -97,7 +97,7 @@ namespace
 
 TYPED_TEST(Mat4AdditionTests, PlusOperator_ReturnsMatrixSum)
 {
-    const fgm::Mat4 sum = this->_matA + this->_matB;
+    const flcn::Mat4 sum = this->_matA + this->_matB;
 
     EXPECT_MAT_EQ(this->_expectedSum, sum);
 }
@@ -105,12 +105,12 @@ TYPED_TEST(Mat4AdditionTests, PlusOperator_ReturnsMatrixSum)
 
 TEST(Mat4AdditionTests, PlusOperator_MixedType_PromotesType)
 {
-    constexpr fgm::Mat4 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 7.5f }, fgm::Vec4{ -3.0f, -4.0f, 10.0f, -11.0f },
-                              fgm::Vec4{ 4.5f, 3.25f, 3.16f, -22.0f }, fgm::Vec4{ 15.0f, 32.0f, 101.0f, 12.5f } };
-    constexpr fgm::Mat4 mat2{ fgm::Vec4{ 11.0, 10.0, 2.0, -1.0 }, fgm::Vec4{ 3.0, -8.0, 12.0, 11.0 },
-                              fgm::Vec4{ 3.25, 5.1, 0.0, 0.25 }, fgm::Vec4{ 12.0, 13.0, 14.0, 15.0 } };
+    constexpr flcn::Mat4 mat1{ flcn::Vec4{ 1.0f, 2.0f, 3.0f, 7.5f }, flcn::Vec4{ -3.0f, -4.0f, 10.0f, -11.0f },
+                              flcn::Vec4{ 4.5f, 3.25f, 3.16f, -22.0f }, flcn::Vec4{ 15.0f, 32.0f, 101.0f, 12.5f } };
+    constexpr flcn::Mat4 mat2{ flcn::Vec4{ 11.0, 10.0, 2.0, -1.0 }, flcn::Vec4{ 3.0, -8.0, 12.0, 11.0 },
+                              flcn::Vec4{ 3.25, 5.1, 0.0, 0.25 }, flcn::Vec4{ 12.0, 13.0, 14.0, 15.0 } };
 
-    [[maybe_unused]] constexpr fgm::Mat4 sum = mat1 + mat2;
+    [[maybe_unused]] constexpr flcn::Mat4 sum = mat1 + mat2;
     static_assert(std::is_same_v<decltype(sum)::value_type, double>);
 }
 
@@ -124,11 +124,11 @@ TYPED_TEST(Mat4AdditionTests, PlusEqualsOperator_ReturnsSameMatrixWithSum)
 
 TEST(Mat4AdditionTests, PlusEqualsOperator_MixedType_DoesNotPromoteType)
 {
-    [[maybe_unused]] fgm::Mat4 mat1{ fgm::Vec4{ 1.0f, 2.0f, 3.0f, 7.5f }, fgm::Vec4{ -3.0f, -4.0f, 10.0f, -11.0f },
-                                     fgm::Vec4{ 4.5f, 3.25f, 3.16f, -22.0f },
-                                     fgm::Vec4{ 15.0f, 32.0f, 101.0f, 12.5f } };
-    [[maybe_unused]] constexpr fgm::Mat4 mat2{ fgm::Vec4{ 11.0, 10.0, 2.0, -1.0 }, fgm::Vec4{ 3.0, -8.0, 12.0, 11.0 },
-                                               fgm::Vec4{ 3.25, 5.1, 0.0, 0.25 }, fgm::Vec4{ 12.0, 13.0, 14.0, 15.0 } };
+    [[maybe_unused]] flcn::Mat4 mat1{ flcn::Vec4{ 1.0f, 2.0f, 3.0f, 7.5f }, flcn::Vec4{ -3.0f, -4.0f, 10.0f, -11.0f },
+                                     flcn::Vec4{ 4.5f, 3.25f, 3.16f, -22.0f },
+                                     flcn::Vec4{ 15.0f, 32.0f, 101.0f, 12.5f } };
+    [[maybe_unused]] constexpr flcn::Mat4 mat2{ flcn::Vec4{ 11.0, 10.0, 2.0, -1.0 }, flcn::Vec4{ 3.0, -8.0, 12.0, 11.0 },
+                                               flcn::Vec4{ 3.25, 5.1, 0.0, 0.25 }, flcn::Vec4{ 12.0, 13.0, 14.0, 15.0 } };
 
     (void) (mat1 += mat2);
     static_assert(std::is_same_v<decltype(mat1)::value_type, float>);

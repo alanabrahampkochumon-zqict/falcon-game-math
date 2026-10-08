@@ -87,7 +87,7 @@ namespace demo
         }
 
         template <typename T>
-        void renderTriangleWireframe(const fgm::CVec2<T>& v0, const fgm::CVec2<T>& v1, const fgm::CVec2<T>& v2)
+        void renderTriangleWireframe(const flcn::CVec2<T>& v0, const flcn::CVec2<T>& v1, const flcn::CVec2<T>& v2)
         {
             renderLine(v0.x(), v0.y(), v1.x(), v1.y(), 0xff, 0xff, 0xff, 0xff);
             renderLine(v1.x(), v1.y(), v2.x(), v2.y(), 0xff, 0xff, 0xff, 0xff);
@@ -134,7 +134,7 @@ namespace demo
          *         negative number if the poit is below the edge and 0 if the point is on the edge.
          */
         template <typename T>
-        T edgeCross(const fgm::CVec2<T>& vert0, const fgm::CVec2<T>& vert1, const fgm::CVec2<T>& point)
+        T edgeCross(const flcn::CVec2<T>& vert0, const flcn::CVec2<T>& vert1, const flcn::CVec2<T>& point)
         {
             // We are assuming that the edges start from vert0
             const auto edge0 = vert1 - vert0;
@@ -143,8 +143,8 @@ namespace demo
         }
 
 
-        BarycentricCoordinates computeBaryCentricCoordinates(const fgm::CVec2F& v0, const fgm::CVec2F& v1,
-                                                             const fgm::CVec2F& v2, const fgm::CVec2F& point)
+        BarycentricCoordinates computeBaryCentricCoordinates(const flcn::CVec2F& v0, const flcn::CVec2F& v1,
+                                                             const flcn::CVec2F& v2, const flcn::CVec2F& point)
         {
             // Division by two is omitted since that is common in smaller triangles area too
             const auto triArea   = (v1 - v0).cross(v2 - v1);
@@ -157,8 +157,8 @@ namespace demo
                                            .gamma = gammaArea / triArea };
         }
 
-        BarycentricCoordinates computeBaryCentricCoordinates(const fgm::CVec2F& v0, const fgm::CVec2F& v1,
-                                                             const fgm::CVec2F& v2, const fgm::CVec2F& point,
+        BarycentricCoordinates computeBaryCentricCoordinates(const flcn::CVec2F& v0, const flcn::CVec2F& v1,
+                                                             const flcn::CVec2F& v2, const flcn::CVec2F& point,
                                                              const float triArea)
         {
             const auto alphaArea = 0.5f * (v2 - v1).cross(point - v1);
@@ -177,7 +177,7 @@ namespace demo
          * @param v1 The second vertex of the edge.
          * @return `true` if the edge is a top or left edge else `false`.
          */
-        bool isTopLeftEdge(const fgm::CVec2<float>& v0, const fgm::CVec2<float>& v1)
+        bool isTopLeftEdge(const flcn::CVec2<float>& v0, const flcn::CVec2<float>& v1)
         {
             const auto edge = v1 - v0;
             // Top Left if edge's x coordinate is positive (negative is bottom edge due to clockwise convention used)
@@ -213,9 +213,9 @@ namespace demo
         // minValue-> Lowest vertex value
         // maxValue -> Highest vertex value
         template <typename T>
-        fgm::CVec2<T> toScreenSpace(const fgm::Vec3<T>& vec) const
+        flcn::CVec2<T> toScreenSpace(const flcn::Vec3<T>& vec) const
         {
-            return fgm::CVec2<T>{
+            return flcn::CVec2<T>{
                 width - vec.x() * width,
                 height - vec.y() * height,
             };
@@ -223,14 +223,14 @@ namespace demo
 
 
         template <typename T>
-        static fgm::Vec3<T> toNDC(const fgm::Vec3<T>& vec, const fgm::Vec3F& minValueVec, const fgm::Vec3F& maxValueVec)
+        static flcn::Vec3<T> toNDC(const flcn::Vec3<T>& vec, const flcn::Vec3F& minValueVec, const flcn::Vec3F& maxValueVec)
         {
-            return fgm::Vec3<T>{ static_cast<T>((vec.x() - minValueVec.x()) / (maxValueVec.x() - minValueVec.x())),
+            return flcn::Vec3<T>{ static_cast<T>((vec.x() - minValueVec.x()) / (maxValueVec.x() - minValueVec.x())),
                                  static_cast<T>((vec.y() - minValueVec.y()) / (maxValueVec.y() - minValueVec.y())),
                                  static_cast<T>((vec.z() - minValueVec.z()) / (maxValueVec.z() - minValueVec.z())) };
         }
 
-        inline BoundingBox computeBoundingBox(const fgm::CVec2F& v0, const fgm::CVec2F& v1, const fgm::CVec2F& v2)
+        inline BoundingBox computeBoundingBox(const flcn::CVec2F& v0, const flcn::CVec2F& v1, const flcn::CVec2F& v2)
         {
             return BoundingBox{
                 .top    = static_cast<std::size_t>(std::min({ v0.y(), v1.y(), v2.y() })),
@@ -243,7 +243,7 @@ namespace demo
 
         // TODO: Add docs
         template <typename T>
-        void renderTriangle(const fgm::Vec3<T>& v0, const fgm::Vec3<T>& v1, const fgm::Vec3<T>& v2,
+        void renderTriangle(const flcn::Vec3<T>& v0, const flcn::Vec3<T>& v1, const flcn::Vec3<T>& v2,
                             const uint8_t r = 0xff, const uint8_t g = 0xff, const uint8_t b = 0xff,
                             const uint8_t a = 0xff)
         {
@@ -290,7 +290,7 @@ namespace demo
                 {
                     const auto offset      = y * static_cast<std::size_t>(width) + x;
                     const auto colorOffset = static_cast<std::size_t>(colorChannels) * offset;
-                    const auto point       = fgm::CVec2(static_cast<float>(x), static_cast<float>(y));
+                    const auto point       = flcn::CVec2(static_cast<float>(x), static_cast<float>(y));
 
                     if (offset > static_cast<std::size_t>(width * height))
                     {
@@ -326,11 +326,11 @@ namespace demo
 
         // Degree in Radians
         // TODO: Move to library
-        fgm::Vec3F rotateY(const fgm::Vec3F& vertex, const float deg)
+        flcn::Vec3F rotateY(const flcn::Vec3F& vertex, const float deg)
         {
             const auto s = std::sin(deg);
             const auto c = std::cos(deg);
-            fgm::Vec3F vec{};
+            flcn::Vec3F vec{};
 
             // [cos, 0, -sin]
             // [0, 1, 0]
@@ -342,9 +342,9 @@ namespace demo
             return vec;
         }
 
-        fgm::Vec3F project(const fgm::Vec3F& vertex, const float focalLength)
+        flcn::Vec3F project(const flcn::Vec3F& vertex, const float focalLength)
         {
-            fgm::Vec3F vec{};
+            flcn::Vec3F vec{};
             const auto factor = focalLength / vertex.z();
 
             vec.x() = vertex.x() * factor;
@@ -355,8 +355,8 @@ namespace demo
         }
 
         // Vertex Shader
-        inline fgm::Vec3F perVertex(const fgm::Vec3F& vertex, const fgm::Vec3F& minVertexValues,
-                                    const fgm::Vec3F& maxVertexValues, const float rotationDeg)
+        inline flcn::Vec3F perVertex(const flcn::Vec3F& vertex, const flcn::Vec3F& minVertexValues,
+                                    const flcn::Vec3F& maxVertexValues, const float rotationDeg)
         {
             const auto vec = rotateY(vertex, rotationDeg);
             return toNDC(vec, minVertexValues, maxVertexValues);
@@ -373,16 +373,16 @@ namespace demo
          */
         void render(const Mesh& mesh, [[maybe_unused]] const float deg)
         {
-            std::vector<fgm::Vec3<float>> vertices{ mesh.vertices.size() };
+            std::vector<flcn::Vec3<float>> vertices{ mesh.vertices.size() };
             // const auto focalLength = 3.0f;
 
             std::ranges::transform(mesh.vertices, std::inserter(vertices, vertices.begin()),
-                                   [mesh, this, deg](const fgm::Vec3<float> vertex) {
+                                   [mesh, this, deg](const flcn::Vec3<float> vertex) {
                                        return perVertex(vertex, mesh.minVertexValue, mesh.maxVertexValue, deg);
                                    });
 
             // std::ranges::transform(mesh.vertices, std::inserter(vertices, vertices.begin()),
-            //                [this, mesh](const fgm::Vec3<float> vertex) {
+            //                [this, mesh](const flcn::Vec3<float> vertex) {
             //                    const auto vec = project(vertex, 3.0f);
             //                    const auto proj = toNDC(vec, mesh.minVertexValue, mesh.maxVertexValue);
             //                    // const auto vec = rotateY(vertex, deg);

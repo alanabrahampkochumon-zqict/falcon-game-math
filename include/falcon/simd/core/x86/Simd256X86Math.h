@@ -12,7 +12,7 @@
  */
 
 
-namespace falcon
+namespace flcn
 {
     template <typename DataType, size_t Lane>
     using _REG_256_SSE = Simd256<SimdBackend::ARCH_SSE2, DataType, Lane>;
@@ -81,6 +81,6 @@ namespace falcon
     template <typename DataType, size_t Lane>
     [[nodiscard]] constexpr _REG_256_SSE<DataType, Lane> sqrt(_REG_256_SSE<DataType, Lane> reg) noexcept;
 
-} // namespace falcon
+} // namespace flcn
 
 #include "Simd256X86Math.inl"

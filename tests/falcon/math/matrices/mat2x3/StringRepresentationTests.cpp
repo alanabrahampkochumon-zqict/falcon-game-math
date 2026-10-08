@@ -3,7 +3,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 18, 2026
  *
- * @brief Verify @ref fgm::Mat2x3 string representation.
+ * @brief Verify @ref flcn::Mat2x3 string representation.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,16 +26,16 @@ namespace
      **************************************/
 
     /**
-     * @brief Test fixture for @ref fgm::Mat2x3 String Representation.
+     * @brief Test fixture for @ref flcn::Mat2x3 String Representation.
      */
     class Mat2x3StringRepresentationTests: public testing::Test
     {
     protected:
         /** @brief Switch to use full precision for testing. */
-        void SetUp() override { fgm::Config::useFullPrecision = true; }
+        void SetUp() override { flcn::Config::useFullPrecision = true; }
 
         /** @brief Switch back to normal log precision. */
-        void TearDown() override { fgm::Config::useFullPrecision = false; }
+        void TearDown() override { flcn::Config::useFullPrecision = false; }
     };
 
 } // namespace
@@ -48,7 +48,7 @@ namespace
 
 TEST_F(Mat2x3StringRepresentationTests, IntegralMatrix_ReturnsFormattedString)
 {
-    const fgm::Mat2x3 mat(1, 2, 3, 4, 5, 6);
+    const flcn::Mat2x3 mat(1, 2, 3, 4, 5, 6);
     std::stringstream ss;
 
     ss << mat;
@@ -58,7 +58,7 @@ TEST_F(Mat2x3StringRepresentationTests, IntegralMatrix_ReturnsFormattedString)
 
 TEST_F(Mat2x3StringRepresentationTests, FloatingPointMatrix_ReturnsFormattedString)
 {
-    const fgm::Mat2x3 mat(1.2345f, 2.0f, 3.0f, 4.53823f, 3.323f, 12.003f);
+    const flcn::Mat2x3 mat(1.2345f, 2.0f, 3.0f, 4.53823f, 3.323f, 12.003f);
     std::stringstream ss;
 
     ss << mat;
@@ -68,7 +68,7 @@ TEST_F(Mat2x3StringRepresentationTests, FloatingPointMatrix_ReturnsFormattedStri
 
 TEST_F(Mat2x3StringRepresentationTests, DoublePrecisionFloatingPointMatrix_ReturnsFormattedString)
 {
-    const fgm::Mat2x3 mat(1.2345789777, 2.65831, 5.39281, 2.0, 4.0, 12.0);
+    const flcn::Mat2x3 mat(1.2345789777, 2.65831, 5.39281, 2.0, 4.0, 12.0);
     std::stringstream ss;
 
     ss << mat;

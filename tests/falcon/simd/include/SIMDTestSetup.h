@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 10, 2026
  *
- * @brief Test setups common to all @ref falcon::simd tests.
+ * @brief Test setups common to all @ref flcn::simd tests.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */

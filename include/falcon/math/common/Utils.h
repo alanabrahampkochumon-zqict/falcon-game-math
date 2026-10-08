@@ -13,7 +13,7 @@
 #include "Config.h"
 #include "MathTraits.h"
 
-namespace fgm::utils
+namespace flcn::utils
 {
 
     /**
@@ -72,7 +72,7 @@ namespace fgm::utils
      *
      * @param num     The number to take the square root of.
      * @param epsilon The precision required for the square-root.
-     *                Default to fgm EPSILON.
+     *                Default to falcon EPSILON.
      *
      * @return The square root of a number promoted to the near floating point type.
      */
@@ -81,7 +81,7 @@ namespace fgm::utils
 
     /** @} */
 
-} // namespace fgm::utils
+} // namespace flcn::utils
 
 
 #include "Utils.tpp"
