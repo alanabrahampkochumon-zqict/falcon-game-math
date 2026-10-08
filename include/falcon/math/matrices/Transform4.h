@@ -12,7 +12,7 @@
 
 
 #include "Mat4.h"
-#include "fgm/vectors/Point3.h"
+#include "falcon/math/vectors/Point3.h"
 
 
 namespace fgm

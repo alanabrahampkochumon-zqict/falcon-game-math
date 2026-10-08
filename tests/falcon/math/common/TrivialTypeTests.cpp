@@ -11,19 +11,19 @@
 
 #include "utils/TypeUtils.h"
 
-#include <fgm/Quaternion.h>
-#include <fgm/matrices/Mat2.h>
-#include <fgm/matrices/Mat2x3.h>
-#include <fgm/matrices/Mat2x4.h>
-#include <fgm/matrices/Mat3.h>
-#include <fgm/matrices/Mat3x2.h>
-#include <fgm/matrices/Mat3x4.h>
-#include <fgm/matrices/Mat4.h>
-#include <fgm/matrices/Mat4x2.h>
-#include <fgm/matrices/Mat4x3.h>
-#include <fgm/vectors/CVec2.h>
-#include <fgm/vectors/Vec3.h>
-#include <fgm/vectors/Vec4.h>
+#include <falcon/math/Quaternion.h>
+#include <falcon/math/matrices/Mat2.h>
+#include <falcon/math/matrices/Mat2x3.h>
+#include <falcon/math/matrices/Mat2x4.h>
+#include <falcon/math/matrices/Mat3.h>
+#include <falcon/math/matrices/Mat3x2.h>
+#include <falcon/math/matrices/Mat3x4.h>
+#include <falcon/math/matrices/Mat4.h>
+#include <falcon/math/matrices/Mat4x2.h>
+#include <falcon/math/matrices/Mat4x3.h>
+#include <falcon/math/vectors/CVec2.h>
+#include <falcon/math/vectors/Vec3.h>
+#include <falcon/math/vectors/Vec4.h>
 
 /**
  * @addtogroup T_FGM_Trivial

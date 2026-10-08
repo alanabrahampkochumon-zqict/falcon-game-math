@@ -9,16 +9,16 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-#include "fgm/common/Types.h"
-#include "fgm/matrices/Mat2.h"
-#include "fgm/matrices/Mat2x3.h"
-#include "fgm/matrices/Mat2x4.h"
-#include "fgm/matrices/Mat3.h"
-#include "fgm/matrices/Mat3x2.h"
-#include "fgm/matrices/Mat3x4.h"
-#include "fgm/matrices/Mat4.h"
-#include "fgm/matrices/Mat4x2.h"
-#include "fgm/matrices/Mat4x3.h"
+#include "falcon/math/common/Types.h"
+#include "falcon/math/matrices/Mat2.h"
+#include "falcon/math/matrices/Mat2x3.h"
+#include "falcon/math/matrices/Mat2x4.h"
+#include "falcon/math/matrices/Mat3.h"
+#include "falcon/math/matrices/Mat3x2.h"
+#include "falcon/math/matrices/Mat3x4.h"
+#include "falcon/math/matrices/Mat4.h"
+#include "falcon/math/matrices/Mat4x2.h"
+#include "falcon/math/matrices/Mat4x3.h"
 
 // TODO: Add Implementation
 // Implementations

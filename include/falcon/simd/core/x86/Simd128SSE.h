@@ -17,12 +17,12 @@
  */
 
 
-#include "falcon_core/Preprocessors.h"
-#include "falcon_core/traits/TypeHelpers.h"
-#include "falcon_simd/core/RegisterTraits.h"
-#include "falcon_simd/utils/SIMDUtils.h"
-#include "falcon_simd/utils/SimdTraits.h"
-#include "falcon_simd/utils/TypeTraits.h"
+#include "falcon/core/Preprocessors.h"
+#include "falcon/core/traits/TypeHelpers.h"
+#include "falcon/simd/core/RegisterTraits.h"
+#include "falcon/simd/utils/SIMDUtils.h"
+#include "falcon/simd/utils/SimdTraits.h"
+#include "falcon/simd/utils/TypeTraits.h"
 
 #include <array>
 #include <bit>

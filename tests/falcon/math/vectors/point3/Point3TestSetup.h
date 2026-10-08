@@ -15,7 +15,7 @@
 #include "CommonSetup.h"
 #include "utils/VectorUtils.h"
 
-#include <fgm/vectors/Point3.h>
+#include <falcon/math/vectors/Point3.h>
 
 
 using namespace testutils;

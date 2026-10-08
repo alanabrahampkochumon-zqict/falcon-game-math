@@ -11,7 +11,7 @@
 
 #include "Mat3x2TestSetup.h"
 
-#include <fgm/matrices/Mat2x3.h>
+#include <falcon/math/matrices/Mat2x3.h>
 
 
 /**

@@ -12,7 +12,7 @@
 #include "CommonSetup.h"
 
 #include <cmath>
-#include <fgm/Quaternion.h>
+#include <falcon/math/Quaternion.h>
 #include <type_traits>
 
 

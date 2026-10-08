@@ -15,8 +15,8 @@
 #include "CommonSetup.h"
 #include "utils/VectorUtils.h"
 
-#include <fgm/common/MathTraits.h>
-#include <fgm/vectors/Vec3.h>
+#include <falcon/math/common/MathTraits.h>
+#include <falcon/math/vectors/Vec3.h>
 #include <gtest/gtest.h>
 
 

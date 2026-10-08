@@ -12,7 +12,7 @@
 
 #include "Mat3x2TestSetup.h"
 
-#include <fgm/common/Constants.h>
+#include <falcon/math/common/Constants.h>
 
 /**
  * @addtogroup T_FGM_Mat3x2_Equality

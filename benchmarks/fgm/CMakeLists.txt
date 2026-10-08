@@ -11,7 +11,6 @@ target_precompile_headers(
         FGMBenchmark
         PRIVATE
         <benchmark/benchmark.h>
-        #        <fgm>
 )
 
 target_link_libraries(
@@ -19,7 +18,7 @@ target_link_libraries(
         PRIVATE
         benchmark::benchmark
         benchmark::benchmark_main
-        FGM
+        Falcon::Falcon
 
         ${PROJECT_NAME}-StrictWarnings
         ${PROJECT_NAME}-ProjectSanitizers

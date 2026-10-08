@@ -9,7 +9,7 @@
  */
 
 
-#include <fgm/common/OperationStatus.h>
+#include <falcon/math/common/OperationStatus.h>
 #include <gtest/gtest.h>
 
 

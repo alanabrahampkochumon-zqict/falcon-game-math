@@ -12,7 +12,7 @@
 
 #include "../Mat3TestSetup.h"
 
-#include <fgm/matrices/Mat2.h>
+#include <falcon/math/matrices/Mat2.h>
 
 
 /**

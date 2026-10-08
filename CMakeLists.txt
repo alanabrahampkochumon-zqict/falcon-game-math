@@ -53,7 +53,6 @@ endif ()
 
 # Core Library
 add_subdirectory(include)
-
 # Test enabling is handled in tests CML per project
 add_subdirectory(tests)
 

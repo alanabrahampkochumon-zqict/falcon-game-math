@@ -11,7 +11,7 @@
 
 #include "Mat2x4TestSetup.h"
 
-#include <fgm/matrices/Mat4x2.h>
+#include <falcon/math/matrices/Mat4x2.h>
 
 
 /**

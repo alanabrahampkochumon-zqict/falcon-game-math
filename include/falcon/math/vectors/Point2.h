@@ -4,14 +4,14 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: July 30, 2026
  *
- * @brief 3D point representation with a implicit w values of 1 <x, y, z, 1>.
+ * @brief 3D point representation with an implicit w value of 1 <x, y, z, 1>.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
 
 #include "CVec2.h"
-#include "fgm/common/Types.h"
+#include "falcon/math/common/Types.h"
 
 
 namespace fgm

@@ -12,7 +12,7 @@
 #include "utils/MatrixUtils.h"
 #include "utils/VectorUtils.h"
 
-#include <fgm/matrices/Mat2x4.h>
+#include <falcon/math/matrices/Mat2x4.h>
 #include <utility>
 
 /**

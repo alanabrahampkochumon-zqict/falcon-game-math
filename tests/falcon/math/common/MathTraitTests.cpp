@@ -11,7 +11,7 @@
 
 #include <array>
 #include <cstdint>
-#include <fgm/common/MathTraits.h>
+#include <falcon/math/common/MathTraits.h>
 #include <vector>
 
 

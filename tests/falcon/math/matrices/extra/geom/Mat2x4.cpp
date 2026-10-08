@@ -13,7 +13,7 @@
 #include "utils/MatrixUtils.h"
 #include "utils/VectorUtils.h"
 
-#include <fgm/matrices/extra/Geom.h>
+#include <falcon/math/matrices/extra/Geom.h>
 #include <gtest/gtest.h>
 
 

@@ -21,11 +21,11 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-#include "fgm/common/Config.h"
-#include "fgm/common/Constants.h"
-#include "fgm/common/MathTraits.h"
-#include "fgm/common/OperationStatus.h"
-#include "fgm/common/Types.h"
+#include "falcon/math/common/Config.h"
+#include "falcon/math/common/Constants.h"
+#include "falcon/math/common/MathTraits.h"
+#include "falcon/math/common/OperationStatus.h"
+#include "falcon/math/common/Types.h"
 
 #include <array>
 #include <cstdint>

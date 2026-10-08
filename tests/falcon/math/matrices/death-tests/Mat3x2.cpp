@@ -12,7 +12,7 @@
 #include "CommonSetup.h"
 #include "utils/MatrixUtils.h"
 
-#include <fgm/matrices/Mat3x2.h>
+#include <falcon/math/matrices/Mat3x2.h>
 #include <utility>
 
 

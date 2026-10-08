@@ -19,7 +19,7 @@ target_include_directories(
 target_link_libraries(
         Rasterizer
         PRIVATE
-        FGM
+        Falcon::Falcon
         SDL3::SDL3
         fast_float
         ${PROJECT_NAME}-StrictWarnings

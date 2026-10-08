@@ -24,6 +24,7 @@ target_link_libraries(
         ${PROJECT_NAME}-StrictWarnings
         ${PROJECT_NAME}-ProjectSanitizers
 )
+target_compile_features(FalconTestSetup INTERFACE cxx_std_20)
 
 AddCompilerFlag(FalconTestSetup INTERFACE ${FALCON_SIMD_MODE})
 target_compile_definitions(FalconTestSetup INTERFACE $<$<CONFIG:Debug>:ENABLE_DEBUG_TESTS>)

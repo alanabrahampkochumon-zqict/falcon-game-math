@@ -11,10 +11,10 @@
  */
 
 
-#include "fgm/common/Messages.h"
-#include "fgm/common/Types.h"
-#include "fgm/common/Utils.h"
-#include "fgm/common/Wrappers.h"
+#include "falcon/math/common/Messages.h"
+#include "falcon/math/common/Types.h"
+#include "falcon/math/common/Utils.h"
+#include "falcon/math/common/Wrappers.h"
 
 #include <algorithm>
 #include <cmath>

@@ -12,12 +12,12 @@
 
 #include "Mesh.h"
 
-#include <fgm/Mat>
+#include <falcon/math/Mat>
 #include <bit>
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
-#include <fgm/Vec>
+#include <falcon/math/Vec>
 #include <iostream>
 #include <map>
 #include <utility>

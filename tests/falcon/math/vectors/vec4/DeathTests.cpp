@@ -11,7 +11,7 @@
 #ifdef ENABLE_DEBUG_TESTS
     #include "CommonSetup.h"
 
-    #include <fgm/vectors/Vec4.h>
+    #include <falcon/math/vectors/Vec4.h>
     #include <gtest/gtest.h>
 
 namespace

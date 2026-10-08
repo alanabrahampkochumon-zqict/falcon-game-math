@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @file Point3TestSetup.h
+ * @file Point2TestSetup.h
  * @author Alan Abraham P Kochumon
  * @date Created on: July 30, 2026
  *
@@ -15,7 +15,7 @@
 #include "CommonSetup.h"
 #include "utils/VectorUtils.h"
 
-#include <fgm/vectors/Point2.h>
+#include <falcon/math/vectors/Point2.h>
 
 
 using namespace testutils;

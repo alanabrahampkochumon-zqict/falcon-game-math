@@ -17,7 +17,7 @@
 
 #include <cassert>
 #include <cmath>
-#include <fgm/common/Utils.h>
+#include <falcon/math/common/Utils.h>
 #include <gtest/gtest.h>
 #include <vector>
 

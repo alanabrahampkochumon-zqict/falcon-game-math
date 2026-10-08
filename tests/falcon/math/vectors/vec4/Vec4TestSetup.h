@@ -16,7 +16,7 @@
 #include "CommonSetup.h"
 #include "utils/VectorUtils.h"
 
-#include <fgm/vectors/Vec4.h>
+#include <falcon/math/vectors/Vec4.h>
 
 
 using namespace testutils;

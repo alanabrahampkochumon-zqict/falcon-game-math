@@ -22,8 +22,8 @@
  */
 
 
-#include "fgm/common/Types.h"
-#include "fgm/vectors/Vec3.h"
+#include "falcon/math/common/Types.h"
+#include "falcon/math/vectors/Vec3.h"
 
 #include <array>
 #include <type_traits>

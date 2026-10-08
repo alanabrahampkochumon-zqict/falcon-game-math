@@ -9,7 +9,7 @@
  */
 
 #include <cstdint>
-#include <falcon_simd/utils/TypeTraits.h>
+#include <falcon/simd/utils/TypeTraits.h>
 
 namespace
 {

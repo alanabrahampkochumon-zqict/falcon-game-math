@@ -12,7 +12,7 @@
 #include "CommonSetup.h"
 #include "utils/MatrixUtils.h"
 
-#include <fgm/matrices/extra/Comp.h>
+#include <falcon/math/matrices/extra/Comp.h>
 #include <gtest/gtest.h>
 
 

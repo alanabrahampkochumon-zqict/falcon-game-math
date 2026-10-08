@@ -4,7 +4,6 @@ set_target_properties(FGMCommonTests PROPERTIES CXX_STANDARD 20)
 set_target_properties(FGMCommonTests PROPERTIES CXX_STANDARD_REQUIRED ON)
 set_target_properties(FGMCommonTests PROPERTIES CXX_EXTENSIONS OFF)
 
-
 target_sources(
         FGMCommonTests PRIVATE
         MathTraitTests.cpp
@@ -14,16 +13,7 @@ target_sources(
         WrapperTests.cpp
 )
 
-target_include_directories(
-        FGMCommonTests PRIVATE
-        ${FGM_TEST_ROOT_DIR}/include
-)
-
-
-target_link_libraries(
-        FGMCommonTests PRIVATE
-        FalconMathTestSetup
-)
+target_link_libraries(FGMCommonTests PRIVATE FalconMathTestSetup)
 
 target_precompile_headers(
         FGMCommonTests

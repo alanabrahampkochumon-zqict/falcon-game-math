@@ -22,7 +22,7 @@
  */
 
 
-#include "fgm/vectors/CVec2.h"
+#include "falcon/math/vectors/CVec2.h"
 
 #include <array>
 #include <type_traits>

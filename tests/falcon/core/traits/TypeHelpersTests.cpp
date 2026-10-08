@@ -8,7 +8,8 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
-#include <falcon_core/traits/TypeHelpers.h>
+
+#include <falcon/core/traits/TypeHelpers.h>
 
 
 /** @addtogroup TFalcon_Type

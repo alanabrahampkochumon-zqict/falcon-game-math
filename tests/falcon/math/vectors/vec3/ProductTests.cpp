@@ -12,7 +12,7 @@
 #include "Vec3TestSetup.h"
 #include "utils/MatrixUtils.h"
 
-#include <fgm/matrices/Mat3.h>
+#include <falcon/math/matrices/Mat3.h>
 
 
 

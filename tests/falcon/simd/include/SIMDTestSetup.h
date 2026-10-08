@@ -15,7 +15,7 @@
 #include <bit>
 #include <cmath>
 #include <cstdint>
-#include <falcon_simd/FalconSimd.h>
+#include <falcon/simd/FalconSimd.h>
 #include <gtest/gtest.h>
 #include <limits>
 

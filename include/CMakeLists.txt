@@ -8,9 +8,11 @@ add_subdirectory(falcon/math)
 
 # Library Options
 option(FGM_FORCE_LEFT_HANDED "Use Left-Handed Coordinate System in Falcon Game Math")
+
 add_library(${FALCON_LIB_NAME} INTERFACE
         falcon/Falcon.h
 )
+target_compile_features(${FALCON_LIB_NAME}  INTERFACE cxx_std_20)
 add_library(${FALCON_LIB_NAME}::${FALCON_LIB_NAME} ALIAS ${FALCON_LIB_NAME})
 
 
@@ -21,7 +23,7 @@ target_link_libraries(${FALCON_LIB_NAME} INTERFACE
 )
 
 target_include_directories(${FALCON_LIB_NAME} INTERFACE
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${FALCON_LIBRARY_ROOT_DIR}>
         $<INSTALL_INTERFACE:include>
 )
 

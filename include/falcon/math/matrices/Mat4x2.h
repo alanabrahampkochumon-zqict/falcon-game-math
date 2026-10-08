@@ -23,8 +23,8 @@
 
 
 #include "Mat4x2.h"
-#include "fgm/common/Types.h"
-#include "fgm/vectors/Vec4.h"
+#include "falcon/math/common/Types.h"
+#include "falcon/math/vectors/Vec4.h"
 
 #include <array>
 #include <type_traits>

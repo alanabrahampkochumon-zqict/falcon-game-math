@@ -10,9 +10,8 @@
 
 #include "CommonSetup.h"
 
-#include <falcon_simd/utils/SIMDUtils.h>
+#include <falcon/simd/utils/SIMDUtils.h>
 #include <gtest/gtest.h>
-
 
 /**
  * @addtogroup T_SIMD_Utils

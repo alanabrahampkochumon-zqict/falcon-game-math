@@ -11,7 +11,7 @@
  */
 
 
-#include "falcon_simd/utils/SIMDUtils.h"
+#include "falcon/simd/utils/SIMDUtils.h"
 
 namespace falcon
 {

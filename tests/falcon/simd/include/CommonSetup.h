@@ -17,10 +17,6 @@
 #include <utility>
 #include <vector>
 
-#ifndef NDEBUG
-    #define ENABLE_DEBUG_TESTS
-#endif
-
 
 #ifdef NONCOMPREHENSIVE
 

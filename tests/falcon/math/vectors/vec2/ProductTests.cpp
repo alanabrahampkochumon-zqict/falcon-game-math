@@ -12,7 +12,7 @@
 #include "Vec2TestSetup.h"
 #include "utils/MatrixUtils.h"
 
-#include <fgm/matrices/Mat2.h>
+#include <falcon/math/matrices/Mat2.h>
 
 
 /**

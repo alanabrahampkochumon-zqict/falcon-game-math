@@ -13,7 +13,7 @@
 
 #include <array>
 #include <bit>
-#include <falcon_simd/FalconSimd.h>
+#include <falcon/simd/FalconSimd.h>
 
 // TODO: Remove Preprocessor after implementing individual simd paths
 #if defined(FALCON_ENABLE_AVX512) || defined(FALCON_ENABLE_AVX2) || defined(FALCON_ENABLE_AVX) ||                      \

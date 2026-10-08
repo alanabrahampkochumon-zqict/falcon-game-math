@@ -16,9 +16,9 @@
  */
 
 
-#include "falcon_core/Preprocessors.h"
-#include "falcon_simd/core/RegisterTraits.h"
-#include "falcon_simd/utils/SimdTraits.h"
+#include "falcon/core/Preprocessors.h"
+#include "falcon/simd/core/RegisterTraits.h"
+#include "falcon/simd/utils/SimdTraits.h"
 
 #include <bit>
 
