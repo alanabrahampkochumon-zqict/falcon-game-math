@@ -59,7 +59,7 @@ TYPED_TEST(Simd256GetterSetterTests, Set_FillsActiveLanesInCorrectOrder)
 {
     using Type                = TypeParam::Type;
     constexpr size_t Lane     = TypeParam::VALUE;
-    constexpr size_t MaxLanes = this->RegSizeInBytes / sizeof(Type);
+    const size_t MaxLanes = this->RegSizeInBytes / sizeof(Type);
 
     /// Grab the register prefilled with values using set
     auto reg = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
@@ -79,7 +79,7 @@ TYPED_TEST(Simd256GetterSetterTests, Set_FillsUnoccupiedSpaceWithZeroes)
 {
     using Type                = typename TypeParam::Type;
     constexpr size_t Lane     = TypeParam::VALUE;
-    constexpr size_t MaxLanes = this->RegSizeInBytes / sizeof(Type);
+    const size_t MaxLanes = this->RegSizeInBytes / sizeof(Type);
 
     // If the register is perfectly full (e.g., 4 floats), there is no space to pad.
     // We can tell GTest to automatically skip this specific matrix combination!

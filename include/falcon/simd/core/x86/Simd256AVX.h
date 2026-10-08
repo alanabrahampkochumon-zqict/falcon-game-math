@@ -25,7 +25,8 @@ namespace flcn
     //  * @brief 256-bit Simd Register specialized for AVX architecture.
     //  *
     //  * @tparam DataType The word-width/data type of the register.
-    //  * @tparam Lane     The number of data lanes. Must be a power of 2 and the total width in bits(size * Lane) must be
+    //  * @tparam Lane     The number of data lanes. Must be a power of 2 and the total width in bits(size * Lane) must
+    //  be
     //  *                  less than 256.
     //  */
     // template <typename DataType, size_t Lane>
@@ -35,7 +36,8 @@ namespace flcn
     //     static constexpr size_t BufferWidth  = 256;      ///< Width of the register in bits.
     //     using ValueType                      = DataType; ///< The internal data type of this Register.
     //     static constexpr size_t LaneCount    = Lane;     ///< Number of Lanes of current SIMD256 Register
-    //     static constexpr size_t MaxLaneCount = BufferWidth / (sizeof(DataType) * 8); /// Maximum Lanes in this register.
+    //     static constexpr size_t MaxLaneCount = BufferWidth / (sizeof(DataType) * 8); /// Maximum Lanes in this
+    //     register.
     //
     //     static_assert(sizeof(DataType) * Lane * 8 <= BufferWidth && "Invalid size.");
     //     static_assert(std::has_single_bit(Lane) && Lane > 1 &&
@@ -125,7 +127,8 @@ namespace flcn
     //      *
     //      * @note Data must be aligned to 16 bit boundary.
     //      *       If the size * Lane cannot saturate the buffer, data will be moved to lower lanes.
-    //      *       Example: loadAligned<2>(uint8_t*) will only load the lower 16-bit with the data and fill the rest with
+    //      *       Example: loadAligned<2>(uint8_t*) will only load the lower 16-bit with the data and fill the rest
+    //      with
     //      *       zeroes.
     //      *
     //      * @param data The data to load.
@@ -138,7 +141,8 @@ namespace flcn
     //      *
     //      * @note Can work with unaligned memory.
     //      *       If the size * Lane cannot saturate the buffer, data will be moved to lower lanes.
-    //      *       Example: loadAligned<2>(uint8_t*) will only load the lower 16-bit with the data and fill the rest with
+    //      *       Example: loadAligned<2>(uint8_t*) will only load the lower 16-bit with the data and fill the rest
+    //      with
     //      *       zeroes.
     //      *
     //      * @param data The data to load.
@@ -414,7 +418,8 @@ namespace flcn
     //      * @note Direct SIMD operations are limited to floating-point numbers only.
     //      *       Therefore the operations for integrals are emulated by converting them to floating points, but some
     //      *       integrals like for `uint64_t` and `int64_t` are fully scalar since converting them to floating point
-    //      *       can lead to precision loss due to the 53-bit maximum precision of double precision float point numbers.
+    //      *       can lead to precision loss due to the 53-bit maximum precision of double precision float point
+    //      numbers.
     //      *
     //      * @note For division with same divisor it is faster to use operator/ or operator/= which implements division
     //      *       by constant from Hackers Delight. (TODO)
@@ -720,7 +725,8 @@ namespace flcn
     //      * const flcn::Simd256_t<float, 8> reg1{1.0f, 2.0f, 3.0f, 4.0f, 12.0f, 13.0f, 14.0f, 15.0f};
     //      * const flcn::Simd256_t<float, 8> reg2{8.0f, 9.0f, 10.0f, 11.0f, 5.0f, 6.0f, 7.0f, 8.0f};
     //      * constexpr auto mask = flcn::makeBlendMask32<true, false, false, true, true, true, false, false>();
-    //      * const auto blended = reg1.template blend<mask>(reg2); // {8.0f, 2.0f, 3.0f, 11.0f, 5.0f, 6.0f, 14.0f, 15.0f}
+    //      * const auto blended = reg1.template blend<mask>(reg2); //
+    //      {8.0f, 2.0f, 3.0f, 11.0f, 5.0f, 6.0f, 14.0f, 15.0f}
     //      * @endcode
     //      *
     //      * @param other The register whose values are selected when mask is 0b11..11 or 0xf..f.
@@ -800,7 +806,8 @@ namespace flcn
     //
     // private:
     //     static constexpr auto Max128BitLaneCount = 128 / (sizeof(DataType) * 8);
-    //     static_assert(Lane > Max128BitLaneCount, "Payload fits in 128-bits. Use Simd128 to directly prevent emulation");
+    //     static_assert(Lane > Max128BitLaneCount, "Payload fits in 128-bits. Use Simd128 to directly prevent
+    //     emulation");
     //
     //     static constexpr auto LOWER_LANE_COUNT = Max128BitLaneCount;
     //     static constexpr auto UPPER_LANE_COUNT = (Lane - Max128BitLaneCount > 0) ? (Lane - Max128BitLaneCount) : 0;
@@ -815,7 +822,7 @@ namespace flcn
     //                                Simd128<SimdBackend::ARCH_AVX, DataType, UPPER_LANE_COUNT> upper)
     //         : _upper(upper), _lower(lower)
     //     {}
-    };
+    // };
 
 
 } // namespace flcn
