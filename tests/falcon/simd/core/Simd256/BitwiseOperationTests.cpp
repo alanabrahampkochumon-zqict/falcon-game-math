@@ -54,7 +54,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, BitwiseNot_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> data{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         data[i] = this->lhsData[i];
@@ -94,7 +94,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, BitwiseAnd_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i] = this->lhsData[i];
@@ -135,7 +135,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, BitwiseOr_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i] = this->lhsData[i];
@@ -177,7 +177,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, BitwiseXor_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i] = this->lhsData[i];
@@ -219,7 +219,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, BitwiseAndNot_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i] = this->lhsData[i];
@@ -261,7 +261,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, HorizontalOR_ReturnsAValidScalar)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{};
+    alignas(32) std::array<Type, Lane> data{};
     Type expected{};
     for (size_t i = 0; i < Lane; ++i)
     {
@@ -298,7 +298,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, HorizontalAND_ReturnsAValidScalar)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{};
+    alignas(32) std::array<Type, Lane> data{};
     Type expected{};
     for (size_t i = 0; i < Lane; ++i)
     {
@@ -351,7 +351,7 @@ TYPED_TEST(Simd256BitwiseOperationTests, HorizontalAND_ReturnsAValidScalar)
             using Type            = TypeParam::Type;                                                                   \
             constexpr size_t Lane = TypeParam::VALUE;                                                                  \
                                                                                                                        \
-            alignas(16) std::array<Type, Lane> data{}, expected{}, result{};                                           \
+            alignas(32) std::array<Type, Lane> data{}, expected{}, result{};                                           \
             for (size_t i = 0; i < Lane; ++i)                                                                          \
             {                                                                                                          \
                 data[i] = this->lhsData[i];                                                                            \
@@ -401,7 +401,7 @@ TEST_SIMD256_SHIFT_LEFT_WITH_DIFFERENT_SHIFT_SIZES(31)
             using Type            = TypeParam::Type;                                                                   \
             constexpr size_t Lane = TypeParam::VALUE;                                                                  \
                                                                                                                        \
-            alignas(16) std::array<Type, Lane> data{}, expected{}, result{};                                           \
+            alignas(32) std::array<Type, Lane> data{}, expected{}, result{};                                           \
             for (size_t i = 0; i < Lane; ++i)                                                                          \
             {                                                                                                          \
                 data[i] = this->lhsData[i];                                                                            \
@@ -450,7 +450,7 @@ TEST_SIMD256_SHIFT_LEFT_EQUALS_WITH_DIFFERENT_SHIFT_SIZES(31)
             using Type            = TypeParam::Type;                                                                   \
             constexpr size_t Lane = TypeParam::VALUE;                                                                  \
                                                                                                                        \
-            alignas(16) std::array<Type, Lane> data{}, expected{}, result{};                                           \
+            alignas(32) std::array<Type, Lane> data{}, expected{}, result{};                                           \
             for (size_t i = 0; i < Lane; ++i)                                                                          \
             {                                                                                                          \
                 data[i] = this->lhsData[i];                                                                            \
@@ -504,7 +504,7 @@ TEST_SIMD256_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(31)
             using Type            = TypeParam::Type;                                                                   \
             constexpr size_t Lane = TypeParam::VALUE;                                                                  \
                                                                                                                        \
-            alignas(16) std::array<Type, Lane> data{}, expected{}, result{};                                           \
+            alignas(32) std::array<Type, Lane> data{}, expected{}, result{};                                           \
             for (size_t i = 0; i < Lane; ++i)                                                                          \
             {                                                                                                          \
                 data[i] = this->lhsData[i];                                                                            \
@@ -559,7 +559,7 @@ TEST_SIMD256_SHIFT_RIGHT_EQUALS_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(31)
             using Type            = TypeParam::Type;                                                                   \
             constexpr size_t Lane = TypeParam::VALUE;                                                                  \
                                                                                                                        \
-            alignas(16) std::array<Type, Lane> data{}, expected{}, result{};                                           \
+            alignas(32) std::array<Type, Lane> data{}, expected{}, result{};                                           \
             for (size_t i = 0; i < Lane; ++i)                                                                          \
             {                                                                                                          \
                 data[i] = this->lhsData[i];                                                                            \
@@ -611,7 +611,7 @@ TEST_SIMD256_SHIFT_RIGHT_LOGICAL_WITH_DIFFERENT_SHIFT_SIZES(31)
             using Type            = TypeParam::Type;                                                                   \
             constexpr size_t Lane = TypeParam::VALUE;                                                                  \
                                                                                                                        \
-            alignas(16) std::array<Type, Lane> data{}, expected{}, result{};                                           \
+            alignas(32) std::array<Type, Lane> data{}, expected{}, result{};                                           \
             for (size_t i = 0; i < Lane; ++i)                                                                          \
             {                                                                                                          \
                 data[i] = this->lhsData[i];                                                                            \
@@ -661,7 +661,7 @@ TEST_SIMD256_CONST_SHIFT_LEFT_WITH_DIFFERENT_SHIFT_SIZES(31)
             using Type            = TypeParam::Type;                                                                   \
             constexpr size_t Lane = TypeParam::VALUE;                                                                  \
                                                                                                                        \
-            alignas(16) std::array<Type, Lane> data{}, expected{}, result{};                                           \
+            alignas(32) std::array<Type, Lane> data{}, expected{}, result{};                                           \
             for (size_t i = 0; i < Lane; ++i)                                                                          \
             {                                                                                                          \
                 data[i] = this->lhsData[i];                                                                            \
@@ -715,7 +715,7 @@ TEST_SIMD256_CONST_SHIFT_RIGHT_ARITHMETIC_WITH_DIFFERENT_SHIFT_SIZES(31)
             using Type            = TypeParam::Type;                                                                   \
             constexpr size_t Lane = TypeParam::VALUE;                                                                  \
                                                                                                                        \
-            alignas(16) std::array<Type, Lane> data{}, expected{}, result{};                                           \
+            alignas(32) std::array<Type, Lane> data{}, expected{}, result{};                                           \
             for (size_t i = 0; i < Lane; ++i)                                                                          \
             {                                                                                                          \
                 data[i] = this->lhsData[i];                                                                            \

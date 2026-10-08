@@ -54,9 +54,9 @@ namespace
 
 TYPED_TEST(Simd128GetterSetterTests, Set_FillsActiveLanesInCorrectOrder)
 {
-    using Type                = TypeParam::Type;
-    constexpr size_t Lane     = TypeParam::VALUE;
-    constexpr size_t MaxLanes = 16 / sizeof(Type);
+    using Type                       = typename TypeParam::Type;
+    constexpr size_t Lane            = TypeParam::VALUE;
+    static constexpr size_t MaxLanes = 32 / sizeof(Type);
 
     /// Grab the register prefilled with values using set
     auto reg = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
@@ -74,9 +74,9 @@ TYPED_TEST(Simd128GetterSetterTests, Set_FillsActiveLanesInCorrectOrder)
 
 TYPED_TEST(Simd128GetterSetterTests, Set_FillsUnoccupiedSpaceWithZeroes)
 {
-    using Type                = typename TypeParam::Type;
-    constexpr size_t Lane     = TypeParam::VALUE;
-    constexpr size_t MaxLanes = 16 / sizeof(Type);
+    using Type                       = typename TypeParam::Type;
+    constexpr size_t Lane            = TypeParam::VALUE;
+    static constexpr size_t MaxLanes = 16 / sizeof(Type);
 
     // If the register is perfectly full (e.g., 4 floats), there is no space to pad.
     // We can tell GTest to automatically skip this specific matrix combination!
@@ -318,7 +318,7 @@ using namespace simd::testing;
             alignas(16) constexpr std::array<Type, 16> dataArr = { max, min, 0, 3,  5,  11, 15, 3,                     \
                                                                    1,   2,   5, 12, 14, 3,  15, 12 };                  \
                                                                                                                        \
-            flcn::Simd128_t<Type, Lanes> reg(dataArr.data());                                                        \
+            flcn::Simd128_t<Type, Lanes> reg(dataArr.data());                                                          \
             EXPECT_ANY_EQ(dataArr[Index], reg.getAt<Index>());                                                         \
         }
 
@@ -451,7 +451,7 @@ TEST_SIMD128_CONST_GET_AT_RETURNS_VALUE_AT_INDEX(FP64_2Lanes_AtIndex1, FP64, 2, 
             alignas(16) constexpr std::array<Type, 16> dataArr = { max, min, 0, 3,  5,  11, 15, 3,                     \
                                                                    1,   2,   5, 12, 14, 3,  15, 12 };                  \
                                                                                                                        \
-            flcn::Simd128_t<Type, Lanes> reg{};                                                                      \
+            flcn::Simd128_t<Type, Lanes> reg{};                                                                        \
             reg.setAt<Index>(dataArr[Index]);                                                                          \
             EXPECT_ANY_EQ(dataArr[Index], reg.getAt<Index>());                                                         \
         }

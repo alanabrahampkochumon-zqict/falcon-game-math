@@ -118,7 +118,7 @@ namespace
 
 TYPED_TEST(Simd256ComparisonTests, GreaterThanOperator_ReturnsAValidMask)
 {
-    using Type = TypeParam::Type;
+    using Type = typename TypeParam::Type;
     flcn::Simd256_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());
@@ -137,7 +137,7 @@ TYPED_TEST(Simd256ComparisonTests, GreaterThanOperator_ReturnsAValidMask)
 
 TYPED_TEST(Simd256ComparisonTests, GreaterThanOrEqualsOperator_ReturnsAValidMask)
 {
-    using Type = TypeParam::Type;
+    using Type = typename TypeParam::Type;
     flcn::Simd256_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());
@@ -156,7 +156,7 @@ TYPED_TEST(Simd256ComparisonTests, GreaterThanOrEqualsOperator_ReturnsAValidMask
 
 TYPED_TEST(Simd256ComparisonTests, LessThanOperator_ReturnsAValidMask)
 {
-    using Type = TypeParam::Type;
+    using Type = typename TypeParam::Type;
     flcn::Simd256_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());
@@ -175,7 +175,7 @@ TYPED_TEST(Simd256ComparisonTests, LessThanOperator_ReturnsAValidMask)
 
 TYPED_TEST(Simd256ComparisonTests, LessThanOrEqualsOperator_ReturnsAValidMask)
 {
-    using Type = TypeParam::Type;
+    using Type = typename TypeParam::Type;
     flcn::Simd256_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());
@@ -194,7 +194,7 @@ TYPED_TEST(Simd256ComparisonTests, LessThanOrEqualsOperator_ReturnsAValidMask)
 
 TYPED_TEST(Simd256ComparisonTests, DoubleEqualsOperator_ReturnsAValidMask)
 {
-    using Type = TypeParam::Type;
+    using Type = typename TypeParam::Type;
     flcn::Simd256_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());
@@ -213,7 +213,7 @@ TYPED_TEST(Simd256ComparisonTests, DoubleEqualsOperator_ReturnsAValidMask)
 
 TYPED_TEST(Simd256ComparisonTests, NotEqualsOperator_ReturnsAValidMask)
 {
-    using Type = TypeParam::Type;
+    using Type = typename TypeParam::Type;
     flcn::Simd256_t<Type, TypeParam::VALUE> a{}, b{};
     a.load(this->lhsData.data());
     b.load(this->rhsData.data());

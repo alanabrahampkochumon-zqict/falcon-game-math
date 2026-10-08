@@ -41,7 +41,7 @@ TYPED_TEST(Simd256LoadStoreTests, LoadAligned_LoadsAndStoresDataWithoutCorruptio
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{};
+    alignas(32) std::array<Type, Lane> data{};
 
     for (size_t i = 0; i < Lane; ++i)
     {
@@ -51,7 +51,7 @@ TYPED_TEST(Simd256LoadStoreTests, LoadAligned_LoadsAndStoresDataWithoutCorruptio
     flcn::Simd256_t<Type, Lane> reg;
     reg.loadAligned(data.data());
 
-    alignas(16) std::array<Type, Lane> result{};
+    alignas(32) std::array<Type, Lane> result{};
     reg.storeAligned(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -76,7 +76,7 @@ TYPED_TEST(Simd256LoadStoreTests, Load_LoadsDataFromUnalignedMemory)
     flcn::Simd256_t<Type, Lane> reg;
     reg.load(data.data());
 
-    alignas(16) std::array<Type, Lane> result{};
+    alignas(32) std::array<Type, Lane> result{};
     reg.storeAligned(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -91,7 +91,7 @@ TYPED_TEST(Simd256LoadStoreTests, Store_StoresDataIntoUnalignedMemory)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{}; // Min alignment possible is 8
+    alignas(32) std::array<Type, Lane> data{}; // Min alignment possible is 8
 
     for (size_t i = 0; i < Lane; ++i)
     {
@@ -121,7 +121,7 @@ TYPED_TEST(Simd256LoadStoreTests, Broadcast_StoresASingleValueIntoTheRegister)
     flcn::Simd256_t<Type, Lane> reg;
     reg.broadcast(data);
 
-    alignas(16) std::array<Type, Lane> result{};
+    alignas(32) std::array<Type, Lane> result{};
     reg.storeAligned(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -139,7 +139,7 @@ TYPED_TEST(Simd256LoadStoreTests, SetZero_ZeroesOutTheRegister)
     flcn::Simd256_t<Type, Lane> reg;
     reg.setZero();
 
-    alignas(16) std::array<Type, Lane> result{};
+    alignas(32) std::array<Type, Lane> result{};
 
     reg.storeAligned(result.data());
 

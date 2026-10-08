@@ -42,7 +42,7 @@ TYPED_TEST(Simd256CtorTests, Simd256_CanBeInitializedWithAStdVector)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::vector<Type> data{};
+    alignas(32) std::vector<Type> data{};
     data.resize(Lane);
 
     for (size_t i = 0; i < Lane; ++i)
@@ -52,7 +52,7 @@ TYPED_TEST(Simd256CtorTests, Simd256_CanBeInitializedWithAStdVector)
 
     flcn::Simd256_t<Type, Lane> reg{ data };
 
-    alignas(16) std::array<Type, Lane> result{};
+    alignas(32) std::array<Type, Lane> result{};
     reg.storeAligned(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -68,7 +68,7 @@ TYPED_TEST(Simd256CtorTests, Simd256_CanBeInitializedWithAStdArray)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{};
+    alignas(32) std::array<Type, Lane> data{};
 
     for (size_t i = 0; i < Lane; ++i)
     {
@@ -77,7 +77,7 @@ TYPED_TEST(Simd256CtorTests, Simd256_CanBeInitializedWithAStdArray)
 
     flcn::Simd256_t<Type, Lane> reg{ data };
 
-    alignas(16) std::array<Type, Lane> result{};
+    alignas(32) std::array<Type, Lane> result{};
     reg.storeAligned(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -92,7 +92,7 @@ TYPED_TEST(Simd256CtorTests, Simd256_CanBeInitializedWithACStyleArray)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) Type data[Lane]{};
+    alignas(32) Type data[Lane]{};
 
     for (size_t i = 0; i < Lane; ++i)
     {
@@ -101,7 +101,7 @@ TYPED_TEST(Simd256CtorTests, Simd256_CanBeInitializedWithACStyleArray)
 
     flcn::Simd256_t<Type, Lane> reg{ data };
 
-    alignas(16) std::array<Type, Lane> result{};
+    alignas(32) std::array<Type, Lane> result{};
     reg.storeAligned(result.data());
 
     for (size_t i = 0; i < Lane; ++i)

@@ -87,7 +87,7 @@ TYPED_TEST(Simd256UtilsTests, HasNaN_ReturnsValidMask)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{}, resultMask;
+    alignas(32) std::array<Type, Lane> data{}, resultMask;
     for (size_t i = 0; i < Lane; ++i)
     {
         data[i] = this->nanVec[i];
@@ -110,7 +110,7 @@ TYPED_TEST(Simd256UtilsTests, HasInf_ReturnsValidMask)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{}, resultMask;
+    alignas(32) std::array<Type, Lane> data{}, resultMask;
     for (size_t i = 0; i < Lane; ++i)
     {
         data[i] = this->infVec[i];
@@ -137,7 +137,7 @@ using namespace simd::testing;
         {                                                                                                              \
             flcn::Simd256_t<Type, Lane> regA{ Data };                                                                \
                                                                                                                        \
-            alignas(16) std::array<Type, Lane> resultMask{};                                                           \
+            alignas(32) std::array<Type, Lane> resultMask{};                                                           \
             auto regRes = regA.hasNan();                                                                               \
             regRes.storeAligned(resultMask.data());                                                                    \
                                                                                                                        \
@@ -182,7 +182,7 @@ SIMD256_HAS_NAN_TESTS_FP(FP64_4Lanes_AlternatingNaN, FP64, 4, DATA_FP64_4LANES_M
         {                                                                                                              \
             flcn::Simd256_t<Type, Lane> regA{ Data };                                                                \
                                                                                                                        \
-            alignas(16) std::array<Type, Lane> resultMask{};                                                           \
+            alignas(32) std::array<Type, Lane> resultMask{};                                                           \
             auto regRes = regA.hasInf();                                                                               \
             regRes.storeAligned(resultMask.data());                                                                    \
                                                                                                                        \

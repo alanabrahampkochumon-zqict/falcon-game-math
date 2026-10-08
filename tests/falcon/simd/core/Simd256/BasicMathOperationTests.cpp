@@ -64,7 +64,7 @@ TYPED_TEST(Simd256BasicMathTests, Min_ReturnsARegisterWithMinimumValuesFromEithe
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = this->a[i];
@@ -92,7 +92,7 @@ TYPED_TEST(Simd256BasicMathTests, Max_ReturnsARegisterWithMaximumValuesFromEithe
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = this->a[i];
@@ -120,7 +120,7 @@ TYPED_TEST(Simd256BasicMathTests, MemberAbsFunction_ReturnsARegisterWithAbsolute
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> data{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         data[i] = this->absData[i];
@@ -156,7 +156,7 @@ TYPED_TEST(Simd256BasicMathTests, Abs_ReturnsARegisterWithAbsoluteValues)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> data{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         data[i] = this->absData[i];
@@ -190,7 +190,7 @@ TYPED_TEST(Simd256BasicMathTests, MemberSqrtFunction_ReturnsARegisterWithSquareR
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> data{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         data[i] = this->a[i];
@@ -222,7 +222,7 @@ TYPED_TEST(Simd256BasicMathTests, Sqrt_ReturnsARegisterWithSquareRootValues)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> data{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         data[i] = this->a[i];
@@ -254,7 +254,7 @@ TYPED_TEST(Simd256BasicMathTests, HorizontalMax_ReturnsTheMaxValueFromTheRegiste
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{};
+    alignas(32) std::array<Type, Lane> data{};
     Type max = std::numeric_limits<Type>::min();
     for (size_t i = 0; i < Lane; ++i)
     {
@@ -276,7 +276,7 @@ TYPED_TEST(Simd256BasicMathTests, HorizontalMin_ReturnsTheMaxValueFromTheRegiste
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> data{};
+    alignas(32) std::array<Type, Lane> data{};
     Type min = std::numeric_limits<Type>::max();
     for (size_t i = 0; i < Lane; ++i)
     {

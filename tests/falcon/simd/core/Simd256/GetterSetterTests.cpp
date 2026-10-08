@@ -37,7 +37,7 @@ namespace
 
         static constexpr auto max = std::numeric_limits<typename T::Type>::max();
         static constexpr auto min = std::numeric_limits<typename T::Type>::min();
-        alignas(16) static constexpr std::array<typename T::Type, 32> data = { max, min, 0, 3,  5,  11, 15, 3,
+        alignas(32) static constexpr std::array<typename T::Type, 32> data = { max, min, 0, 3,  5,  11, 15, 3,
                                                                                1,   2,   5, 12, 14, 3,  15, 12,
                                                                                max, min, 0, 3,  5,  11, 15, 3,
                                                                                1,   2,   5, 12, 14, 3,  15, 12 };
@@ -64,7 +64,7 @@ TYPED_TEST(Simd256GetterSetterTests, Set_FillsActiveLanesInCorrectOrder)
     /// Grab the register prefilled with values using set
     auto reg = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
 
-    alignas(16) std::array<Type, MaxLanes> result{};
+    alignas(32) std::array<Type, MaxLanes> result{};
     reg.store(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -91,7 +91,7 @@ TYPED_TEST(Simd256GetterSetterTests, Set_FillsUnoccupiedSpaceWithZeroes)
     {
         auto reg = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
 
-        alignas(16) std::array<Type, MaxLanes> result{};
+        alignas(32) std::array<Type, MaxLanes> result{};
         reg.store(result.data());
 
 
@@ -111,7 +111,7 @@ TEST(Simd256GetterSetterTests, Set_CanTakeParametersLessThanLaneSize)
 
     reg.set(static_cast<Type>(1), static_cast<Type>(2), static_cast<Type>(3), static_cast<Type>(4),
             static_cast<Type>(5), static_cast<Type>(6), static_cast<Type>(7));
-    alignas(16) std::array<Type, Lane> result;
+    alignas(32) std::array<Type, Lane> result;
     reg.store(result.data());
 
     EXPECT_EQ(1, result[0]);
@@ -133,7 +133,7 @@ TYPED_TEST(Simd256GetterSetterTests, SetZero_FillsTheLanesWithZeroes)
     auto reg = flcn::Simd256_t<Type, Lane>();
     reg.setZero();
 
-    alignas(16) std::array<Type, Lane> result{};
+    alignas(32) std::array<Type, Lane> result{};
     reg.store(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -152,7 +152,7 @@ TYPED_TEST(Simd256GetterSetterTests, SetOne_FillsTheLanesWithOnes)
     auto reg = flcn::Simd256_t<Type, Lane>();
     reg.setOne();
 
-    alignas(16) std::array<Type, Lane> result{};
+    alignas(32) std::array<Type, Lane> result{};
     reg.store(result.data());
 
     for (size_t i = 0; i < Lane; ++i)
@@ -221,7 +221,7 @@ TEST(Simd256GetterSetterTests, Integrals_Naive_ReturnsDefaultRegister)
 
     const auto naiveReg = reg.naive();
 
-    alignas(16) std::array<int, 4> dataLower{}, dataUpper{};
+    alignas(32) std::array<int, 4> dataLower{}, dataUpper{};
     _mm_store_si128(reinterpret_cast<__m128i*>(dataLower.data()), naiveReg.lower);
     _mm_store_si128(reinterpret_cast<__m128i*>(dataUpper.data()), naiveReg.upper);
 
@@ -242,7 +242,7 @@ TEST(Simd256GetterSetterTests, Float_Naive_ReturnsDefaultRegister)
 
     const auto naiveReg = reg.naive();
 
-    alignas(16) std::array<float, 4> dataLower{}, dataUpper{};
+    alignas(32) std::array<float, 4> dataLower{}, dataUpper{};
     _mm_store_ps(dataLower.data(), naiveReg.lower);
     _mm_store_ps(dataUpper.data(), naiveReg.upper);
 
@@ -263,7 +263,7 @@ TEST(Simd256GetterSetterTests, Double_Naive_ReturnsDefaultRegister)
 
     const auto naiveReg = reg.naive();
 
-    alignas(16) std::array<double, 2> dataLower{}, dataUpper{};
+    alignas(32) std::array<double, 2> dataLower{}, dataUpper{};
     _mm_store_pd(dataLower.data(), naiveReg.lower);
     _mm_store_pd(dataUpper.data(), naiveReg.upper);
 
@@ -281,7 +281,7 @@ TEST(Simd256GetterSetterTests, UnaryTimesOperator_IntegralRegister_ReturnsDefaul
 
     const auto naiveReg = *reg;
 
-    alignas(16) std::array<int, 4> dataLower{}, dataUpper{};
+    alignas(32) std::array<int, 4> dataLower{}, dataUpper{};
     _mm_store_si128(reinterpret_cast<__m128i*>(dataLower.data()), naiveReg.lower);
     _mm_store_si128(reinterpret_cast<__m128i*>(dataUpper.data()), naiveReg.upper);
 
@@ -303,7 +303,7 @@ TEST(Simd256GetterSetterTests, UnaryTimesOperator_FloatRegister_ReturnsDefaultRe
 
     const auto naiveReg = *reg;
 
-    alignas(16) std::array<float, 4> dataLower{}, dataUpper{};
+    alignas(32) std::array<float, 4> dataLower{}, dataUpper{};
     _mm_store_ps(dataLower.data(), naiveReg.lower);
     _mm_store_ps(dataUpper.data(), naiveReg.upper);
 
@@ -325,7 +325,7 @@ TEST(Simd256GetterSetterTests, UnaryTimesOperator_DoubleRegister_ReturnsDefaultR
 
     const auto naiveReg = *reg;
 
-    alignas(16) std::array<double, 2> dataLower{}, dataUpper{};
+    alignas(32) std::array<double, 2> dataLower{}, dataUpper{};
     _mm_store_pd(dataLower.data(), naiveReg.lower);
     _mm_store_pd(dataUpper.data(), naiveReg.upper);
 
@@ -344,7 +344,7 @@ using namespace simd::testing;
         {                                                                                                              \
             constexpr auto max                                 = std::numeric_limits<Type>::max();                     \
             constexpr auto min                                 = std::numeric_limits<Type>::min();                     \
-            alignas(16) constexpr std::array<Type, 32> dataArr = { max, min, 0, 3,  5,  11,  15,  3, 1,  2, 5,         \
+            alignas(32) constexpr std::array<Type, 32> dataArr = { max, min, 0, 3,  5,  11,  15,  3, 1,  2, 5,         \
                                                                    12,  14,  3, 15, 12, max, min, 0, 3,  5, 11,        \
                                                                    15,  3,   1, 2,  5,  12,  14,  3, 15, 12 };         \
                                                                                                                        \
@@ -501,7 +501,7 @@ TEST_SIMD256_CONST_GET_AT_RETURNS_VALUE_AT_INDEX(FP64_4Lanes_AtIndex3, FP64, 4, 
         {                                                                                                              \
             constexpr auto max                                 = std::numeric_limits<Type>::max();                     \
             constexpr auto min                                 = std::numeric_limits<Type>::min();                     \
-            alignas(16) constexpr std::array<Type, 32> dataArr = { max, min, 0, 3,  5,  11,  15,  3, 1,  2, 5,         \
+            alignas(32) constexpr std::array<Type, 32> dataArr = { max, min, 0, 3,  5,  11,  15,  3, 1,  2, 5,         \
                                                                    12,  14,  3, 15, 12, max, min, 0, 3,  5, 11,        \
                                                                    15,  3,   1, 2,  5,  12,  14,  3, 15, 12 };         \
                                                                                                                        \

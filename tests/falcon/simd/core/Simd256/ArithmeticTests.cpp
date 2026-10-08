@@ -58,7 +58,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinaryAddOperation_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = static_cast<Type>(i * 3);
@@ -85,7 +85,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinaryAddOperation_ReturnsAValidResult)
 TEST(Simd256ArithmeticTests, BinaryAddOperation_WorksWithMixedNumbers)
 {
 
-    alignas(16) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 27, 45, 19 }, rhs{ -1, 5, -5, -1, 5, -5, -1, 12 },
+    alignas(32) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 27, 45, 19 }, rhs{ -1, 5, -5, -1, 5, -5, -1, 12 },
         expected{ 0, 10, -7, -1, 0, 22, 44, 31 }, result{};
 
     flcn::Simd256_t<float, 8> regA, regB;
@@ -108,7 +108,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundAddOperation_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = static_cast<Type>(i * 3);
@@ -133,7 +133,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundAddOperation_ReturnsAValidResult)
 TEST(Simd256ArithmeticTests, CompoundAddOperation_WorksWithMixedNumbers)
 {
 
-    alignas(16) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 27, 45, 19 }, rhs{ -1, 5, -5, -1, 5, -5, -1, 12 },
+    alignas(32) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 27, 45, 19 }, rhs{ -1, 5, -5, -1, 5, -5, -1, 12 },
         expected{ 0, 10, -7, -1, 0, 22, 44, 31 }, result{};
 
     flcn::Simd256_t<float, 8> regA, regB;
@@ -156,7 +156,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinarySubtractOperation_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = static_cast<Type>(i * 5);
@@ -182,7 +182,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinarySubtractOperation_ReturnsAValidResult)
 TEST(Simd256ArithmeticTests, BinarySubtractOperation_WorksWithMixedNumbers)
 {
 
-    alignas(16) std::array<float, 8> lhs{ 1, 5, -2, 0, 11, -12, 13, -14 }, rhs{ -1, 5, -5, -1, 1, 5, -2, 0 },
+    alignas(32) std::array<float, 8> lhs{ 1, 5, -2, 0, 11, -12, 13, -14 }, rhs{ -1, 5, -5, -1, 1, 5, -2, 0 },
         expected{ 2, 0, 3, 1, 10, -17, 15, -14 }, result{};
 
     flcn::Simd256_t<float, 8> regA, regB;
@@ -205,7 +205,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundSubtractOperation_ReturnsAValidResult
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = static_cast<Type>(i * 5);
@@ -230,7 +230,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundSubtractOperation_ReturnsAValidResult
 TEST(Simd256ArithmeticTests, CompoundSubtractOperation_WorksWithMixedNumbers)
 {
 
-    alignas(16) std::array<float, 8> lhs{ 1, 5, -2, 0, 11, -12, 13, -14 }, rhs{ -1, 5, -5, -1, 1, 5, -2, 0 },
+    alignas(32) std::array<float, 8> lhs{ 1, 5, -2, 0, 11, -12, 13, -14 }, rhs{ -1, 5, -5, -1, 1, 5, -2, 0 },
         expected{ 2, 0, 3, 1, 10, -17, 15, -14 }, result{};
 
     flcn::Simd256_t<float, 8> regA, regB;
@@ -255,7 +255,7 @@ TYPED_TEST(Simd256ArithmeticTests, UnaryMinusOperator_ReturnsAValidResult)
 
     Type min = std::numeric_limits<Type>::min();
     Type max = std::numeric_limits<Type>::max();
-    alignas(16) std::array<Type, Lane> data{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> data{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
 
@@ -294,7 +294,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinaryMultiplication_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = this->a[i];
@@ -318,7 +318,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinaryMultiplication_ReturnsAValidResult)
 
 TEST(Simd256ArithmeticTests, BinaryMultiplicationOperation_WorksWithMixedNumbers)
 {
-    alignas(16) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 4, 1, 10 }, rhs{ -1, 5, -5, -1, 6, 5, 13, 12 }, result{};
+    alignas(32) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 4, 1, 10 }, rhs{ -1, 5, -5, -1, 6, 5, 13, 12 }, result{};
     const std::array<float, 8> expected{ -1, 25, 10, 0, -30, 20, 13, 120 };
 
     flcn::Simd256_t<float, 8> regA, regB;
@@ -342,7 +342,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundMultiplication_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = this->a[i];
@@ -366,7 +366,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundMultiplication_ReturnsAValidResult)
 
 TEST(Simd256ArithmeticTests, CompoundMultiplicationOperation_WorksWithMixedNumbers)
 {
-    alignas(16) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 4, 1, 10 }, rhs{ -1, 5, -5, -1, 6, 5, 13, 12 }, result{};
+    alignas(32) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 4, 1, 10 }, rhs{ -1, 5, -5, -1, 6, 5, 13, 12 }, result{};
     const std::array<float, 8> expected{ -1, 25, 10, 0, -30, 20, 13, 120 };
 
     flcn::Simd256_t<float, 8> regA, regB;
@@ -388,7 +388,7 @@ TYPED_TEST(Simd256ArithmeticTests, DivReg_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = this->a[i];
@@ -420,7 +420,7 @@ TYPED_TEST(Simd256ArithmeticTests, DivReg_MaintainsPrecisionForAtUpperAndLowerLi
     constexpr auto largestNumber  = std::numeric_limits<Type>::max();
     constexpr auto smallestNumber = std::numeric_limits<Type>::min();
 
-    alignas(16) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = this->a[i];
@@ -449,7 +449,7 @@ TYPED_TEST(Simd256ArithmeticTests, DivReg_MaintainsPrecisionForAtUpperAndLowerLi
 
 TEST(Simd256ArithmeticTests, DivReg_WorksWithMixedNumbers)
 {
-    alignas(16) std::array<float, 8> lhs{ 25, -51, 13, 0, 12, 15, 44, 17 }, rhs{ -5, 25, 3, 16, 2, 3, 11, 2 }, result{};
+    alignas(32) std::array<float, 8> lhs{ 25, -51, 13, 0, 12, 15, 44, 17 }, rhs{ -5, 25, 3, 16, 2, 3, 11, 2 }, result{};
     const std::array<float, 8> expected{ -5, -2.04f, 4.333333f, 0, 6, 5, 4, 8.5 };
 
     flcn::Simd256_t<float, 8> regA, regB;
@@ -474,7 +474,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinaryDivideOperator_ReturnsAValidResult)
     constexpr size_t Lane = TypeParam::VALUE;
     const Type divisor    = Type(5);
 
-    alignas(16) std::array<Type, Lane> lhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = this->a[i];
@@ -507,7 +507,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinaryDivideOperator_MaintainsPrecisionForAtU
 
     // We are swapping for the largest and smallest for the first two indices
     // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
-    alignas(16) std::array<Type, Lane> lhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = this->a[i];
@@ -534,7 +534,7 @@ TYPED_TEST(Simd256ArithmeticTests, BinaryDivideOperator_MaintainsPrecisionForAtU
 
 TEST(Simd256ArithmeticTests, BinaryDivideOperator_WorksWithMixedNumbers)
 {
-    alignas(16) std::array<float, 8> lhs{ 25, -51, 13, 0, 12, 15, 44, 17 }, result{};
+    alignas(32) std::array<float, 8> lhs{ 25, -51, 13, 0, 12, 15, 44, 17 }, result{};
     const std::array<float, 8> expected{ -6.25, 12.75, -3.25, -0.0, -3.0, -3.75, -11.0, -4.25 };
 
     flcn::Simd256_t<float, 8> regA;
@@ -558,7 +558,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundDivideOperator_ReturnsAValidResult)
     constexpr size_t Lane = TypeParam::VALUE;
     const Type divisor    = Type(5);
 
-    alignas(16) std::array<Type, Lane> lhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = this->a[i];
@@ -591,7 +591,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundDivideOperator_MaintainsPrecisionForA
 
     // We are swapping for the largest and smallest for the first two indices
     // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
-    alignas(16) std::array<Type, Lane> lhs{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> lhs{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         lhs[i]      = this->a[i];
@@ -618,7 +618,7 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundDivideOperator_MaintainsPrecisionForA
 
 TEST(Simd256ArithmeticTests, CompoundDivideOperator_WorksWithMixedNumbers)
 {
-    alignas(16) std::array<float, 8> lhs{ 25, -51, 13, 0, 12, 15, 44, 17 }, result{};
+    alignas(32) std::array<float, 8> lhs{ 25, -51, 13, 0, 12, 15, 44, 17 }, result{};
     const std::array<float, 8> expected{ -6.25, 12.75, -3.25, -0.0, -3.0, -3.75, -11.0, -4.25 };
 
     flcn::Simd256_t<float, 8> regA;
@@ -643,7 +643,7 @@ TYPED_TEST(Simd256ArithmeticTests, FMA_ReturnsAValidResult)
 
     // We are swapping for the largest and smallest for the first two indices
     // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
-    alignas(16) std::array<Type, Lane> a{}, b{}, c{}, expected{}, result{};
+    alignas(32) std::array<Type, Lane> a{}, b{}, c{}, expected{}, result{};
     for (size_t i = 0; i < Lane; ++i)
     {
         a[i]        = this->a[i];
@@ -672,7 +672,7 @@ TYPED_TEST(Simd256ArithmeticTests, HorizontalAdd_ReturnsAValidResult)
 
     // We are swapping for the largest and smallest for the first two indices
     // since we have at least 2 lanes(128 / 64(max data type size)) we can safely inject those values
-    alignas(16) std::array<Type, Lane> a{};
+    alignas(32) std::array<Type, Lane> a{};
     Type sum = 0;
     for (size_t i = 0; i < Lane; ++i)
     {
@@ -692,7 +692,7 @@ TYPED_TEST(Simd256ArithmeticTests, HorizontalSub_ReturnsAValidResult)
     using Type            = TypeParam::Type;
     constexpr size_t Lane = TypeParam::VALUE;
 
-    alignas(16) std::array<Type, Lane> a{};
+    alignas(32) std::array<Type, Lane> a{};
     Type difference = 0;
     for (size_t i = 0; i < Lane; ++i)
     {
