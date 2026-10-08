@@ -18,15 +18,9 @@ option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Flags for keeping the library lightweight when a consumer imports it
 option(FALCON_BENCHMARK "Enables FALCON Benchmark Suite")
 option(FALCON_TESTS "Enables FALCON Benchmark Suite")
-option(FALCON_DEMO_RASTERIZER "Enables FALCON Demo Rasterizer Application")
 option(FALCON_DOCS "Enables FALCON Documentation Generation")
 option(FALCON_STRICT_MODE "Enable Strict Warnings" OFF) # Option to enable compiler specific "Warning as Error"
 option(FALCON_ASAN "Enable ASan" OFF) # Option to enable ASAN # TODO: Fix ASAN
-
-
-if (FALCON_DEMO_RASTERIZER)
-    add_subdirectory(apps/rasterizer)
-endif ()
 
 include(cmake/ClangFormat.cmake)
 include(cmake/ClangTidy.cmake)

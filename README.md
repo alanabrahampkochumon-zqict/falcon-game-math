@@ -13,7 +13,6 @@ High performance math library written in modern C++. *Requires C++20 or above*
 
 ### General
 
-- **FALCON_DEMO_RASTERIZER**: Enables FALCON Demo Application.
 - **FALCON_DOCS**: Enables FALCON Documentation Generation.
 - **FALCON_STRICT_MODE**: Enables Strict Warnings, treating warnings as errors.
 - **FALCON_ASAN**: Enables Address Sanitizer in Strict Mode.

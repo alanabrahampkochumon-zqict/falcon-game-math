@@ -104,7 +104,6 @@ jobs:
           -D FALCON_COMBINED_TEST_RUN=OFF
           -D FALCON_SIMD_COMBINED_TEST_RUN=ON
           -D FALCON_BENCHMARK=OFF
-          -D FALCON_DEMO_RASTERIZER=OFF
           -D FALCON_DOCS=ON
           -DSDL_UNIX_CONSOLE_BUILD=ON
           -S ${{ github.workspace }}

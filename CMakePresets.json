@@ -10,7 +10,6 @@
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "FALCON_BENCHMARK": "ON",
         "FALCON_TESTS": "ON",
-        "FALCON_DEMO_RASTERIZER": "ON",
         "FALCON_DOCS": "ON",
         "FALCON_STRICT_MODE": "ON",
         "FALCON_SIMD_TESTS": "ON",
