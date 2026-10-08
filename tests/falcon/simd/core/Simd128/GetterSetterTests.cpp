@@ -32,13 +32,12 @@ namespace
     class Simd128GetterSetterTests: public testing::Test
     {
     public:
-        static constexpr auto REGISTER_SIZE_IN_BYTES = 32;
-        using Register                               = flcn::Simd128_t<typename T::Type, T::VALUE>;
+        using Register = flcn::Simd128_t<typename T::Type, T::VALUE>;
 
         static constexpr auto max = std::numeric_limits<typename T::Type>::max();
         static constexpr auto min = std::numeric_limits<typename T::Type>::min();
         alignas(16) static constexpr std::array<typename T::Type, 16> data = { max, min, 0, 3,  5,  11, 15, 3,
-                                                                               1,   2,   5, 12, 14, 3,  15, 12 };
+                                                                               1,   2,   5, 12, 14, 3,  15, 12};
 
         /// Testing condition
         template <size_t... Index>
@@ -57,7 +56,7 @@ TYPED_TEST(Simd128GetterSetterTests, Set_FillsActiveLanesInCorrectOrder)
 {
     using Type                       = typename TypeParam::Type;
     constexpr size_t Lane            = TypeParam::VALUE;
-    static constexpr size_t MaxLanes = 32 / sizeof(Type);
+    static constexpr size_t MaxLanes = 16 / sizeof(Type);
 
     /// Grab the register prefilled with values using set
     auto reg = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
@@ -77,7 +76,7 @@ TYPED_TEST(Simd128GetterSetterTests, Set_FillsUnoccupiedSpaceWithZeroes)
 {
     using Type                       = typename TypeParam::Type;
     constexpr size_t Lane            = TypeParam::VALUE;
-    static constexpr size_t MaxLanes = 32 / sizeof(Type);
+    static constexpr size_t MaxLanes = 16 / sizeof(Type);
 
     // If the register is perfectly full (e.g., 4 floats), there is no space to pad.
     // We can tell GTest to automatically skip this specific matrix combination!

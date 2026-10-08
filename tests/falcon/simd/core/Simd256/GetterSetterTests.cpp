@@ -31,8 +31,7 @@ namespace
     class Simd256GetterSetterTests: public testing::Test
     {
     public:
-        static constexpr size_t RegSizeInBytes = 32;
-        using Register                         = flcn::Simd256_t<typename T::Type, T::VALUE>;
+        using Register = flcn::Simd256_t<typename T::Type, T::VALUE>;
 
         static constexpr auto max = std::numeric_limits<typename T::Type>::max();
         static constexpr auto min = std::numeric_limits<typename T::Type>::min();
@@ -56,9 +55,9 @@ namespace
 
 TYPED_TEST(Simd256GetterSetterTests, Set_FillsActiveLanesInCorrectOrder)
 {
-    using Type                = TypeParam::Type;
-    constexpr size_t Lane     = TypeParam::VALUE;
-    const size_t MaxLanes = this->RegSizeInBytes / sizeof(Type);
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+    const size_t MaxLanes = 32 / sizeof(Type);
 
     /// Grab the register prefilled with values using set
     auto reg = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
@@ -76,9 +75,9 @@ TYPED_TEST(Simd256GetterSetterTests, Set_FillsActiveLanesInCorrectOrder)
 
 TYPED_TEST(Simd256GetterSetterTests, Set_FillsUnoccupiedSpaceWithZeroes)
 {
-    using Type                = typename TypeParam::Type;
-    constexpr size_t Lane     = TypeParam::VALUE;
-    const size_t MaxLanes = this->RegSizeInBytes / sizeof(Type);
+    using Type            = typename TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+    const size_t MaxLanes = 32 / sizeof(Type);
 
     // If the register is perfectly full (e.g., 4 floats), there is no space to pad.
     // We can tell GTest to automatically skip this specific matrix combination!
@@ -347,7 +346,7 @@ using namespace simd::testing;
                                                                    12,  14,  3, 15, 12, max, min, 0, 3,  5, 11,        \
                                                                    15,  3,   1, 2,  5,  12,  14,  3, 15, 12 };         \
                                                                                                                        \
-            flcn::Simd256_t<Type, Lanes> reg(dataArr.data());                                                        \
+            flcn::Simd256_t<Type, Lanes> reg(dataArr.data());                                                          \
             EXPECT_ANY_EQ(dataArr[Index], reg.getAt<Index>());                                                         \
         }
 
@@ -504,7 +503,7 @@ TEST_SIMD256_CONST_GET_AT_RETURNS_VALUE_AT_INDEX(FP64_4Lanes_AtIndex3, FP64, 4, 
                                                                    12,  14,  3, 15, 12, max, min, 0, 3,  5, 11,        \
                                                                    15,  3,   1, 2,  5,  12,  14,  3, 15, 12 };         \
                                                                                                                        \
-            flcn::Simd256_t<Type, Lanes> reg{};                                                                      \
+            flcn::Simd256_t<Type, Lanes> reg{};                                                                        \
             reg.setAt<Index>(dataArr[Index]);                                                                          \
             EXPECT_ANY_EQ(dataArr[Index], reg.getAt<Index>());                                                         \
         }
