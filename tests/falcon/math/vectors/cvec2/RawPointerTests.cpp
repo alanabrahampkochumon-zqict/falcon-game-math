@@ -12,7 +12,7 @@
 #include "CVec2TestSetup.h"
 
 /**
- * @addtogroup T_FGM_CVec2_Ptr
+ * @addtogroup T_FALCON_CVec2_Ptr
  * @{
  */
 

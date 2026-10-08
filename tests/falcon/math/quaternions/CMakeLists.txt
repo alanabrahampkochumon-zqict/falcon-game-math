@@ -22,7 +22,7 @@ target_sources(
 
         PRIVATE
         FILE_SET HEADERS
-        BASE_DIRS ${FGM_ROOT_INCLUDE_DIR}
+        BASE_DIRS ${FALCON_ROOT_INCLUDE_DIR}
         FILES
         ${SetupHeaderFiles}
         ${TestUtilities}
@@ -63,7 +63,7 @@ target_sources(
 
         PRIVATE
         FILE_SET HEADERS
-        BASE_DIRS ${FGM_ROOT_INCLUDE_DIR}
+        BASE_DIRS ${FALCON_ROOT_INCLUDE_DIR}
         FILES
         ${SetupHeaderFiles}
         ${TestUtilities}
@@ -85,9 +85,9 @@ target_precompile_headers(
 
 
 include(GoogleTest)
-if (FGM_COMBINED_TEST_RUN)
-    add_test(NAME FGMQuaternionsTestSuite COMMAND FalconMathQuaternionsTests)
-    add_test(NAME FGMQuaternionsDeathTestSuite COMMAND FalconMathQuaternionsDeathTests)
+if (FALCON_COMBINED_TEST_RUN)
+    add_test(NAME FALCONQuaternionsTestSuite COMMAND FalconMathQuaternionsTests)
+    add_test(NAME FALCONQuaternionsDeathTestSuite COMMAND FalconMathQuaternionsDeathTests)
 else ()
     gtest_discover_tests(FalconMathQuaternionsTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
     gtest_discover_tests(FalconMathQuaternionsDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)

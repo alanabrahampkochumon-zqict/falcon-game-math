@@ -5,7 +5,7 @@ if (CLANG_TIDY_EXE)
     # Create a custom target that you manually trigger
     add_custom_target(
             ${PROJECT_NAME}-Tidy
-            COMMAND ${CMAKE_COMMAND} -E echo "Running Clang-Tidy on FGM..."
+            COMMAND ${CMAKE_COMMAND} -E echo "Running Clang-Tidy on FALCON..."
             COMMAND run-clang-tidy -p ${CMAKE_BINARY_DIR} -header-filter=.*
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
             COMMENT "Running static analysis..."

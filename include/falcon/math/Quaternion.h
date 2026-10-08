@@ -14,7 +14,7 @@
  * @note Arithmetic operations are restricted to numeric types via @ref StrictArithmetic.
  *
  * @par Configuration ::TODO::Update
- * - Define `ENABLE_FGM_SHADER_OPERATORS` to enable comparison operators (`,`, `<`, etc.).
+ * - Define `ENABLE_FALCON_SHADER_OPERATORS` to enable comparison operators (`,`, `<`, etc.).
  *   Even if disabled, functional comparisons like @ref gt remain available.
  * - Define `FORCE_SCALAR` to disable SIMD optimizations (enabled by default on supported hardware).
  *
@@ -50,7 +50,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Quaternion_Init
+         * @addtogroup FALCON_Quaternion_Init
          * @{
          */
 
@@ -109,7 +109,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Quaternion_Access
+         * @addtogroup FALCON_Quaternion_Access
          * @{
          */
 
@@ -226,7 +226,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Quaternion_Arithmetic
+         * @addtogroup FALCON_Quaternion_Arithmetic
          * @{
          */
 
@@ -368,7 +368,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Quaternion_Equality
+         * @addtogroup FALCON_Quaternion_Equality
          * @{
          */
 
@@ -723,7 +723,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Quaternion_Algebra
+         * @addtogroup FALCON_Quaternion_Algebra
          * @{
          */
 
@@ -847,7 +847,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Quaternion_Vector_Algebra
+         * @addtogroup FALCON_Quaternion_Vector_Algebra
          * @{
          */
 
@@ -895,7 +895,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Quaternion_Utils
+         * @addtogroup FALCON_Quaternion_Utils
          * @{
          */
 
@@ -946,7 +946,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Quaternion_Const
+         * @addtogroup FALCON_Quaternion_Const
          * @{
          */
 
@@ -984,7 +984,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Quaternion_Arithmetic
+     * @addtogroup FALCON_Quaternion_Arithmetic
      * @{
      */
 

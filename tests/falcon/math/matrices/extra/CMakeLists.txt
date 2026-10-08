@@ -19,7 +19,7 @@ target_sources(
 
 target_include_directories(
         MatrixExtraOpTests PRIVATE
-        ${FGM_TEST_ROOT_DIR}/include
+        ${FALCON_TEST_ROOT_DIR}/include
 
 )
 

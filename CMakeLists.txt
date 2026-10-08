@@ -16,15 +16,15 @@ option(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Custom Options
 # Flags for keeping the library lightweight when a consumer imports it
-option(FGM_BENCHMARK "Enables FGM Benchmark Suite")
-option(FGM_TESTS "Enables FGM Benchmark Suite")
-option(FGM_DEMO_RASTERIZER "Enables FGM Demo Rasterizer Application")
-option(FGM_DOCS "Enables FGM Documentation Generation")
-option(FGM_STRICT_MODE "Enable Strict Warnings" OFF) # Option to enable compiler specific "Warning as Error"
-option(FGM_ASAN "Enable ASan" OFF) # Option to enable ASAN # TODO: Fix ASAN
+option(FALCON_BENCHMARK "Enables FALCON Benchmark Suite")
+option(FALCON_TESTS "Enables FALCON Benchmark Suite")
+option(FALCON_DEMO_RASTERIZER "Enables FALCON Demo Rasterizer Application")
+option(FALCON_DOCS "Enables FALCON Documentation Generation")
+option(FALCON_STRICT_MODE "Enable Strict Warnings" OFF) # Option to enable compiler specific "Warning as Error"
+option(FALCON_ASAN "Enable ASan" OFF) # Option to enable ASAN # TODO: Fix ASAN
 
 
-if (FGM_DEMO_RASTERIZER)
+if (FALCON_DEMO_RASTERIZER)
     add_subdirectory(apps/rasterizer)
 endif ()
 
@@ -33,21 +33,21 @@ include(cmake/ClangTidy.cmake)
 include(cmake/Dependencies.cmake)
 include(cmake/SimdCheck.cmake)
 
-if (FGM_DOCS)
+if (FALCON_DOCS)
     include(cmake/Doxygen.cmake)
 endif ()
 
-if (FGM_STRICT_MODE)
+if (FALCON_STRICT_MODE)
     include(cmake/StrictMode.cmake)
 endif ()
 
-if (FGM_ASAN)
+if (FALCON_ASAN)
     include(cmake/ASan.cmake)
 endif ()
 
 # Multi-processor compilation
 if (MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    message(STATUS "[FGM]: Enabling Multiprocessor compilation on MSVC")
+    message(STATUS "[Falcon]: Enabling Multiprocessor compilation on MSVC")
     add_compile_options("/MP")
 endif ()
 
@@ -56,7 +56,7 @@ add_subdirectory(include)
 # Test enabling is handled in tests CML per project
 add_subdirectory(tests)
 
-if (FGM_BENCHMARK)
-    message(STATUS "[FGM]: Benchmarks are enabled")
+if (FALCON_BENCHMARK)
+    message(STATUS "[Falcon]: Benchmarks are enabled")
     add_subdirectory(benchmarks)
 endif ()

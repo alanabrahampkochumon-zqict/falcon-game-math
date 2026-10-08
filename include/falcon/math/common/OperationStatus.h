@@ -19,7 +19,7 @@ namespace fgm
 {
 
     /**
-     * @addtogroup FGM_Math_Common
+     * @addtogroup FALCON_Math_Common
      * @{
      */
 

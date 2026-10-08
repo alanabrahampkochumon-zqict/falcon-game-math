@@ -16,7 +16,7 @@
  *
  * @par Configuration
  *      Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
- *      Define `FGM_LEFT_HANDED` to configure library to use left-handed coordinated system.
+ *      Define `FALCON_LEFT_HANDED` to configure library to use left-handed coordinated system.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -35,7 +35,7 @@ namespace fgm
     {
 
         /**
-         * @addtogroup FGM_Mat2x4_Members
+         * @addtogroup FALCON_Mat2x4_Members
          * @{
          */
 
@@ -50,7 +50,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x4_Init
+         * @addtogroup FALCON_Mat2x4_Init
          * @{
          */
 
@@ -110,7 +110,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x4_Access
+         * @addtogroup FALCON_Mat2x4_Access
          * @{
          */
 
@@ -168,7 +168,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x4_Equality
+         * @addtogroup FALCON_Mat2x4_Equality
          * @{
          */
 
@@ -311,7 +311,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x4_Arithmetic
+         * @addtogroup FALCON_Mat2x4_Arithmetic
          * @{
          */
 
@@ -579,7 +579,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x4_Algebra
+         * @addtogroup FALCON_Mat2x4_Algebra
          * @{
          */
 
@@ -632,7 +632,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x4_Utils
+         * @addtogroup FALCON_Mat2x4_Utils
          * @{
          */
 
@@ -684,7 +684,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup T_FGM_Mat2x4_Constant
+         * @addtogroup T_FALCON_Mat2x4_Constant
          * @{
          */
 
@@ -718,7 +718,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x4_Log
+         * @addtogroup FALCON_Mat2x4_Log
          * @{
          */
 
@@ -766,7 +766,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Mat2x4_Alias
+     * @addtogroup FALCON_Mat2x4_Alias
      * @{
      */
 

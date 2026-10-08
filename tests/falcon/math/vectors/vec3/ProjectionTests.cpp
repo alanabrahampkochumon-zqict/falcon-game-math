@@ -13,7 +13,7 @@
 
 
 /**
- * @addtogroup T_FGM_Vec3_Proj
+ * @addtogroup T_FALCON_Vec3_Proj
  * @{
  */
 

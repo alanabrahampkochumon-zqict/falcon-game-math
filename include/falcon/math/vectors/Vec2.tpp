@@ -382,7 +382,7 @@ namespace fgm
      *        COMPARISON OPERATORS         *
      ***************************************/
 
-#ifdef ENABLE_FGM_SHADER_OPERATORS
+#ifdef ENABLE_FALCON_SHADER_OPERATORS
 
     template <Arithmetic T>
     FALCON_INLINE constexpr Vec2<Mask_t<T>> Vec2<T>::operator>(const Vec2& rhs) const noexcept

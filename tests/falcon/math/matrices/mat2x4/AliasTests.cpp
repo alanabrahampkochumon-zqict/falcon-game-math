@@ -16,7 +16,7 @@
 
 
 /**
- * @addtogroup T_FGM_Mat2x4_Alias
+ * @addtogroup T_FALCON_Mat2x4_Alias
  * @{
  */
 

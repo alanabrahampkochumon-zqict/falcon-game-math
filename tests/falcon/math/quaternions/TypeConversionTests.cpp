@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_Quaternion_Type_Conv
+ * @addtogroup T_FALCON_Quaternion_Type_Conv
  * @{
  */
 

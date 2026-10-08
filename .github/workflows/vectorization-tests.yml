@@ -87,7 +87,7 @@ jobs:
         with:
           arch: x64
         if: matrix.os == 'windows-latest'
-      # Turn FGM_COMBINED_TEST_RUN to on when turning on FGM_Tests to ensure maximum speed with test runs
+      # Turn FALCON_COMBINED_TEST_RUN to on when turning on FALCON_Tests to ensure maximum speed with test runs
       - name: Configure CMake
         run: >
           cmake -B ${{ steps.strings.outputs.build-output-dir }}
@@ -96,16 +96,16 @@ jobs:
           -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -D FALCON_SIMD_MODE=${{ matrix.simd_backend_flag }}
-          -D FGM_STRICT_MODE=ON
+          -D FALCON_STRICT_MODE=ON
           -D NONCOMPREHENSIVE=ON
-          -D FGM_TESTS=OFF
+          -D FALCON_TESTS=OFF
           -D FALCON_SIMD_TESTS=ON
           -D FALCON_CORE_TESTS=ON
-          -D FGM_COMBINED_TEST_RUN=OFF
+          -D FALCON_COMBINED_TEST_RUN=OFF
           -D FALCON_SIMD_COMBINED_TEST_RUN=ON
-          -D FGM_BENCHMARK=OFF
-          -D FGM_DEMO_RASTERIZER=OFF
-          -D FGM_DOCS=ON
+          -D FALCON_BENCHMARK=OFF
+          -D FALCON_DEMO_RASTERIZER=OFF
+          -D FALCON_DOCS=ON
           -DSDL_UNIX_CONSOLE_BUILD=ON
           -S ${{ github.workspace }}
 

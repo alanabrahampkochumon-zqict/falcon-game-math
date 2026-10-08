@@ -16,7 +16,7 @@
 
 
 /**
- * @addtogroup FGM_Types
+ * @addtogroup FALCON_Types
  * @{
  */
 

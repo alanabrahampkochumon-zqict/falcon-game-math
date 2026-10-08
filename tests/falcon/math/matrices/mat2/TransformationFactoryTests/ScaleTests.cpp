@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_Mat2x2_Transforms
+ * @addtogroup T_FALCON_Mat2x2_Transforms
  * @{
  */
 namespace

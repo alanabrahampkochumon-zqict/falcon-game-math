@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: May 28, 2026
  *
- * @brief FGM Helper and Utility functions.
+ * @brief FALCON Helper and Utility functions.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -17,7 +17,7 @@ namespace fgm::utils
 {
 
     /**
-     * @addtogroup FGM_Utils
+     * @addtogroup FALCON_Utils
      * @{
      */
 

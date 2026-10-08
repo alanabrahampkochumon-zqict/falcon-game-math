@@ -40,7 +40,7 @@ FetchContent_Declare(
 )
 
 # Test Harness Dependencies
-if (FGM_TESTS OR FALCON_SIMD_TESTS)
+if (FALCON_TESTS OR FALCON_SIMD_TESTS)
     FetchContent_MakeAvailable(googletest)
     # Group google_test projects into a "Gtest" folder
     set_target_properties(
@@ -56,7 +56,7 @@ endif ()
 
 
 # Benchmark Dependencies
-if (FGM_BENCHMARK)
+if (FALCON_BENCHMARK)
     FetchContent_MakeAvailable(googlebenchmark)
     if(MSVC)
     else()
@@ -68,7 +68,7 @@ endif ()
 
 
 # Rasterizer Dependencies
-if (FGM_DEMO_RASTERIZER)
+if (FALCON_DEMO_RASTERIZER)
     FetchContent_MakeAvailable(sdl3)
     FetchContent_MakeAvailable(fast_float)
     set_target_properties(SDL3-static SDL3_test PROPERTIES FOLDER "${VENDORS_DIR}/SDL3")

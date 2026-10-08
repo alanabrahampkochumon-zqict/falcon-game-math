@@ -701,7 +701,7 @@ namespace fgm
         using R  = PromotedValue_t<T, U>;
         R cosine = std::cos(angle);
         R sine   = std::sin(angle);
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         return Mat2(cosine, sine, -sine, cosine);
 #else
         return Mat2(cosine, -sine, sine, cosine);

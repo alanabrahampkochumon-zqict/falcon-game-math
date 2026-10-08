@@ -7,7 +7,7 @@ add_subdirectory(falcon/simd)
 add_subdirectory(falcon/math)
 
 # Library Options
-option(FGM_FORCE_LEFT_HANDED "Use Left-Handed Coordinate System in Falcon Game Math")
+option(FALCON_FORCE_LEFT_HANDED "Use Left-Handed Coordinate System in Falcon Game Math")
 
 add_library(${FALCON_LIB_NAME} INTERFACE
         falcon/Falcon.h
@@ -27,10 +27,10 @@ target_include_directories(${FALCON_LIB_NAME} INTERFACE
         $<INSTALL_INTERFACE:include>
 )
 
-if (FGM_FORCE_LEFT_HANDED)
+if (FALCON_FORCE_LEFT_HANDED)
     message(STATUS "[Falcon]: Using Left-Handed Coordinate System")
-    target_compile_definitions(${FALCON_LIB_NAME} INTERFACE FGM_LEFT_HANDED)
-    target_compile_definitions(${FALCON_LIB_NAME} INTERFACE FGM_LEFT_HANDED)
+    target_compile_definitions(${FALCON_LIB_NAME} INTERFACE FALCON_LEFT_HANDED)
+    target_compile_definitions(${FALCON_LIB_NAME} INTERFACE FALCON_LEFT_HANDED)
 else ()
     message(STATUS "[Falcon]: Using Right-Handed Coordinate System")
 endif ()

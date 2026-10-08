@@ -15,7 +15,7 @@
 
 
 /**
- * @addtogroup T_FGM_Mat2x3_String_Repr
+ * @addtogroup T_FALCON_Mat2x3_String_Repr
  * @{
  */
 

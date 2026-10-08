@@ -16,7 +16,7 @@
 
 
 /**
- * @addtogroup T_FGM_Quaternion_Equality
+ * @addtogroup T_FALCON_Quaternion_Equality
  * @{
  */
 

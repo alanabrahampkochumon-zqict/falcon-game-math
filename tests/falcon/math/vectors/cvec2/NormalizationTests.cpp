@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_CVec2_Normalize
+ * @addtogroup T_FALCON_CVec2_Normalize
  * @{
  */
 

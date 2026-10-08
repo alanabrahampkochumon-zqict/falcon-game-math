@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_Mat3x3_Utils
+ * @addtogroup T_FALCON_Mat3x3_Utils
  * @{
  */
 

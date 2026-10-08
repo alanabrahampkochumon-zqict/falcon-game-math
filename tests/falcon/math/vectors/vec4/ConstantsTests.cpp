@@ -13,7 +13,7 @@
 
 
 /**
- * @addtogroup T_FGM_Vec4_Const
+ * @addtogroup T_FALCON_Vec4_Const
  * @{
  */
 
@@ -99,7 +99,7 @@ namespace
         static_assert(fgm::Vec4<int>::down().w() == 0);
 
 
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         /// @test Verify that @ref Vec4::forward() (LHS) returns a valid vector at compile time.
         static_assert(fgm::Vec4<int>::forward().x() == 0);
         static_assert(fgm::Vec4<int>::forward().y() == 0);
@@ -230,7 +230,7 @@ TYPED_TEST(Vec4ConstantsTests, DOWN_ReturnsUnitVectorWithOnlyNegativeYComponent)
 }
 
 
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
 
 /** @test Verify that @ref fgm::Vec4::FORWARD returns a unit vector aligned with positive z-axis. */
 TYPED_TEST(Vec4ConstantsTests, FORWARD_ReturnsUnitVectorWithOnlyPositiveZComponent)

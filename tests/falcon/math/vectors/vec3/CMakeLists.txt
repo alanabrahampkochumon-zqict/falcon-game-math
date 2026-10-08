@@ -27,7 +27,7 @@ target_sources(
 
 target_include_directories(
         Vec3Tests PRIVATE
-        ${FGM_TEST_ROOT_DIR}/include
+        ${FALCON_TEST_ROOT_DIR}/include
 )
 
 

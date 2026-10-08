@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_Vec4_Swizzle
+ * @addtogroup T_FALCON_Vec4_Swizzle
  * @{
  */
 

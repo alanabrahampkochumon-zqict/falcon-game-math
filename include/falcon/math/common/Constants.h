@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 21, 2026
  *
- * @brief Constant definitions of FGM.
+ * @brief Constant definitions of FALCON.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -17,7 +17,7 @@
 
 
 /**
- * @addtogroup FGM_Math_Constants
+ * @addtogroup FALCON_Math_Constants
  * @{
  */
 namespace fgm::constants

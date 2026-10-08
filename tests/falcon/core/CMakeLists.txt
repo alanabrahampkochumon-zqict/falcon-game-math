@@ -24,7 +24,7 @@ target_precompile_headers(
 
 target_link_libraries(FalconCoreTests PRIVATE FalconTestSetup Falcon::Falcon)
 
-if (FGM_COMBINED_TEST_RUN)
+if (FALCON_COMBINED_TEST_RUN)
     add_test(NAME FalconCoreTestSuite COMMAND FalconCoreTests)
 else ()
     gtest_discover_tests(FalconCoreTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)

@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup FGM_Messages
+ * @addtogroup FALCON_Messages
  * @{
  */
 

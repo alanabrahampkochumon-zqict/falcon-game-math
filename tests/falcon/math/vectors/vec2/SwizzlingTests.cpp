@@ -13,7 +13,7 @@
 
 
 /**
- * @addtogroup T_FGM_Vec2_Swizzle
+ * @addtogroup T_FALCON_Vec2_Swizzle
  * @{
  */
 

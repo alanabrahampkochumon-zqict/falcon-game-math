@@ -15,7 +15,7 @@
 
 
 /**
- * @addtogroup T_FGM_Vec2_String_Repr
+ * @addtogroup T_FALCON_Vec2_String_Repr
  * @{
  */
 

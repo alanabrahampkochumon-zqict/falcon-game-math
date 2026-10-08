@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 16, 2026
  *
- * @brief Global configuration for FGM library.
+ * @brief Global configuration for FALCON library.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -20,7 +20,7 @@ namespace fgm
 {
 
     /**
-     * @addtogroup FGM_Math_Config
+     * @addtogroup FALCON_Math_Config
      * @{
      */
 

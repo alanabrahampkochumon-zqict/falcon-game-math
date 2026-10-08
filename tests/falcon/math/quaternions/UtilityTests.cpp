@@ -13,7 +13,7 @@
 
 
 /**
- * @addtogroup T_FGM_Quaternion_Utils
+ * @addtogroup T_FALCON_Quaternion_Utils
  * @{
  */
 

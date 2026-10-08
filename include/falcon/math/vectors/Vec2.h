@@ -14,7 +14,7 @@
  *          and convert it to Vec2 after mutation logic, prior to operations.
  *
  * @par Configuration
- * Define `ENABLE_FGM_SHADER_OPERATORS` to enable comparison operators (>, <, etc.).
+ * Define `ENABLE_FALCON_SHADER_OPERATORS` to enable comparison operators (>, <, etc.).
  * Even if disabled, functional comparisons like `greaterThan()` remain available.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -54,7 +54,7 @@ namespace fgm
 
     public:
         /**
-         * @addtogroup FGM_Vec2_Members
+         * @addtogroup FALCON_Vec2_Members
          * @{
          */
 
@@ -66,7 +66,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Init
+         * @addtogroup FALCON_Vec2_Init
          * @{
          */
 
@@ -130,7 +130,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Access
+         * @addtogroup FALCON_Vec2_Access
          * @{
          */
 
@@ -266,7 +266,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Swizzle
+         * @addtogroup FALCON_Vec2_Swizzle
          * @{
          */
 
@@ -310,7 +310,7 @@ namespace fgm
         /** @} */
 
         /**
-         * @addtogroup FGM_CVec2_Ptr
+         * @addtogroup FALCON_CVec2_Ptr
          * @{
          */
 
@@ -443,7 +443,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Equality
+         * @addtogroup FALCON_Vec2_Equality
          * @{
          */
 
@@ -597,7 +597,7 @@ namespace fgm
         { return Vec2<bool>(static_cast<bool>(x()), static_cast<bool>(y())); }
 
         /**
-         * @addtogroup FGM_Vec2_Comparison
+         * @addtogroup FALCON_Vec2_Comparison
          * @{
          */
 
@@ -741,7 +741,7 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-#ifdef ENABLE_FGM_SHADER_OPERATORS
+#ifdef ENABLE_FALCON_SHADER_OPERATORS
 
         /**
          * @copydoc gt(const Vec2&) const
@@ -775,7 +775,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Bitwise
+         * @addtogroup FALCON_Vec2_Bitwise
          * @{
          */
 
@@ -850,7 +850,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Arithmetic
+         * @addtogroup FALCON_Vec2_Arithmetic
          * @{
          */
 
@@ -1097,7 +1097,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Product
+         * @addtogroup FALCON_Vec2_Product
          * @{
          */
 
@@ -1202,7 +1202,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Mag
+         * @addtogroup FALCON_Vec2_Mag
          * @{
          */
 
@@ -1303,7 +1303,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Dist
+         * @addtogroup FALCON_Vec2_Dist
          * @{
          */
 
@@ -1443,7 +1443,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Normalize
+         * @addtogroup FALCON_Vec2_Normalize
          * @{
          */
 
@@ -1552,7 +1552,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Proj
+         * @addtogroup FALCON_Vec2_Proj
          * @{
          */
 
@@ -2017,7 +2017,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Utils
+         * @addtogroup FALCON_Vec2_Utils
          * @{
          */
 
@@ -2068,7 +2068,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec2_Log
+         * @addtogroup FALCON_Vec2_Log
          * @{
          */
 
@@ -2106,7 +2106,7 @@ namespace fgm
         /** @} */
 
         /**
-         * @addtogroup FGM_Vec2_Const
+         * @addtogroup FALCON_Vec2_Const
          * @{
          */
 
@@ -2282,7 +2282,7 @@ namespace fgm
      *************************************/
 
     /**
-     * @addtogroup FGM_Vec2_Arithmetic
+     * @addtogroup FALCON_Vec2_Arithmetic
      * @{
      */
 
@@ -2309,7 +2309,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Vec2_Alias
+     * @addtogroup FALCON_Vec2_Alias
      * @{
      */
 

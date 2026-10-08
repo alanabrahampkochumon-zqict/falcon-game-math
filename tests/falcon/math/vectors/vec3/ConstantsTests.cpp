@@ -12,7 +12,7 @@
 #include "Vec3TestSetup.h"
 
 /**
- * @addtogroup T_FGM_Vec3_Const
+ * @addtogroup T_FALCON_Vec3_Const
  * @{
  */
 
@@ -97,7 +97,7 @@ namespace
         static_assert(fgm::Vec3<int>::down().z() == 0);
 
 
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         /// @test Verify that @ref Vec3::forward() (LHS) returns a valid vector at compile time.
         static_assert(fgm::Vec3<int>::forward().x() == 0);
         static_assert(fgm::Vec3<int>::forward().y() == 0);
@@ -229,7 +229,7 @@ TYPED_TEST(Vec3ConstantsTests, DOWN_ReturnsUnitVectorWithOnlyNegativeYComponent)
 }
 
 
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
 
 /** @test Verify that @ref fgm::Vec3::FORWARD returns a unit vector aligned with positive z-axis. */
 TYPED_TEST(Vec3ConstantsTests, FORWARD_ReturnsUnitVectorWithOnlyPositiveZComponent)

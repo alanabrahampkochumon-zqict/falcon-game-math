@@ -21,7 +21,7 @@ namespace fgm
     {
 
         /**
-         * @addtogroup FGM_Point2_Init
+         * @addtogroup FALCON_Point2_Init
          * @{
          */
 
@@ -33,7 +33,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Point2_Arithmetic
+         * @addtogroup FALCON_Point2_Arithmetic
          * @{
          */
 

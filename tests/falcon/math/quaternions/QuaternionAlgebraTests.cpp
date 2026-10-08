@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_Quaternion_Algebra
+ * @addtogroup T_FALCON_Quaternion_Algebra
  * @{
  */
 

@@ -18,7 +18,7 @@
 namespace fgm
 {
     /**
-     * @addtogroup FGM_Concepts
+     * @addtogroup FALCON_Concepts
      * @{
      */
 

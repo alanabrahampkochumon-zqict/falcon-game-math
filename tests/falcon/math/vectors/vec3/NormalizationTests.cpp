@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_Vec3_Normalize
+ * @addtogroup T_FALCON_Vec3_Normalize
  * @{
  */
 

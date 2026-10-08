@@ -8,11 +8,11 @@
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "FGM_BENCHMARK": "ON",
-        "FGM_TESTS": "ON",
-        "FGM_DEMO_RASTERIZER": "ON",
-        "FGM_DOCS": "ON",
-        "FGM_STRICT_MODE": "ON",
+        "FALCON_BENCHMARK": "ON",
+        "FALCON_TESTS": "ON",
+        "FALCON_DEMO_RASTERIZER": "ON",
+        "FALCON_DOCS": "ON",
+        "FALCON_STRICT_MODE": "ON",
         "FALCON_SIMD_TESTS": "ON",
         "FALCON_CORE_TESTS": "ON"
       }
@@ -64,7 +64,7 @@
         "CMAKE_CXX_FLAGS": "-target x86_64-pc-windows-msvc",
         "CMAKE_C_FLAGS": "-target x86_64-pc-windows-msvc",
         "CMAKE_LINKER": "lld-link",
-        "FGM_FORCE_LEFT_HANDED": "ON"
+        "FALCON_FORCE_LEFT_HANDED": "ON"
       }
     },
     {
@@ -118,7 +118,7 @@
         "CMAKE_CXX_FLAGS": "-target x86_64-pc-windows-msvc",
         "CMAKE_C_FLAGS": "-target x86_64-pc-windows-msvc",
         "CMAKE_LINKER": "lld-link",
-        "FGM_COMBINED_TEST_RUN": "ON"
+        "FALCON_COMBINED_TEST_RUN": "ON"
       }
     },
     {

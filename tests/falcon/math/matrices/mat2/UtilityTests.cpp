@@ -13,7 +13,7 @@
 
 
 /**
- * @addtogroup T_FGM_Mat2x2_Utils
+ * @addtogroup T_FALCON_Mat2x2_Utils
  * @{
  */
 

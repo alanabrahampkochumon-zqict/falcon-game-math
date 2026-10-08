@@ -13,7 +13,7 @@
 
 
 /**
- * @addtogroup T_FGM_Mat4x4_Negation
+ * @addtogroup T_FALCON_Mat4x4_Negation
  * @{
  */
 

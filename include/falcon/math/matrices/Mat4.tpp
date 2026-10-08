@@ -914,7 +914,7 @@ namespace fgm
         using R  = PromotedValue_t<T, U>;
         R cosine = std::cos(angle);
         R sine   = std::sin(angle);
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         return Mat4{
             T(1), T(0), T(0), T(0), T(0), cosine, sine, T(0), T(0), -sine, cosine, T(0), T(0), T(0), T(0), T(1)
         };
@@ -934,7 +934,7 @@ namespace fgm
         using R  = PromotedValue_t<T, U>;
         R cosine = std::cos(angle);
         R sine   = std::sin(angle);
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         return Mat4{ T(1), T(0),  T(0),   T(center.x()), T(0), cosine, sine, T(center.y()),
                      T(0), -sine, cosine, T(center.z()), T(0), T(0),   T(0), T(1) };
 #else
@@ -952,7 +952,7 @@ namespace fgm
         using R  = PromotedValue_t<T, U>;
         R cosine = std::cos(angle);
         R sine   = std::sin(angle);
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         return Mat4{
             cosine, T(0), -sine, T(0), T(0), T(1), T(0), T(0), sine, T(0), cosine, T(0), T(0), T(0), T(0), T(1)
         };
@@ -972,7 +972,7 @@ namespace fgm
         using R  = PromotedValue_t<T, U>;
         R cosine = std::cos(angle);
         R sine   = std::sin(angle);
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         return Mat4{ cosine, T(0), -sine,  T(center.x()), T(0), T(1), T(0), T(center.y()),
                      sine,   T(0), cosine, T(center.z()), T(0), T(0), T(0), T(1) };
 #else
@@ -991,7 +991,7 @@ namespace fgm
         R cosine = std::cos(angle);
         R sine   = std::sin(angle);
 
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         return Mat4{
             cosine, sine, T(0), T(0), -sine, cosine, T(0), T(0), T(0), T(0), T(1), T(0), T(0), T(0), T(0), T(1)
         };
@@ -1011,7 +1011,7 @@ namespace fgm
         using R  = PromotedValue_t<T, U>;
         R cosine = std::cos(angle);
         R sine   = std::sin(angle);
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         return Mat4{ cosine, sine, T(0), T(center.x()), -sine, cosine, T(0), T(center.y()),
                      T(0),   T(0), T(1), T(center.z()), T(0),  T(0),   T(0), T(1) };
 #else
@@ -1029,7 +1029,7 @@ namespace fgm
         using S = Magnitude<std::common_type_t<T, U>>;
 
         S c = static_cast<S>(std::cos(angle));
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         S s = -static_cast<S>(std::sin(angle));
 #else
         S s = static_cast<S>(std::sin(angle));
@@ -1072,7 +1072,7 @@ namespace fgm
         using S = Magnitude<std::common_type_t<T, U>>;
 
         S c = static_cast<S>(std::cos(angle));
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         S s = -static_cast<S>(std::sin(angle));
 #else
         S s = static_cast<S>(std::sin(angle));

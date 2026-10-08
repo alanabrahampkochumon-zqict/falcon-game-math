@@ -13,12 +13,12 @@
  * @note Matrices utilize a strict column-major internal memory layout. To align with standard mathematical notations,
  *       scalar constructors accept elements in row-major reading order. Vector-based constructors and array-style
  *       access (operator[]) operate directly on columns.
- * @note FGM uses **Right-Handed** coordinate system by default. To use **Left-Handed** coordinate system define
- *       `FGM_LEFT_HANDED` preprocessor macro.
+ * @note FALCON uses **Right-Handed** coordinate system by default. To use **Left-Handed** coordinate system define
+ *       `FALCON_LEFT_HANDED` preprocessor macro.
  *
  * @par Configuration
  *      Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
- *      Define `FGM_LEFT_HANDED` to configure library to use left-handed coordinated system.
+ *      Define `FALCON_LEFT_HANDED` to configure library to use left-handed coordinated system.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -40,7 +40,7 @@ namespace fgm
     struct Mat4x3
     {
         /**
-         * @addtogroup FGM_Mat4x3_Members
+         * @addtogroup FALCON_Mat4x3_Members
          * @{
          */
 
@@ -54,7 +54,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x3_Init
+         * @addtogroup FALCON_Mat4x3_Init
          * @{
          */
 
@@ -117,7 +117,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x3_Access
+         * @addtogroup FALCON_Mat4x3_Access
          * @{
          */
 
@@ -174,7 +174,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x3_Equality
+         * @addtogroup FALCON_Mat4x3_Equality
          * @{
          */
 
@@ -316,7 +316,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x3_Arithmetic
+         * @addtogroup FALCON_Mat4x3_Arithmetic
          * @{
          */
 
@@ -585,7 +585,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x3_Algebra
+         * @addtogroup FALCON_Mat4x3_Algebra
          * @{
          */
 
@@ -641,7 +641,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x3_Utils
+         * @addtogroup FALCON_Mat4x3_Utils
          * @{
          */
 
@@ -693,7 +693,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x3_Log
+         * @addtogroup FALCON_Mat4x3_Log
          * @{
          */
 
@@ -738,7 +738,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup T_FGM_Mat4x3_Constant
+         * @addtogroup T_FALCON_Mat4x3_Constant
          * @{
          */
 
@@ -781,7 +781,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Ma4x3_Alias
+     * @addtogroup FALCON_Ma4x3_Alias
      * @{
      */
 
@@ -811,7 +811,7 @@ namespace fgm
      **************************************/
 
     /**
-     * @addtogroup FGM_Mat4x3_Arithmetic
+     * @addtogroup FALCON_Mat4x3_Arithmetic
      * @{
      */
 

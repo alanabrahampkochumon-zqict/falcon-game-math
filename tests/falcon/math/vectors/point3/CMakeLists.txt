@@ -10,7 +10,7 @@ target_sources(
 
 target_include_directories(
         Point3Tests PRIVATE
-        ${FGM_TEST_ROOT_DIR}/include
+        ${FALCON_TEST_ROOT_DIR}/include
 )
 
 

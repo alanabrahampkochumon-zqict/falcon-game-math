@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_Mat4x4_Transforms
+ * @addtogroup T_FALCON_Mat4x4_Transforms
  * @{
  */
 
@@ -44,7 +44,7 @@ namespace
         {
             _angle = fgm::constants::PI<FP_T> / FP_T(2.0);
 
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
             _expectedMatX   = { fgm::Vec4{ COM_T(1), COM_T(0), COM_T(0), COM_T(0) },
                                 fgm::Vec4{ COM_T(0), COM_T(0), COM_T(-1), COM_T(0) },
                                 fgm::Vec4{ COM_T(0), COM_T(1), COM_T(0), COM_T(0) }, fgm::Vec4 {
@@ -128,7 +128,7 @@ namespace
             _center = fgm::Vec3{ T(1), T(2), T(3) };
             _axis   = fgm::Vec3{ T(0.26726124191242440), T(0.53452248382484879), T(0.80178372573727319) };
 
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
             _expectedMatX = { fgm::Vec4{ T(1.0), T(0.0), T(0.0), T(0.0) },
                               fgm::Vec4{ T(0.0), T(0.70710678118654757), T(-0.70710678118654757), T(0.0) },
                               fgm::Vec4{ T(0.0), T(0.70710678118654757), T(0.70710678118654757), T(0.0) }, fgm::Vec4 {

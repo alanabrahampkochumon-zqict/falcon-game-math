@@ -13,6 +13,6 @@
 
 int main()
 {
-    demo::Application application("FGM Software Rasterizer", "1.0.0", "com.fgm.rasterizer");
+    demo::Application application("FALCON Software Rasterizer", "1.0.0", "com.fgm.rasterizer");
     application.run();
 }

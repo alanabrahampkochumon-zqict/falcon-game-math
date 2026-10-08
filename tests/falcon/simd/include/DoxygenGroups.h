@@ -4,7 +4,7 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 18, 2026
  *
- * @brief Doxygen groups for organizing FGM SIMD test harness.
+ * @brief Doxygen groups for organizing FALCON SIMD test harness.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */

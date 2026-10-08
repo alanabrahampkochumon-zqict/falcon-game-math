@@ -13,7 +13,7 @@
 
 
 /**
- * @addtogroup T_FGM_CVec2_Bool_Bit
+ * @addtogroup T_FALCON_CVec2_Bool_Bit
  * @{
  */
 

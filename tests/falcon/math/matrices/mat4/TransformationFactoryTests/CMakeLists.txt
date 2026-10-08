@@ -15,7 +15,7 @@ target_include_directories(
         Mat4TransformTests
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
-        ${FGM_TEST_ROOT_DIR}/include
+        ${FALCON_TEST_ROOT_DIR}/include
 )
 
 target_link_libraries(

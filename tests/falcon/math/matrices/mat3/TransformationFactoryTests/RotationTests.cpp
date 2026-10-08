@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_Mat3x3_Transforms
+ * @addtogroup T_FALCON_Mat3x3_Transforms
  * @{
  */
 
@@ -43,7 +43,7 @@ namespace
         void SetUp() override
         {
             _angle = fgm::constants::PI<FP_T> / FP_T(2.0);
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
             _expectedMatX = { fgm::Vec3{ COM_T(1), COM_T(0), COM_T(0) }, fgm::Vec3{ COM_T(0), COM_T(0), COM_T(-1) },
                               fgm::Vec3 {
                                   COM_T(0),
@@ -99,7 +99,7 @@ namespace
             _center = fgm::CVec2{ T(1), T(2) };
             _axis   = fgm::Vec3{ T(0.26726124191242440), T(0.53452248382484879), T(0.80178372573727319) };
 
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
             _expectedMatX = { fgm::Vec3{ T(1.0), T(0.0), T(0.0) },
                               fgm::Vec3{ T(0.0), T(0.70710678118654757), T(-0.70710678118654757) }, fgm::Vec3 {
                                   T(0.0),

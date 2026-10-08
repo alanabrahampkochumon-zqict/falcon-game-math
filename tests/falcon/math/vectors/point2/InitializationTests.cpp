@@ -13,7 +13,7 @@
 
 
 /**
- * @addtogroup T_FGM_Point2_Init
+ * @addtogroup T_FALCON_Point2_Init
  * @{
  */
 

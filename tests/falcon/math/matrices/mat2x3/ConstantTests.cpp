@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_Mat2x3x4_Constant
+ * @addtogroup T_FALCON_Mat2x3x4_Constant
  * @{
  */
 

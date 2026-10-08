@@ -13,16 +13,16 @@ High performance math library written in modern C++. *Requires C++20 or above*
 
 ### General
 
-- **FGM_DEMO_RASTERIZER**: Enables FGM Demo Application.
-- **FGM_DOCS**: Enables FGM Documentation Generation.
-- **FGM_STRICT_MODE**: Enables Strict Warnings, treating warnings as errors.
-- **FGM_ASAN**: Enables Address Sanitizer in Strict Mode.
-- **FGM_FORCE_LEFT_HANDED**: Switches Library to use Left Handed Coordinate System (Right-Handed by default).
+- **FALCON_DEMO_RASTERIZER**: Enables FALCON Demo Application.
+- **FALCON_DOCS**: Enables FALCON Documentation Generation.
+- **FALCON_STRICT_MODE**: Enables Strict Warnings, treating warnings as errors.
+- **FALCON_ASAN**: Enables Address Sanitizer in Strict Mode.
+- **FALCON_FORCE_LEFT_HANDED**: Switches Library to use Left Handed Coordinate System (Right-Handed by default).
 
 ### Testing and Benchmarks
 
-- **FGM_BENCHMARK**: Enables FGM Benchmark Suite.
-- **FGM_TESTS**: Enable FGM Unit Tests.
+- **FALCON_BENCHMARK**: Enables FALCON Benchmark Suite.
+- **FALCON_TESTS**: Enable FALCON Unit Tests.
 - **NONCOMPREHENSIVE**: Run unit tests with essential type matrix only.
 
 ### SIMD
@@ -43,7 +43,7 @@ The flag is currently only available for testing targets and will need to be def
 
 1. Generate project files using
     ```bash
-        cmake -B build -DENABLE_FGM_DEMO
+        cmake -B build -DENABLE_FALCON_DEMO
     ```
 
 2. Run the build using commandline

@@ -22,7 +22,7 @@ target_sources(
 
 target_include_directories(
         Mat4x3Tests PRIVATE
-        ${FGM_TEST_ROOT_DIR}/include
+        ${FALCON_TEST_ROOT_DIR}/include
 )
 
 

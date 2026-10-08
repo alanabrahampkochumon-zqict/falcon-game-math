@@ -2,12 +2,12 @@ include(GoogleTest)
 
 # For faster CI/CD unit-tests on push are only run with essential types rather than the full type permutation.
 option(NONCOMPREHENSIVE "Run Unit tests with essential type matrix only")
-option(FGM_COMBINED_TEST_RUN "Runs entire test binaries as unified tests for fgm")
+option(FALCON_COMBINED_TEST_RUN "Runs entire test binaries as unified tests for fgm")
 option(FALCON_SIMD_COMBINED_TEST_RUN "Runs entire test binaries as unified tests for falcon simd")
 set(ENV{FALCON_SIMD_TEST_FLAG} "AUTO") # SIMD Test Flags for Falcon Math Suite
 
 # Add Project Sanitizers to Gtest
-if (TARGET gtest AND (FGM_TESTS OR FALCON_SIMD_TESTS))
+if (TARGET gtest AND (FALCON_TESTS OR FALCON_SIMD_TESTS))
     target_link_libraries(gtest PRIVATE ${PROJECT_NAME}-ProjectSanitizers)
     target_link_libraries(gmock PRIVATE ${PROJECT_NAME}-ProjectSanitizers)
     target_link_libraries(gtest_main PRIVATE ${PROJECT_NAME}-ProjectSanitizers)
@@ -41,7 +41,7 @@ if (FALCON_CORE_TESTS)
     add_subdirectory(falcon/core)
 endif ()
 
-if (FGM_TESTS)
+if (FALCON_TESTS)
     message(STATUS "[Falcon]: Game Math tests are enabled")
     add_subdirectory(falcon/math)
 endif ()

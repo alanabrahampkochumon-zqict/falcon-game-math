@@ -15,7 +15,7 @@
 
 
 /**
- * @addtogroup T_FGM_Vec3_Utils
+ * @addtogroup T_FALCON_Vec3_Utils
  * @{
  */
 

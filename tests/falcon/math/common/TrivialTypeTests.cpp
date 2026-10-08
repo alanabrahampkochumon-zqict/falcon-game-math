@@ -26,7 +26,7 @@
 #include <falcon/math/vectors/Vec4.h>
 
 /**
- * @addtogroup T_FGM_Trivial
+ * @addtogroup T_FALCON_Trivial
  * @{
  */
 

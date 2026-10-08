@@ -12,7 +12,7 @@
  * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
  *
  * @par Configuration
- * Define `ENABLE_FGM_SHADER_OPERATORS` to enable comparison operators (>, <, etc.).
+ * Define `ENABLE_FALCON_SHADER_OPERATORS` to enable comparison operators (>, <, etc.).
  * Even if disabled, functional comparisons like `greaterThan()` remain available.
  * Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
  *
@@ -37,7 +37,7 @@ namespace fgm
     struct CVec2
     {
         /**
-         * @addtogroup FGM_CVec2_Members
+         * @addtogroup FALCON_CVec2_Members
          * @{
          */
 
@@ -49,7 +49,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Init
+         * @addtogroup FALCON_CVec2_Init
          * @{
          */
 
@@ -106,7 +106,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Access
+         * @addtogroup FALCON_CVec2_Access
          * @{
          */
 
@@ -222,7 +222,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Swizzle
+         * @addtogroup FALCON_CVec2_Swizzle
          * @{
          */
 
@@ -268,7 +268,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Ptr
+         * @addtogroup FALCON_CVec2_Ptr
          * @{
          */
 
@@ -295,7 +295,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Equality
+         * @addtogroup FALCON_CVec2_Equality
          * @{
          */
 
@@ -517,7 +517,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Comparison
+         * @addtogroup FALCON_CVec2_Comparison
          * @{
          */
 
@@ -665,7 +665,7 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-#ifdef ENABLE_FGM_SHADER_OPERATORS
+#ifdef ENABLE_FALCON_SHADER_OPERATORS
 
         /**
          * @copydoc gt(const CVec2<U>&) const
@@ -707,7 +707,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Bitwise
+         * @addtogroup FALCON_CVec2_Bitwise
          * @{
          */
 
@@ -782,7 +782,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Arithmetic
+         * @addtogroup FALCON_CVec2_Arithmetic
          * @{
          */
 
@@ -1031,7 +1031,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Product
+         * @addtogroup FALCON_CVec2_Product
          * @{
          */
 
@@ -1153,7 +1153,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Mag
+         * @addtogroup FALCON_CVec2_Mag
          * @{
          */
 
@@ -1254,7 +1254,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Dist
+         * @addtogroup FALCON_CVec2_Dist
          * @{
          */
 
@@ -1421,7 +1421,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Normalize
+         * @addtogroup FALCON_CVec2_Normalize
          * @{
          */
 
@@ -1534,7 +1534,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Proj
+         * @addtogroup FALCON_CVec2_Proj
          * @{
          */
 
@@ -2118,7 +2118,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Utils
+         * @addtogroup FALCON_CVec2_Utils
          * @{
          */
 
@@ -2169,7 +2169,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_CVec2_Log
+         * @addtogroup FALCON_CVec2_Log
          * @{
          */
 
@@ -2202,7 +2202,7 @@ namespace fgm
         /** @} */
 
         /**
-         * @addtogroup FGM_CVec2_Const
+         * @addtogroup FALCON_CVec2_Const
          * @{
          */
 
@@ -2318,7 +2318,7 @@ namespace fgm
      *************************************/
 
     /**
-     * @addtogroup FGM_CVec2_Arithmetic
+     * @addtogroup FALCON_CVec2_Arithmetic
      * @{
      */
 
@@ -2344,7 +2344,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_CVec2_Alias
+     * @addtogroup FALCON_CVec2_Alias
      * @{
      */
 

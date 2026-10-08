@@ -12,7 +12,7 @@
  * @note Arithmetic operations are limited to numeric types via `StrictArithmetic` concept.
  *
  * @par Configuration
- * Define `ENABLE_FGM_SHADER_OPERATORS` to enable comparison operators (>, <, etc.).
+ * Define `ENABLE_FALCON_SHADER_OPERATORS` to enable comparison operators (>, <, etc.).
  * Even if disabled, functional comparisons like `greaterThan()` remain available.
  * Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
  *
@@ -38,7 +38,7 @@ namespace fgm
     struct Vec3
     {
         /**
-         * @addtogroup FGM_Vec3_Members
+         * @addtogroup FALCON_Vec3_Members
          * @{
          */
 
@@ -50,7 +50,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Init
+         * @addtogroup FALCON_Vec3_Init
          * @{
          */
 
@@ -108,7 +108,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Access
+         * @addtogroup FALCON_Vec3_Access
          * @{
          */
 
@@ -268,7 +268,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Swizzle
+         * @addtogroup FALCON_Vec3_Swizzle
          * @{
          */
 
@@ -313,7 +313,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Equality
+         * @addtogroup FALCON_Vec3_Equality
          * @{
          */
 
@@ -535,7 +535,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Comparison
+         * @addtogroup FALCON_Vec3_Comparison
          * @{
          */
 
@@ -683,7 +683,7 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-#ifdef ENABLE_FGM_SHADER_OPERATORS
+#ifdef ENABLE_FALCON_SHADER_OPERATORS
 
         /**
          * @copydoc gt(const Vec3<U>&) const
@@ -725,7 +725,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Bitwise
+         * @addtogroup FALCON_Vec3_Bitwise
          * @{
          */
 
@@ -800,7 +800,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Arithmetic
+         * @addtogroup FALCON_Vec3_Arithmetic
          * @{
          */
 
@@ -1049,7 +1049,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Product
+         * @addtogroup FALCON_Vec3_Product
          * @{
          */
 
@@ -1177,7 +1177,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Mag
+         * @addtogroup FALCON_Vec3_Mag
          * @{
          */
 
@@ -1279,7 +1279,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Dist
+         * @addtogroup FALCON_Vec3_Dist
          * @{
          */
 
@@ -1446,7 +1446,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Normalize
+         * @addtogroup FALCON_Vec3_Normalize
          * @{
          */
 
@@ -1559,7 +1559,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Proj
+         * @addtogroup FALCON_Vec3_Proj
          * @{
          */
 
@@ -2164,7 +2164,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Utils
+         * @addtogroup FALCON_Vec3_Utils
          * @{
          */
 
@@ -2215,7 +2215,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec3_Log
+         * @addtogroup FALCON_Vec3_Log
          * @{
          */
 
@@ -2248,7 +2248,7 @@ namespace fgm
         /** @} */
 
         /**
-         * @addtogroup FGM_Vec3_Const
+         * @addtogroup FALCON_Vec3_Const
          * @{
          */
 
@@ -2346,7 +2346,7 @@ namespace fgm
         { return Vec3{ T(0), T(-1), T(0) }; }
 
 
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         /**
          * @brief A 3D unit vector aligned with the positive Z-axis (0, 0, 1).
          *
@@ -2406,7 +2406,7 @@ namespace fgm
      *************************************/
 
     /**
-     * @addtogroup FGM_Vec3_Arithmetic
+     * @addtogroup FALCON_Vec3_Arithmetic
      * @{
      */
 
@@ -2432,7 +2432,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Vec3_Alias
+     * @addtogroup FALCON_Vec3_Alias
      * @{
      */
 

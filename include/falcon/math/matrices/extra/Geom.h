@@ -38,7 +38,7 @@ namespace fgm
 {
 
     /**
-     * @addtogroup FGM_Mat2x3_Geom
+     * @addtogroup FALCON_Mat2x3_Geom
      * @{
      */
 
@@ -82,7 +82,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Mat2x4_Geom
+     * @addtogroup FALCON_Mat2x4_Geom
      * @{
      */
 
@@ -126,7 +126,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Mat3x2_Geom
+     * @addtogroup FALCON_Mat3x2_Geom
      * @{
      */
 
@@ -170,7 +170,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Mat3x4_Geom
+     * @addtogroup FALCON_Mat3x4_Geom
      * @{
      */
 
@@ -215,7 +215,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Mat4x2_Geom
+     * @addtogroup FALCON_Mat4x2_Geom
      * @{
      */
 
@@ -259,7 +259,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Mat4x3_Geom
+     * @addtogroup FALCON_Mat4x3_Geom
      * @{
      */
 

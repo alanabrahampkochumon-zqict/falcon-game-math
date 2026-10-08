@@ -63,7 +63,7 @@ set_target_properties(
         Mat4TransformTests
         MatrixExtraOpTests
         Transform4Tests
-        PROPERTIES FOLDER "Test Intermediates/FGM"
+        PROPERTIES FOLDER "Test Intermediates/FALCON"
 )
 
 
@@ -92,9 +92,9 @@ target_precompile_headers(FalconMathMatrixDeathTests REUSE_FROM FalconMathCommon
 
 
 #### GTEST
-if (FGM_COMBINED_TEST_RUN)
-    add_test(NAME FGMMatrixTestSuite COMMAND FalconMathMatrixTests)
-    add_test(NAME FGMMatrixDeathTestSuite COMMAND FalconMathMatrixDeathTests)
+if (FALCON_COMBINED_TEST_RUN)
+    add_test(NAME FALCONMatrixTestSuite COMMAND FalconMathMatrixTests)
+    add_test(NAME FALCONMatrixDeathTestSuite COMMAND FalconMathMatrixDeathTests)
 else ()
     gtest_discover_tests(FalconMathMatrixTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
     gtest_discover_tests(FalconMathMatrixDeathTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)

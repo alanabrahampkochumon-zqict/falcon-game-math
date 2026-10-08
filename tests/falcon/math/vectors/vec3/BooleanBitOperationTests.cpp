@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_Vec3_Bool_Bit
+ * @addtogroup T_FALCON_Vec3_Bool_Bit
  * @{
  */
 

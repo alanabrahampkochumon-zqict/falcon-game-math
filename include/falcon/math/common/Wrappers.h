@@ -18,7 +18,7 @@ namespace fgm
 {
 
     /**
-     * @addtogroup FGM_Wrappers
+     * @addtogroup FALCON_Wrappers
      * @{
      */
 

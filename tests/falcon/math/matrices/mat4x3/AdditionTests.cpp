@@ -14,7 +14,7 @@
 
 
 /**
- * @addtogroup T_FGM_Mat4x3_Addition
+ * @addtogroup T_FALCON_Mat4x3_Addition
  * @{
  */
 

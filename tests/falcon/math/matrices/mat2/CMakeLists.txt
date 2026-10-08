@@ -25,7 +25,7 @@ target_sources(
 
 target_include_directories(
         Mat2Tests PRIVATE
-        ${FGM_TEST_ROOT_DIR}/include
+        ${FALCON_TEST_ROOT_DIR}/include
 )
 
 add_subdirectory(TransformationFactoryTests)

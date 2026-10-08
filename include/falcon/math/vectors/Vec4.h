@@ -14,7 +14,7 @@
  * @note Arithmetic operations are restricted to numeric types via @ref StrictArithmetic.
  *
  * @par Configuration
- * - Define `ENABLE_FGM_SHADER_OPERATORS` to enable comparison operators (`,`, `<`, etc.).
+ * - Define `ENABLE_FALCON_SHADER_OPERATORS` to enable comparison operators (`,`, `<`, etc.).
  *   Even if disabled, functional comparisons like @ref gt remain available.
  * - Define `FORCE_SCALAR` to disable SIMD optimizations (enabled by default on supported hardware).
  *
@@ -42,7 +42,7 @@ namespace fgm
     {
 
         /**
-         * @addtogroup FGM_Vec4_Members
+         * @addtogroup FALCON_Vec4_Members
          * @{
          */
 
@@ -55,7 +55,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Init
+         * @addtogroup FALCON_Vec4_Init
          * @{
          */
 
@@ -124,7 +124,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Access
+         * @addtogroup FALCON_Vec4_Access
          * @{
          */
 
@@ -328,7 +328,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Swizzle
+         * @addtogroup FALCON_Vec4_Swizzle
          * @{
          */
 
@@ -374,7 +374,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Equality
+         * @addtogroup FALCON_Vec4_Equality
          * @{
          */
 
@@ -597,7 +597,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Comparison
+         * @addtogroup FALCON_Vec4_Comparison
          * @{
          */
 
@@ -745,7 +745,7 @@ namespace fgm
             requires StrictArithmetic<T>;
 
 
-#ifdef ENABLE_FGM_SHADER_OPERATORS
+#ifdef ENABLE_FALCON_SHADER_OPERATORS
 
         /**
          * @copydoc gt(const Vec4<U>&) const
@@ -788,7 +788,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Bitwise
+         * @addtogroup FALCON_Vec4_Bitwise
          * @{
          */
 
@@ -864,7 +864,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Arithmetic
+         * @addtogroup FALCON_Vec4_Arithmetic
          * @{
          */
 
@@ -1118,7 +1118,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Product
+         * @addtogroup FALCON_Vec4_Product
          * @{
          */
 
@@ -1204,7 +1204,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Mag
+         * @addtogroup FALCON_Vec4_Mag
          * @{
          */
 
@@ -1306,7 +1306,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Dist
+         * @addtogroup FALCON_Vec4_Dist
          * @{
          */
 
@@ -1473,7 +1473,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Normalize
+         * @addtogroup FALCON_Vec4_Normalize
          * @{
          */
 
@@ -1588,7 +1588,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Proj
+         * @addtogroup FALCON_Vec4_Proj
          * @{
          */
 
@@ -2174,7 +2174,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Utils
+         * @addtogroup FALCON_Vec4_Utils
          * @{
          */
 
@@ -2226,7 +2226,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Log
+         * @addtogroup FALCON_Vec4_Log
          * @{
          */
 
@@ -2261,7 +2261,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Vec4_Const
+         * @addtogroup FALCON_Vec4_Const
          * @{
          */
 
@@ -2363,7 +2363,7 @@ namespace fgm
         { return Vec4{ T(0), T(-1), T(0), T(0) }; }
 
 
-#ifdef FGM_LEFT_HANDED
+#ifdef FALCON_LEFT_HANDED
         /**
          * @brief A 4D unit vector aligned with the positive Z-axis (0, 0, 1, 0).
          *
@@ -2425,7 +2425,7 @@ namespace fgm
      *************************************/
 
     /**
-     * @addtogroup FGM_Vec4_Arithmetic
+     * @addtogroup FALCON_Vec4_Arithmetic
      * @{
      */
 
@@ -2452,7 +2452,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Vec4_Alias
+     * @addtogroup FALCON_Vec4_Alias
      * @{
      */
 

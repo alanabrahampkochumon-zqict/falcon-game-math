@@ -16,7 +16,7 @@
 
 
 /**
- * @addtogroup T_FGM_Vec2_Alias
+ * @addtogroup T_FALCON_Vec2_Alias
  * @{
  */
 

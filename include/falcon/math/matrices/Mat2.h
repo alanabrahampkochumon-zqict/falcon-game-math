@@ -13,12 +13,12 @@
  * @note Matrices utilize a strict column-major internal memory layout. To align with standard mathematical notations,
  *       scalar constructors accept elements in row-major reading order. Vector-based constructors and array-style
  *       access (operator[]) operate directly on columns.
- * @note FGM uses **Right-Handed** coordinate system by default. To use **Left-Handed** coordinate system define
- *       `FGM_LEFT_HANDED` preprocessor macro.
+ * @note FALCON uses **Right-Handed** coordinate system by default. To use **Left-Handed** coordinate system define
+ *       `FALCON_LEFT_HANDED` preprocessor macro.
  *
  * @par Configuration
  *      Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
- *      Define `FGM_LEFT_HANDED` to configure library to use left-handed coordinated system.
+ *      Define `FALCON_LEFT_HANDED` to configure library to use left-handed coordinated system.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -39,7 +39,7 @@ namespace fgm
     {
 
         /**
-         * @addtogroup FGM_Mat2x2_Members
+         * @addtogroup FALCON_Mat2x2_Members
          * @{
          */
 
@@ -54,7 +54,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x2_Init
+         * @addtogroup FALCON_Mat2x2_Init
          * @{
          */
 
@@ -116,7 +116,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat3x3_Access
+         * @addtogroup FALCON_Mat3x3_Access
          * @{
          */
 
@@ -174,7 +174,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x2_Equality
+         * @addtogroup FALCON_Mat2x2_Equality
          * @{
          */
 
@@ -316,7 +316,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x2_Arithmetic
+         * @addtogroup FALCON_Mat2x2_Arithmetic
          * @{
          */
 
@@ -427,7 +427,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x2_Geom
+         * @addtogroup FALCON_Mat2x2_Geom
          * @{
          */
 
@@ -467,7 +467,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x2_Comp
+         * @addtogroup FALCON_Mat2x2_Comp
          * @{
          */
 
@@ -542,7 +542,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x2_Algebra
+         * @addtogroup FALCON_Mat2x2_Algebra
          * @{
          */
 
@@ -707,7 +707,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x2_Algebra
+         * @addtogroup FALCON_Mat2x2_Algebra
          * @{
          */
 
@@ -992,7 +992,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x2_Utils
+         * @addtogroup FALCON_Mat2x2_Utils
          * @{
          */
 
@@ -1044,7 +1044,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x2_Log
+         * @addtogroup FALCON_Mat2x2_Log
          * @{
          */
 
@@ -1086,7 +1086,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat2x2_Transforms
+         * @addtogroup FALCON_Mat2x2_Transforms
          * @{
          */
 
@@ -1101,7 +1101,7 @@ namespace fgm
          *                    sin(\theta) & cos(\theta)
          *                \end{bmatrix}
          *            \f$
-         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *          - **Left-Handed (FALCON_LEFT_HANDED):**
          *            \f$
          *                \begin{bmatrix}
          *                    cos(\theta) & sin(\theta) \\
@@ -1185,7 +1185,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup T_FGM_Mat2x2_Constant
+         * @addtogroup T_FALCON_Mat2x2_Constant
          * @{
          */
 
@@ -1229,7 +1229,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Mat2x2_Alias
+     * @addtogroup FALCON_Mat2x2_Alias
      * @{
      */
 
@@ -1259,7 +1259,7 @@ namespace fgm
      **************************************/
 
     /**
-     * @addtogroup FGM_Mat2x2_Arithmetic
+     * @addtogroup FALCON_Mat2x2_Arithmetic
      * @{
      */
 
@@ -1284,7 +1284,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Mat2x2_Geom
+     * @addtogroup FALCON_Mat2x2_Geom
      * @{
      */
 

@@ -456,7 +456,7 @@ namespace fgm
      *                                     *
      ***************************************/
 
-#ifdef ENABLE_FGM_SHADER_OPERATORS
+#ifdef ENABLE_FALCON_SHADER_OPERATORS
 
     template <Arithmetic T>
     template <StrictArithmetic U>

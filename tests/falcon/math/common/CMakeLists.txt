@@ -26,8 +26,8 @@ target_precompile_headers(
         <type_traits>
 )
 
-if (FGM_COMBINED_TEST_RUN)
-    add_test(NAME FGMCommonTestSuite COMMAND FalconMathCommonTests)
+if (FALCON_COMBINED_TEST_RUN)
+    add_test(NAME FALCONCommonTestSuite COMMAND FalconMathCommonTests)
 else ()
     gtest_discover_tests(FalconMathCommonTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
 endif ()

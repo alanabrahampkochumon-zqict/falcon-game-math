@@ -13,12 +13,12 @@
  * @note Matrices utilize a strict column-major internal memory layout. To align with standard mathematical notations,
  *       scalar constructors accept elements in row-major reading order. Vector-based constructors and array-style
  *       access (operator[]) operate directly on columns.
- * @note FGM uses **Right-Handed** coordinate system by default. To use **Left-Handed** coordinate system define
- *       `FGM_LEFT_HANDED` preprocessor macro.
+ * @note FALCON uses **Right-Handed** coordinate system by default. To use **Left-Handed** coordinate system define
+ *       `FALCON_LEFT_HANDED` preprocessor macro.
  *
  * @par Configuration
  *      Define `FORCE_SCALAR` to turn off SIMD which is on by default on supported hardware.
- *      Define `FGM_LEFT_HANDED` to configure library to use left-handed coordinated system.
+ *      Define `FALCON_LEFT_HANDED` to configure library to use left-handed coordinated system.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -40,7 +40,7 @@ namespace fgm
     struct Mat4
     {
         /**
-         * @addtogroup FGM_Mat4x4_Members
+         * @addtogroup FALCON_Mat4x4_Members
          * @{
          */
 
@@ -54,7 +54,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x4_Init
+         * @addtogroup FALCON_Mat4x4_Init
          * @{
          */
 
@@ -134,7 +134,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x4_Access
+         * @addtogroup FALCON_Mat4x4_Access
          * @{
          */
 
@@ -191,7 +191,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x4_Equality
+         * @addtogroup FALCON_Mat4x4_Equality
          * @{
          */
 
@@ -333,7 +333,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x4_Arithmetic
+         * @addtogroup FALCON_Mat4x4_Arithmetic
          * @{
          */
 
@@ -443,7 +443,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x4_Geom
+         * @addtogroup FALCON_Mat4x4_Geom
          * @{
          */
 
@@ -485,7 +485,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x4_Comp
+         * @addtogroup FALCON_Mat4x4_Comp
          * @{
          */
 
@@ -572,7 +572,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x4_Algebra
+         * @addtogroup FALCON_Mat4x4_Algebra
          * @{
          */
 
@@ -738,7 +738,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x4_Algebra
+         * @addtogroup FALCON_Mat4x4_Algebra
          * @{
          */
 
@@ -1121,7 +1121,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x4_Utils
+         * @addtogroup FALCON_Mat4x4_Utils
          * @{
          */
 
@@ -1173,7 +1173,7 @@ namespace fgm
 
 
         /**
-         * @addtogroup FGM_Mat4x4_Log
+         * @addtogroup FALCON_Mat4x4_Log
          * @{
          */
 
@@ -1221,7 +1221,7 @@ namespace fgm
         /** @} */
 
         /**
-         * @addtogroup FGM_Mat4x4_Transforms
+         * @addtogroup FALCON_Mat4x4_Transforms
          * @{
          */
 
@@ -1238,7 +1238,7 @@ namespace fgm
          *                    0 &            0 &            0 & 1
          *                \end{bmatrix}
          *            \f$
-         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *          - **Left-Handed (FALCON_LEFT_HANDED):**
          *            \f$
          *                \begin{bmatrix}
          *                    1 &            0 &           0 & 0 \\
@@ -1276,7 +1276,7 @@ namespace fgm
          *                    0 &            0 &            0 & 1
          *                \end{bmatrix}
          *            \f$
-         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *          - **Left-Handed (FALCON_LEFT_HANDED):**
          *            \f$
          *                \begin{bmatrix}
          *                    1 &            0 &           0 & x \\
@@ -1315,7 +1315,7 @@ namespace fgm
          *                               0 & 0 &           0 & 1
          *                \end{bmatrix}
          *            \f$
-         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *          - **Left-Handed (FALCON_LEFT_HANDED):**
          *            \f$
          *                \begin{bmatrix}
          *                    cos(\theta) & 0 & -sin(\theta) & 0 \\
@@ -1354,7 +1354,7 @@ namespace fgm
          *                               0 & 0 &           0 & 1
          *                \end{bmatrix}
          *            \f$
-         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *          - **Left-Handed (FALCON_LEFT_HANDED):**
          *            \f$
          *                \begin{bmatrix}
          *                    cos(\theta) & 0 & -sin(\theta) & x \\
@@ -1393,7 +1393,7 @@ namespace fgm
          *                               0 &            0 & 0 & 1
          *                \end{bmatrix}
          *            \f$
-         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *          - **Left-Handed (FALCON_LEFT_HANDED):**
          *            \f$
          *                \begin{bmatrix}
          *                     cos(\theta) & sin(\theta) & 0 & 0 \\
@@ -1432,7 +1432,7 @@ namespace fgm
          *                               0 &            0 & 0 & 1
          *                \end{bmatrix}
          *            \f$
-         *          - **Left-Handed (FGM_LEFT_HANDED):**
+         *          - **Left-Handed (FALCON_LEFT_HANDED):**
          *            \f$
          *                \begin{bmatrix}
          *                     cos(\theta) & sin(\theta) & 0 & x \\
@@ -1463,7 +1463,7 @@ namespace fgm
          *
          * @details The layout of the returned matrix adapts to the library's active coordinate system:
          *          - **Right-Handed (Default):** Anticlockwise Rotation
-         *          - **Left-Handed (FGM_LEFT_HANDED):** Clockwise Rotation
+         *          - **Left-Handed (FALCON_LEFT_HANDED):** Clockwise Rotation
          *          - Uses Rodrigues' formula
          *            \f$
          *            \textbf{v}_{Rot} =
@@ -1500,7 +1500,7 @@ namespace fgm
          *
          * @details The layout of the returned matrix adapts to the library's active coordinate system:
          *          - **Right-Handed (Default):** Anticlockwise Rotation
-         *          - **Left-Handed (FGM_LEFT_HANDED):** Clockwise Rotation
+         *          - **Left-Handed (FALCON_LEFT_HANDED):** Clockwise Rotation
          *          - Uses Rodrigues' formula
          *            \f$
          *            \textbf{v}_{Rot} =
@@ -1541,7 +1541,7 @@ namespace fgm
         //  *
         //  * @details The layout of the returned matrix adapts to the library's active coordinate system:
         //  *          - **Right-Handed (Default):** Anticlockwise Rotation
-        //  *          - **Left-Handed (FGM_LEFT_HANDED):** Clockwise Rotation
+        //  *          - **Left-Handed (FALCON_LEFT_HANDED):** Clockwise Rotation
         //  *          - Uses Rodrigues' formula
         //  *            \f$
         //  *            \textbf{v}_{Rot} =
@@ -1785,7 +1785,7 @@ namespace fgm
         /** @} */
 
         /**
-         * @addtogroup T_FGM_Mat4x4_Constant
+         * @addtogroup T_FALCON_Mat4x4_Constant
          * @{
          */
 
@@ -1835,7 +1835,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Ma4x4_Alias
+     * @addtogroup FALCON_Ma4x4_Alias
      * @{
      */
 
@@ -1865,7 +1865,7 @@ namespace fgm
      **************************************/
 
     /**
-     * @addtogroup FGM_Mat4x4_Arithmetic
+     * @addtogroup FALCON_Mat4x4_Arithmetic
      * @{
      */
 
@@ -1890,7 +1890,7 @@ namespace fgm
 
 
     /**
-     * @addtogroup FGM_Mat4x4_Geom
+     * @addtogroup FALCON_Mat4x4_Geom
      * @{
      */
 

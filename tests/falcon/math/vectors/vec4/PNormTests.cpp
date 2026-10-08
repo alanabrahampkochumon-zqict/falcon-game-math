@@ -12,7 +12,7 @@
 
 
 /**
- * @addtogroup T_FGM_Vec4_Norm
+ * @addtogroup T_FALCON_Vec4_Norm
  * @{
  */
 

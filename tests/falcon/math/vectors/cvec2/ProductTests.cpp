@@ -16,7 +16,7 @@
 
 
 /**
- * @addtogroup T_FGM_CVec2_Product
+ * @addtogroup T_FALCON_CVec2_Product
  * @{
  */
 
