@@ -1,4 +1,4 @@
-add_executable(FalconSIMDMemoryTests
+add_executable(FalconSIMDCoreTests
         Simd128/ArithmeticTests.cpp
         Simd128/ComparisonTests.cpp
         # Simd128/ConversionCtorTests.cpp # TODO: Enable after creating a conversion ctor
@@ -23,24 +23,13 @@ add_executable(FalconSIMDMemoryTests
         Simd256/BasicMathOperationTests.cpp
 )
 
-target_compile_options(FalconSIMDMemoryTests PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>)
-target_include_directories(FalconSIMDMemoryTests PRIVATE "${FALCON_SIMD_TEST_ROOT_DIR}/include")
+target_compile_options(FalconSIMDCoreTests PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>)
+target_include_directories(FalconSIMDCoreTests PRIVATE "${FALCON_SIMD_TEST_ROOT_DIR}/include")
 
-target_link_libraries(
-        FalconSIMDMemoryTests
-        PRIVATE
-        FalconSIMD
-        GTest::gtest
-        GTest::gtest_main # googletest
-
-        ${PROJECT_NAME}-StrictWarnings
-        ${PROJECT_NAME}-ProjectSanitizers
-)
-
-AddCompilerFlag(FalconSIMDMemoryTests PUBLIC ${FALCON_SIMD_MODE}) # Update to compile an executable per flag
+target_link_libraries(FalconSIMDCoreTests PRIVATE FalconSIMDTestSetup)
 
 if (FALCON_SIMD_COMBINED_TEST_RUN)
-    add_test(NAME FalconSIMDMemoryTestSuite COMMAND FalconSIMDMemoryTests)
+    add_test(NAME FalconSIMDMemoryTestSuite COMMAND FalconSIMDCoreTests)
 else ()
-    gtest_discover_tests(FalconSIMDMemoryTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
+    gtest_discover_tests(FalconSIMDCoreTests DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
 endif ()

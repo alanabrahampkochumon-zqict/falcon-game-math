@@ -32,5 +32,5 @@ add_subdirectory(TransformationFactoryTests)
 
 target_link_libraries(
         Mat2Tests PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 )

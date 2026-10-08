@@ -1,3 +1,5 @@
+include(GoogleTest)
+
 # For faster CI/CD unit-tests on push are only run with essential types rather than the full type permutation.
 option(NONCOMPREHENSIVE "Run Unit tests with essential type matrix only")
 option(FGM_COMBINED_TEST_RUN "Runs entire test binaries as unified tests for fgm")
@@ -18,52 +20,30 @@ target_link_libraries(
 
         GTest::gtest
         GTest::gtest_main
+        Falcon::Falcon
         ${PROJECT_NAME}-StrictWarnings
         ${PROJECT_NAME}-ProjectSanitizers
 )
+
+AddCompilerFlag(FalconTestSetup INTERFACE ${FALCON_SIMD_MODE})
+target_compile_definitions(FalconTestSetup INTERFACE $<$<CONFIG:Debug>:ENABLE_DEBUG_TESTS>)
+
+
+if (NONCOMPREHENSIVE)
+    message(STATUS "[Falcon]: Running only non-comprehensive tests")
+    target_compile_definitions(FalconTestSetup INTERFACE NONCOMPREHENSIVE)
+    target_compile_definitions(FalconTestSetup INTERFACE $ENV{FALCON_SIMD_TEST_FLAG})
+endif ()
 
 if (FALCON_CORE_TESTS)
     message(STATUS "[Falcon]: Core Library tests are enabled")
     add_subdirectory(falcon/core)
 endif ()
 
-
-#----------------------------------
-# Falcon Game Math(FGM) Test Setup
-#----------------------------------
-add_library(FGMTestSetup INTERFACE)
-target_link_libraries(FGMTestSetup INTERFACE
-        FGM
-        FalconTestSetup
-)
-target_compile_definitions(FGMTestSetup INTERFACE $<$<CONFIG:Debug>:ENABLE_DEBUG_TESTS>)
-
-# TODO: Remove after refactor
-AddCompilerFlag(FGMTestSetup INTERFACE ${FALCON_SIMD_MODE}) # Update to compile an executable per flag
-
-if (NONCOMPREHENSIVE)
-    message(STATUS "[Falcon]: Running only non-comprehensive tests")
-    target_compile_definitions(FGMTestSetup INTERFACE NONCOMPREHENSIVE)
-    target_compile_definitions(FGMTestSetup INTERFACE $ENV{FALCON_SIMD_TEST_FLAG})
-endif ()
-
 if (FGM_TESTS)
     message(STATUS "[Falcon]: Game Math tests are enabled")
     add_subdirectory(falcon/math)
 endif ()
-
-
-#------------------------
-# Falcon SIMD Test Setup
-#------------------------
-# TODO: Refactor Test Suite
-add_library(FalconSimdTestSetup INTERFACE
-        falcon_core/traits/TypeHelpersTests.cpp
-        falcon_core/traits/DummyTest.cpp)
-target_link_libraries(FalconSimdTestSetup INTERFACE
-        FalconSIMD
-        FalconTestSetup
-)
 
 if (FALCON_SIMD_TESTS)
     message(STATUS "[Falcon]: SIMD tests are enabled")

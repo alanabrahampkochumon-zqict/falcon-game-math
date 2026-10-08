@@ -16,5 +16,5 @@ target_include_directories(
 
 target_link_libraries(
         Point2Tests PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 )

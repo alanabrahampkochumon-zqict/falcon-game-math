@@ -25,5 +25,5 @@ target_include_directories(
 
 target_link_libraries(
         MatrixExtraOpTests PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 )

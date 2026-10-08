@@ -33,5 +33,5 @@ target_include_directories(
 
 target_link_libraries(
         Vec4Tests PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 )

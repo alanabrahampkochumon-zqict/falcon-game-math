@@ -35,5 +35,5 @@ target_include_directories(
 
 target_link_libraries(
         CVec2Tests PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 )

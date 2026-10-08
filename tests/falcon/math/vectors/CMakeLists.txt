@@ -28,7 +28,7 @@ add_subdirectory(vec2)
 target_link_libraries(
         FGMVectorTests
         PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 
         # OBJs
         # CONSTEXPR
@@ -86,7 +86,7 @@ target_compile_options(FGMVectorDeathTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/
 target_link_libraries(
         FGMVectorDeathTests
         PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 )
 
 target_precompile_headers(

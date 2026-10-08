@@ -2,18 +2,6 @@ add_executable(FGMMatrixTests)
 set_target_properties(FGMMatrixTests PROPERTIES CXX_STANDARD 20)
 set_target_properties(FGMMatrixTests PROPERTIES CXX_STANDARD_REQUIRED ON)
 set_target_properties(FGMMatrixTests PROPERTIES CXX_EXTENSIONS OFF)
-
-target_sources(
-        FGMMatrixTests
-
-        PRIVATE
-        FILE_SET HEADERS
-        BASE_DIRS ${FGM_ROOT_INCLUDE_DIR}
-        FILES
-        ${SetupHeaderFiles}
-        ${TestUtilities}
-)
-
 target_compile_options(FGMMatrixTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
 
 
@@ -32,7 +20,7 @@ add_subdirectory(transform4)
 target_link_libraries(
         FGMMatrixTests
         PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 
         # OBJs
         Mat2Tests
@@ -97,25 +85,13 @@ add_executable(FGMMatrixDeathTests
 set_target_properties(FGMMatrixDeathTests PROPERTIES CXX_STANDARD 20)
 set_target_properties(FGMMatrixDeathTests PROPERTIES CXX_STANDARD_REQUIRED ON)
 set_target_properties(FGMMatrixDeathTests PROPERTIES CXX_EXTENSIONS OFF)
-
-target_sources(
-        FGMMatrixDeathTests
-
-        PRIVATE
-        FILE_SET HEADERS
-        BASE_DIRS ${FGM_ROOT_INCLUDE_DIR}
-        FILES
-        ${SetupHeaderFiles}
-        ${TestUtilities}
-)
-
 target_compile_options(FGMMatrixDeathTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
-target_link_libraries(FGMMatrixDeathTests PRIVATE FGMTestSetup)
+
+target_link_libraries(FGMMatrixDeathTests PRIVATE FalconMathTestSetup)
 target_precompile_headers(FGMMatrixDeathTests REUSE_FROM FGMCommonTests)
 
 
 #### GTEST
-include(GoogleTest)
 if (FGM_COMBINED_TEST_RUN)
     add_test(NAME FGMMatrixTestSuite COMMAND FGMMatrixTests)
     add_test(NAME FGMMatrixDeathTestSuite COMMAND FGMMatrixDeathTests)

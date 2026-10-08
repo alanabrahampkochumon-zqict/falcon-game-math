@@ -22,7 +22,7 @@ target_include_directories(
 
 target_link_libraries(
         FGMCommonTests PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 )
 
 target_precompile_headers(
@@ -35,8 +35,6 @@ target_precompile_headers(
         <cstddef>
         <type_traits>
 )
-
-include(GoogleTest)
 
 if (FGM_COMBINED_TEST_RUN)
     add_test(NAME FGMCommonTestSuite COMMAND FGMCommonTests)

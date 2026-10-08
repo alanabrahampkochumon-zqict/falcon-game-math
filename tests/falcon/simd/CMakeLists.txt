@@ -1,50 +1,18 @@
-set(FALCON_SIMD_TEST_ROOT_DIR .)
-set(FALCON_SIMD_TEST_ROOT_INCLUDE_DIR "include")
+add_library(FalconSIMDTestSetup INTERFACE
+        include/CommonSetup.h
+        include/DoxygenGroups.h
+        include/SIMDTestSetup.h
+        include/utils/FloatEquals.h
+        include/utils/TypeUtils.h
+)
 
-add_executable(FalconSIMDTestSuite)
-set_target_properties(FalconSIMDTestSuite PROPERTIES CXX_STANDARD 20)
-set_target_properties(FalconSIMDTestSuite PROPERTIES CXX_STANDARD_REQUIRED ON)
-set_target_properties(FalconSIMDTestSuite PROPERTIES CXX_EXTENSIONS OFF)
+target_include_directories(FalconSIMDTestSetup INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(FalconSIMDTestSetup INTERFACE FalconTestSetup)
 
 # Error with avx1-10 invalid combination
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    target_compile_options(FalconSIMDTestSuite PRIVATE -Wno-invalid-feature-combination)
+    target_compile_options(FalconSIMDTestSetup INTERFACE -Wno-invalid-feature-combination)
 endif ()
 
 add_subdirectory(utils)
 add_subdirectory(core)
-
-target_sources(
-        FalconSIMDTestSuite
-        PRIVATE
-        SimdTests.cpp
-)
-
-target_compile_options(FalconSIMDTestSuite INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
-
-target_precompile_headers(
-        FalconSIMDTestSuite PRIVATE
-        <gtest/gtest.h>
-        <iostream>
-        <limits>
-        <concepts>
-        <cstddef>
-        <type_traits>
-)
-
-target_link_libraries(FalconSIMDTestSuite PRIVATE FalconSimdTestSetup)
-
-target_include_directories(
-        FalconSIMDTestSuite
-        PRIVATE
-        include
-)
-
-# TODO: Remove after refactor
-AddCompilerFlag(FalconSIMDTestSuite PUBLIC ${FALCON_SIMD_MODE}) # Update to compile an executable per flag
-
-
-include(GoogleTest)
-gtest_discover_tests(FalconSIMDTestSuite DISCOVERY_MODE POST_BUILD DISCOVERY_TIMEOUT 180)
-
-set_target_properties(FalconSIMDUtilTests PROPERTIES FOLDER "Test Intermediates/Falcon SIMD")

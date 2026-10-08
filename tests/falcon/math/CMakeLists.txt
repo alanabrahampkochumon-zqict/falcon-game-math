@@ -1,33 +1,16 @@
-# Directories
-set(FGM_ROOT_INCLUDE_DIR "include")
-set(FGM_TEST_ROOT_DIR .)
-
-set(UTILS_DIR "${FGM_ROOT_INCLUDE_DIR}utils/")
-
-
-# Files
-set(SetupHeaderFiles
-        DoxygenGroups.h
-        CommonSetup.h
+add_library(FalconMathTestSetup INTERFACE
+        include/CommonSetup.h
+        include/DoxygenGroups.h
+        include/utils/FloatEquals.h
+        include/utils/MatrixUtils.h
+        include/utils/TypeUtils.h
+        include/utils/VectorUtils.h
 )
-list(TRANSFORM SetupHeaderFiles PREPEND ${FGM_ROOT_INCLUDE_DIR})
 
-set(TestUtilities "FloatEquals.h;MatrixUtils.h;VectorUtils.h;TypeUtils.h;")
-list(TRANSFORM TestUtilities PREPEND ${UTILS_DIR})
+target_include_directories(FalconMathTestSetup INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(FalconMathTestSetup INTERFACE FalconTestSetup)
 
 add_subdirectory(common)
 add_subdirectory(vectors)
 add_subdirectory(quaternions)
 add_subdirectory(matrices)
-
-# TODO: FIX Directory Structuring
-#source_group(
-#        TREE
-#        "${FGM_ROOT_INCLUDE_DIR}"
-#        PREFIX "Header Files"
-#        FILES
-#        ${SetupHeaderFiles}
-#        ${TestUtilities}
-#)
-
-

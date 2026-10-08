@@ -28,5 +28,5 @@ target_include_directories(
 
 target_link_libraries(
         Mat3x4Tests PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 )

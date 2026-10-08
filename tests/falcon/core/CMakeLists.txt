@@ -7,7 +7,6 @@ target_sources(
         FalconCoreTestSuite
         PRIVATE
         traits/TypeHelpersTests.cpp
-        traits/DummyTest.cpp # TODO: REMOVE UPON ADDING FURTHER RUNTIME TESTS
 )
 
 target_compile_options(FalconCoreTestSuite INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/fp:strict;>)
@@ -23,16 +22,7 @@ target_precompile_headers(
         <type_traits>
 )
 
-target_link_libraries(FalconCoreTestSuite PRIVATE FalconSimdTestSetup)
-
-target_include_directories(
-        FalconCoreTestSuite
-        PRIVATE
-        include
-)
-
-AddCompilerFlag(FalconCoreTestSuite PUBLIC ${FALCON_SIMD_MODE}) # Update to compile an executable per flag
-
+target_link_libraries(FalconCoreTestSuite PRIVATE FalconTestSetup)
 
 include(GoogleTest)
 if (FGM_COMBINED_TEST_RUN)

@@ -21,5 +21,5 @@ target_include_directories(
 target_link_libraries(
         Mat4TransformTests
         PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 )

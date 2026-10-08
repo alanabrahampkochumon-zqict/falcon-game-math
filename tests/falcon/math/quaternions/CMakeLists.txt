@@ -33,7 +33,7 @@ target_compile_options(FGMQuaternionsTests INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/
 target_link_libraries(
         FGMQuaternionsTests
         PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 )
 
 target_precompile_headers(
@@ -74,7 +74,7 @@ target_compile_options(FGMQuaternionsDeathTests INTERFACE $<$<CXX_COMPILER_ID:MS
 target_link_libraries(
         FGMQuaternionsDeathTests
         PRIVATE
-        FGMTestSetup
+        FalconMathTestSetup
 )
 
 target_precompile_headers(
