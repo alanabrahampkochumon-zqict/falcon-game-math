@@ -27,52 +27,82 @@
  */
 namespace flcn::simd::internal
 {
+    // TODO: Update to have a backend type parameter
     template <typename>
-    struct SSERegister
+    struct Simd128Register
     {
         using Type = __m128i;
     };
 
     template <>
-    struct SSERegister<float>
+    struct Simd128Register<float>
     {
         using Type = __m128;
     };
 
     template <>
-    struct SSERegister<double>
+    struct Simd128Register<double>
     {
         using Type = __m128d;
     };
 
     template <typename T>
-    using SSERegister_t = SSERegister<T>::Type;
+    using Simd128Register_t = Simd128Register<T>::Type;
 
 
     /**
-     * @brief Defines an AVX(2) Register(256-bit) for a given data type.
+     * @brief Defines the internal register type of a 256-bit register, given ISA and the data-type.
      *        @note Use @ref AVXRegister_t<type> for a shorter syntax.
      */
-    template <typename>
-    struct AVXRegister
+    template <SimdBackend, typename, size_t>
+    struct Simd256Register;
+
+
+    //+=+=+=+=+=+=+=+=+=+=
+    //  x86 Architecture
+    //+=+=+=+=+=+=+=+=+=+=
+
+
+    /// Forward Declaration
+    template <SimdBackend Backend, typename T, size_t Lane>
+    struct Simd256;
+
+
+    template <SimdBackend Backend, typename T, size_t Lane>
+        requires(Backend >= SimdBackend::ARCH_AVX)
+    struct Simd256Register<Backend, T, Lane>
+    {
+        using Type = struct Simd256<Backend, T, Lane>;
+    };
+
+
+    template <SimdBackend Backend, typename T, size_t Lane>
+        requires(Backend >= SimdBackend::ARCH_AVX2)
+    struct Simd256Register<Backend, T, Lane>
     {
         using Type = __m256i;
     };
 
-    template <>
-    struct AVXRegister<float>
+
+    template <SimdBackend Backend, size_t Lane>
+        requires(Backend >= SimdBackend::ARCH_AVX)
+    struct Simd256Register<Backend, float, Lane>
     {
         using Type = __m256;
     };
 
-    template <>
-    struct AVXRegister<double>
+
+    template <SimdBackend Backend, size_t Lane>
+        requires(Backend >= SimdBackend::ARCH_AVX)
+    struct Simd256Register<Backend, double, Lane>
     {
         using Type = __m256d;
     };
 
-    template <typename T>
-    using AVXRegister_t = AVXRegister<T>::Type;
+
+
+    template <SimdBackend Backend, typename T, size_t Lane>
+    using Simd256Register_t = Simd256Register<Backend, T, Lane>::Type;
 
 
 

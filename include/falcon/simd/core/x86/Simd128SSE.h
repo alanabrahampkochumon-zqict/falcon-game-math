@@ -133,7 +133,7 @@ namespace flcn
 
 
         /// @brief Initialize a Simd128 with the supplied register.
-        explicit constexpr Simd128(simd::internal::SSERegister_t<DataType> reg): _register(reg) {}
+        explicit constexpr Simd128(simd::internal::Simd128Register_t<DataType> reg): _register(reg) {}
 
 
         /**
@@ -774,12 +774,12 @@ namespace flcn
 
 
         /// @brief Get the internal register used by Simd128.
-        [[nodiscard]] FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> naive() const noexcept
+        [[nodiscard]] FALCON_INLINE constexpr simd::internal::Simd128Register_t<DataType> naive() const noexcept
         { return _register; }
 
 
         /// @brief Get the internal register used by Simd128.
-        [[nodiscard]] FALCON_INLINE constexpr simd::internal::SSERegister_t<DataType> operator*() const noexcept
+        [[nodiscard]] FALCON_INLINE constexpr simd::internal::Simd128Register_t<DataType> operator*() const noexcept
         { return _register; }
 
 
@@ -827,7 +827,7 @@ namespace flcn
 
 
     private:
-        simd::internal::SSERegister_t<DataType> _register;
+        simd::internal::Simd128Register_t<DataType> _register;
 
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         ///         HELPERS
