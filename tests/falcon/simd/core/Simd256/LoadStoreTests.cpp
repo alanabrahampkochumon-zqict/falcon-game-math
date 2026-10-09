@@ -130,23 +130,23 @@ TYPED_TEST(Simd256LoadStoreTests, Broadcast_StoresASingleValueIntoTheRegister)
 }
 
 
-// TYPED_TEST(Simd256LoadStoreTests, SetZero_ZeroesOutTheRegister)
-// {
-//     using Type            = TypeParam::Type;
-//     constexpr size_t Lane = TypeParam::VALUE;
-//
-//     flcn::Simd256_t<Type, Lane> reg;
-//     reg.setZero();
-//
-//     alignas(32) std::array<Type, Lane> result{};
-//
-//     reg.storeAligned(result.data());
-//
-//     for (size_t i = 0; i < Lane; ++i)
-//     {
-//         EXPECT_ANY_EQ(Type(0), result[i]);
-//     }
-// }
+TYPED_TEST(Simd256LoadStoreTests, SetZero_ZeroesOutTheRegister)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    flcn::Simd256_t<Type, Lane> reg;
+    reg.setZero();
+
+    alignas(32) std::array<Type, Lane> result{};
+
+    reg.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(Type(0), result[i]);
+    }
+}
 
 #endif
 
