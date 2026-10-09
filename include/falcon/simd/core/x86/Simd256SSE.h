@@ -22,6 +22,7 @@
 
 #include <bit>
 
+
 namespace flcn
 {
 
@@ -92,7 +93,7 @@ namespace flcn
          *
          * @param values The values to fill the register with.
          *
-         * @warning The container must be aligned to 16-byte boundary. For unaligned data,
+         * @warning The container must be aligned to 32-byte boundary. For unaligned data,
          *          use @ref load to load data manually.
          */
         constexpr explicit Simd256(std::span<const DataType> values) noexcept;
@@ -107,7 +108,7 @@ namespace flcn
          *
          * @param pBuffer The starting address of the values to fill the register with.
          *
-         * @warning @p buffer must be aligned to 16-byte boundary. For unaligned data,
+         * @warning @p buffer must be aligned to 32-byte boundary. For unaligned data,
          *          use @ref load to load data manually.
          */
         constexpr explicit Simd256(const DataType* pBuffer) noexcept;
@@ -118,7 +119,7 @@ namespace flcn
          *
          * @note Internally the register gets filled from the bottom to top, but when used with store
          *       to retrieve the value, the values will be identical.
-         *       REGISTER VIEW SET(1, 2) => [0, 0, 2, 1] => STORE() => [1, 2]
+         *       set(1, 2) => [0, 0, 2, 1] => store() => [1, 2]
          * @note Unused lanes are zeroed out.
          *
          * @tparam Args The numeric type of arguments. Must be less than the maximum lane size.
@@ -141,7 +142,7 @@ namespace flcn
         /**
          * @brief Load data from memory into the SIMD register.
          *
-         * @note Data must be aligned to 16 bit boundary.
+         * @note Data must be aligned to 32-byte boundary.
          *       If the size * Lane cannot saturate the buffer, data will be moved to lower lanes.
          *       Example: loadAligned<2>(uint8_t*) will only load the lower 16-bit with the data and fill the rest with
          *       zeroes.
@@ -233,7 +234,7 @@ namespace flcn
 
 
         /**
-         * @brief Store the current register values into a 16-byte aligned buffer.
+         * @brief Store the current register values into a 32-byte aligned buffer.
          *
          * @note The provided buffer must have enough size to hold the data.
          *

@@ -15,6 +15,11 @@
 
 namespace flcn
 {
+/// Macro for differentiating SIMD256 pathways based on architectural support.
+#define _FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType)                                                             \
+    (std::floating_point<DataType> && CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX) ||                                \
+        CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX2
+
     // template <typename DataType, size_t Lane>
     // template <typename... Args>
     //     requires(SimdSafeConvertible<Args, DataType> && ...)
@@ -65,50 +70,27 @@ namespace flcn
     FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>& Simd256<SimdBackend::ARCH_AVX, DataType,
                                                                                     Lane>::set(Args... args)
     {
-        if constexpr ((std::floating_point<DataType> && CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX) ||
-                      CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX2)
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
         {
-            alignas(32) std::array<DataType, MaxLaneCount> _data{ args... };
+            alignas(32) std::array<DataType, MaxLaneCount> _data{ std::forward<Args>(args)... };
             if constexpr (types::IsFP64<DataType>)
             {
-                _mm256_load_pd(_data);
+                _reg = _mm256_load_pd(_data.data());
             }
             else if constexpr (types::IsFP32<DataType>)
             {
-                _mm256_load_ps(_data);
+                _reg = _mm256_load_ps(_data.data());
             }
             else
             {
-                _mm256_load_si256(_data);
+                _reg = _mm256_load_si256(reinterpret_cast<__m256i*>(_data.data()));
             }
         }
         else
         {
-            _reg.template set(args...);
+            // Emulated Register will `set` the correct values so we don't need to assign.
+            _reg.template set<Args...>(std::forward<Args>(args)...);
         }
-        // // TODO: Apply this to SIMD128
-        // // To support variable argument passing we need to return pass down a zero for all the lanes that are
-        // // not provided.
-        // constexpr auto argCount  = sizeof...(args);
-        // const DataType arr[Lane] = { args... };
-        //
-        // // Fill the upper lane
-        // if constexpr (argCount <= LOWER_LANE_COUNT)
-        // {
-        //     _upper.setZero();
-        // }
-        // else
-        // {
-        //     auto fillUpper = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
-        //         _upper.set(arr[LOWER_LANE_COUNT + Indices]...);
-        //     };
-        //     fillUpper(std::make_index_sequence<UPPER_LANE_COUNT>{});
-        // }
-        // // Fill the lower lane
-        // auto fillLower = [&]<size_t... Indices>(std::index_sequence<Indices...>) {
-        //     _lower.set(arr[Indices]...);
-        // };
-        // fillLower(std::make_index_sequence<LOWER_LANE_COUNT>{});
 
         return *this;
     }
@@ -152,25 +134,58 @@ namespace flcn
     //     _lower.setOne();
     //     _upper.setOne();
     // }
-    //
-    //
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::store(
-    //     DataType* pBuffer) const noexcept
-    // {
-    //     _lower.store(pBuffer);
-    //     _upper.store(pBuffer + LOWER_LANE_COUNT);
-    // }
-    //
-    //
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::storeAligned(
-    //     DataType* pBuffer) const noexcept
-    // {
-    //     _lower.storeAligned(pBuffer);
-    //     _upper.storeAligned(pBuffer + LOWER_LANE_COUNT);
-    // }
-    //
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::store(DataType* pBuffer) const noexcept
+    {
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                _mm256_storeu_pd(pBuffer, _reg);
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                _mm256_storeu_ps(pBuffer, _reg);
+            }
+            else
+            {
+                _mm256_storeu_si256(reinterpret_cast<__m256i*>(pBuffer), _reg);
+            }
+        }
+        else
+        {
+            _reg.store(pBuffer);
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::storeAligned(
+        DataType* pBuffer) const noexcept
+    {
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                _mm256_store_pd(pBuffer, _reg);
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                _mm256_store_ps(pBuffer, _reg);
+            }
+            else
+            {
+                _mm256_store_si256(reinterpret_cast<__m256i*>(pBuffer), _reg);
+            }
+        }
+        else
+        {
+            _reg.storeAligned(pBuffer);
+        }
+    }
+
     //
     //
     // /**************************************
@@ -617,5 +632,7 @@ namespace flcn
     //                                                                                 Lane>::hasInf() const noexcept
     // { return Simd256(_lower.hasInf(), _upper.hasInf()); }
 
+
+#undef _FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC
 
 } // namespace flcn

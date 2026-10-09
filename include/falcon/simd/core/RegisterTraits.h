@@ -69,7 +69,7 @@ namespace flcn::simd::internal
 
 
     template <SimdBackend Backend, typename T, size_t Lane>
-        requires(Backend >= SimdBackend::ARCH_AVX)
+        requires(Backend == SimdBackend::ARCH_AVX)
     struct Simd256Register<Backend, T, Lane>
     {
         using Type = Simd256<Backend, T, Lane>;
