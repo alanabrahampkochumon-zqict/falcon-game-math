@@ -311,13 +311,13 @@ namespace flcn
         constexpr DataType extractFirst() noexcept;
 
 
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //     ///    BITWISE OPERATIONS
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //
-        //     /// @brief Perform bitwise NOT on the entire register.
-        //     [[nodiscard]] constexpr Simd256 operator~() const noexcept;
-        //
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+        ///    BITWISE OPERATIONS
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+        /// @brief Perform bitwise NOT on the entire register.
+        [[nodiscard]] constexpr Simd256 operator~() const noexcept;
+
         //     /// @brief Perform bitwise AND between this register and @p other.
         //     [[nodiscard]] constexpr Simd256 operator&(Simd256 other) const noexcept;
         //
@@ -761,19 +761,21 @@ namespace flcn
         //     template <uint8_t... ShuffleIndex>
         //     [[nodiscard]] constexpr Simd256 shuffle() const noexcept;
         //
-        //
-        //
-        //     /// @brief Get the internal register used by Simd256.
-        //     [[nodiscard]] FALCON_INLINE constexpr Emulated256<SimdBackend::ARCH_AVX, DataType> naive() const noexcept
-        //     { return { .lower = _lower.naive(), .upper = _upper.naive() }; }
-        //
-        //
-        //     /// @brief Get the internal register used by Simd256.
-        //     [[nodiscard]] FALCON_INLINE constexpr Emulated256<SimdBackend::ARCH_AVX, DataType> operator*() const
-        //     noexcept { return { .lower = *_lower, .upper = *_upper }; }
-        //
-        //
-        //
+
+
+        /// @brief Get the internal register used by Simd256.
+        [[nodiscard]] FALCON_INLINE constexpr simd::internal::Simd256Register_t<CURRENT_SIMD_BACKEND, DataType, Lane>
+        naive() const noexcept
+        { return _reg; }
+
+
+        /// @brief Get the internal register used by Simd256.
+        [[nodiscard]] FALCON_INLINE constexpr simd::internal::Simd256Register_t<CURRENT_SIMD_BACKEND, DataType, Lane>
+        operator*() const noexcept
+        { return _reg; }
+
+
+
         //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         //     ///       UTILITIES
         //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=

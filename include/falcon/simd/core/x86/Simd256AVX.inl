@@ -426,7 +426,7 @@ namespace flcn
                 {
                     auto lowerReg = _mm_castpd_si128(_mm256_castpd256_pd128(_reg));
                     lowerReg      = _mm_insert_epi64(lowerReg, std::bit_cast<uint64_t>(value), Index);
-                    _reg = _mm256_insertf128_pd(_reg, _mm_castsi128_pd(lowerReg), 0);
+                    _reg          = _mm256_insertf128_pd(_reg, _mm_castsi128_pd(lowerReg), 0);
                 }
                 else
                 {
@@ -442,7 +442,7 @@ namespace flcn
                 {
                     auto lowerReg = _mm_castps_si128(_mm256_castps256_ps128(_reg));
                     lowerReg      = _mm_insert_epi32(lowerReg, std::bit_cast<uint32_t>(value), Index);
-                    _reg = _mm256_insertf128_ps(_reg, _mm_castsi128_ps(lowerReg), 0);
+                    _reg          = _mm256_insertf128_ps(_reg, _mm_castsi128_ps(lowerReg), 0);
                 }
                 else
                 {
@@ -511,16 +511,38 @@ namespace flcn
 
 
 
-    // /**************************************
-    //  *          BITWISE OPERATORS         *
-    //  **************************************/
-    //
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane> Simd256<SimdBackend::ARCH_AVX, DataType,
-    //                                                                                 Lane>::operator~() const noexcept
-    // { return Simd256(~_lower, ~_upper); }
-    //
-    //
+    /**************************************
+     *          BITWISE OPERATORS         *
+     **************************************/
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane> Simd256<SimdBackend::ARCH_AVX, DataType,
+                                                                                   Lane>::operator~() const noexcept
+    {
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            Simd256 one;
+            one.setOne();
+            if constexpr (types::IsFP64<DataType>)
+            {
+                return Simd256(_mm256_andnot_pd(_reg, *one));
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                return Simd256(_mm256_andnot_ps(_reg, *one));
+            }
+            else // if constexpr (std::integral<DataType>)
+            {
+                return Simd256(_mm256_andnot_si256(_reg, *one));
+            }
+        }
+        else
+        {
+            return ~_reg;
+        }
+    }
+
+
     // template <typename DataType, size_t Lane>
     // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane> Simd256<
     //     SimdBackend::ARCH_AVX, DataType, Lane>::operator&(Simd256 other) const noexcept
