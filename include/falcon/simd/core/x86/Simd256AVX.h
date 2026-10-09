@@ -304,11 +304,12 @@ namespace flcn
         //     template <size_t Index>
         //         requires(Index < Lane)
         //     constexpr void setAt(DataType value) noexcept;
-        //
-        //     /// @brief Get the element from the lowest lane(0-th index).
-        //     constexpr DataType extractFirst() noexcept;
-        //
-        //
+
+
+        /// @brief Get the element from the lowest lane(0-th index).
+        constexpr DataType extractFirst() noexcept;
+
+
         //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         //     ///    BITWISE OPERATIONS
         //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=

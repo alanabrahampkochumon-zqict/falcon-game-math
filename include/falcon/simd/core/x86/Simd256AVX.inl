@@ -291,37 +291,38 @@ namespace flcn
                 if constexpr (types::IsFP64<DataType>)
                 {
                     auto reg = _mm256_mask_compress_pd(mask, _reg);
-                    return _mm_cvtsd_f64(reg);
+                    return _mm256_cvtsd_f64(reg);
                 }
                 else if constexpr (types::IsFP32<DataType>)
                 {
                     auto reg = _mm256_maskz_compress_ps(mask, _reg);
-                    return _mm_cvtss_f32(reg);
+                    return _mm256_cvtss_f32(reg);
                 }
                 else if constexpr (sizeof(DataType) == 8)
                 {
                     auto reg = _mm256_maskz_compress_epi64(mask, _reg);
-                    return std::bit_cast<DataType>(_mm_cvtsi128_si64(reg));
+                    return std::bit_cast<DataType>(_mm256_extract_epi64(reg, 0));
                 }
                 else if constexpr (sizeof(DataType) == 4)
                 {
                     auto reg = _mm256_maskz_compress_epi32(mask, _reg);
-                    return std::bit_cast<DataType>(_mm_cvtsi128_si32(reg));
+                    return std::bit_cast<DataType>(_mm256_cvtsi256_si32(reg));
                 }
                 else if constexpr (sizeof(DataType) == 2)
                 {
+                    // Compress will zero out the upper lanes we can extract the lowest 32-bit and static cast
+                    // it to a 16-bit integer.
                     // Note: epi8 version require __mask16
-                    auto reg = _mm_maskz_compress_epi16(static_cast<__mmask16>(1u << index), _reg);
-                    return std::bit_cast<DataType>(_mm_cvtsi128_si16(reg));
+                    auto reg = _mm256_maskz_compress_epi16(static_cast<__mmask16>(1u << index), _reg);
+                    return static_cast<DataType>(_mm256_cvtsi256_si32(reg));
                 }
                 else // if constexpr (sizeof(DataType) == 2)
                 {
                     // Note: epi8 version of maskz_compress require __mmask32 and there is no standalone
                     //       variant of cvtsi128 for converting to 8-bit integral
-                    auto reg = _mm_maskz_compress_epi8(static_cast<__mmask32>(1u << index), _reg);
-                    return static_cast<DataType>(_mm_cvtsi128_si16);
+                    auto reg = _mm256_maskz_compress_epi8(static_cast<__mmask32>(1u << index), _reg);
+                    return static_cast<DataType>(_mm_cvtsi256_si32(reg));
                 }
-                return static_cast<DataType>(index);
             }
             else
             {
@@ -376,14 +377,44 @@ namespace flcn
     //         _lower.template setAt<Index>(value);
     //     }
     // }
-    //
-    //
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::extractFirst() noexcept
-    // { return _lower.extractFirst(); }
-    //
-    //
-    //
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::extractFirst() noexcept
+    {
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                return _mm256_cvtsd_f64(_reg);
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                return _mm256_cvtss_f32(_reg);
+            }
+            else if constexpr (sizeof(DataType) == 8)
+            {
+                return std::bit_cast<DataType>(_mm256_extract_epi64(_reg, 0));
+            }
+            else if constexpr (sizeof(DataType) == 4)
+            {
+                return std::bit_cast<DataType>(_mm256_cvtsi256_si32(_reg));
+            }
+            else // if constexpr (sizeof(DataType) == 2)
+            {
+                // Note: No separate instruction for si16/si8(epi/epu)
+                return static_cast<DataType>(_mm256_cvtsi256_si32(_reg));
+            }
+        }
+        else
+        {
+            return _reg.extractFirst();
+            ;
+        }
+    }
+
+
+
     // /**************************************
     //  *          BITWISE OPERATORS         *
     //  **************************************/
