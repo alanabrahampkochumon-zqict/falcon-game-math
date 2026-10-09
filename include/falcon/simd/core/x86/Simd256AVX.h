@@ -193,17 +193,17 @@ namespace flcn
         constexpr void setZero() noexcept;
 
 
-        //     /**
-        //      * @brief Get a register filled with ones.
-        //      *
-        //      * @relatedalso load(DataType*)
-        //      * @relatedalso loadAligned(DataType*)
-        //      * @relatedalso store(DataType*)
-        //      * @relatedalso storeAligned(DataType*)
-        //      * @relatedalso broadcast(DataType)
-        //      * @relatedalso setZero()
-        //      */
-        //     constexpr void setOne() noexcept;
+        /**
+         * @brief Set all the bits in the register to 1.
+         *
+         * @relatedalso load(DataType*)
+         * @relatedalso loadAligned(DataType*)
+         * @relatedalso store(DataType*)
+         * @relatedalso storeAligned(DataType*)
+         * @relatedalso broadcast(DataType)
+         * @relatedalso setZero()
+         */
+        constexpr void setOne() noexcept;
 
 
         /**

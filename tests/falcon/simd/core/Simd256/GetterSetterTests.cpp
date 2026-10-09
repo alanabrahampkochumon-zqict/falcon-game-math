@@ -137,35 +137,35 @@ TYPED_TEST(Simd256GetterSetterTests, SetZero_FillsTheLanesWithZeroes)
         EXPECT_ANY_EQ(static_cast<Type>(0), result[i]);
     }
 }
-//
-//
-// TYPED_TEST(Simd256GetterSetterTests, SetOne_FillsTheLanesWithOnes)
-// {
-//     using Type            = typename TypeParam::Type;
-//     constexpr size_t Lane = TypeParam::VALUE;
-//     constexpr auto one    = getAllOnes<Type>();
-//
-//     auto reg = flcn::Simd256_t<Type, Lane>();
-//     reg.setOne();
-//
-//     alignas(32) std::array<Type, Lane> result{};
-//     reg.store(result.data());
-//
-//     for (size_t i = 0; i < Lane; ++i)
-//     {
-//         // Floating point types returns -nan which doesn't equal any so we must use
-//         // bitwise comparison.
-//         if constexpr (std::is_floating_point_v<Type>)
-//         {
-//             EXPECT_TRUE(isEqualBitwise(one, result[i]));
-//         }
-//         else
-//         {
-//             EXPECT_ANY_EQ(one, result[i]);
-//         }
-//     }
-// }
-//
+
+
+TYPED_TEST(Simd256GetterSetterTests, SetOne_FillsTheLanesWithOnes)
+{
+    using Type            = typename TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+    constexpr auto one    = getAllOnes<Type>();
+
+    auto reg = flcn::Simd256_t<Type, Lane>();
+    reg.setOne();
+
+    alignas(32) std::array<Type, Lane> result{};
+    reg.store(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        // Floating point types returns -nan which doesn't equal any so we must use
+        // bitwise comparison.
+        if constexpr (std::is_floating_point_v<Type>)
+        {
+            EXPECT_TRUE(isEqualBitwise(one, result[i]));
+        }
+        else
+        {
+            EXPECT_ANY_EQ(one, result[i]);
+        }
+    }
+}
+
 //
 // /// @test Verify that get(index) returns the element at the given index.
 // TYPED_TEST(Simd256GetterSetterTests, GetAt_ReturnsTheValueAtGivenIndex)

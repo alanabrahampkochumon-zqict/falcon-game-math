@@ -202,7 +202,7 @@ namespace flcn
 
 
         /**
-         * @brief Get a register filled with ones.
+         * @brief Set all the bits in the register to 1.
          *
          * @relatedalso load(DataType*)
          * @relatedalso loadAligned(DataType*)

@@ -208,12 +208,9 @@ namespace flcn
     }
 
 
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::setOne() noexcept
-    // {
-    //     _lower.setOne();
-    //     _upper.setOne();
-    // }
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::setOne() noexcept
+    { broadcast(DataType(simd::getAllOnes<DataType>())); }
 
 
     template <typename DataType, size_t Lane>
