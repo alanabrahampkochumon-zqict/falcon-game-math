@@ -180,19 +180,19 @@ namespace flcn
         constexpr void broadcast(DataType value) noexcept;
 
 
-        //     /**
-        //      * @brief Zero out the register.
-        //      *
-        //      * @relatedalso load(DataType*)
-        //      * @relatedalso loadAligned(DataType*)
-        //      * @relatedalso store(DataType*)
-        //      * @relatedalso storeAligned(DataType*)
-        //      * @relatedalso broadcast(DataType)
-        //      * @relatedalso setOne()
-        //      */
-        //     constexpr void setZero() noexcept;
-        //
-        //
+        /**
+         * @brief Zero out the register.
+         *
+         * @relatedalso load(DataType*)
+         * @relatedalso loadAligned(DataType*)
+         * @relatedalso store(DataType*)
+         * @relatedalso storeAligned(DataType*)
+         * @relatedalso broadcast(DataType)
+         * @relatedalso setOne()
+         */
+        constexpr void setZero() noexcept;
+
+
         //     /**
         //      * @brief Get a register filled with ones.
         //      *

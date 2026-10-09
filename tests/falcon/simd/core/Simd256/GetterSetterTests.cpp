@@ -120,24 +120,23 @@ TEST(Simd256GetterSetterTests, Set_CanTakeParametersLessThanLaneSize)
     EXPECT_EQ(7, result[6]);
 }
 
-//
-//
-// TYPED_TEST(Simd256GetterSetterTests, SetZero_FillsTheLanesWithZeroes)
-// {
-//     using Type            = typename TypeParam::Type;
-//     constexpr size_t Lane = TypeParam::VALUE;
-//
-//     auto reg = flcn::Simd256_t<Type, Lane>();
-//     reg.setZero();
-//
-//     alignas(32) std::array<Type, Lane> result{};
-//     reg.store(result.data());
-//
-//     for (size_t i = 0; i < Lane; ++i)
-//     {
-//         EXPECT_ANY_EQ(static_cast<Type>(0), result[i]);
-//     }
-// }
+
+TYPED_TEST(Simd256GetterSetterTests, SetZero_FillsTheLanesWithZeroes)
+{
+    using Type            = typename TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    auto reg = flcn::Simd256_t<Type, Lane>();
+    reg.setZero();
+
+    alignas(32) std::array<Type, Lane> result{};
+    reg.store(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(static_cast<Type>(0), result[i]);
+    }
+}
 //
 //
 // TYPED_TEST(Simd256GetterSetterTests, SetOne_FillsTheLanesWithOnes)

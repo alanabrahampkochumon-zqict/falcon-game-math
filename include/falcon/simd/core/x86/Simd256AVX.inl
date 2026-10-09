@@ -183,14 +183,31 @@ namespace flcn
     }
 
 
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::setZero() noexcept
-    // {
-    //     _lower.setZero();
-    //     _upper.setZero();
-    // }
-    //
-    //
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::setZero() noexcept
+    {
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                _reg = _mm256_setzero_pd();
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                _reg = _mm256_setzero_ps();
+            }
+            else
+            {
+                _reg = _mm256_setzero_si256();
+            }
+        }
+        else
+        {
+            _reg.setZero();
+        }
+    }
+
+
     // template <typename DataType, size_t Lane>
     // FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::setOne() noexcept
     // {
