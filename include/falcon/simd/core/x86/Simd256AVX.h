@@ -272,23 +272,23 @@ namespace flcn
         //      * @relatedalso setAt<size_t>(DataType)
         //      */
         //     constexpr void setAt(size_t index, DataType value) noexcept;
-        //
-        //
-        //     /**
-        //      * @brief Get the value at @p index.
-        //      *
-        //      * @tparam Index The index of the register. Must be between 0 and Lane - 1.
-        //      *
-        //      * @return The value at index [read-only].
-        //      *
-        //      * @relatedalso getAt(size_t)
-        //      * @relatedalso setAt(size_t, DataType)
-        //      * @relatedalso setAt<size_t>(DataType)
-        //      */
-        //     template <size_t Index>
-        //         requires(Index < Lane)
-        //     [[nodiscard]] constexpr DataType getAt() const noexcept;
-        //
+
+
+        /**
+         * @brief Get the value at @p index.
+         *
+         * @tparam Index The index of the register. Must be between 0 and Lane - 1.
+         *
+         * @return The value at index [read-only].
+         *
+         * @relatedalso getAt(size_t)
+         * @relatedalso setAt(size_t, DataType)
+         * @relatedalso setAt<size_t>(DataType)
+         */
+        template <size_t Index>
+            requires(Index < Lane)
+        [[nodiscard]] constexpr DataType getAt() const noexcept;
+
         //
         //     /**
         //      * @brief Set the value at @p index to @p value.

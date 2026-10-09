@@ -316,7 +316,7 @@ namespace flcn
                     auto reg = _mm256_maskz_compress_epi16(static_cast<__mmask16>(1u << index), _reg);
                     return static_cast<DataType>(_mm256_cvtsi256_si32(reg));
                 }
-                else // if constexpr (sizeof(DataType) == 2)
+                else // if constexpr (sizeof(DataType) == 1)
                 {
                     // Note: epi8 version of maskz_compress require __mmask32 and there is no standalone
                     //       variant of cvtsi128 for converting to 8-bit integral
@@ -345,24 +345,69 @@ namespace flcn
     //     // TODO: Optimize with masks
     //     index >= LOWER_LANE_COUNT ? _upper.setAt(index - LOWER_LANE_COUNT, value) : _lower.setAt(index, value);
     // }
-    //
-    //
-    // template <typename DataType, size_t Lane>
-    // template <size_t Index>
-    //     requires(Index < Lane)
-    // FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::getAt() const noexcept
-    // {
-    //     if constexpr (Index >= LOWER_LANE_COUNT)
-    //     {
-    //         return _upper.template getAt<Index - LOWER_LANE_COUNT>();
-    //     }
-    //     else
-    //     {
-    //         return _lower.template getAt<Index>();
-    //     }
-    // }
-    //
-    //
+
+
+    template <typename DataType, size_t Lane>
+    template <size_t Index>
+        requires(Index < Lane)
+    FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::getAt() const noexcept
+    {
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                // For floating point types if the indices are lower than half of max index
+                // 2 for double, then we can cast it to an XMM register and extract values.
+                // If the index is in the upper lane however, we need to extract the upper 128-bits
+                // and then extract the values(with applied index offset, 2 in case of doubles).
+                if constexpr (Index < 2)
+                {
+                    const auto reg128 = _mm_castpd_si128(_mm256_castpd256_pd128(_reg));
+                    return std::bit_cast<double>(_mm_extract_epi64(reg128, Index));
+                }
+                else
+                {
+                    const auto upperReg = _mm_castpd_si128(_mm256_extractf128_pd(_reg, 1));
+                    return std::bit_cast<double>(_mm_extract_epi64(upperReg, Index - 2)); // 2 is the offset.
+                }
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                if constexpr (Index < 4)
+                {
+                    const auto reg128 = _mm256_castps256_ps128(_reg);
+                    return _mm_extract_ps(reg128, Index);
+                }
+                else
+                {
+                    const auto upperReg = _mm256_extractf128_ps(_reg, 1);
+                    return _mm_extract_ps(upperReg, Index - 4); // 4 is the offset.
+                }
+            }
+            else if constexpr (sizeof(DataType) == 8)
+            {
+                return std::bit_cast<DataType>(_mm256_extract_epi64(_reg, Index));
+            }
+            else if constexpr (sizeof(DataType) == 4)
+            {
+                return std::bit_cast<DataType>(_mm256_extract_epi32(_reg, Index));
+            }
+            else if constexpr (sizeof(DataType) == 2)
+            {
+                return std::bit_cast<DataType>(_mm256_extract_epi16(_reg, Index));
+            }
+            else // if constexpr (sizeof(DataType) == 1)
+            {
+                return std::bit_cast<DataType>(_mm256_extract_epi8(_reg, Index));
+            }
+        }
+        else
+        {
+            return _reg.template getAt<Index>();
+        }
+    }
+
+
     // template <typename DataType, size_t Lane>
     // template <size_t Index>
     //     requires(Index < Lane)
@@ -409,7 +454,6 @@ namespace flcn
         else
         {
             return _reg.extractFirst();
-            ;
         }
     }
 
