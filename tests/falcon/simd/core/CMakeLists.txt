@@ -14,7 +14,7 @@ add_executable(FalconSIMDCoreTests
         # Simd256/ArithmeticTests.cpp
         # Simd256/ComparisonTests.cpp
         Simd256/GetterSetterTests.cpp
-        # Simd256/LoadStoreTests.cpp
+        Simd256/LoadStoreTests.cpp
         # Simd256/BitwiseOperationTests.cpp
         # Simd256/BlendTests.cpp
         # Simd256/ShuffleTests.cpp

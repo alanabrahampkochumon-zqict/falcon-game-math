@@ -96,30 +96,93 @@ namespace flcn
     }
 
 
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::loadAligned(
-    //     const DataType* data) noexcept
-    // {
-    //     _lower.loadAligned(data);
-    //     _upper.loadAligned(data + LOWER_LANE_COUNT);
-    // }
-    //
-    //
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::load(const DataType* data) noexcept
-    // {
-    //     _lower.load(data);
-    //     _upper.load(data + LOWER_LANE_COUNT);
-    // }
-    //
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::broadcast(DataType value) noexcept
-    // {
-    //     _lower.broadcast(value);
-    //     _upper.broadcast(value);
-    // }
-    //
-    //
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::loadAligned(
+        const DataType* data) noexcept
+    {
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                _reg = _mm256_load_pd(data);
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                _reg = _mm256_load_ps(data);
+            }
+            else
+            {
+                _reg = _mm256_load_si256(reinterpret_cast<const __m256i*>(data));
+            }
+        }
+        else
+        {
+            _reg.loadAligned(data);
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::load(const DataType* data) noexcept
+    {
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                _reg = _mm256_loadu_pd(data);
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                _reg = _mm256_loadu_ps(data);
+            }
+            else
+            {
+                _reg = _mm256_loadu_si256(reinterpret_cast<const __m256i*>(data));
+            }
+        }
+        else
+        {
+            _reg.load(data);
+        }
+    }
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::broadcast(DataType value) noexcept
+    {
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                _reg = _mm256_set1_pd(value);
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                _reg = _mm256_set1_ps(value);
+            }
+            else if constexpr (sizeof(DataType) == 8)
+            {
+                _reg = _mm256_set1_epi64x(value);
+            }
+            else if constexpr (sizeof(DataType) == 4)
+            {
+                _reg = _mm256_set1_epi32(value);
+            }
+            else if constexpr (sizeof(DataType) == 2)
+            {
+                _reg = _mm256_set1_epi16(value);
+            }
+            else // if constexpr(sizeof(DataType) == 2)
+            {
+                _reg = _mm256_set1_epi8(value);
+            }
+        }
+        else
+        {
+            _reg.broadcast(value);
+        }
+    }
+
+
     // template <typename DataType, size_t Lane>
     // FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::setZero() noexcept
     // {

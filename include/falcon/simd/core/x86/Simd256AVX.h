@@ -130,58 +130,56 @@ namespace flcn
         constexpr Simd256& set(Args... args);
 
 
-        //     /**
-        //      * @brief Load data from memory into the SIMD register.
-        //      *
-        //      * @note Data must be aligned to 32-byte boundary.
-        //      *       If the size * Lane cannot saturate the buffer, data will be moved to lower lanes.
-        //      *       Example: loadAligned<2>(uint8_t*) will only load the lower 16 bits with the data and fill the
-        //      rest with
-        //      *       zeroes.
-        //      *
-        //      * @param data The data to load.
-        //      */
-        //     constexpr void loadAligned(const DataType* data) noexcept;
-        //
-        //
-        //     /**
-        //      * @brief Load data from memory into the SIMD register.
-        //      *
-        //      * @note Can work with unaligned memory.
-        //      *       If the size * Lane cannot saturate the buffer, data will be moved to lower lanes.
-        //      *       Example: loadAligned<2>(uint8_t*) will only load the lower 16 bits with the data and fill the
-        //      rest with
-        //      *       zeroes.
-        //      *
-        //      * @param data The data to load.
-        //      *
-        //      * @relatedalso loadAligned(DataType*)
-        //      * @relatedalso store(DataType*)
-        //      * @relatedalso storeAligned(DataType*)
-        //      * @relatedalso broadcast(DataType)
-        //      * @relatedalso setZero()
-        //      */
-        //     constexpr void load(const DataType* data) noexcept;
-        //
-        //
-        //     /**
-        //      * @brief Broadcast single value across the whole simd register.
-        //      *
-        //      * @details
-        //      *        Fills the entire register lane with the same value, i.e, for 32-bit floats, all the 4 lanes
-        //      will
-        //      *        contain the same @p value.
-        //      * @param value The value to broadcast.
-        //      *
-        //      * @relatedalso load(DataType*)
-        //      * @relatedalso loadAligned(DataType*)
-        //      * @relatedalso store(DataType*)
-        //      * @relatedalso storeAligned(DataType*)
-        //      * @relatedalso setZero()
-        //      */
-        //     constexpr void broadcast(DataType value) noexcept;
-        //
-        //
+        /**
+         * @brief Load data from memory into the SIMD register.
+         *
+         * @note Data must be aligned to 32-byte boundary.
+         *       If the size * Lane cannot saturate the buffer, data will be moved to lower lanes.
+         *       Example: loadAligned<2>(uint8_t*) will only load the lower 16 bits with the data and
+         *       fill the rest with zeroes.
+         *
+         * @param data The data to load.
+         */
+        constexpr void loadAligned(const DataType* data) noexcept;
+
+
+        /**
+         * @brief Load data from memory into the SIMD register.
+         *
+         * @note Can work with unaligned memory.
+         *       If the size * Lane cannot saturate the buffer, data will be moved to lower lanes.
+         *       Example: loadAligned<2>(uint8_t*) will only load the lower 16 bits with the data and fill the
+         *       rest with zeroes.
+         *
+         * @param data The data to load.
+         *
+         * @relatedalso loadAligned(DataType*)
+         * @relatedalso store(DataType*)
+         * @relatedalso storeAligned(DataType*)
+         * @relatedalso broadcast(DataType)
+         * @relatedalso setZero()
+         */
+        constexpr void load(const DataType* data) noexcept;
+
+
+        /**
+         * @brief Broadcast single value across the whole simd register.
+         *
+         * @details
+         *        Fills the entire register lane with the same value, i.e, for 32-bit floats, all the 4 lanes
+         will
+         *        contain the same @p value.
+         * @param value The value to broadcast.
+         *
+         * @relatedalso load(DataType*)
+         * @relatedalso loadAligned(DataType*)
+         * @relatedalso store(DataType*)
+         * @relatedalso storeAligned(DataType*)
+         * @relatedalso setZero()
+         */
+        constexpr void broadcast(DataType value) noexcept;
+
+
         //     /**
         //      * @brief Zero out the register.
         //      *
