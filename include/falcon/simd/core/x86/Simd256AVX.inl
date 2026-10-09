@@ -20,24 +20,24 @@ namespace flcn
     (std::floating_point<DataType> && CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX) ||                                \
         CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX2
 
-    // template <typename DataType, size_t Lane>
-    // template <typename... Args>
-    //     requires(SimdSafeConvertible<Args, DataType> && ...)
-    // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::Simd256(Args&&... data) noexcept
-    // {
-    //     /// If only single argument is provided then it will be broadcast otherwise the data will be filled
-    //     /// from bottom to top, with zeroes in unoccupied spaces.
-    //     if constexpr (sizeof...(data) == 1)
-    //     {
-    //         broadcast(std::forward<Args>(data)...);
-    //     }
-    //     else
-    //     {
-    //         set(std::forward<Args>(data)...);
-    //     }
-    // }
-    //
-    //
+    template <typename DataType, size_t Lane>
+    template <typename... Args>
+        requires(SimdSafeConvertible<Args, DataType> && ...)
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::Simd256(Args&&... data) noexcept
+    {
+        /// If only single argument is provided then it will be broadcast otherwise the data will be filled
+        /// from bottom to top, with zeroes in unoccupied spaces.
+        if constexpr (sizeof...(data) == 1)
+        {
+            broadcast(std::forward<Args>(data)...);
+        }
+        else
+        {
+            set(std::forward<Args>(data)...);
+        }
+    }
+
+
     // template <typename DataType, size_t Lane>
     // template <typename T>
     // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, T, Lane> Simd256<SimdBackend::ARCH_AVX, DataType,
@@ -50,17 +50,17 @@ namespace flcn
     // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, T, Lane> Simd256<SimdBackend::ARCH_AVX, DataType,
     //                                                                          Lane>::cast() noexcept
     // { return Simd256(_lower.template cast<T>(), _upper.template cast<T>()); }
-    //
-    //
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::Simd256(
-    //     std::span<const DataType> values) noexcept
-    // { loadAligned(values.data()); }
-    //
-    //
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::Simd256(const DataType* pBuffer) noexcept
-    // { loadAligned(pBuffer); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::Simd256(
+        std::span<const DataType> values) noexcept
+    { loadAligned(values.data()); }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::Simd256(const DataType* pBuffer) noexcept
+    { loadAligned(pBuffer); }
 
 
     template <typename DataType, size_t Lane>
@@ -394,11 +394,11 @@ namespace flcn
             }
             else if constexpr (sizeof(DataType) == 2)
             {
-                return std::bit_cast<DataType>(_mm256_extract_epi16(_reg, Index));
+                return static_cast<DataType>(_mm256_extract_epi16(_reg, Index));
             }
             else // if constexpr (sizeof(DataType) == 1)
             {
-                return std::bit_cast<DataType>(_mm256_extract_epi8(_reg, Index));
+                return static_cast<DataType>(_mm256_extract_epi8(_reg, Index));
             }
         }
         else
