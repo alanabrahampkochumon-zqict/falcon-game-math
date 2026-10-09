@@ -129,123 +129,123 @@ TYPED_TEST(Simd256ArithmeticTests, CompoundAddOperation_ReturnsAValidResult)
 }
 
 
-// TEST(Simd256ArithmeticTests, CompoundAddOperation_WorksWithMixedNumbers)
-// {
-//
-//     alignas(32) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 27, 45, 19 }, rhs{ -1, 5, -5, -1, 5, -5, -1, 12 },
-//         expected{ 0, 10, -7, -1, 0, 22, 44, 31 }, result{};
-//
-//     flcn::Simd256_t<float, 8> regA, regB;
-//     regA.loadAligned(lhs.data());
-//     regB.loadAligned(rhs.data());
-//
-//     regA += regB;
-//     regA.storeAligned(result.data());
-//
-//
-//     for (size_t i = 0; i < 8; ++i)
-//     {
-//         EXPECT_FLOAT_EQ(expected[i], result[i]);
-//     }
-// }
-//
-//
-// TYPED_TEST(Simd256ArithmeticTests, BinarySubtractOperation_ReturnsAValidResult)
-// {
-//     using Type            = TypeParam::Type;
-//     constexpr size_t Lane = TypeParam::VALUE;
-//
-//     alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
-//     for (size_t i = 0; i < Lane; ++i)
-//     {
-//         lhs[i]      = static_cast<Type>(i * 5);
-//         rhs[i]      = static_cast<Type>(i * 3);
-//         expected[i] = static_cast<Type>((i * 5) - (i * 3));
-//     }
-//
-//     flcn::Simd256_t<Type, Lane> regA, regB;
-//     regA.loadAligned(lhs.data());
-//     regB.loadAligned(rhs.data());
-//
-//     auto regRes = regA - regB;
-//
-//     regRes.storeAligned(result.data());
-//
-//     for (size_t i = 0; i < Lane; ++i)
-//     {
-//         EXPECT_ANY_EQ(expected[i], result[i]);
-//     }
-// }
-//
-//
-// TEST(Simd256ArithmeticTests, BinarySubtractOperation_WorksWithMixedNumbers)
-// {
-//
-//     alignas(32) std::array<float, 8> lhs{ 1, 5, -2, 0, 11, -12, 13, -14 }, rhs{ -1, 5, -5, -1, 1, 5, -2, 0 },
-//         expected{ 2, 0, 3, 1, 10, -17, 15, -14 }, result{};
-//
-//     flcn::Simd256_t<float, 8> regA, regB;
-//     regA.loadAligned(lhs.data());
-//     regB.loadAligned(rhs.data());
-//
-//     const auto regRes = regA - regB;
-//     regRes.storeAligned(result.data());
-//
-//
-//     for (size_t i = 0; i < 8; ++i)
-//     {
-//         EXPECT_FLOAT_EQ(expected[i], result[i]);
-//     }
-// }
-//
-//
-// TYPED_TEST(Simd256ArithmeticTests, CompoundSubtractOperation_ReturnsAValidResult)
-// {
-//     using Type            = TypeParam::Type;
-//     constexpr size_t Lane = TypeParam::VALUE;
-//
-//     alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
-//     for (size_t i = 0; i < Lane; ++i)
-//     {
-//         lhs[i]      = static_cast<Type>(i * 5);
-//         rhs[i]      = static_cast<Type>(i * 3);
-//         expected[i] = static_cast<Type>((i * 5) - (i * 3));
-//     }
-//
-//     flcn::Simd256_t<Type, Lane> regA, regB;
-//     regA.loadAligned(lhs.data());
-//     regB.loadAligned(rhs.data());
-//
-//     regA -= regB;
-//     regA.storeAligned(result.data());
-//
-//     for (size_t i = 0; i < Lane; ++i)
-//     {
-//         EXPECT_ANY_EQ(expected[i], result[i]);
-//     }
-// }
-//
-//
-// TEST(Simd256ArithmeticTests, CompoundSubtractOperation_WorksWithMixedNumbers)
-// {
-//
-//     alignas(32) std::array<float, 8> lhs{ 1, 5, -2, 0, 11, -12, 13, -14 }, rhs{ -1, 5, -5, -1, 1, 5, -2, 0 },
-//         expected{ 2, 0, 3, 1, 10, -17, 15, -14 }, result{};
-//
-//     flcn::Simd256_t<float, 8> regA, regB;
-//     regA.loadAligned(lhs.data());
-//     regB.loadAligned(rhs.data());
-//
-//     regA -= regB;
-//     regA.storeAligned(result.data());
-//
-//     for (size_t i = 0; i < 8; ++i)
-//     {
-//         EXPECT_FLOAT_EQ(expected[i], result[i]);
-//     }
-// }
-//
-//
+TEST(Simd256ArithmeticTests, CompoundAddOperation_WorksWithMixedNumbers)
+{
+
+    alignas(32) std::array<float, 8> lhs{ 1, 5, -2, 0, -5, 27, 45, 19 }, rhs{ -1, 5, -5, -1, 5, -5, -1, 12 },
+        expected{ 0, 10, -7, -1, 0, 22, 44, 31 }, result{};
+
+    flcn::Simd256_t<float, 8> regA, regB;
+    regA.loadAligned(lhs.data());
+    regB.loadAligned(rhs.data());
+
+    regA += regB;
+    regA.storeAligned(result.data());
+
+
+    for (size_t i = 0; i < 8; ++i)
+    {
+        EXPECT_FLOAT_EQ(expected[i], result[i]);
+    }
+}
+
+
+TYPED_TEST(Simd256ArithmeticTests, BinarySubtractOperation_ReturnsAValidResult)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        lhs[i]      = static_cast<Type>(i * 5);
+        rhs[i]      = static_cast<Type>(i * 3);
+        expected[i] = static_cast<Type>((i * 5) - (i * 3));
+    }
+
+    flcn::Simd256_t<Type, Lane> regA, regB;
+    regA.loadAligned(lhs.data());
+    regB.loadAligned(rhs.data());
+
+    auto regRes = regA - regB;
+
+    regRes.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
+    }
+}
+
+
+TEST(Simd256ArithmeticTests, BinarySubtractOperation_WorksWithMixedNumbers)
+{
+
+    alignas(32) std::array<float, 8> lhs{ 1, 5, -2, 0, 11, -12, 13, -14 }, rhs{ -1, 5, -5, -1, 1, 5, -2, 0 },
+        expected{ 2, 0, 3, 1, 10, -17, 15, -14 }, result{};
+
+    flcn::Simd256_t<float, 8> regA, regB;
+    regA.loadAligned(lhs.data());
+    regB.loadAligned(rhs.data());
+
+    const auto regRes = regA - regB;
+    regRes.storeAligned(result.data());
+
+
+    for (size_t i = 0; i < 8; ++i)
+    {
+        EXPECT_FLOAT_EQ(expected[i], result[i]);
+    }
+}
+
+
+TYPED_TEST(Simd256ArithmeticTests, CompoundSubtractOperation_ReturnsAValidResult)
+{
+    using Type            = TypeParam::Type;
+    constexpr size_t Lane = TypeParam::VALUE;
+
+    alignas(32) std::array<Type, Lane> lhs{}, rhs{}, expected{}, result{};
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        lhs[i]      = static_cast<Type>(i * 5);
+        rhs[i]      = static_cast<Type>(i * 3);
+        expected[i] = static_cast<Type>((i * 5) - (i * 3));
+    }
+
+    flcn::Simd256_t<Type, Lane> regA, regB;
+    regA.loadAligned(lhs.data());
+    regB.loadAligned(rhs.data());
+
+    regA -= regB;
+    regA.storeAligned(result.data());
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(expected[i], result[i]);
+    }
+}
+
+
+TEST(Simd256ArithmeticTests, CompoundSubtractOperation_WorksWithMixedNumbers)
+{
+
+    alignas(32) std::array<float, 8> lhs{ 1, 5, -2, 0, 11, -12, 13, -14 }, rhs{ -1, 5, -5, -1, 1, 5, -2, 0 },
+        expected{ 2, 0, 3, 1, 10, -17, 15, -14 }, result{};
+
+    flcn::Simd256_t<float, 8> regA, regB;
+    regA.loadAligned(lhs.data());
+    regB.loadAligned(rhs.data());
+
+    regA -= regB;
+    regA.storeAligned(result.data());
+
+    for (size_t i = 0; i < 8; ++i)
+    {
+        EXPECT_FLOAT_EQ(expected[i], result[i]);
+    }
+}
+
+
 // /// @test Verify that unary minus return a new register with negated values(0-reg).
 // TYPED_TEST(Simd256ArithmeticTests, UnaryMinusOperator_ReturnsAValidResult)
 // {

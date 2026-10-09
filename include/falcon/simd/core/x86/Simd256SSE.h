@@ -368,7 +368,7 @@ namespace flcn
          *
          * @param other The register to add.
          *
-         * @return A reference to the this register with sum.
+         * @return A reference to this register with sum.
          */
         constexpr Simd256& operator+=(Simd256 other) noexcept;
 
@@ -390,7 +390,7 @@ namespace flcn
          *
          * @param other The register to subtract.
          *
-         * @return A reference to the this register with difference.
+         * @return A reference to this register with difference.
          */
         constexpr Simd256& operator-=(Simd256 other) noexcept;
 
@@ -421,7 +421,7 @@ namespace flcn
          *
          * @param other The register to multiply.
          *
-         * @return A reference to the this register with products.
+         * @return A reference to this register with products.
          */
         constexpr Simd256& operator*=(Simd256 other) noexcept;
 
@@ -476,7 +476,7 @@ namespace flcn
          *
          * @param scalar The divisor.
          *
-         * @return A reference to the this register with products.
+         * @return A reference to this register with products.
          *
          * @relatedalso divReg(const Simd256)
          * @relatedalso operator/(const DataType)
