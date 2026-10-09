@@ -390,14 +390,14 @@ namespace flcn
         constexpr Simd256& operator-=(Simd256 other) noexcept;
 
 
-        //     /**
-        //      * @brief Perform a arithmetic negation on this register(NOT BITWISE) and return a new register.
-        //      *        Analogous to (0 - reg) or -reg.
-        //      * @return A new register with negated elements.
-        //      */
-        //     [[nodiscard]] constexpr Simd256 operator-() const noexcept;
-        //
-        //
+        /**
+         * @brief Perform a arithmetic negation on this register(NOT BITWISE) and return a new register.
+         *        Analogous to (0 - reg) or -reg.
+         * @return A new register with negated elements.
+         */
+        [[nodiscard]] constexpr Simd256 operator-() const noexcept;
+
+
         //     /**
         //      * @brief Multiply two registers and return a new register.
         //      *
