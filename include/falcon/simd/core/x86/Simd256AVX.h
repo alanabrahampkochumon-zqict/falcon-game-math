@@ -336,37 +336,37 @@ namespace flcn
         //
         //     /// @brief Perform an AND operation on the entire vector, horizontally.
         //     [[nodiscard]] constexpr DataType horizontalAnd() const noexcept;
-        //
-        //
-        //
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //     ///   ARITHMETIC OPERATIONS
-        //     ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-        //
-        //     /**
-        //      * @brief Add two registers together and return a new register.
-        //      *
-        //      * @note Register arithmetic to limited is same data types and lanes.
-        //      *
-        //      * @param other The register to add.
-        //      *
-        //      * @return A new register with the sum elements from this register and @p other.
-        //      */
-        //     [[nodiscard]] constexpr Simd256 operator+(Simd256 other) const noexcept;
-        //
-        //
-        //     /**
-        //      * @brief Add contents of this register with @p other in-place.
-        //      *
-        //      * @note Register arithmetic to limited is same data types and lanes.
-        //      *
-        //      * @param other The register to add.
-        //      *
-        //      * @return A reference to the this register with sum.
-        //      */
-        //     constexpr Simd256& operator+=(Simd256 other) noexcept;
-        //
-        //
+
+
+
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+        ///   ARITHMETIC OPERATIONS
+        ///+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+        /**
+         * @brief Add two registers together and return a new register.
+         *
+         * @note Register arithmetic to limited is same data types and lanes.
+         *
+         * @param other The register to add.
+         *
+         * @return A new register with the sum elements from this register and @p other.
+         */
+        [[nodiscard]] constexpr Simd256 operator+(Simd256 other) const noexcept;
+
+
+        /**
+         * @brief Add contents of this register with @p other in-place.
+         *
+         * @note Register arithmetic to limited is same data types and lanes.
+         *
+         * @param other The register to add.
+         *
+         * @return A reference to the this register with sum.
+         */
+        constexpr Simd256& operator+=(Simd256 other) noexcept;
+
+
         //     /**
         //      * @brief Subtract two registers and return a new register.
         //      *

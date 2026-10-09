@@ -685,28 +685,60 @@ namespace flcn
     //         return lower & upper;
     //     }
     // }
-    //
-    //
-    //
-    // /**************************************
-    //  *       ARITHMETIC OPERATORS         *
-    //  **************************************/
-    //
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane> Simd256<
-    //     SimdBackend::ARCH_AVX, DataType, Lane>::operator+(Simd256 other) const noexcept
-    // { return Simd256(_lower + other._lower, _upper + other._upper); }
-    //
-    //
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>& Simd256<
-    //     SimdBackend::ARCH_AVX, DataType, Lane>::operator+=(Simd256 other) noexcept
-    // {
-    //     *this = *this + other;
-    //     return *this;
-    // }
-    //
-    //
+
+
+
+    /**************************************
+     *       ARITHMETIC OPERATORS         *
+     **************************************/
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane> Simd256<
+        SimdBackend::ARCH_AVX, DataType, Lane>::operator+(Simd256 other) const noexcept
+    {
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                return Simd256(_mm256_add_pd(_reg, *other));
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                return Simd256(_mm256_add_ps(_reg, *other));
+            }
+            else if constexpr (sizeof(DataType) == 8)
+            {
+                return Simd256(_mm256_add_epi64(_reg, *other));
+            }
+            else if constexpr (sizeof(DataType) == 4)
+            {
+                return Simd256(_mm256_add_epi32(_reg, *other));
+            }
+            else if constexpr (sizeof(DataType) == 2)
+            {
+                return Simd256(_mm256_add_epi16(_reg, *other));
+            }
+            else // if constexpr (sizeof(DataType) == 1)
+            {
+                return Simd256(_mm256_add_epi8(_reg, *other));
+            }
+        }
+        else
+        {
+            return _reg + other._reg;
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>& Simd256<
+        SimdBackend::ARCH_AVX, DataType, Lane>::operator+=(Simd256 other) noexcept
+    {
+        *this = *this + other;
+        return *this;
+    }
+
+
     // template <typename DataType, size_t Lane>
     // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane> Simd256<
     //     SimdBackend::ARCH_AVX, DataType, Lane>::operator-(Simd256 other) const noexcept
