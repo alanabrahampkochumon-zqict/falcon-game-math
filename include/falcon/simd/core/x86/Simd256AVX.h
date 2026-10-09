@@ -314,13 +314,13 @@ namespace flcn
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
         ///    BITWISE OPERATIONS
         ///+=+=+=+=+=+=+=+=+=+=+=+=+=
-
+// TODO: Add bitwise |=, &= ^= etc.
         /// @brief Perform bitwise NOT on the entire register.
         [[nodiscard]] constexpr Simd256 operator~() const noexcept;
 
-        //     /// @brief Perform bitwise AND between this register and @p other.
-        //     [[nodiscard]] constexpr Simd256 operator&(Simd256 other) const noexcept;
-        //
+        /// @brief Perform bitwise AND between this register and @p other.
+        [[nodiscard]] constexpr Simd256 operator&(Simd256 other) const noexcept;
+
         //     /// @brief Perform bitwise OR between this register and @p other.
         //     [[nodiscard]] constexpr Simd256 operator|(Simd256 other) const noexcept;
         //
