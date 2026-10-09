@@ -241,23 +241,23 @@ namespace flcn
         constexpr void storeAligned(DataType* pBuffer) const noexcept;
 
 
-        //     /**
-        //      * Get the value at @p index.
-        //      *
-        //      * @param index The index of the register. Must be between 0 and Lane - 1.
-        //      *
-        //      * @note For indices known at compile-time, use get<Index>() as it is faster
-        //      *       due to the availability of direct hardware intrinsic.
-        //      *
-        //      * @return The value at index [read-only].
-        //      *
-        //      * @relatedalso setAt(size_t, DataType)
-        //      * @relatedalso getAt<size_t>()
-        //      * @relatedalso setAt<size_t>(DataType)
-        //      */
-        //     [[nodiscard]] constexpr DataType getAt(size_t index) const noexcept;
-        //
-        //
+        /**
+         * Get the value at @p index.
+         *
+         * @param index The index of the register. Must be between 0 and Lane - 1.
+         *
+         * @note For indices known at compile-time, use get<Index>() as it is faster
+         *       due to the availability of direct hardware intrinsic.
+         *
+         * @return The value at index [read-only].
+         *
+         * @relatedalso setAt(size_t, DataType)
+         * @relatedalso getAt<size_t>()
+         * @relatedalso setAt<size_t>(DataType)
+         */
+        [[nodiscard]] constexpr DataType getAt(size_t index) const noexcept;
+
+
         //     /**
         //      * @brief Set the value at @p index to @p value.
         //      *

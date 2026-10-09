@@ -263,17 +263,80 @@ namespace flcn
         }
     }
 
-    //
-    //
-    // /**************************************
-    //  *          GETTERS/SETTERS           *
-    //  **************************************/
-    //
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::getAt(size_t index) const
-    // noexcept { return index >= LOWER_LANE_COUNT ? _upper.getAt(index - LOWER_LANE_COUNT) : _lower.getAt(index); }
-    //
-    //
+
+
+    /**************************************
+     *          GETTERS/SETTERS           *
+     **************************************/
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr DataType Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::getAt(size_t index) const noexcept
+    {
+        // TODO: Extract out message
+        // TODO: Add death test
+        FALCON_ASSERT_MSG(
+            index < Lane,
+            std::format("Out of bounds access. Idx must be less than {}. But it is currently {}.", Lane, index)
+                .c_str());
+
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            // We can use the compress and extract trick from CVL2(Agner Fog)
+            // But that instruction is available only in AVX512F + AVX512VL
+            if constexpr (CURRENT_SIMD_BACKEND >= SimdBackend::ARCH_AVX512EX)
+            {
+                // 1u << index creates a mask that selects the lane we want to index into
+                // Eg: For index 4 the mask is 1 << 4 => 0001 0000 instead of 0000 1000
+                auto mask = static_cast<__mmask8>(1u << index);
+                if constexpr (types::IsFP64<DataType>)
+                {
+                    auto reg = _mm256_mask_compress_pd(mask, _reg);
+                    return _mm_cvtsd_f64(reg);
+                }
+                else if constexpr (types::IsFP32<DataType>)
+                {
+                    auto reg = _mm256_maskz_compress_ps(mask, _reg);
+                    return _mm_cvtss_f32(reg);
+                }
+                else if constexpr (sizeof(DataType) == 8)
+                {
+                    auto reg = _mm256_maskz_compress_epi64(mask, _reg);
+                    return std::bit_cast<DataType>(_mm_cvtsi128_si64(reg));
+                }
+                else if constexpr (sizeof(DataType) == 4)
+                {
+                    auto reg = _mm256_maskz_compress_epi32(mask, _reg);
+                    return std::bit_cast<DataType>(_mm_cvtsi128_si32(reg));
+                }
+                else if constexpr (sizeof(DataType) == 2)
+                {
+                    // Note: epi8 version require __mask16
+                    auto reg = _mm_maskz_compress_epi16(static_cast<__mmask16>(1u << index), _reg);
+                    return std::bit_cast<DataType>(_mm_cvtsi128_si16(reg));
+                }
+                else // if constexpr (sizeof(DataType) == 2)
+                {
+                    // Note: epi8 version of maskz_compress require __mmask32 and there is no standalone
+                    //       variant of cvtsi128 for converting to 8-bit integral
+                    auto reg = _mm_maskz_compress_epi8(static_cast<__mmask32>(1u << index), _reg);
+                    return static_cast<DataType>(_mm_cvtsi128_si16);
+                }
+                return static_cast<DataType>(index);
+            }
+            else
+            {
+                alignas(32) std::array<DataType, Lane> buffer{};
+                store(buffer.data());
+                return buffer[index];
+            }
+        }
+        else
+        {
+            return _reg.getAt(index);
+        }
+    }
+
+
     // template <typename DataType, size_t Lane>
     // FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::setAt(size_t index,
     //                                                                                     DataType value) noexcept

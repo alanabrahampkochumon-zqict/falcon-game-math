@@ -530,7 +530,7 @@ namespace flcn
         }
         else
         {
-            std::array<DataType, Lane> buffer{};
+            alignas(16) std::array<DataType, Lane> buffer{};
             store(buffer.data());
             return buffer[index];
         }
@@ -2685,7 +2685,6 @@ namespace flcn
         }
 
 #undef _SIMD128_CONST_BLEND_FALLBACK
-
     }
 
 

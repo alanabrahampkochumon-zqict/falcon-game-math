@@ -166,20 +166,20 @@ TYPED_TEST(Simd256GetterSetterTests, SetOne_FillsTheLanesWithOnes)
     }
 }
 
-//
-// /// @test Verify that get(index) returns the element at the given index.
-// TYPED_TEST(Simd256GetterSetterTests, GetAt_ReturnsTheValueAtGivenIndex)
-// {
-//     constexpr size_t Lane = TypeParam::VALUE;
-//     auto reg              = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
-//
-//     for (size_t i = 0; i < Lane; ++i)
-//     {
-//         EXPECT_ANY_EQ(this->data[i], reg.getAt(i));
-//     }
-// }
-//
-//
+
+/// @test Verify that get(index) returns the element at the given index.
+TYPED_TEST(Simd256GetterSetterTests, GetAt_ReturnsTheValueAtGivenIndex)
+{
+    constexpr size_t Lane = TypeParam::VALUE;
+    auto reg              = this->setValuesAndGetRegister(std::make_index_sequence<Lane>{});
+
+    for (size_t i = 0; i < Lane; ++i)
+    {
+        EXPECT_ANY_EQ(this->data[i], reg.getAt(i));
+    }
+}
+
+
 // TYPED_TEST(Simd256GetterSetterTests, ExtractFirst_ReturnsTheValueAtZerothIndex)
 // {
 //     constexpr size_t Lane = TypeParam::VALUE;
