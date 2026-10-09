@@ -376,12 +376,12 @@ namespace flcn
                 if constexpr (Index < 4)
                 {
                     const auto reg128 = _mm256_castps256_ps128(_reg);
-                    return _mm_extract_ps(reg128, Index);
+                    return std::bit_cast<float>(_mm_extract_ps(reg128, Index));
                 }
                 else
                 {
                     const auto upperReg = _mm256_extractf128_ps(_reg, 1);
-                    return _mm_extract_ps(upperReg, Index - 4); // 4 is the offset.
+                    return std::bit_cast<float>(_mm_extract_ps(upperReg, Index - 4)); // 4 is the offset.
                 }
             }
             else if constexpr (sizeof(DataType) == 8)
@@ -408,20 +408,72 @@ namespace flcn
     }
 
 
-    // template <typename DataType, size_t Lane>
-    // template <size_t Index>
-    //     requires(Index < Lane)
-    // FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::setAt(DataType value) noexcept
-    // {
-    //     if constexpr (Index >= LOWER_LANE_COUNT)
-    //     {
-    //         _upper.template setAt<Index - LOWER_LANE_COUNT>(value);
-    //     }
-    //     else
-    //     {
-    //         _lower.template setAt<Index>(value);
-    //     }
-    // }
+    template <typename DataType, size_t Lane>
+    template <size_t Index>
+        requires(Index < Lane)
+    FALCON_INLINE constexpr void Simd256<SimdBackend::ARCH_AVX, DataType, Lane>::setAt(DataType value) noexcept
+    {
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                // For floating point types if the indices are lower than half of max index,
+                // 2 for double, then we can cast it to an XMM register and insert the value
+                // and insert the register into the lower lane.
+                // If the index is in the upper lane however, we need to extract the upper 128-bits
+                // and then insert the value(with applied index offset, 2 in case of doubles).
+                if constexpr (Index < 2)
+                {
+                    auto lowerReg = _mm_castpd_si128(_mm256_castpd256_pd128(_reg));
+                    lowerReg      = _mm_insert_epi64(lowerReg, std::bit_cast<uint64_t>(value), Index);
+                    _reg = _mm256_insertf128_pd(_reg, _mm_castsi128_pd(lowerReg), 0);
+                }
+                else
+                {
+                    auto upperReg = _mm_castpd_si128(_mm256_extractf128_pd(_reg, 1));
+                    upperReg =
+                        _mm_insert_epi64(upperReg, std::bit_cast<uint64_t>(value), Index - 2); // 2 is the offset.
+                    _reg = _mm256_insertf128_pd(_reg, _mm_castsi128_pd(upperReg), 1);
+                }
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                if constexpr (Index < 4)
+                {
+                    auto lowerReg = _mm_castps_si128(_mm256_castps256_ps128(_reg));
+                    lowerReg      = _mm_insert_epi32(lowerReg, std::bit_cast<uint32_t>(value), Index);
+                    _reg = _mm256_insertf128_ps(_reg, _mm_castsi128_ps(lowerReg), 0);
+                }
+                else
+                {
+                    auto upperReg = _mm_castps_si128(_mm256_extractf128_ps(_reg, 1));
+                    upperReg =
+                        _mm_insert_epi32(upperReg, std::bit_cast<uint32_t>(value), Index - 4); // 4 is the offset.
+                    _reg = _mm256_insertf128_ps(_reg, _mm_castsi128_ps(upperReg), 1);
+                }
+            }
+            else if constexpr (sizeof(DataType) == 8)
+            {
+                _reg = _mm256_insert_epi64(_reg, value, Index);
+            }
+            else if constexpr (sizeof(DataType) == 4)
+            {
+                _reg = _mm256_insert_epi32(_reg, value, Index);
+            }
+            else if constexpr (sizeof(DataType) == 2)
+            {
+                _reg = _mm256_insert_epi16(_reg, value, Index);
+            }
+            else // if constexpr (sizeof(DataType) == 1)
+            {
+                _reg = _mm256_insert_epi8(_reg, value, Index);
+            }
+        }
+        else
+        {
+            _reg.template setAt<Index>(value);
+        }
+    }
 
 
     template <typename DataType, size_t Lane>
