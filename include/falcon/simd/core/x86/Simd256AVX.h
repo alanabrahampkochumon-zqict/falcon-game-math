@@ -398,29 +398,29 @@ namespace flcn
         [[nodiscard]] constexpr Simd256 operator-() const noexcept;
 
 
-        //     /**
-        //      * @brief Multiply two registers and return a new register.
-        //      *
-        //      * @note Register arithmetic is limited to same data types and lanes.
-        //      *
-        //      * @param other The register to multiply.
-        //      * @return A new register with the product of elements of this register and @p other.
-        //      */
-        //     [[nodiscard]] constexpr Simd256 operator*(Simd256 other) const noexcept;
-        //
-        //
-        //     /**
-        //      * @brief Multiply contents of this register with @p other in-place.
-        //      *
-        //      * @note Register arithmetic is limited to same data types and lanes.
-        //      *
-        //      * @param other The register to multiply.
-        //      *
-        //      * @return A reference to this register with products.
-        //      */
-        //     constexpr Simd256& operator*=(Simd256 other) noexcept;
-        //
-        //
+        /**
+         * @brief Multiply two registers and return a new register.
+         *
+         * @note Register arithmetic is limited to same data types and lanes.
+         *
+         * @param other The register to multiply.
+         * @return A new register with the product of elements of this register and @p other.
+         */
+        [[nodiscard]] constexpr Simd256 operator*(Simd256 other) const noexcept;
+
+
+        /**
+         * @brief Multiply contents of this register with @p other in-place.
+         *
+         * @note Register arithmetic is limited to same data types and lanes.
+         *
+         * @param other The register to multiply.
+         *
+         * @return A reference to this register with products.
+         */
+        constexpr Simd256& operator*=(Simd256 other) noexcept;
+
+
         //     /**
         //      * @brief Divide contents of this register by another register(@p other).
         //      *

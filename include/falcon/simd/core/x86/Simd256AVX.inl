@@ -788,7 +788,7 @@ namespace flcn
 
     template <typename DataType, size_t Lane>
     FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane> Simd256<SimdBackend::ARCH_AVX, DataType,
-                                                                                    Lane>::operator-() const noexcept
+                                                                                   Lane>::operator-() const noexcept
     {
         Simd256 zero;
         zero.setZero();
@@ -796,21 +796,79 @@ namespace flcn
     }
 
 
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane> Simd256<
-    //     SimdBackend::ARCH_AVX, DataType, Lane>::operator*(Simd256 other) const noexcept
-    // { return Simd256(_lower * other._lower, _upper * other._upper); }
-    //
-    //
-    // template <typename DataType, size_t Lane>
-    // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>& Simd256<
-    //     SimdBackend::ARCH_AVX, DataType, Lane>::operator*=(Simd256 other) noexcept
-    // {
-    //     *this = *this * other;
-    //     return *this;
-    // }
-    //
-    //
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane> Simd256<
+        SimdBackend::ARCH_AVX, DataType, Lane>::operator*(Simd256 other) const noexcept
+    {
+        if constexpr (_FALCON_SIMD256_SUPPORT_NATIVE_INTRINSIC(DataType))
+        {
+            if constexpr (types::IsFP64<DataType>)
+            {
+                return Simd256(_mm256_mul_pd(_reg, *other));
+            }
+            else if constexpr (types::IsFP32<DataType>)
+            {
+                return Simd256(_mm256_mul_ps(_reg, *other));
+            }
+            // Signed types
+            else if constexpr (types::IsQWord<DataType>)
+            {
+                // TODO:
+                return other;
+            }
+            else if constexpr (types::IsDWord<DataType>)
+            {
+                // TODO:
+                return other;
+            }
+            else if constexpr (types::IsWord<DataType>)
+            {
+                // TODO:
+                return other;
+            }
+            else if constexpr (types::IsByte<DataType>)
+            {
+                // TODO:
+                return other;
+            }
+            // Unsigned types
+            else if constexpr (types::IsUQWord<DataType>)
+            {
+                // TODO:
+                return other;
+            }
+            else if constexpr (types::IsUDWord<DataType>)
+            {
+                // TODO:
+                return other;
+            }
+            else if constexpr (types::IsUWord<DataType>)
+            {
+                // TODO:
+                return other;
+            }
+            else // if constexpr(types::IsUByte<DataType>)
+            {
+                // TODO:
+                return other;
+            }
+        }
+        else
+        {
+            return _reg * other._reg;
+        }
+    }
+
+
+    template <typename DataType, size_t Lane>
+    FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane>& Simd256<
+        SimdBackend::ARCH_AVX, DataType, Lane>::operator*=(Simd256 other) noexcept
+    {
+        *this = *this * other;
+        return *this;
+    }
+
+
     // template <typename DataType, size_t Lane>
     // FALCON_INLINE constexpr Simd256<SimdBackend::ARCH_AVX, DataType, Lane> Simd256<
     //     SimdBackend::ARCH_AVX, DataType, Lane>::divReg(Simd256 other) const noexcept
